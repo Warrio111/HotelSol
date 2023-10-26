@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using HotelSolRepo.Modelo;  // Asegúrese de que esta línea apunte al espacio de nombres correcto donde están definidas sus clases del modelo
+using HotelSolRepo.Modelo;  
 
 namespace HotelSolRepo.Controlador
 {
