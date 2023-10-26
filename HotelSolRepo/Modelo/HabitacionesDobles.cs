@@ -7,15 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HotelSolRepo.BBDD
+namespace HotelSolRepo.Modelo
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class HabitacionesSencillas
+    public partial class HabitacionesDobles
     {
         public int HabitacionID { get; set; }
-        public Nullable<int> CamaSencilla { get; set; }
+        public Nullable<int> CamasDobles { get; set; }
     
         public virtual Habitaciones Habitaciones { get; set; }
     }
