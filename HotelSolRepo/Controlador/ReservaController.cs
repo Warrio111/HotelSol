@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using HotelSolRepo.Modelo;
+using System;
 using System.Xml.Linq;
-using HotelSolRepo.Modelo;  // Asegúrese de que esta línea apunte al espacio de nombres correcto donde están definidas sus clases del modelo
 
 namespace HotelSolRepo.Controlador
 {
@@ -19,15 +17,16 @@ namespace HotelSolRepo.Controlador
         }
 
         // Método para registrar un nuevo cliente
-        public void RegistrarCliente(Clientes nuevoCliente)  // Cambiado de Cliente a Clientes para coincidir con el modelo
+        public void RegistrarCliente(Clientes nuevoCliente)
         {
-            // Implementar lógica para registrar un nuevo cliente en el archivo XML
+            ClienteController clienteController = new ClienteController();
+            clienteController.AgregarCliente(nuevoCliente);
         }
 
         // Método para hacer una nueva reserva
-        public void HacerReserva(Reservas nuevaReserva)  // Asumiendo que tiene una clase Reservas en su modelo
+        public void HacerReserva(Reservas nuevaReserva)
         {
-            // Implementar lógica para añadir una nueva reserva al archivo XML
+            // Implementar lógica para añadir una nueva reserva al archivo XML o la base de datos
         }
 
         // Otros métodos adicionales como cancelar reserva, etc.
