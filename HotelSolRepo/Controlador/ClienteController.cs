@@ -1,41 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
-using HotelSolRepo.Modelo;  
+using HotelSolRepo.Modelo;
 
 namespace HotelSolRepo.Controlador
 {
     public class ClienteController
     {
-        private string rutaArchivoXmlClientes = @"ruta\al\archivo\clientes.xml";
-
-        // Método para registrar un nuevo cliente
-        public void RegistrarCliente(Cliente nuevoCliente)
+        // Agrega un nuevo cliente al sistema
+        public bool AgregarCliente(Clientes nuevoCliente)
         {
-            XDocument doc = XDocument.Load(rutaArchivoXmlClientes);
-            // Implementar lógica para añadir un nuevo cliente al archivo XML
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                db.Clientes.Add(nuevoCliente);
+                db.SaveChanges();
+            }
+            return true;
         }
 
-        // Método para actualizar la información de un cliente existente
-        public void ActualizarCliente(Cliente clienteActualizado)
+        // Obtiene una lista de todos los clientes
+        public List<Clientes> ObtenerClientes()
         {
-            // Implementar lógica para actualizar la información del cliente en el archivo XML
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                return db.Clientes.ToList();
+            }
         }
 
-        // Método para eliminar un cliente
-        public void EliminarCliente(string clienteId)
+        // Obtiene un cliente específico por NIF
+        public Clientes ObtenerClientePorNIF(string nif)
         {
-            // Implementar lógica para eliminar un cliente del archivo XML
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                return db.Clientes.FirstOrDefault(c => c.NIF == nif);
+            }
         }
 
-        // Método para obtener información de un cliente específico
-        public Cliente ObtenerCliente(string clienteId)
+        // Actualiza la información de un cliente existente
+        public bool ActualizarCliente(Clientes clienteActualizado)
         {
-            // Implementar lógica para obtener la información de un cliente específico del archivo XML
-            return new Cliente(); // Devuelve un objeto Cliente con la información recuperada
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                var clienteExistente = db.Clientes.FirstOrDefault(c => c.NIF == clienteActualizado.NIF);
+                if (clienteExistente != null)
+                {
+                    clienteExistente.Nombre = clienteActualizado.Nombre;
+                    // Actualizar otros campos aquí
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
         }
 
-        // Otros métodos adicionales según sea necesario
+        // Elimina un cliente del sistema
+        public bool EliminarCliente(string nif)
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                var clienteExistente = db.Clientes.FirstOrDefault(c => c.NIF == nif);
+                if (clienteExistente != null)
+                {
+                    db.Clientes.Remove(clienteExistente);
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
     }
 }
+
