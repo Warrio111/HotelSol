@@ -55,52 +55,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BBDD\Clientes.cs">
+    <Compile Include="Modelo\Clientes.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="BBDD\Empleados.cs">
+    <Compile Include="Modelo\Empleados.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="BBDD\Facturas.cs">
+    <Compile Include="Modelo\Facturas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="BBDD\Habitaciones.cs">
+    <Compile Include="Modelo\Habitaciones.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="BBDD\HabitacionesDobles.cs">
+    <Compile Include="Modelo\HabitacionesDobles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="BBDD\HabitacionesSencillas.cs">
+    <Compile Include="Modelo\HabitacionesSencillas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="BBDD\HabitacionesSuite.cs">
+    <Compile Include="Modelo\HabitacionesSuite.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="BBDD\Model1.Context.cs">
+    <Compile Include="Modelo\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="BBDD\Model1.cs">
+    <Compile Include="Modelo\Model1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="BBDD\Model1.Designer.cs">
+    <Compile Include="Modelo\Model1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="BBDD\ProgramasFidelizacion.cs">
+    <Compile Include="Modelo\ProgramasFidelizacion.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="BBDD\Reservas.cs">
+    <Compile Include="Modelo\Reservas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="BBDD\sysdiagrams.cs">
+    <Compile Include="Modelo\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="BBDD\TareasEmpleados.cs">
+    <Compile Include="Modelo\TareasEmpleados.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
@@ -123,11 +123,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EntityDeploy Include="BBDD\Model1.edmx">
+    <EntityDeploy Include="Modelo\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="BBDD\Model1.edmx.diagram">
+    <None Include="Modelo\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -145,12 +145,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BBDD\Model1.Context.tt">
+    <Content Include="Modelo\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="BBDD\Model1.tt">
+    <Content Include="Modelo\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>

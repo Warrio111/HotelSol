@@ -7,31 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HotelSolRepo.BBDD
+namespace HotelSolRepo.Modelo
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Empleados
+    public partial class ProgramasFidelizacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Empleados()
+        public ProgramasFidelizacion()
         {
-            this.Facturas = new HashSet<Facturas>();
-            this.Reservas = new HashSet<Reservas>();
-            this.TareasEmpleados = new HashSet<TareasEmpleados>();
+            this.Clientes = new HashSet<Clientes>();
         }
     
-        public int EmpleadoID { get; set; }
+        public int ProgramaFidelizacionID { get; set; }
         public string Nombre { get; set; }
-        public string Rol { get; set; }
-        public string Horario { get; set; }
+        public Nullable<int> Puntos { get; set; }
+        public string Beneficios { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Facturas> Facturas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reservas> Reservas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TareasEmpleados> TareasEmpleados { get; set; }
+        public virtual ICollection<Clientes> Clientes { get; set; }
     }
 }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HotelSolRepo.BBDD
+namespace HotelSolRepo.Modelo
 {
     using System;
     using System.Data.Entity;

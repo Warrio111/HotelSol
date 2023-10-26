@@ -7,25 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HotelSolRepo.BBDD
+namespace HotelSolRepo.Modelo
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ProgramasFidelizacion
+    public partial class Habitaciones
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProgramasFidelizacion()
+        public Habitaciones()
         {
-            this.Clientes = new HashSet<Clientes>();
+            this.Reservas = new HashSet<Reservas>();
         }
     
-        public int ProgramaFidelizacionID { get; set; }
-        public string Nombre { get; set; }
-        public Nullable<int> Puntos { get; set; }
-        public string Beneficios { get; set; }
+        public int HabitacionID { get; set; }
+        public string Tipo { get; set; }
+        public string Caracteristicas { get; set; }
+        public Nullable<double> Tarifa { get; set; }
+        public string EstadoActual { get; set; }
     
+        public virtual HabitacionesDobles HabitacionesDobles { get; set; }
+        public virtual HabitacionesSencillas HabitacionesSencillas { get; set; }
+        public virtual HabitacionesSuite HabitacionesSuite { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Clientes> Clientes { get; set; }
+        public virtual ICollection<Reservas> Reservas { get; set; }
     }
 }
