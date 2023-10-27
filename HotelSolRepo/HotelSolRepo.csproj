@@ -135,6 +135,18 @@
     <Compile Include="Vista\ImportarForm.Designer.cs">
       <DependentUpon>ImportarForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vista\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\RegisterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\RegisterForm.Designer.cs">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vista\ReservaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +170,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\ImportarForm.resx">
       <DependentUpon>ImportarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\RegisterForm.resx">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\ReservaForm.resx">
       <DependentUpon>ReservaForm.cs</DependentUpon>

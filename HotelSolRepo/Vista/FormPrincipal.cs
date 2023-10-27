@@ -42,11 +42,12 @@ namespace HotelSolRepo.Vista
             MostrarFormulario(new ImportarForm());
         }
 
-        private void MostrarFormulario(Form formulario)
+        public void MostrarFormulario(Form formulario)
         {
             // Configura las propiedades del formulario para que pueda incrustarse en el panel
 
             formulario.TopLevel = false;
+            formulario.FormBorderStyle = FormBorderStyle.None;
             formulario.Dock = DockStyle.Fill;
 
             // Limpia el panel y agrega el nuevo formulario
