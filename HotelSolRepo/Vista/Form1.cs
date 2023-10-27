@@ -30,7 +30,7 @@ namespace HotelSolRepo
                                  .Include("Reservas")
                                  .ToList();
 
-                // Cree una proyección de los datos que quiere mostrar
+                // Crea una proyección de los datos que quiere mostrar
                 var vistaClientes = clientes.Select(c => new
                 {
                     c.NIF,
