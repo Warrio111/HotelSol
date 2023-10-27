@@ -91,9 +91,6 @@ namespace HotelSolRepo
                 // Actualizar la vista o mostrar un mensaje de éxito
                 ActualizarVista();
             }
-            else
-            {
-                MessageBox.Show("El XML de reserva está vacío o no es válido.");
             }
         }
 
