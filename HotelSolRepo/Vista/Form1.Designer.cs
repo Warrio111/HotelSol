@@ -1,4 +1,8 @@
-﻿namespace HotelSolRepo
+﻿using HotelSolRepo.Controlador;
+using System.Windows.Forms;
+using System;
+
+namespace HotelSolRepo
 {
     partial class Form1
     {
@@ -29,23 +33,38 @@
         private void InitializeComponent()
         {
             this.dataClientesGrid = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataClientesGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // dataClientesGrid
             // 
             this.dataClientesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataClientesGrid.Location = new System.Drawing.Point(3, -3);
+            this.dataClientesGrid.Location = new System.Drawing.Point(4, -4);
+            this.dataClientesGrid.Margin = new System.Windows.Forms.Padding(4);
             this.dataClientesGrid.Name = "dataClientesGrid";
-            this.dataClientesGrid.Size = new System.Drawing.Size(715, 441);
+            this.dataClientesGrid.RowHeadersWidth = 51;
+            this.dataClientesGrid.Size = new System.Drawing.Size(1224, 511);
             this.dataClientesGrid.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(21, 539);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(211, 88);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "CrearReservaXML";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1234, 875);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataClientesGrid);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -57,6 +76,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataClientesGrid;
+        private Button button1;
     }
 }
 
