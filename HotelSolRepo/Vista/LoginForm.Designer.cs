@@ -29,48 +29,77 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxLoginNIF = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.textBoxLoginPass = new System.Windows.Forms.TextBox();
+            this.btnLoginValidation = new System.Windows.Forms.Button();
+            this.btnGoToReserva = new System.Windows.Forms.Button();
+            this.mensaje = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // textBox1
+            // textBoxLoginNIF
             // 
-            this.textBox1.Location = new System.Drawing.Point(220, 121);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(341, 20);
-            this.textBox1.TabIndex = 0;
+            this.textBoxLoginNIF.Location = new System.Drawing.Point(302, 84);
+            this.textBoxLoginNIF.Name = "textBoxLoginNIF";
+            this.textBoxLoginNIF.Size = new System.Drawing.Size(186, 20);
+            this.textBoxLoginNIF.TabIndex = 0;
+            this.textBoxLoginNIF.Text = "INTRODUZCA SU NIF/DNI";
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // textBox2
+            // textBoxLoginPass
             // 
-            this.textBox2.Location = new System.Drawing.Point(220, 168);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(186, 20);
-            this.textBox2.TabIndex = 2;
+            this.textBoxLoginPass.Location = new System.Drawing.Point(302, 135);
+            this.textBoxLoginPass.Name = "textBoxLoginPass";
+            this.textBoxLoginPass.Size = new System.Drawing.Size(186, 20);
+            this.textBoxLoginPass.TabIndex = 2;
+            this.textBoxLoginPass.Text = "INTRODUZCA SU PASSWORD";
             // 
-            // button1
+            // btnLoginValidation
             // 
-            this.button1.Location = new System.Drawing.Point(486, 199);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnLoginValidation.Location = new System.Drawing.Point(353, 179);
+            this.btnLoginValidation.Name = "btnLoginValidation";
+            this.btnLoginValidation.Size = new System.Drawing.Size(75, 23);
+            this.btnLoginValidation.TabIndex = 3;
+            this.btnLoginValidation.Text = "Validar";
+            this.btnLoginValidation.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnLoginValidation.UseVisualStyleBackColor = true;
+            // 
+            // btnGoToReserva
+            // 
+            this.btnGoToReserva.Location = new System.Drawing.Point(535, 316);
+            this.btnGoToReserva.Name = "btnGoToReserva";
+            this.btnGoToReserva.Size = new System.Drawing.Size(75, 23);
+            this.btnGoToReserva.TabIndex = 4;
+            this.btnGoToReserva.Text = "Alta Usuario";
+            this.btnGoToReserva.UseVisualStyleBackColor = true;
+            // 
+            // mensaje
+            // 
+            this.mensaje.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mensaje.Enabled = false;
+            this.mensaje.Location = new System.Drawing.Point(372, 319);
+            this.mensaje.Name = "mensaje";
+            this.mensaje.ReadOnly = true;
+            this.mensaje.Size = new System.Drawing.Size(157, 13);
+            this.mensaje.TabIndex = 5;
+            this.mensaje.Text = "NO ESTAS DADO DE ALTA? >";
+            this.mensaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.mensaje);
+            this.Controls.Add(this.btnGoToReserva);
+            this.Controls.Add(this.btnLoginValidation);
+            this.Controls.Add(this.textBoxLoginPass);
+            this.Controls.Add(this.textBoxLoginNIF);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "LoginForm";
             this.Text = "LoginForm";
             this.ResumeLayout(false);
@@ -80,9 +109,11 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxLoginNIF;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBoxLoginPass;
+        private System.Windows.Forms.Button btnLoginValidation;
+        private System.Windows.Forms.Button btnGoToReserva;
+        private System.Windows.Forms.TextBox mensaje;
     }
 }

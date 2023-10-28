@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Reservas xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ReservaID>1</ReservaID>
+  <NIF>12345678H</NIF>
+  <HabitacionID>123</HabitacionID>
+  <FechaInicio>2023-10-27T21:52:50.7325081+02:00</FechaInicio>
+  <FechaFin>2023-11-03T21:52:50.7325081+01:00</FechaFin>
+  <OpcionesPension>Completa</OpcionesPension>
+  <Estado>Activa</Estado>
+  <FechaCreacion>2023-10-27T21:52:50.7325081+02:00</FechaCreacion>
+  <TipoReserva>Vacaciones</TipoReserva>
+</Reservas>

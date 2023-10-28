@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelSolRepo.Modelo;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,13 +14,34 @@ namespace HotelSolRepo.Vista
 {
     public partial class FormPrincipal : Form
     {
+        public bool IsAuthenticated { get; set; } // Propiedad para saber si el usuario está autenticado
+        private Type exportXmlWrapperType; // Almacena el tipo de XMLWrapper para exportación
+        private Form callerForm; // Almacena el formulario que llama a FormPrincipal
+        public event Action<Type> XmlWrapperTypeChanged; // Evento personalizado
+        public event Action<Form> CallerPrincipal;
         public FormPrincipal()
         {
             InitializeComponent();
-            ConectarControladoresEventos();  // Conecta los controladores de eventos
 
+            ConectarControladoresEventos();  // Conecta los controladores de eventos
+            IsAuthenticated = false; // Inicialmente, el usuario no está autenticado
+            // Suscribe el manejador de eventos para el cambio de tipo XMLWrapper
+            XmlWrapperTypeChanged += (xmlWrapperType) =>
+            {
+                exportXmlWrapperType = xmlWrapperType;
+            };
         }
 
+
+        public void OnXmlWrapperTypeChanged(Type xmlWrapperType)
+        {
+            XmlWrapperTypeChanged?.Invoke(xmlWrapperType);
+        }
+        public void OnPrincipalFormCalled(Form callerForm)
+        {
+            CallerPrincipal?.Invoke(callerForm);
+            this.callerForm = callerForm;
+        }
         private void ConectarControladoresEventos()
         {
             btnNuevaReserva.Click += BtnNuevaReserva_Click;
@@ -29,22 +51,47 @@ namespace HotelSolRepo.Vista
 
         private void BtnNuevaReserva_Click(object sender, EventArgs e)
         {
-            MostrarFormulario(new ReservaForm());
+            MostrarFormulario(new ReservaForm(ref exportXmlWrapperType,this));
         }
 
         private void BtnExportarXML_Click(object sender, EventArgs e)
         {
-            MostrarFormulario(new ExportarForm());
+            //if(!IsAuthenticated)
+            //{
+            //    MessageBox.Show("Por favor, autentíquese para exportar datos.");
+            //    return;
+            //}
+            if(null!=exportXmlWrapperType)
+            {
+                ExportarForm exportarForm = new ExportarForm(exportXmlWrapperType);
+                
+                if (exportarForm != null)
+                {
+                    exportarForm.ExportarDatosToXml(this.callerForm);
+                }
+                MostrarFormulario(exportarForm);
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione un tipo de archivo.");
+            }
         }
 
         private void BtnImportarXML_Click(object sender, EventArgs e)
         {
-            MostrarFormulario(new ImportarForm());
+            ImportarForm importarForm = new ImportarForm();
+            FormPrincipal activeForm = ActiveForm as FormPrincipal;
+            if (activeForm != null)
+            {
+                importarForm.SubscribeToXmlWrapperTypeChange(activeForm);
+            }
+            MostrarFormulario(importarForm);
         }
 
         public void MostrarFormulario(Form formulario)
         {
-            // Configura las propiedades del formulario para que pueda incrustarse en el panel
+            // Configuracion de las propiedades del formulario para que pueda incrustarse en el panel
 
             formulario.TopLevel = false;
             formulario.FormBorderStyle = FormBorderStyle.None;

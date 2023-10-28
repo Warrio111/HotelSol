@@ -26,6 +26,7 @@ namespace HotelSolRepo.Modelo
         public string CorreoElectronico { get; set; }
         public string Telefono { get; set; }
         public Nullable<int> ProgramaFidelizacionID { get; set; }
+        public string Contraseña { get; set; }
     
         public virtual ProgramasFidelizacion ProgramasFidelizacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

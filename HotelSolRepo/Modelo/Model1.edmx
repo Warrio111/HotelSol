@@ -14,6 +14,7 @@
           <Property Name="CorreoElectronico" Type="nvarchar" MaxLength="255" />
           <Property Name="Telefono" Type="nvarchar" MaxLength="15" />
           <Property Name="ProgramaFidelizacionID" Type="int" />
+          <Property Name="Contraseña" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Empleados">
           <Key>
@@ -332,6 +333,7 @@
           <NavigationProperty Name="ProgramasFidelizacion" Relationship="Self.FK__Clientes__Progra__398D8EEE" FromRole="Clientes" ToRole="ProgramasFidelizacion" />
           <NavigationProperty Name="Facturas" Relationship="Self.FK__Facturas__NIF__49C3F6B7" FromRole="Clientes" ToRole="Facturas" />
           <NavigationProperty Name="Reservas" Relationship="Self.FK__Reservas__NIF__4E88ABD4" FromRole="Clientes" ToRole="Reservas" />
+          <Property Name="Contraseña" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Empleados">
           <Key>
@@ -671,6 +673,7 @@
           <EntitySetMapping Name="Clientes">
             <EntityTypeMapping TypeName="HotelDBModel.Clientes">
               <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
                 <ScalarProperty Name="NIF" ColumnName="NIF" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />

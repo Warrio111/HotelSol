@@ -9,6 +9,7 @@ namespace HotelSolRepo.Controlador
     public class ReservaController
     {
         private string rutaArchivoXml = @"ruta\al\archivo\reservas.xml";
+        private Reservas reserva;
 
         // Método para comprobar disponibilidad de habitaciones
         public bool ComprobarDisponibilidad(DateTime fechaInicio, DateTime fechaFin)
@@ -23,7 +24,7 @@ namespace HotelSolRepo.Controlador
         }
 
         // Método para hacer una nueva reserva desde datos XML
-        public bool HacerReservaDesdeXml(string xmlReserva)
+        public Reservas HacerReservaDesdeXml(string xmlReserva)
         {
             try
             {
@@ -35,7 +36,7 @@ namespace HotelSolRepo.Controlador
                     using (HotelDBEntities db = new HotelDBEntities())
                     {
                         // Añade la nueva reserva a la base de datos
-                        Reservas reserva = new Reservas
+                        reserva = new Reservas
                         {
                             NIF = nuevaReserva.NIF,
                             HabitacionID = nuevaReserva.HabitacionID,
@@ -51,14 +52,14 @@ namespace HotelSolRepo.Controlador
                         db.SaveChanges();
                     }
 
-                    return true; // La reserva se realizó con éxito
+                    return reserva; // La reserva se realizó con éxito
                 }
             }
             catch (Exception ex)
             {
                 // Manejar excepciones si la deserialización falla
                 Console.WriteLine("Error al deserializar la reserva desde XML: " + ex.Message);
-                return false; // La reserva no se pudo realizar
+                return null; // La reserva no se pudo realizar
             }
         }
 

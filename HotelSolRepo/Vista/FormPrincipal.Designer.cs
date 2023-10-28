@@ -36,27 +36,30 @@
             // 
             // btnNuevaReserva
             // 
-            this.btnNuevaReserva.Location = new System.Drawing.Point(12, 12);
+            this.btnNuevaReserva.Location = new System.Drawing.Point(16, 15);
+            this.btnNuevaReserva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNuevaReserva.Name = "btnNuevaReserva";
-            this.btnNuevaReserva.Size = new System.Drawing.Size(173, 51);
+            this.btnNuevaReserva.Size = new System.Drawing.Size(231, 63);
             this.btnNuevaReserva.TabIndex = 0;
             this.btnNuevaReserva.Text = "NuevaReserva";
             this.btnNuevaReserva.UseVisualStyleBackColor = true;
             // 
             // btnExportarXML
             // 
-            this.btnExportarXML.Location = new System.Drawing.Point(12, 84);
+            this.btnExportarXML.Location = new System.Drawing.Point(13, 722);
+            this.btnExportarXML.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExportarXML.Name = "btnExportarXML";
-            this.btnExportarXML.Size = new System.Drawing.Size(173, 51);
+            this.btnExportarXML.Size = new System.Drawing.Size(231, 63);
             this.btnExportarXML.TabIndex = 1;
             this.btnExportarXML.Text = "ExportarXML";
             this.btnExportarXML.UseVisualStyleBackColor = true;
             // 
             // btnImportarXML
             // 
-            this.btnImportarXML.Location = new System.Drawing.Point(12, 157);
+            this.btnImportarXML.Location = new System.Drawing.Point(13, 649);
+            this.btnImportarXML.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnImportarXML.Name = "btnImportarXML";
-            this.btnImportarXML.Size = new System.Drawing.Size(173, 51);
+            this.btnImportarXML.Size = new System.Drawing.Size(231, 63);
             this.btnImportarXML.TabIndex = 2;
             this.btnImportarXML.Text = "ImportarXML";
             this.btnImportarXML.UseVisualStyleBackColor = true;
@@ -64,21 +67,23 @@
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(191, 0);
+            this.panel1.Location = new System.Drawing.Point(255, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(946, 648);
+            this.panel1.Size = new System.Drawing.Size(1261, 798);
             this.panel1.TabIndex = 4;
             // 
             // FormPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1137, 648);
+            this.ClientSize = new System.Drawing.Size(1516, 798);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnImportarXML);
             this.Controls.Add(this.btnExportarXML);
             this.Controls.Add(this.btnNuevaReserva);
             this.IsMdiContainer = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormPrincipal";
             this.Text = "FormPrincipal";
             this.ResumeLayout(false);

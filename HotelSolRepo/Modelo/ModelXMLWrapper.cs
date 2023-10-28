@@ -48,6 +48,8 @@ namespace HotelSolRepo.Modelo
 
         [XmlElement("Telefono")]
         public string Telefono { get; set; }
+        [XmlElement("Contraseña")]
+        public string Contraseña { get; set; }
 
         [XmlElement("ProgramaFidelizacionID")]
         public Nullable<int> ProgramaFidelizacionID { get; set; }
