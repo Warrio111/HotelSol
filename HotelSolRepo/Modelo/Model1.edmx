@@ -48,6 +48,9 @@
           <Property Name="Caracteristicas" Type="nvarchar(max)" />
           <Property Name="Tarifa" Type="float" />
           <Property Name="EstadoActual" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ocupado_desde" Type="datetime" />
+          <Property Name="Ocupado_hasta" Type="datetime" />
+          <Property Name="CodigoHabitacion" Type="nvarchar" MaxLength="11" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="HabitacionesDobles">
           <Key>
@@ -80,6 +83,16 @@
           <Property Name="Puntos" Type="int" />
           <Property Name="Beneficios" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="ReservaHabitaciones">
+          <Key>
+            <PropertyRef Name="ReservaHabitacionID" />
+          </Key>
+          <Property Name="ReservaHabitacionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReservaID" Type="int" />
+          <Property Name="HabitacionID" Type="int" />
+          <Property Name="TipoPension" Type="nvarchar" MaxLength="50" />
+          <Property Name="NumeroHabitaciones" Type="int" />
+        </EntityType>
         <EntityType Name="Reservas">
           <Key>
             <PropertyRef Name="ReservaID" />
@@ -94,16 +107,6 @@
           <Property Name="Estado" Type="nvarchar" MaxLength="50" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="TipoReserva" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TareasEmpleados">
           <Key>
@@ -126,7 +129,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Facturas__Emplea__4AB81AF0">
+        <Association Name="FK__Facturas__Emplea__4BAC3F29">
           <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -138,7 +141,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Facturas__NIF__49C3F6B7">
+        <Association Name="FK__Facturas__NIF__4AB81AF0">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -150,7 +153,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Habitacio__Habit__403A8C7D">
+        <Association Name="FK__Habitacio__Habit__412EB0B6">
           <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="1" />
           <End Role="HabitacionesDobles" Type="Self.HabitacionesDobles" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -162,7 +165,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Habitacio__Habit__4316F928">
+        <Association Name="FK__Habitacio__Habit__440B1D61">
           <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="1" />
           <End Role="HabitacionesSencillas" Type="Self.HabitacionesSencillas" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -174,7 +177,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Habitacio__Habit__45F365D3">
+        <Association Name="FK__Habitacio__Habit__46E78A0C">
           <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="1" />
           <End Role="HabitacionesSuite" Type="Self.HabitacionesSuite" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -186,7 +189,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservas__Emplea__5070F446">
+        <Association Name="FK__ReservaHa__Habit__5DCAEF64">
+          <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="0..1" />
+          <End Role="ReservaHabitaciones" Type="Self.ReservaHabitaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Habitaciones">
+              <PropertyRef Name="HabitacionID" />
+            </Principal>
+            <Dependent Role="ReservaHabitaciones">
+              <PropertyRef Name="HabitacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReservaHa__Reser__5CD6CB2B">
+          <End Role="Reservas" Type="Self.Reservas" Multiplicity="0..1" />
+          <End Role="ReservaHabitaciones" Type="Self.ReservaHabitaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservas">
+              <PropertyRef Name="ReservaID" />
+            </Principal>
+            <Dependent Role="ReservaHabitaciones">
+              <PropertyRef Name="ReservaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservas__Emplea__5165187F">
           <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
           <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -198,7 +225,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservas__Habita__4F7CD00D">
+        <Association Name="FK__Reservas__Habita__5070F446">
           <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="0..1" />
           <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -210,7 +237,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservas__NIF__4E88ABD4">
+        <Association Name="FK__Reservas__NIF__4F7CD00D">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
           <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -222,7 +249,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TareasEmp__Emple__534D60F1">
+        <Association Name="FK__TareasEmp__Emple__5441852A">
           <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
           <End Role="TareasEmpleados" Type="Self.TareasEmpleados" Multiplicity="*" />
           <ReferentialConstraint>
@@ -234,36 +261,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="HotelDBModelStoreContainer">
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
@@ -273,46 +270,54 @@
           <EntitySet Name="HabitacionesSencillas" EntityType="Self.HabitacionesSencillas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HabitacionesSuite" EntityType="Self.HabitacionesSuite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProgramasFidelizacion" EntityType="Self.ProgramasFidelizacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReservaHabitaciones" EntityType="Self.ReservaHabitaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservas" EntityType="Self.Reservas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TareasEmpleados" EntityType="Self.TareasEmpleados" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Clientes__Progra__398D8EEE" Association="Self.FK__Clientes__Progra__398D8EEE">
             <End Role="ProgramasFidelizacion" EntitySet="ProgramasFidelizacion" />
             <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Facturas__Emplea__4AB81AF0" Association="Self.FK__Facturas__Emplea__4AB81AF0">
+          <AssociationSet Name="FK__Facturas__Emplea__4BAC3F29" Association="Self.FK__Facturas__Emplea__4BAC3F29">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Facturas__NIF__49C3F6B7" Association="Self.FK__Facturas__NIF__49C3F6B7">
+          <AssociationSet Name="FK__Facturas__NIF__4AB81AF0" Association="Self.FK__Facturas__NIF__4AB81AF0">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Habitacio__Habit__403A8C7D" Association="Self.FK__Habitacio__Habit__403A8C7D">
+          <AssociationSet Name="FK__Habitacio__Habit__412EB0B6" Association="Self.FK__Habitacio__Habit__412EB0B6">
             <End Role="Habitaciones" EntitySet="Habitaciones" />
             <End Role="HabitacionesDobles" EntitySet="HabitacionesDobles" />
           </AssociationSet>
-          <AssociationSet Name="FK__Habitacio__Habit__4316F928" Association="Self.FK__Habitacio__Habit__4316F928">
+          <AssociationSet Name="FK__Habitacio__Habit__440B1D61" Association="Self.FK__Habitacio__Habit__440B1D61">
             <End Role="Habitaciones" EntitySet="Habitaciones" />
             <End Role="HabitacionesSencillas" EntitySet="HabitacionesSencillas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Habitacio__Habit__45F365D3" Association="Self.FK__Habitacio__Habit__45F365D3">
+          <AssociationSet Name="FK__Habitacio__Habit__46E78A0C" Association="Self.FK__Habitacio__Habit__46E78A0C">
             <End Role="Habitaciones" EntitySet="Habitaciones" />
             <End Role="HabitacionesSuite" EntitySet="HabitacionesSuite" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservas__Emplea__5070F446" Association="Self.FK__Reservas__Emplea__5070F446">
+          <AssociationSet Name="FK__ReservaHa__Habit__5DCAEF64" Association="Self.FK__ReservaHa__Habit__5DCAEF64">
+            <End Role="Habitaciones" EntitySet="Habitaciones" />
+            <End Role="ReservaHabitaciones" EntitySet="ReservaHabitaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReservaHa__Reser__5CD6CB2B" Association="Self.FK__ReservaHa__Reser__5CD6CB2B">
+            <End Role="Reservas" EntitySet="Reservas" />
+            <End Role="ReservaHabitaciones" EntitySet="ReservaHabitaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservas__Emplea__5165187F" Association="Self.FK__Reservas__Emplea__5165187F">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="Reservas" EntitySet="Reservas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservas__Habita__4F7CD00D" Association="Self.FK__Reservas__Habita__4F7CD00D">
+          <AssociationSet Name="FK__Reservas__Habita__5070F446" Association="Self.FK__Reservas__Habita__5070F446">
             <End Role="Habitaciones" EntitySet="Habitaciones" />
             <End Role="Reservas" EntitySet="Reservas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservas__NIF__4E88ABD4" Association="Self.FK__Reservas__NIF__4E88ABD4">
+          <AssociationSet Name="FK__Reservas__NIF__4F7CD00D" Association="Self.FK__Reservas__NIF__4F7CD00D">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Reservas" EntitySet="Reservas" />
           </AssociationSet>
-          <AssociationSet Name="FK__TareasEmp__Emple__534D60F1" Association="Self.FK__TareasEmp__Emple__534D60F1">
+          <AssociationSet Name="FK__TareasEmp__Emple__5441852A" Association="Self.FK__TareasEmp__Emple__5441852A">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="TareasEmpleados" EntitySet="TareasEmpleados" />
           </AssociationSet>
@@ -376,6 +381,10 @@
           <NavigationProperty Name="HabitacionesSencillas" Relationship="Self.FK__Habitacio__Habit__4316F928" FromRole="Habitaciones" ToRole="HabitacionesSencillas" />
           <NavigationProperty Name="HabitacionesSuite" Relationship="Self.FK__Habitacio__Habit__45F365D3" FromRole="Habitaciones" ToRole="HabitacionesSuite" />
           <NavigationProperty Name="Reservas" Relationship="Self.FK__Reservas__Habita__4F7CD00D" FromRole="Habitaciones" ToRole="Reservas" />
+          <Property Name="Ocupado_desde" Type="DateTime" Precision="3" />
+          <Property Name="Ocupado_hasta" Type="DateTime" Precision="3" />
+          <Property Name="CodigoHabitacion" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ReservaHabitaciones" Relationship="HotelDBModel.FK__ReservaHa__Habit__5DCAEF64" FromRole="Habitaciones" ToRole="ReservaHabitaciones" />
         </EntityType>
         <EntityType Name="HabitacionesDobles">
           <Key>
@@ -429,16 +438,7 @@
           <NavigationProperty Name="Clientes" Relationship="Self.FK__Reservas__NIF__4E88ABD4" FromRole="Reservas" ToRole="Clientes" />
           <NavigationProperty Name="Empleados" Relationship="Self.FK__Reservas__Emplea__5070F446" FromRole="Reservas" ToRole="Empleados" />
           <NavigationProperty Name="Habitaciones" Relationship="Self.FK__Reservas__Habita__4F7CD00D" FromRole="Reservas" ToRole="Habitaciones" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="ReservaHabitaciones" Relationship="HotelDBModel.FK__ReservaHa__Reser__5CD6CB2B" FromRole="Reservas" ToRole="ReservaHabitaciones" />
         </EntityType>
         <EntityType Name="TareasEmpleados">
           <Key>
@@ -580,7 +580,6 @@
           <EntitySet Name="HabitacionesSuite" EntityType="Self.HabitacionesSuite" />
           <EntitySet Name="ProgramasFidelizacion" EntityType="Self.ProgramasFidelizacion" />
           <EntitySet Name="Reservas" EntityType="Self.Reservas" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TareasEmpleados" EntityType="Self.TareasEmpleados" />
           <AssociationSet Name="FK__Clientes__Progra__398D8EEE" Association="Self.FK__Clientes__Progra__398D8EEE">
             <End Role="ProgramasFidelizacion" EntitySet="ProgramasFidelizacion" />
@@ -652,6 +651,15 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="ReservaHabitaciones" EntityType="HotelDBModel.ReservaHabitaciones" />
+          <AssociationSet Name="FK__ReservaHa__Habit__5DCAEF64" Association="HotelDBModel.FK__ReservaHa__Habit__5DCAEF64">
+            <End Role="Habitaciones" EntitySet="Habitaciones" />
+            <End Role="ReservaHabitaciones" EntitySet="ReservaHabitaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReservaHa__Reser__5CD6CB2B" Association="HotelDBModel.FK__ReservaHa__Reser__5CD6CB2B">
+            <End Role="Reservas" EntitySet="Reservas" />
+            <End Role="ReservaHabitaciones" EntitySet="ReservaHabitaciones" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -664,6 +672,42 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="ReservaHabitaciones">
+          <Key>
+            <PropertyRef Name="ReservaHabitacionID" />
+          </Key>
+          <Property Name="ReservaHabitacionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReservaID" Type="Int32" />
+          <Property Name="HabitacionID" Type="Int32" />
+          <Property Name="TipoPension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroHabitaciones" Type="Int32" />
+          <NavigationProperty Name="Habitaciones" Relationship="HotelDBModel.FK__ReservaHa__Habit__5DCAEF64" FromRole="ReservaHabitaciones" ToRole="Habitaciones" />
+          <NavigationProperty Name="Reservas" Relationship="HotelDBModel.FK__ReservaHa__Reser__5CD6CB2B" FromRole="ReservaHabitaciones" ToRole="Reservas" />
+        </EntityType>
+        <Association Name="FK__ReservaHa__Habit__5DCAEF64">
+          <End Type="HotelDBModel.Habitaciones" Role="Habitaciones" Multiplicity="0..1" />
+          <End Type="HotelDBModel.ReservaHabitaciones" Role="ReservaHabitaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Habitaciones">
+              <PropertyRef Name="HabitacionID" />
+            </Principal>
+            <Dependent Role="ReservaHabitaciones">
+              <PropertyRef Name="HabitacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReservaHa__Reser__5CD6CB2B">
+          <End Type="HotelDBModel.Reservas" Role="Reservas" Multiplicity="0..1" />
+          <End Type="HotelDBModel.ReservaHabitaciones" Role="ReservaHabitaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservas">
+              <PropertyRef Name="ReservaID" />
+            </Principal>
+            <Dependent Role="ReservaHabitaciones">
+              <PropertyRef Name="ReservaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -710,6 +754,9 @@
           <EntitySetMapping Name="Habitaciones">
             <EntityTypeMapping TypeName="HotelDBModel.Habitaciones">
               <MappingFragment StoreEntitySet="Habitaciones">
+                <ScalarProperty Name="CodigoHabitacion" ColumnName="CodigoHabitacion" />
+                <ScalarProperty Name="Ocupado_hasta" ColumnName="Ocupado_hasta" />
+                <ScalarProperty Name="Ocupado_desde" ColumnName="Ocupado_desde" />
                 <ScalarProperty Name="HabitacionID" ColumnName="HabitacionID" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="Caracteristicas" ColumnName="Caracteristicas" />
@@ -769,17 +816,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="HotelDBModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TareasEmpleados">
             <EntityTypeMapping TypeName="HotelDBModel.TareasEmpleados">
               <MappingFragment StoreEntitySet="TareasEmpleados">
@@ -790,31 +826,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="HotelDBModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="HotelDBModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="HotelDBModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="HotelDBModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="HotelDBModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="HotelDBModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="HotelDBModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="HotelDBModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="HotelDBModel.Store.sp_upgraddiagrams" />
-        </EntityContainerMapping>
+          <EntitySetMapping Name="ReservaHabitaciones">
+            <EntityTypeMapping TypeName="HotelDBModel.ReservaHabitaciones">
+              <MappingFragment StoreEntitySet="ReservaHabitaciones">
+                <ScalarProperty Name="NumeroHabitaciones" ColumnName="NumeroHabitaciones" />
+                <ScalarProperty Name="TipoPension" ColumnName="TipoPension" />
+                <ScalarProperty Name="HabitacionID" ColumnName="HabitacionID" />
+                <ScalarProperty Name="ReservaID" ColumnName="ReservaID" />
+                <ScalarProperty Name="ReservaHabitacionID" ColumnName="ReservaHabitacionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

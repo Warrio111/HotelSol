@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using HotelSolRepo.Controlador;
+
 namespace HotelSolRepo.Vista
 {
     public partial class RegisterForm : Form

@@ -60,6 +60,11 @@
   <ItemGroup>
     <Compile Include="Controlador\ClienteController.cs" />
     <Compile Include="Controlador\ReservaController.cs" />
+    <Compile Include="HotelDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HotelDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Modelo\Clientes.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -100,16 +105,22 @@
     <Compile Include="Modelo\ProgramasFidelizacion.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\ReservaHabitaciones.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Modelo\Reservas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\ServiciosExtraForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\ServiciosExtraForm.Designer.cs">
+      <DependentUpon>ServiciosExtraForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo\sp_helpdiagrams_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Modelo\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo\TareasEmpleados.cs">
@@ -180,10 +191,24 @@
     <EmbeddedResource Include="Vista\ReservaForm.resx">
       <DependentUpon>ReservaForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vista\ServiciosExtraForm.resx">
+      <DependentUpon>ServiciosExtraForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="Modelo\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="HotelDBDataSet.xsc">
+      <DependentUpon>HotelDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HotelDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HotelDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="HotelDBDataSet.xss">
+      <DependentUpon>HotelDBDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Modelo\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
@@ -212,6 +237,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Vista\ReservaTemplate.xslt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

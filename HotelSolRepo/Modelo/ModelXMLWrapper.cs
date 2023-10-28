@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 namespace HotelSolRepo.Modelo
 {
@@ -122,7 +123,7 @@ namespace HotelSolRepo.Modelo
         [XmlElement("CamasDobles")]
         public Nullable<int> CamasDobles { get; set; }
     }
-    
+
     [Serializable]
     [XmlRoot("HabitacionesSencillas")]
     public class HabitacionesSencillasXmlWrapper
@@ -172,27 +173,50 @@ namespace HotelSolRepo.Modelo
         [XmlElement("ReservaID")]
         public int ReservaID { get; set; }
 
+        [XmlElement("TipoReserva")]
+        public string TipoReserva { get; set; }
+
+
         [XmlElement("NIF")]
         public string NIF { get; set; }
 
-        [XmlElement("HabitacionID")]
-        public Nullable<int> HabitacionID { get; set; }
+        [XmlArray("Habitaciones")]
+        [XmlArrayItem("Habitacion")]
+        public List<HabitacionXmlWrapper> Habitaciones { get; set; }
+
+        [XmlElement("EmpleadoID")]
+        public Nullable<int> EmpleadoID { get; set; }
 
         [XmlElement("FechaInicio", DataType = "dateTime")]
         public Nullable<DateTime> FechaInicio { get; set; }
 
         [XmlElement("FechaFin", DataType = "dateTime")]
         public Nullable<DateTime> FechaFin { get; set; }
+
         [XmlElement("OpcionesPension")]
         public string OpcionesPension { get; set; }
+
         [XmlElement("Estado")]
         public string Estado { get; set; }
 
         [XmlElement("FechaCreacion", DataType = "dateTime")]
         public Nullable<DateTime> FechaCreacion { get; set; }
+    }
 
-        [XmlElement("TipoReserva")]
-        public string TipoReserva { get; set; }
+    [Serializable]
+    public class HabitacionXmlWrapper
+    {
+        [XmlElement("HabitacionID")]
+        public int HabitacionID { get; set; }
+
+        [XmlElement("Tipo")]
+        public string Tipo { get; set; }
+
+        [XmlElement("TipoPension")]
+        public string TipoPension { get; set; }  // Añadido
+
+        [XmlElement("NumeroHabitaciones")]
+        public int NumeroHabitaciones { get; set; }  // Añadido
     }
 
     [Serializable]

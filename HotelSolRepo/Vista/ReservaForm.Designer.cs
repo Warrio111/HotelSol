@@ -34,14 +34,27 @@
             this.btnCheckAvaliable = new System.Windows.Forms.Button();
             this.entityCommand1 = new System.Data.Entity.Core.EntityClient.EntityCommand();
             this.btnLoginMenu = new System.Windows.Forms.Button();
-            this.brnRegisterMenu = new System.Windows.Forms.Button();
+            this.btnRegisterMenu = new System.Windows.Forms.Button();
             this.btnConfirmar = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.SuspendLayout();
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(117, 32);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
+            this.dateTimePicker1.Location = new System.Drawing.Point(88, 99);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(357, 22);
             this.dateTimePicker1.TabIndex = 0;
@@ -60,9 +73,16 @@
             this.comboBox1.Location = new System.Drawing.Point(117, 125);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(357, 24);
+            this.comboBox1.Size = new System.Drawing.Size(166, 21);
             this.comboBox1.TabIndex = 2;
 
+            // 
+            this.btnCheckAvaliable.Location = new System.Drawing.Point(88, 318);
+            this.btnCheckAvaliable.Name = "btnCheckAvaliable";
+            this.btnCheckAvaliable.Size = new System.Drawing.Size(128, 22);
+            this.btnCheckAvaliable.TabIndex = 3;
+            this.btnCheckAvaliable.Text = "Comprobar";
+            this.btnCheckAvaliable.UseVisualStyleBackColor = true;
             // 
             // entityCommand1
             // 
@@ -82,15 +102,14 @@
             this.btnLoginMenu.Text = "Login";
             this.btnLoginMenu.UseVisualStyleBackColor = true;
             // 
-            // brnRegisterMenu
+            // btnRegisterMenu
             // 
-            this.brnRegisterMenu.Location = new System.Drawing.Point(896, 31);
-            this.brnRegisterMenu.Margin = new System.Windows.Forms.Padding(4);
-            this.brnRegisterMenu.Name = "brnRegisterMenu";
-            this.brnRegisterMenu.Size = new System.Drawing.Size(100, 28);
-            this.brnRegisterMenu.TabIndex = 5;
-            this.brnRegisterMenu.Text = "Registro";
-            this.brnRegisterMenu.UseVisualStyleBackColor = true;
+            this.btnRegisterMenu.Location = new System.Drawing.Point(672, 25);
+            this.btnRegisterMenu.Name = "btnRegisterMenu";
+            this.btnRegisterMenu.Size = new System.Drawing.Size(75, 23);
+            this.btnRegisterMenu.TabIndex = 5;
+            this.btnRegisterMenu.Text = "Registro";
+            this.btnRegisterMenu.UseVisualStyleBackColor = true;
             // 
             // btnConfirmar
             // 
@@ -99,16 +118,124 @@
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(212, 73);
             this.btnConfirmar.TabIndex = 6;
-            this.btnConfirmar.Text = "Confirmar Reserva";
+            this.btnConfirmar.Text = "Continuar";
             this.btnConfirmar.UseVisualStyleBackColor = true;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(88, 243);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(166, 21);
+            this.comboBox2.TabIndex = 7;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(88, 279);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(166, 21);
+            this.comboBox3.TabIndex = 8;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(273, 206);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(38, 20);
+            this.numericUpDown1.TabIndex = 9;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(273, 244);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(38, 20);
+            this.numericUpDown2.TabIndex = 10;
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(273, 280);
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(38, 20);
+            this.numericUpDown3.TabIndex = 11;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(317, 210);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(96, 17);
+            this.checkBox1.TabIndex = 12;
+            this.checkBox1.Text = "Media Pension";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(419, 210);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(111, 17);
+            this.checkBox2.TabIndex = 13;
+            this.checkBox2.Text = "Pension Completa";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(317, 247);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(96, 17);
+            this.checkBox3.TabIndex = 14;
+            this.checkBox3.Text = "Media Pension";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(419, 247);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(111, 17);
+            this.checkBox4.TabIndex = 15;
+            this.checkBox4.Text = "Pension Completa";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(317, 283);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(96, 17);
+            this.checkBox5.TabIndex = 16;
+            this.checkBox5.Text = "Media Pension";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(419, 283);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(111, 17);
+            this.checkBox6.TabIndex = 17;
+            this.checkBox6.Text = "Pension Completa";
+            this.checkBox6.UseVisualStyleBackColor = true;
             // 
             // ReservaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1073, 640);
+            this.ClientSize = new System.Drawing.Size(805, 520);
+            this.Controls.Add(this.checkBox6);
+            this.Controls.Add(this.checkBox5);
+            this.Controls.Add(this.checkBox4);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.numericUpDown3);
+            this.Controls.Add(this.numericUpDown2);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.btnConfirmar);
-            this.Controls.Add(this.brnRegisterMenu);
+            this.Controls.Add(this.btnRegisterMenu);
             this.Controls.Add(this.btnLoginMenu);
             this.Controls.Add(this.btnCheckAvaliable);
             this.Controls.Add(this.comboBox1);
@@ -118,7 +245,11 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ReservaForm";
             this.Text = "ReservaForm";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -130,7 +261,18 @@
         private System.Windows.Forms.Button btnCheckAvaliable;
         private System.Data.Entity.Core.EntityClient.EntityCommand entityCommand1;
         private System.Windows.Forms.Button btnLoginMenu;
-        private System.Windows.Forms.Button brnRegisterMenu;
+        private System.Windows.Forms.Button btnRegisterMenu;
         private System.Windows.Forms.Button btnConfirmar;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox checkBox6;
     }
 }

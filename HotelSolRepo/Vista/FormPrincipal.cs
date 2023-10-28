@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace HotelSolRepo.Vista
 {
     public partial class FormPrincipal : Form
@@ -19,12 +18,14 @@ namespace HotelSolRepo.Vista
         private Form callerForm; // Almacena el formulario que llama a FormPrincipal
         public event Action<Type> XmlWrapperTypeChanged; // Evento personalizado
         public event Action<Form> CallerPrincipal;
+        public string AuthenticatedNIF { get; set; } // Propiedad para almacenar el NIF del usuario autenticado
         public FormPrincipal()
         {
             InitializeComponent();
 
             ConectarControladoresEventos();  // Conecta los controladores de eventos
             IsAuthenticated = false; // Inicialmente, el usuario no está autenticado
+            AuthenticatedNIF = string.Empty; // Inicialmente, no hay NIF autenticado
             // Suscribe el manejador de eventos para el cambio de tipo XMLWrapper
             XmlWrapperTypeChanged += (xmlWrapperType) =>
             {
