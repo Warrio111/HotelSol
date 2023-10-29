@@ -20,6 +20,7 @@ CREATE TABLE Clientes (
     CorreoElectronico NVARCHAR(255),
     Telefono NVARCHAR(15),
     ProgramaFidelizacionID INT,
+    Contraseña NVARCHAR(255),
     FOREIGN KEY (ProgramaFidelizacionID) REFERENCES ProgramasFidelizacion(ProgramaFidelizacionID)
 );
 
@@ -31,13 +32,23 @@ CREATE TABLE Empleados (
     Horario NVARCHAR(MAX)
 );
 
--- Tabla de Habitaciones (Tabla principal)
+-- Tabla principal de Habitaciones
 CREATE TABLE Habitaciones (
     HabitacionID INT PRIMARY KEY IDENTITY(1,1),
     Tipo NVARCHAR(50),
     Caracteristicas NVARCHAR(MAX),
     Tarifa FLOAT,
-    EstadoActual NVARCHAR(50)  -- Nuevo campo
+    EstadoActual NVARCHAR(50),
+    Ocupado_desde DATETIME,
+    Ocupado_hasta DATETIME,
+    CodigoHabitacion AS (
+        CASE
+            WHEN Tipo = 'Sencilla' THEN '1'
+            WHEN Tipo = 'Doble' THEN '2'
+            WHEN Tipo = 'Suite' THEN '3'
+            ELSE '0'
+        END + CAST(HabitacionID AS NVARCHAR(10))
+    ) PERSISTED UNIQUE
 );
 
 -- Tablas para diferentes tipos de Habitaciones (Subclases)
@@ -69,7 +80,7 @@ CREATE TABLE Facturas (
     Cargos FLOAT,
     Impuestos FLOAT,
     Fecha DATE,
-    FechaCreacion DATETIME DEFAULT GETDATE(),  -- Nuevo campo
+    FechaCreacion DATETIME DEFAULT GETDATE(),
     TipoFactura NVARCHAR(50),
     FOREIGN KEY (NIF) REFERENCES Clientes(NIF),
     FOREIGN KEY (EmpleadoID) REFERENCES Empleados(EmpleadoID)
@@ -84,8 +95,8 @@ CREATE TABLE Reservas (
     FechaInicio DATE,
     FechaFin DATE,
     OpcionesPension NVARCHAR(50),
-    Estado NVARCHAR(50),  -- Nuevo campo
-    FechaCreacion DATETIME DEFAULT GETDATE(),  -- Nuevo campo
+    Estado NVARCHAR(50),
+    FechaCreacion DATETIME DEFAULT GETDATE(),
     TipoReserva NVARCHAR(50),
     FOREIGN KEY (NIF) REFERENCES Clientes(NIF),
     FOREIGN KEY (HabitacionID) REFERENCES Habitaciones(HabitacionID),
@@ -102,21 +113,5 @@ CREATE TABLE TareasEmpleados (
 );
 
 
--- Inclusion de datos de prueba
 
--- Insertar programas de fidelización en la tabla ProgramasFidelizacion
-INSERT INTO ProgramasFidelizacion (Nombre, Puntos, Beneficios)
-VALUES
-('Gold', 1000, 'Acceso a promociones exclusivas, 5% de descuento en compras'),
-('Standard', 500, 'Acceso a promociones'),
-('VIP', 2000, 'Acceso a promociones exclusivas, 10% de descuento en compras, acceso a eventos VIP'),
-('Platinum', 3000, 'Acceso a promociones exclusivas, 15% de descuento en compras, acceso a eventos VIP, servicio de atención al cliente personalizado');
-
--- Insertar clientes de prueba en la tabla Clientes
-INSERT INTO Clientes (NIF, Nombre, CorreoElectronico, Telefono, ProgramaFidelizacionID)
-VALUES
-('12345678A', 'Prueba 1', 'prueba1@example.com', '600111222', 1),
-('12345679B', 'Prueba 2', 'prueba2@example.com', '600111223', 2),
-('12345680C', 'Prueba 3', 'prueba3@example.com', '600111224', 3),
-('12345681D', 'Prueba 4', 'prueba4@example.com', '600111225', 4);
 
