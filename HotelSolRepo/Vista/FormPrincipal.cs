@@ -72,7 +72,7 @@ namespace HotelSolRepo.Vista
                 {
                     exportarForm.ExportarDatosToXml(this.callerForm);
                 }
-                MostrarFormulario(exportarForm);
+                //MostrarFormulario(exportarForm);
                 return;
             }
             else

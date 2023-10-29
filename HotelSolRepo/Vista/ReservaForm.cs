@@ -35,11 +35,43 @@ namespace HotelSolRepo.Vista
 
         public ReservasListXmlWrapper RealizarExportDesdeReservas()
         {
+            List<HabitacionXmlWrapper> habitacionesSeleccionadas = new List<HabitacionXmlWrapper>();
 
+            if (comboBox1.SelectedItem != null)
+            {
+                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
+                {
+                    HabitacionID = ConvertToNumericType(comboBox1.SelectedItem.ToString()),
+                    TipoPension = GetPensionType(checkBox1, checkBox2),
+                    NumeroHabitaciones = (int)numericUpDown1.Value
+                });
+            }
 
+            if (comboBox2.SelectedItem != null)
+            {
+                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
+                {
+                    HabitacionID = ConvertToNumericType(comboBox2.SelectedItem.ToString()),
+                    TipoPension = GetPensionType(checkBox3, checkBox4),
+                    NumeroHabitaciones = (int)numericUpDown2.Value
+                });
+            }
+
+            if (comboBox3.SelectedItem != null)
+            {
+                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
+                {
+                    HabitacionID = ConvertToNumericType(comboBox3.SelectedItem.ToString()),
+                    TipoPension = GetPensionType(checkBox5, checkBox6),
+                    NumeroHabitaciones = (int)numericUpDown3.Value
+                });
+            }
+
+           
             // Verificar si dateTimePicker1 y dateTimePicker2 no son nulos antes de acceder a sus propiedades
             if (dateTimePicker1 != null && dateTimePicker2 != null)
             {
+
                 ReservasXmlWrapper reservasXmlWrapper = new ReservasXmlWrapper
                 {
                     ReservaID = 1,
@@ -48,7 +80,8 @@ namespace HotelSolRepo.Vista
                     //NIF = ((FormPrincipal)this.ParentForm).AuthenticatedNIF, // Este valor debe venir del usuario autenticado
                     NIF = "12345678A",
                     Estado = "Pendiente",
-                    FechaCreacion = DateTime.Now
+                    FechaCreacion = DateTime.Now,
+                    Habitaciones = habitacionesSeleccionadas
                 };
                 ((FormPrincipal)this.Owner).reservasXML.Reservas.Add(reservasXmlWrapper);
             }

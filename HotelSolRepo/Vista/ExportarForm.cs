@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography.Xml;
 using System.Windows.Forms;
@@ -54,26 +55,7 @@ namespace HotelSolRepo.Vista
                     }
                     else if (result == DialogResult.Yes)
                     {
-                        // El usuario desea sobrescribir el archivo
-                        if (dataForm is ReservaForm)
-                        {
-                            ReservaForm reservaForm = (ReservaForm)dataForm;
-                            // Aquí creamos una instancia del tipo exportXmlWrapperType
-                            serializeXMLWrapperType = Activator.CreateInstance(exportXmlWrapperType);
-                            foreach (PropertyInfo propertyInfo in exportXmlWrapperType.GetProperties())
-                            {
-                                PropertyInfo sourceProperty = reservaForm.RealizarExportDesdeReservas().GetType().GetProperty(propertyInfo.Name);
-                                if (sourceProperty != null)
-                                {
-                                    object value = sourceProperty.GetValue(reservaForm.RealizarExportDesdeReservas());
-                                    propertyInfo.SetValue(serializeXMLWrapperType, value);
-                                }
-                            }
-                        }
-                    }
-                    else if (result == DialogResult.No)
-                    {
-                        // El usuario desea añadir datos al archivo donde corresponda
+                        // El usuario desea Sobrescribir el archivo existente
                         if (dataForm is ReservaForm)
                         {
                             ReservaForm reservaForm = (ReservaForm)dataForm;
@@ -86,10 +68,47 @@ namespace HotelSolRepo.Vista
                             List<ReservasXmlWrapper> reservas = reservaForm.RealizarExportDesdeReservas().Reservas;
 
                             // Agregar las reservas a la lista de reservas en ReservasListXmlWrapper
-                            reservasList.Reservas.AddRange(reservas);
+                            reservasList.Reservas.Add(reservas.Last());
+
+                            // Ahora tenemos una instancia de ReservasListXmlWrapper con todas las reservas
+                            // Serializa esta instancia
+                            using (FileStream stream = new FileStream(rutaArchivoXml, FileMode.Create))
+                            {
+                                serializer.Serialize(stream, reservasList);
+                            }
+
+                            MessageBox.Show("Exportación exitosa.");
+                            return;
+
+                        }
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        // Conecpto de LIFO (Last In First Out) para añadir datos al archivo existente
+                        //Aplicamos LIFO a las reservasList 
+                        // El usuario desea añadir datos al archivo donde corresponda
+                        if (dataForm is ReservaForm)
+                        {
+                            ReservaForm reservaForm = (ReservaForm)dataForm;
+
+                            // Crear una instancia de ReservasListXmlWrapper y su lista de reservas
+                            ReservasListXmlWrapper reservasList = new ReservasListXmlWrapper();
+                            reservasList.Reservas = new List<ReservasXmlWrapper>();
+                            using (FileStream existingFileStream = new FileStream(rutaArchivoXml, FileMode.Open))
+                            {
+                                if(existingFileStream.Length!= 0)
+                                // Deserializa los datos existentes desde el archivo
+                                reservasList = (ReservasListXmlWrapper)serializer.Deserialize(existingFileStream);
+                            }
+
+                            // Obtener la lista de reservas desde reservaForm
+                            List<ReservasXmlWrapper> reservas = reservaForm.RealizarExportDesdeReservas().Reservas;
+
+                            // Agregar las reservas a la lista de reservas en ReservasListXmlWrapper
+                            reservasList.Reservas.Add(reservas.Last());
 
                             // Ahora tienes una instancia de ReservasListXmlWrapper con todas las reservas
-                            // Serializa esta instancia
+                            // Serializamos esta instancia
                             using (FileStream stream = new FileStream(rutaArchivoXml, FileMode.Create))
                             {
                                 serializer.Serialize(stream, reservasList);
