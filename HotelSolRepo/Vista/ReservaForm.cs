@@ -37,6 +37,108 @@ namespace HotelSolRepo.Vista
         {
             List<HabitacionXmlWrapper> habitacionesSeleccionadas = new List<HabitacionXmlWrapper>();
 
+
+            if (comboBox1.SelectedItem != null)
+            {
+                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
+                {
+                    HabitacionID = ConvertToNumericType(comboBox1.SelectedItem.ToString()),
+                    TipoPension = GetPensionType(checkBox1, checkBox2),
+                    NumeroHabitaciones = (int)numericUpDown1.Value
+                });
+            }
+
+            if (comboBox2.SelectedItem != null)
+            {
+                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
+                {
+                    HabitacionID = ConvertToNumericType(comboBox2.SelectedItem.ToString()),
+                    TipoPension = GetPensionType(checkBox3, checkBox4),
+                    NumeroHabitaciones = (int)numericUpDown2.Value
+                });
+            }
+
+            if (comboBox3.SelectedItem != null)
+            {
+                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
+                {
+                    HabitacionID = ConvertToNumericType(comboBox3.SelectedItem.ToString()),
+                    TipoPension = GetPensionType(checkBox5, checkBox6),
+                    NumeroHabitaciones = (int)numericUpDown3.Value
+                });
+            }
+           
+            // Verificar si dateTimePicker1 y dateTimePicker2 no son nulos antes de acceder a sus propiedades
+            if (dateTimePicker1 != null && dateTimePicker2 != null)
+            {
+
+                ReservasXmlWrapper reservasXmlWrapper = new ReservasXmlWrapper
+                {
+                    ReservaID = 1,
+                    FechaInicio = dateTimePicker1.Value,
+                    FechaFin = dateTimePicker2.Value,
+                    NIF = ((FormPrincipal)this.ParentForm).AuthenticatedNIF, // Este valor debe venir del usuario autenticado
+                    Estado = "Pendiente",
+                    FechaCreacion = DateTime.Now,
+                    Habitaciones = habitacionesSeleccionadas
+                };
+                ((FormPrincipal)this.Owner).reservasXML.Reservas.Add(reservasXmlWrapper);
+            }
+
+            return ((FormPrincipal)this.Owner).reservasXML;
+        }
+        private void LoginForm_Click(object sender, EventArgs e)
+        {
+            FormPrincipal formPrincipal = (FormPrincipal)this.ParentForm;
+            if (formPrincipal.IsAuthenticated)
+            {
+                MessageBox.Show("Cliente Validado.");
+                return;
+            }
+
+            formPrincipal.MostrarFormulario(new LoginForm());
+        }
+
+        private void RegisterForm_Click(object sender, EventArgs e)
+        {
+            FormPrincipal formPrincipal = (FormPrincipal)this.ParentForm;
+            if (formPrincipal.IsAuthenticated)
+            {
+                MessageBox.Show("Cliente Validado.");
+                return;
+            }
+
+            formPrincipal.MostrarFormulario(new RegisterForm());
+        }
+
+        private void ReservaForm_Load(object sender, EventArgs e)
+        {
+            var tiposHabitaciones = db.Habitaciones.Select(h => h.Tipo).Distinct().ToList();
+            foreach (var tipo in tiposHabitaciones)
+            {
+                comboBox1.Items.Add(tipo);
+                comboBox2.Items.Add(tipo);
+                comboBox3.Items.Add(tipo);
+            }
+        }
+
+        private void RealizarReserva_Click(object sender, EventArgs e)
+        {
+            FormPrincipal formPrincipal = (FormPrincipal)this.ParentForm;
+            if (!formPrincipal.IsAuthenticated)
+            {
+                MessageBox.Show("Por favor, valide un Cliente para realizar una reserva.");
+                return;
+            }
+
+            // Obtener detalles del cliente
+            ClienteController clienteController = new ClienteController();
+            var cliente = clienteController.ObtenerClientePorNIF(formPrincipal.AuthenticatedNIF);
+
+
+            List<HabitacionXmlWrapper> habitacionesSeleccionadas = new List<HabitacionXmlWrapper>();
+
+
             if (comboBox1.SelectedItem != null)
             {
                 habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
@@ -67,117 +169,28 @@ namespace HotelSolRepo.Vista
                 });
             }
 
-           
-            // Verificar si dateTimePicker1 y dateTimePicker2 no son nulos antes de acceder a sus propiedades
-            if (dateTimePicker1 != null && dateTimePicker2 != null)
+            ReservasXmlWrapper reserva = new ReservasXmlWrapper
             {
+                FechaInicio = dateTimePicker1.Value,
+                FechaFin = dateTimePicker2.Value,
+                NIF = formPrincipal.AuthenticatedNIF,
+                Estado = "Pendiente",
+                FechaCreacion = DateTime.Now,
+                ClienteNombre = cliente.Nombre,  
 
-                ReservasXmlWrapper reservasXmlWrapper = new ReservasXmlWrapper
-                {
-                    ReservaID = 1,
-                    FechaInicio = dateTimePicker1.Value,
-                    FechaFin = dateTimePicker2.Value,
-                    //NIF = ((FormPrincipal)this.ParentForm).AuthenticatedNIF, // Este valor debe venir del usuario autenticado
-                    NIF = "12345678A",
-                    Estado = "Pendiente",
-                    FechaCreacion = DateTime.Now,
-                    Habitaciones = habitacionesSeleccionadas
-                };
-                ((FormPrincipal)this.Owner).reservasXML.Reservas.Add(reservasXmlWrapper);
-            }
 
-            return ((FormPrincipal)this.Owner).reservasXML;
+                Habitaciones = habitacionesSeleccionadas
+            };
+            Type XmlWrapperType = typeof(ReservasXmlWrapper);
+            ((FormPrincipal)this.ParentForm).OnXmlWrapperTypeChanged(XmlWrapperType);
+
+            int empleadoID = formPrincipal.AuthenticatedEmployeeID;
+
+            reservaController.GenerarReservaTemporalXml(reserva, empleadoID);
+
+
+            formPrincipal.MostrarFormulario(new ServiciosExtraForm());
         }
-        private void LoginForm_Click(object sender, EventArgs e)
-        {
-            FormPrincipal formPrincipal = (FormPrincipal)this.ParentForm;
-            if (formPrincipal.IsAuthenticated)
-            {
-                MessageBox.Show("Ya está autenticado.");
-                return;
-            }
-
-            formPrincipal.MostrarFormulario(new LoginForm());
-        }
-
-        private void RegisterForm_Click(object sender, EventArgs e)
-        {
-            FormPrincipal formPrincipal = (FormPrincipal)this.ParentForm;
-            if (formPrincipal.IsAuthenticated)
-            {
-                MessageBox.Show("Ya está autenticado.");
-                return;
-            }
-
-            formPrincipal.MostrarFormulario(new RegisterForm());
-        }
-
-        private void ReservaForm_Load(object sender, EventArgs e)
-        {
-            var tiposHabitaciones = db.Habitaciones.Select(h => h.Tipo).Distinct().ToList();
-            foreach (var tipo in tiposHabitaciones)
-            {
-                comboBox1.Items.Add(tipo);
-                comboBox2.Items.Add(tipo);
-                comboBox3.Items.Add(tipo);
-            }
-        }
-
-        private void RealizarReserva_Click(object sender, EventArgs e)
-        {
-            FormPrincipal formPrincipal = (FormPrincipal)this.ParentForm;
-            if (!formPrincipal.IsAuthenticated)
-            {
-                MessageBox.Show("Por favor, autentíquese para realizar una reserva.");
-                return;
-            }
-
-            List<HabitacionXmlWrapper> habitacionesSeleccionadas = new List<HabitacionXmlWrapper>();
-
-            if (comboBox1.SelectedItem != null)
-            {
-                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
-                {
-                    HabitacionID = ConvertToNumericType(comboBox1.SelectedItem.ToString()),
-                    TipoPension = GetPensionType(checkBox1, checkBox2),
-                    NumeroHabitaciones = (int)numericUpDown1.Value
-                });
-            }
-
-            if (comboBox2.SelectedItem != null)
-            {
-                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
-                {
-                    HabitacionID = ConvertToNumericType(comboBox2.SelectedItem.ToString()),
-                    TipoPension = GetPensionType(checkBox3, checkBox4),
-                    NumeroHabitaciones = (int)numericUpDown2.Value
-                });
-            }
-
-    if (comboBox3.SelectedItem != null)
-    {
-        habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
-        {
-            HabitacionID = ConvertToNumericType(comboBox3.SelectedItem.ToString()),
-            TipoPension = GetPensionType(checkBox5, checkBox6),
-            NumeroHabitaciones = (int)numericUpDown3.Value
-        });
-    }
-
-    ReservasXmlWrapper reserva = new ReservasXmlWrapper
-    {
-        FechaInicio = dateTimePicker1.Value,
-        FechaFin = dateTimePicker2.Value,
-        NIF = ((FormPrincipal)this.ParentForm).AuthenticatedNIF, // Este valor debe venir del usuario autenticado
-        Estado = "Pendiente",
-        FechaCreacion = DateTime.Now,
-        Habitaciones = habitacionesSeleccionadas
-    };
-    Type XmlWrapperType = typeof(ReservasXmlWrapper);
-    ((FormPrincipal)this.ParentForm).OnXmlWrapperTypeChanged(XmlWrapperType);
-    reservaController.GenerarReservaTemporalXml(reserva);
-    ((FormPrincipal)this.ParentForm).MostrarFormulario(new ServiciosExtraForm());
-}
 
         private void ComprobarDisponibilidad_Click(object sender, EventArgs e)
         {
@@ -223,16 +236,7 @@ namespace HotelSolRepo.Vista
             {
                 MessageBox.Show("Alguna de las habitaciones seleccionadas no está disponible.");
             }
-
-            // Mostrar el resultado
-            if (estaDisponible)
-            {
-                MessageBox.Show("Las habitaciones seleccionadas están disponibles.");
-            }
-            else
-            {
-                MessageBox.Show("Alguna de las habitaciones seleccionadas no está disponible.");
-            }
+        
         }
 
         private int ConvertToNumericType(string tipoHabitacion)

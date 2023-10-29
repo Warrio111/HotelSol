@@ -28,20 +28,25 @@ namespace HotelSolRepo.Vista
                 parentForm.IsAuthenticated = true;
                 parentForm.AuthenticatedNIF = nif;  // Almacenar el NIF del usuario autenticado
 
-                MessageBox.Show("Inicio de sesión exitoso.");
+                MessageBox.Show("Cliente validado.");
                 Type exportXmlWrapperType = typeof(LoginForm);
                 parentForm.MostrarFormulario(new ReservaForm(ref exportXmlWrapperType,parentForm)); // Redirigir al formulario de reserva
                 this.Close(); // Cerrar el formulario de inicio de sesión
             }
             else
             {
-                MessageBox.Show("Inicio de sesión fallido. Verifique sus credenciales.");
+                MessageBox.Show("Validacion fallida. Verifique sus credenciales.");
             }
         }
 
         private void BtnGoToReserva_Click(object sender, EventArgs e)
         {
             ((FormPrincipal)this.ParentForm).MostrarFormulario(new RegisterForm());
+        }
+
+        private void textBoxLoginNIF_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

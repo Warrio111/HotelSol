@@ -180,11 +180,16 @@ namespace HotelSolRepo.Modelo
         public int ReservaID { get; set; }
 
         [XmlElement("TipoReserva")]
-        public string TipoReserva { get; set; }
-
+        public string TipoReserva { get; set; }  // Nuevo campo
 
         [XmlElement("NIF")]
         public string NIF { get; set; }
+
+        [XmlElement("ClienteNombre")]  // Nuevo campo
+        public string ClienteNombre { get; set; }
+
+        [XmlElement("ClienteApellido")]  // Nuevo campo
+        public string ClienteApellido { get; set; }
 
         [XmlArray("Habitaciones")]
         [XmlArrayItem("Habitacion")]
@@ -207,6 +212,7 @@ namespace HotelSolRepo.Modelo
 
         [XmlElement("FechaCreacion", DataType = "dateTime")]
         public Nullable<DateTime> FechaCreacion { get; set; }
+
     }
 
     [Serializable]
@@ -216,14 +222,15 @@ namespace HotelSolRepo.Modelo
         public int HabitacionID { get; set; }
 
         [XmlElement("Tipo")]
-        public string Tipo { get; set; }
+        public string Tipo { get; set; }  // Modificado para incluir "Sencilla", "Doble", "Suite"
 
         [XmlElement("TipoPension")]
-        public string TipoPension { get; set; }  // Añadido
+        public string TipoPension { get; set; }
 
         [XmlElement("NumeroHabitaciones")]
-        public int NumeroHabitaciones { get; set; }  // Añadido
+        public int NumeroHabitaciones { get; set; }
     }
+
 
     [Serializable]
     [XmlRoot("TareasEmpleados")]

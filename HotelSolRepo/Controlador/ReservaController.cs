@@ -14,35 +14,46 @@ namespace HotelSolRepo.Controlador
         private Reservas reserva;
 
 
-        // Comprobación de disponibilidad de habitaciones (implementación simulada)
-        public bool ComprobarDisponibilidad(DateTime fechaInicio, DateTime fechaFin, List<int> habitacionesSeleccionadas, List<int> cantidades)
+        // Comprobación de disponibilidad de habitaciones 
+        public bool ComprobarDisponibilidad(DateTime fechaInicio, DateTime fechaFin, List<int> tiposHabitacionesSeleccionadas, List<int> cantidades)
         {
             using (HotelDBEntities db = new HotelDBEntities())
             {
-                // Obtener habitaciones ocupadas para el rango de fechas y tipos de habitación seleccionados
-                var habitacionesOcupadas = db.Habitaciones.Where(h => habitacionesSeleccionadas.Contains(h.HabitacionID) &&
-                    ((h.Ocupado_desde >= fechaInicio && h.Ocupado_desde <= fechaFin) ||
-                    (h.Ocupado_hasta >= fechaInicio && h.Ocupado_hasta <= fechaFin) ||
-                    (h.Ocupado_desde <= fechaInicio && h.Ocupado_hasta >= fechaFin))
-                ).ToList();
-
-                // Agrupar habitaciones ocupadas por su tipo (ID)
-                var habitacionesOcupadasAgrupadas = habitacionesOcupadas.GroupBy(h => h.HabitacionID).ToDictionary(g => g.Key, g => g.Count());
-
-                // Verificar si hay suficientes habitaciones de cada tipo disponibles
-                for (int i = 0; i < habitacionesSeleccionadas.Count; i++)
+                for (int i = 0; i < tiposHabitacionesSeleccionadas.Count; i++)
                 {
-                    int tipoHabitacion = habitacionesSeleccionadas[i];
+                    int tipoHabitacionSeleccionada = tiposHabitacionesSeleccionadas[i];
+                    string tipoHabitacion = null;
+
+                    // Convertir el valor numérico a la cadena correspondiente del tipo de habitación
+                    switch (tipoHabitacionSeleccionada)
+                    {
+                        case 1:
+                            tipoHabitacion = "Sencilla";
+                            break;
+                        case 2:
+                            tipoHabitacion = "Doble";
+                            break;
+                        case 3:
+                            tipoHabitacion = "Suite";
+                            break;
+                        default:
+                            return false; // Tipo de habitación no reconocido
+                    }
+
                     int cantidadNecesaria = cantidades[i];
 
-                    // Obtener la cantidad de habitaciones ocupadas de este tipo, si hay alguna
-                    int cantidadOcupada = habitacionesOcupadasAgrupadas.ContainsKey(tipoHabitacion) ? habitacionesOcupadasAgrupadas[tipoHabitacion] : 0;
-
                     // Obtener el total de habitaciones de este tipo en la base de datos
-                    int cantidadTotal = db.Habitaciones.Count(h => h.HabitacionID == tipoHabitacion);
+                    int cantidadTotal = db.Habitaciones.Count(h => h.Tipo == tipoHabitacion);
+
+                    // Obtener habitaciones ocupadas para el rango de fechas y tipos de habitación seleccionados
+                    int habitacionesOcupadas = db.Habitaciones.Count(h => h.Tipo == tipoHabitacion &&
+                        ((h.Ocupado_desde >= fechaInicio && h.Ocupado_desde <= fechaFin) ||
+                        (h.Ocupado_hasta >= fechaInicio && h.Ocupado_hasta <= fechaFin) ||
+                        (h.Ocupado_desde <= fechaInicio && h.Ocupado_hasta >= fechaFin))
+                    );
 
                     // Verificar si hay suficientes habitaciones disponibles de este tipo
-                    if (cantidadTotal - cantidadOcupada < cantidadNecesaria)
+                    if (cantidadTotal - habitacionesOcupadas < cantidadNecesaria)
                     {
                         return false;
                     }
@@ -53,8 +64,10 @@ namespace HotelSolRepo.Controlador
         }
 
 
+
+
         // Crear reserva desde datos XML
-        public bool HacerReservaDesdeXml(string xmlReserva)
+        public bool HacerReservaDesdeXml(string xmlReserva, int empleadoID)
         {
             try
             {
@@ -62,7 +75,6 @@ namespace HotelSolRepo.Controlador
                 using (StringReader reader = new StringReader(xmlReserva))
                 {
                     ReservasXmlWrapper nuevaReserva = (ReservasXmlWrapper)serializer.Deserialize(reader);
-
                     using (HotelDBEntities db = new HotelDBEntities())
                     {
                         Reservas reserva = new Reservas
@@ -70,13 +82,14 @@ namespace HotelSolRepo.Controlador
                             NIF = nuevaReserva.NIF,
                             FechaInicio = nuevaReserva.FechaInicio,
                             FechaFin = nuevaReserva.FechaFin,
-                            Estado = nuevaReserva.Estado, // Inicialmente se establece como "Pendiente"
-                            FechaCreacion = DateTime.Now
+                            Estado = nuevaReserva.Estado,
+                            FechaCreacion = nuevaReserva.FechaCreacion,  // Utilizar la fecha de creación deserializada
+                            EmpleadoID = empleadoID  // Utilizar el ID del empleado proporcionado
                         };
 
                         db.Reservas.Add(reserva);
+                        db.SaveChanges();
 
-                        // Añadir las habitaciones y las opciones de pensión a la reserva
                         foreach (var habitacion in nuevaReserva.Habitaciones)
                         {
                             ReservaHabitaciones reservaHabitacion = new ReservaHabitaciones
@@ -91,7 +104,6 @@ namespace HotelSolRepo.Controlador
 
                         db.SaveChanges();
 
-                        // Cambiar el estado a "Confirmada"
                         reserva.Estado = "Confirmada";
                         db.SaveChanges();
                     }
@@ -107,8 +119,13 @@ namespace HotelSolRepo.Controlador
         }
 
         // Generar archivo XML para reserva temporal
-        public void GenerarReservaTemporalXml(ReservasXmlWrapper reservaTemporal)
+        public void GenerarReservaTemporalXml(ReservasXmlWrapper reservaTemporal, int empleadoID)
         {
+            reservaTemporal.EmpleadoID = empleadoID;
+            reservaTemporal.FechaCreacion = DateTime.Now;
+            string clienteNombre = reservaTemporal.ClienteNombre;
+            
+            
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(ReservasXmlWrapper));
@@ -116,8 +133,6 @@ namespace HotelSolRepo.Controlador
                 {
                     serializer.Serialize(writer, reservaTemporal);
                     string xmlReservaTemporal = writer.ToString();
-
-                    // Guardar la cadena XML en un archivo temporal
                     File.WriteAllText(rutaArchivoXml, xmlReservaTemporal);
                 }
             }
@@ -127,15 +142,15 @@ namespace HotelSolRepo.Controlador
             }
         }
 
-        public void ConfirmarReserva()
+
+        public void ConfirmarReserva(int empleadoID)
         {
             if (File.Exists(rutaArchivoXml))
             {
                 string xmlReserva = File.ReadAllText(rutaArchivoXml);
-                if (HacerReservaDesdeXml(xmlReserva))
+                if (HacerReservaDesdeXml(xmlReserva, empleadoID))
                 {
                     MessageBox.Show("Reserva confirmada y almacenada en la base de datos.");
-                    // Implementar la lógica para eliminar o mover el archivo XML temporal
                 }
                 else
                 {
@@ -143,7 +158,6 @@ namespace HotelSolRepo.Controlador
                 }
             }
         }
-
 
 
         // Actualizar reserva existente
@@ -158,13 +172,10 @@ namespace HotelSolRepo.Controlador
                     reservaExistente.FechaFin = reservaActualizada.FechaFin;
                     reservaExistente.Estado = reservaActualizada.Estado;
 
-                    // Implemente la lógica para actualizar las habitaciones y las opciones de pensión aquí
-
                     db.SaveChanges();
                 }
             }
         }
     }
 }
-
 

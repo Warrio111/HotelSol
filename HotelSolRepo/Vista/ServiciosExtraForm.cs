@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Xsl;
 using System.Windows.Forms;
+using HotelSolRepo.Vista;
 
 namespace HotelSolRepo.Modelo
 {
@@ -20,12 +21,7 @@ namespace HotelSolRepo.Modelo
 
         private void ServiciosExtraForm_Load(object sender, EventArgs e)
         {
-            if (File.Exists(rutaArchivoXml))
-            {
-                string xmlContent = File.ReadAllText(rutaArchivoXml);
-                string htmlContent = ConvertXmlToHtml(xmlContent);
-                webBrowser1.DocumentText = htmlContent;
-            }
+            UpdateWebBrowserContent();
         }
 
         private string ConvertXmlToHtml(string xmlContent)
@@ -52,12 +48,29 @@ namespace HotelSolRepo.Modelo
             }
         }
 
+        private void UpdateWebBrowserContent()
+        {
+            if (File.Exists(rutaArchivoXml))
+            {
+                string xmlContent = File.ReadAllText(rutaArchivoXml);
+                string htmlContent = ConvertXmlToHtml(xmlContent);
+                webBrowser1.DocumentText = htmlContent;
+            }
+        }
+
         private void BtnConfirmar_Click(object sender, EventArgs e)
         {
             ReservaController reservaController = new ReservaController();
-            reservaController.ConfirmarReserva();
+            FormPrincipal formPrincipal = (FormPrincipal)this.ParentForm;
+            int empleadoID = formPrincipal.AuthenticatedEmployeeID;
+
+            reservaController.ConfirmarReserva(empleadoID);
+
+            // Update the WebBrowser 
+            UpdateWebBrowserContent();
         }
     }
 }
+
 
 

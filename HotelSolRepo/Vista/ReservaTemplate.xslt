@@ -5,20 +5,17 @@
 		<html>
 			<head>
 				<style>
+					/* Estilos para la tabla y los elementos del cuerpo */
 					body {
 					font-family: Arial, sans-serif;
 					}
-					h1, h2 {
-					color: #333366;
-					}
 					table {
+					width: 100%;
 					border-collapse: collapse;
-					margin-bottom: 20px;
 					}
 					th, td {
-					border: 1px solid #ccc;
+					border: 1px solid #ddd;
 					padding: 8px;
-					text-align: left;
 					}
 					th {
 					background-color: #f2f2f2;
@@ -26,8 +23,15 @@
 				</style>
 			</head>
 			<body>
-				<h1>Reserva</h1>
+				<h1>Detalles de la Reserva</h1>
+				<!-- Tabla para información general de la reserva -->
 				<table>
+					<tr>
+						<th>Nombre del Cliente</th>
+						<td>
+							<xsl:value-of select="Reservas/ClienteNombre"/>
+						</td>
+					</tr>
 					<tr>
 						<th>NIF</th>
 						<td>
@@ -35,30 +39,29 @@
 						</td>
 					</tr>
 					<tr>
-						<th>Fecha Inicio</th>
+						<th>Teléfono</th>
 						<td>
-							<xsl:value-of select="Reservas/FechaInicio"/>
+							<xsl:value-of select="Reservas/Telefono"/>
 						</td>
 					</tr>
 					<tr>
-						<th>Fecha Fin</th>
+						<th>Correo</th>
 						<td>
-							<xsl:value-of select="Reservas/FechaFin"/>
+							<xsl:value-of select="Reservas/Correo"/>
 						</td>
 					</tr>
-					<tr>
-						<th>Estado</th>
-						<td>
-							<xsl:value-of select="Reservas/Estado"/>
-						</td>
-					</tr>
+					<!-- ... (otros campos) -->
 				</table>
-				<h2>Habitaciones</h2>
+
+				<!-- Tabla para detalles de las habitaciones reservadas -->
+				<h2>Habitaciones Reservadas</h2>
 				<table>
 					<tr>
-						<th>ID Habitacion</th>
-						<th>Tipo Pension</th>
-						<th>Numero Habitaciones</th>
+						<th>ID Habitación</th>
+						<th>Tipo</th>
+						<th>Tipo de Pensión</th>
+						<th>Número de Habitaciones</th>
+						<th>Precio Unitario</th>
 					</tr>
 					<xsl:for-each select="Reservas/Habitaciones/Habitacion">
 						<tr>
@@ -66,10 +69,16 @@
 								<xsl:value-of select="HabitacionID"/>
 							</td>
 							<td>
+								<xsl:value-of select="Tipo"/>
+							</td>
+							<td>
 								<xsl:value-of select="TipoPension"/>
 							</td>
 							<td>
 								<xsl:value-of select="NumeroHabitaciones"/>
+							</td>
+							<td>
+								<xsl:value-of select="PrecioUnitario"/>
 							</td>
 						</tr>
 					</xsl:for-each>
@@ -78,4 +87,6 @@
 		</html>
 	</xsl:template>
 </xsl:stylesheet>
+
+
 

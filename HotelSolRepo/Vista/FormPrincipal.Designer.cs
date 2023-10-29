@@ -46,8 +46,7 @@
             // 
             // btnExportarXML
             // 
-            this.btnExportarXML.Location = new System.Drawing.Point(13, 722);
-            this.btnExportarXML.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExportarXML.Location = new System.Drawing.Point(12, 466);
             this.btnExportarXML.Name = "btnExportarXML";
             this.btnExportarXML.Size = new System.Drawing.Size(231, 63);
             this.btnExportarXML.TabIndex = 1;
@@ -56,8 +55,7 @@
             // 
             // btnImportarXML
             // 
-            this.btnImportarXML.Location = new System.Drawing.Point(13, 649);
-            this.btnImportarXML.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnImportarXML.Location = new System.Drawing.Point(12, 536);
             this.btnImportarXML.Name = "btnImportarXML";
             this.btnImportarXML.Size = new System.Drawing.Size(231, 63);
             this.btnImportarXML.TabIndex = 2;

@@ -39,11 +39,12 @@
             // 
             // textBoxLoginNIF
             // 
-            this.textBoxLoginNIF.Location = new System.Drawing.Point(302, 84);
+            this.textBoxLoginNIF.Location = new System.Drawing.Point(30, 95);
             this.textBoxLoginNIF.Name = "textBoxLoginNIF";
-            this.textBoxLoginNIF.Size = new System.Drawing.Size(186, 20);
+            this.textBoxLoginNIF.Size = new System.Drawing.Size(347, 20);
             this.textBoxLoginNIF.TabIndex = 0;
-            this.textBoxLoginNIF.Text = "INTRODUZCA SU NIF/DNI";
+            this.textBoxLoginNIF.Text = "DNI o NIF del Cliente";
+            this.textBoxLoginNIF.TextChanged += new System.EventHandler(this.textBoxLoginNIF_TextChanged);
             // 
             // contextMenuStrip1
             // 
@@ -52,41 +53,41 @@
             // 
             // textBoxLoginPass
             // 
-            this.textBoxLoginPass.Location = new System.Drawing.Point(302, 135);
+            this.textBoxLoginPass.Location = new System.Drawing.Point(30, 143);
             this.textBoxLoginPass.Name = "textBoxLoginPass";
-            this.textBoxLoginPass.Size = new System.Drawing.Size(186, 20);
+            this.textBoxLoginPass.Size = new System.Drawing.Size(347, 20);
             this.textBoxLoginPass.TabIndex = 2;
-            this.textBoxLoginPass.Text = "INTRODUZCA SU PASSWORD";
+            this.textBoxLoginPass.Text = "Password asignada al Cliente";
             // 
             // btnLoginValidation
             // 
-            this.btnLoginValidation.Location = new System.Drawing.Point(353, 179);
+            this.btnLoginValidation.Location = new System.Drawing.Point(30, 204);
             this.btnLoginValidation.Name = "btnLoginValidation";
-            this.btnLoginValidation.Size = new System.Drawing.Size(75, 23);
+            this.btnLoginValidation.Size = new System.Drawing.Size(347, 24);
             this.btnLoginValidation.TabIndex = 3;
-            this.btnLoginValidation.Text = "Validar";
+            this.btnLoginValidation.Text = "Validar Cliente";
             this.btnLoginValidation.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnLoginValidation.UseVisualStyleBackColor = true;
             // 
             // btnGoToReserva
             // 
-            this.btnGoToReserva.Location = new System.Drawing.Point(535, 316);
+            this.btnGoToReserva.Location = new System.Drawing.Point(193, 33);
             this.btnGoToReserva.Name = "btnGoToReserva";
-            this.btnGoToReserva.Size = new System.Drawing.Size(75, 23);
+            this.btnGoToReserva.Size = new System.Drawing.Size(184, 22);
             this.btnGoToReserva.TabIndex = 4;
-            this.btnGoToReserva.Text = "Alta Usuario";
+            this.btnGoToReserva.Text = "Alta Cliente";
             this.btnGoToReserva.UseVisualStyleBackColor = true;
             // 
             // mensaje
             // 
             this.mensaje.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.mensaje.Enabled = false;
-            this.mensaje.Location = new System.Drawing.Point(372, 319);
+            this.mensaje.Location = new System.Drawing.Point(30, 38);
             this.mensaje.Name = "mensaje";
             this.mensaje.ReadOnly = true;
             this.mensaje.Size = new System.Drawing.Size(157, 13);
             this.mensaje.TabIndex = 5;
-            this.mensaje.Text = "NO ESTAS DADO DE ALTA? >";
+            this.mensaje.Text = "CLIENTE NO REGISTRADO? >";
             this.mensaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // LoginForm

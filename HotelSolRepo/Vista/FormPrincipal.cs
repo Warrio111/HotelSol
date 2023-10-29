@@ -19,6 +19,7 @@ namespace HotelSolRepo.Vista
         public event Action<Type> XmlWrapperTypeChanged; // Evento personalizado
         public event Action<Form> CallerPrincipal;
         public string AuthenticatedNIF { get; set; } // Propiedad para almacenar el NIF del usuario autenticado
+        public int AuthenticatedEmployeeID { get; set; } // Propiedad para almacenar el ID del empleado autenticado
         public ReservasListXmlWrapper reservasXML = new ReservasListXmlWrapper();
         public FormPrincipal()
         {
@@ -33,6 +34,7 @@ namespace HotelSolRepo.Vista
                 exportXmlWrapperType = xmlWrapperType;
             };
             reservasXML.Reservas = new List<ReservasXmlWrapper>();
+            ShowEmployeeLogin(); // Solicitar autenticación del empleado al iniciar el programa
         }
 
 
@@ -59,11 +61,11 @@ namespace HotelSolRepo.Vista
 
         private void BtnExportarXML_Click(object sender, EventArgs e)
         {
-            //if(!IsAuthenticated)
-            //{
-            //    MessageBox.Show("Por favor, autentíquese para exportar datos.");
-            //    return;
-            //}
+            if(!IsAuthenticated)
+            {
+                MessageBox.Show("Por favor, autentíquese para exportar datos.");
+                return;
+            }
             if(null!=exportXmlWrapperType)
             {
                 ExportarForm exportarForm = new ExportarForm(exportXmlWrapperType);
@@ -83,6 +85,11 @@ namespace HotelSolRepo.Vista
 
         private void BtnImportarXML_Click(object sender, EventArgs e)
         {
+            if (!IsAuthenticated)
+            {
+                MessageBox.Show("Por favor, autentíquese para importar datos.");
+                return;
+            }
             ImportarForm importarForm = new ImportarForm();
             FormPrincipal activeForm = ActiveForm as FormPrincipal;
             if (activeForm != null)
@@ -107,6 +114,23 @@ namespace HotelSolRepo.Vista
             // Muestra el formulario
             formulario.BringToFront();
             formulario.Show();
+        }
+
+        private void ShowEmployeeLogin()
+        {
+            using (SystemLogin loginForm = new SystemLogin())
+            {
+                if (loginForm.ShowDialog() == DialogResult.OK)
+                {
+                    AuthenticatedEmployeeID = loginForm.AuthenticatedEmployeeID;
+                    // Podemos asumir que si llegamos a este punto, el empleado está autenticado
+                }
+                else
+                {
+                    // Cerrar la aplicación si la autenticación del empleado falla
+                    Application.Exit();
+                }
+            }
         }
     }
 }
