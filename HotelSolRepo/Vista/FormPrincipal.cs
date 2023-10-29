@@ -61,11 +61,7 @@ namespace HotelSolRepo.Vista
 
         private void BtnExportarXML_Click(object sender, EventArgs e)
         {
-            if(!IsAuthenticated)
-            {
-                MessageBox.Show("Por favor, autentíquese para exportar datos.");
-                return;
-            }
+            
             if(null!=exportXmlWrapperType)
             {
                 ExportarForm exportarForm = new ExportarForm(exportXmlWrapperType);
@@ -85,11 +81,7 @@ namespace HotelSolRepo.Vista
 
         private void BtnImportarXML_Click(object sender, EventArgs e)
         {
-            if (!IsAuthenticated)
-            {
-                MessageBox.Show("Por favor, autentíquese para importar datos.");
-                return;
-            }
+
             ImportarForm importarForm = new ImportarForm();
             FormPrincipal activeForm = ActiveForm as FormPrincipal;
             if (activeForm != null)
