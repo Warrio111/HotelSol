@@ -1,4 +1,12 @@
--- Cargar datos iniciales para las Habitaciones y sus subtipos
+-- Cargar datos iniciales para las Habitaciones y sus subtipos y Empleados
+
+-- Insertar datos de los empleados
+INSERT INTO Empleados ( Nombre, Rol, Horario)
+VALUES
+    ( 'Robert', 'Recepcionista', '08:00 - 16:00'),
+    ( 'Pablo', 'Recepcionista', '16:00 - 24:00'),
+    ( 'Jose', 'Recepcionista', '00:00 - 08:00');
+
 
 -- Definir las fechas
 DECLARE @DateNow DATETIME = CAST('2023-10-28T00:00:00' AS DATETIME);
@@ -40,7 +48,7 @@ BEGIN TRANSACTION;
 WHILE @Counter <= 2
 BEGIN
     INSERT INTO Habitaciones (Tipo, Caracteristicas, Tarifa, EstadoActual)
-    VALUES ('Doble', 'Dos camas dobles', 70, 'Libre');
+    VALUES ('Doble', 'Dos camas ', 70, 'Libre');
 
     INSERT INTO HabitacionesDobles (HabitacionID, CamasDobles)
     VALUES (SCOPE_IDENTITY(), 2);
@@ -55,7 +63,7 @@ BEGIN TRANSACTION;
 WHILE @Counter <= 23
 BEGIN
     INSERT INTO Habitaciones (Tipo, Caracteristicas, Tarifa, Ocupado_desde, Ocupado_hasta, EstadoActual)
-    VALUES ('Doble', 'Dos camas dobles', 70, @DateNow, @FutureDate, 'Ocupado');
+    VALUES ('Doble', 'Cama Matrimonio ', 70, @DateNow, @FutureDate, 'Ocupado');
 
     INSERT INTO HabitacionesDobles (HabitacionID, CamasDobles)
     VALUES (SCOPE_IDENTITY(), 2);
