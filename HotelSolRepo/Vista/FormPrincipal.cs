@@ -19,6 +19,7 @@ namespace HotelSolRepo.Vista
         public event Action<Type> XmlWrapperTypeChanged; // Evento personalizado
         public event Action<Form> CallerPrincipal;
         public string AuthenticatedNIF { get; set; } // Propiedad para almacenar el NIF del usuario autenticado
+        public ReservasListXmlWrapper reservasXML = new ReservasListXmlWrapper();
         public FormPrincipal()
         {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace HotelSolRepo.Vista
             {
                 exportXmlWrapperType = xmlWrapperType;
             };
+            reservasXML.Reservas = new List<ReservasXmlWrapper>();
         }
 
 

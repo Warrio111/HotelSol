@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelSolRepo.Modelo;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +15,7 @@ namespace HotelSolRepo.Vista
         {
             InitializeComponent();
             comboBox1.Items.Add("");
-            comboBox1.Items.Add("ReservasXmlWrapper");
+            comboBox1.Items.Add("ReservasListXmlWrapper");
             comboBox1.Items.Add("ClientesXmlWrapper");
             comboBox1.Items.Add("FacturasXmlWrapper");
             comboBox1.Items.Add("EmpleadosXmlWrapper");
@@ -42,6 +43,7 @@ namespace HotelSolRepo.Vista
                 MessageBox.Show("Seleccione un tipo de archivo");
                 return;
             }
+
             XmlSerializer serializer = new XmlSerializer(xmlWrapperType);
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -49,6 +51,7 @@ namespace HotelSolRepo.Vista
                 Title = "Selecciona un archivo XML de reserva",
                 RestoreDirectory = true
             };
+
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 using (FileStream stream = new FileStream(openFileDialog.FileName, FileMode.Open))
@@ -65,6 +68,15 @@ namespace HotelSolRepo.Vista
                             var item = serializer.Deserialize(stream);
                             data.Add(item);
                         }
+
+                        // Si los datos son de tipo ReservasListXmlWrapper, extrae la lista de Reservas
+                        if (xmlWrapperType == typeof(ReservasListXmlWrapper))
+                        {
+                            ReservasListXmlWrapper reservasList = (ReservasListXmlWrapper)data[0];
+                            data = reservasList.Reservas;
+                        }
+
+                        // Crea el DataGridView
                         dataGrid = new DataGridView
                         {
                             Name = "dataGrid",
@@ -72,8 +84,8 @@ namespace HotelSolRepo.Vista
                             AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells,
                             Dock = DockStyle.Fill
                         };
-                       
 
+                        // Asigna la lista de datos al DataGridView
                         dataGrid.DataSource = data;
                         this.Controls.Add(dataGrid);
                         dataGrid.BringToFront();
@@ -84,12 +96,10 @@ namespace HotelSolRepo.Vista
                         MessageBox.Show("Error al cargar el archivo XML: " + ex.Message);
                         return;
                     }
-
-                    
                 }
             }
-
         }
+
 
 
 

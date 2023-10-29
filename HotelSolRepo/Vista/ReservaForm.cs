@@ -13,6 +13,7 @@ namespace HotelSolRepo.Vista
         private HotelDBEntities db = new HotelDBEntities();
         private List<object> datos;
 
+        
         public ReservaForm(ref Type exportXmlWrapperType, Form formularioPadre)
 
         {
@@ -22,43 +23,37 @@ namespace HotelSolRepo.Vista
             btnCheckAvaliable.Click += new EventHandler(this.ComprobarDisponibilidad_Click);
             btnLoginMenu.Click += new EventHandler(this.LoginForm_Click);
             btnRegisterMenu.Click += new EventHandler(this.RegisterForm_Click);
-            exportXmlWrapperType = typeof(ReservasXmlWrapper);
+            exportXmlWrapperType = typeof(ReservasListXmlWrapper);
             this.Owner = formularioPadre;
             if (this.Owner is FormPrincipal formPrincipal)
             {
                 ((FormPrincipal)this.Owner).OnPrincipalFormCalled(this);
             }
+
+            
         }
 
-        public ReservasXmlWrapper RealizarExportDesdeReservas()
+        public ReservasListXmlWrapper RealizarExportDesdeReservas()
         {
 
-            ReservasXmlWrapper datos = new ReservasXmlWrapper();
 
-            // Verifica si dateTimePicker1 tiene un valor seleccionado
-            if (dateTimePicker1.Value != null)
+            // Verificar si dateTimePicker1 y dateTimePicker2 no son nulos antes de acceder a sus propiedades
+            if (dateTimePicker1 != null && dateTimePicker2 != null)
             {
-                datos.FechaInicio = dateTimePicker1.Value;
+                ReservasXmlWrapper reservasXmlWrapper = new ReservasXmlWrapper
+                {
+                    ReservaID = 1,
+                    FechaInicio = dateTimePicker1.Value,
+                    FechaFin = dateTimePicker2.Value,
+                    //NIF = ((FormPrincipal)this.ParentForm).AuthenticatedNIF, // Este valor debe venir del usuario autenticado
+                    NIF = "12345678A",
+                    Estado = "Pendiente",
+                    FechaCreacion = DateTime.Now
+                };
+                ((FormPrincipal)this.Owner).reservasXML.Reservas.Add(reservasXmlWrapper);
             }
 
-            // Verifica si dateTimePicker2 tiene un valor seleccionado
-            if (dateTimePicker2.Value != null)
-            {
-                datos.FechaFin = dateTimePicker2.Value;
-            }
-
-            // Verifica si comboBox1 tiene un elemento seleccionado
-            if (comboBox1.SelectedItem != null)
-            {
-                datos.OpcionesPension = comboBox1.SelectedItem.ToString();
-            }
-
-            // Asigna los valores a las propiedades de ReservasXmlWrapper
-            datos.ReservaID = 1; // Ejemplo: Asigna el valor correcto
-            datos.NIF = "123456789"; // Ejemplo: Asigna el valor correcto
-            datos.Estado = "Activa"; // Ejemplo: Asigna el valor correcto
-
-            return datos;
+            return ((FormPrincipal)this.Owner).reservasXML;
         }
         private void LoginForm_Click(object sender, EventArgs e)
         {

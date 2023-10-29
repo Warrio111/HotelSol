@@ -166,8 +166,14 @@ namespace HotelSolRepo.Modelo
         public string Beneficios { get; set; }
     }
 
+    [XmlRoot("ReservasList")]
+    public class ReservasListXmlWrapper
+    {
+        [XmlElement("Reservas")]
+        public List<ReservasXmlWrapper> Reservas { get; set; }
+    }
+
     [Serializable]
-    [XmlRoot("Reservas")]
     public class ReservasXmlWrapper
     {
         [XmlElement("ReservaID")]

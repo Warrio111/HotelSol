@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelSolRepo.Modelo;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -77,36 +78,21 @@ namespace HotelSolRepo.Vista
                         {
                             ReservaForm reservaForm = (ReservaForm)dataForm;
 
-                            // Crear una nueva instancia del tipo exportXmlWrapperType y asignarle los datos
-                            serializeXMLWrapperType = Activator.CreateInstance(exportXmlWrapperType);
-                            foreach (PropertyInfo propertyInfo in exportXmlWrapperType.GetProperties())
+                            // Crear una instancia de ReservasListXmlWrapper y su lista de reservas
+                            ReservasListXmlWrapper reservasList = new ReservasListXmlWrapper();
+                            reservasList.Reservas = new List<ReservasXmlWrapper>();
+
+                            // Obtener la lista de reservas desde reservaForm
+                            List<ReservasXmlWrapper> reservas = reservaForm.RealizarExportDesdeReservas().Reservas;
+
+                            // Agregar las reservas a la lista de reservas en ReservasListXmlWrapper
+                            reservasList.Reservas.AddRange(reservas);
+
+                            // Ahora tienes una instancia de ReservasListXmlWrapper con todas las reservas
+                            // Serializa esta instancia
+                            using (FileStream stream = new FileStream(rutaArchivoXml, FileMode.Create))
                             {
-                                PropertyInfo sourceProperty = reservaForm.RealizarExportDesdeReservas().GetType().GetProperty(propertyInfo.Name);
-                                if (sourceProperty != null)
-                                {
-                                    object value = sourceProperty.GetValue(reservaForm.RealizarExportDesdeReservas());
-                                    propertyInfo.SetValue(serializeXMLWrapperType, value);
-                                }
-                            }
-                            // Cargar los datos existentes del archivo
-                            List<object> existingData = new List<object>();
-                            using (FileStream existingFileStream = new FileStream(rutaArchivoXml, FileMode.Open))
-                            {
-                                while (existingFileStream.Position < existingFileStream.Length)
-                                {
-                                    object existingItem = serializer.Deserialize(existingFileStream);
-                                    existingData.Add(existingItem);
-                                }
-                            }
-                            // Agregar los nuevos datos a la lista de datos existentes
-                            existingData.Add(serializeXMLWrapperType);
-                            // Sobrescribir el archivo con la lista actualizada de datos
-                            using (FileStream updatedFileStream = new FileStream(rutaArchivoXml, FileMode.Create))
-                            {
-                                foreach (var item in existingData)
-                                {
-                                    serializer.Serialize(updatedFileStream, item);
-                                }
+                                serializer.Serialize(stream, reservasList);
                             }
 
                             MessageBox.Show("Exportación exitosa.");

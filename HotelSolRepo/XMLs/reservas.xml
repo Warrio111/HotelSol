@@ -4,19 +4,19 @@
   <NIF>666666</NIF>
   <Habitaciones>
     <Habitacion>
-      <HabitacionID>3</HabitacionID>
+      <HabitacionID>2</HabitacionID>
       <TipoPension>Pension Completa</TipoPension>
       <NumeroHabitaciones>1</NumeroHabitaciones>
     </Habitacion>
     <Habitacion>
-      <HabitacionID>1</HabitacionID>
+      <HabitacionID>3</HabitacionID>
       <TipoPension>Media Pension</TipoPension>
       <NumeroHabitaciones>1</NumeroHabitaciones>
     </Habitacion>
   </Habitaciones>
   <EmpleadoID xsi:nil="true" />
-  <FechaInicio>2023-10-29T00:24:05.146461+02:00</FechaInicio>
-  <FechaFin>2023-10-31T00:24:05</FechaFin>
+  <FechaInicio>2023-10-29T00:30:38.1322928+02:00</FechaInicio>
+  <FechaFin>2023-10-30T00:30:38</FechaFin>
   <Estado>Pendiente</Estado>
-  <FechaCreacion>2023-10-29T00:24:27.1327547+02:00</FechaCreacion>
+  <FechaCreacion>2023-10-29T00:31:12.0340975+02:00</FechaCreacion>
 </Reservas>
