@@ -1,89 +1,84 @@
--- Cargar datos iniciales para las Habitaciones y sus subtipos y Empleados
+-- Triggers para asegurar la integridad de los datos en las tablas de subtipos
 
--- Insertar datos de los empleados
-INSERT INTO Empleados ( Nombre, Rol, Horario)
-VALUES
-    ( 'Robert', 'Recepcionista', '08:00 - 16:00'),
-    ( 'Pablo', 'Recepcionista', '16:00 - 24:00'),
-    ( 'Jose', 'Recepcionista', '00:00 - 08:00');
-
-
--- Definir las fechas
-DECLARE @DateNow DATETIME = CAST('2023-10-28T00:00:00' AS DATETIME);
-DECLARE @FutureDate DATETIME = CAST('2023-10-30T00:00:00' AS DATETIME);
-
--- 15 Habitaciones Sencillas, 5 disponibles hoy
-DECLARE @Counter INT = 1;
-BEGIN TRANSACTION;
-WHILE @Counter <= 5
+-- Trigger para HabitacionesDobles
+CREATE TRIGGER tr_CheckTipoHabitacionesDobles ON HabitacionesDobles
+AFTER INSERT, UPDATE
+AS
 BEGIN
-    INSERT INTO Habitaciones (Tipo, Caracteristicas, Tarifa, EstadoActual)
-    VALUES ('Sencilla', 'Una cama sencilla', 55, 'Libre');
+    IF EXISTS (
+        SELECT 1
+        FROM inserted i
+        JOIN Habitaciones h ON i.HabitacionID = h.HabitacionID
+        WHERE h.Tipo != 'Doble'
+    )
+    BEGIN
+        ROLLBACK;
+        THROW 50000, 'Tipo de Habitación no coincide con la tabla HabitacionesDobles', 1;
+    END
+END;
+GO
 
-    INSERT INTO HabitacionesSencillas (HabitacionID, CamaSencilla)
-    VALUES (SCOPE_IDENTITY(), 1);
-
-    SET @Counter = @Counter + 1;
-END
-COMMIT;
-
--- 10 disponibles a partir del 30 de octubre de 2023
-SET @Counter = 1;
-BEGIN TRANSACTION;
-WHILE @Counter <= 10
+-- Trigger para HabitacionesSencillas
+CREATE TRIGGER tr_CheckTipoHabitacionesSencillas ON HabitacionesSencillas
+AFTER INSERT, UPDATE
+AS
 BEGIN
-    INSERT INTO Habitaciones (Tipo, Caracteristicas, Tarifa, Ocupado_desde, Ocupado_hasta, EstadoActual)
-    VALUES ('Sencilla', 'Una cama sencilla', 55, @DateNow, @FutureDate, 'Ocupado');
+    IF EXISTS (
+        SELECT 1
+        FROM inserted i
+        JOIN Habitaciones h ON i.HabitacionID = h.HabitacionID
+        WHERE h.Tipo != 'Sencilla'
+    )
+    BEGIN
+        ROLLBACK;
+        THROW 50000, 'Tipo de Habitación no coincide con la tabla HabitacionesSencillas', 1;
+    END
+END;
+GO
 
-    INSERT INTO HabitacionesSencillas (HabitacionID, CamaSencilla)
-    VALUES (SCOPE_IDENTITY(), 1);
-
-    SET @Counter = @Counter + 1;
-END
-COMMIT;
-
--- 25 Habitaciones Dobles, 2 disponibles
-SET @Counter = 1;
-BEGIN TRANSACTION;
-WHILE @Counter <= 2
+-- Trigger para HabitacionesSuite
+CREATE TRIGGER tr_CheckTipoHabitacionesSuite ON HabitacionesSuite
+AFTER INSERT, UPDATE
+AS
 BEGIN
-    INSERT INTO Habitaciones (Tipo, Caracteristicas, Tarifa, EstadoActual)
-    VALUES ('Doble', 'Dos camas ', 70, 'Libre');
+    IF EXISTS (
+        SELECT 1
+        FROM inserted i
+        JOIN Habitaciones h ON i.HabitacionID = h.HabitacionID
+        WHERE h.Tipo != 'Suite'
+    )
+    BEGIN
+        ROLLBACK;
+        THROW 50000, 'Tipo de Habitación no coincide con la tabla HabitacionesSuite', 1;
+    END
+END;
+GO
 
-    INSERT INTO HabitacionesDobles (HabitacionID, CamasDobles)
-    VALUES (SCOPE_IDENTITY(), 2);
 
-    SET @Counter = @Counter + 1;
-END
-COMMIT;
-
--- 23 ocupadas hasta el 30 de octubre de 2023
-SET @Counter = 1;
-BEGIN TRANSACTION;
-WHILE @Counter <= 23
+-- Crear el trigger para actualizar el estado de la habitación
+CREATE TRIGGER tr_UpdateEstadoActual ON Habitaciones
+AFTER INSERT, UPDATE
+AS
 BEGIN
-    INSERT INTO Habitaciones (Tipo, Caracteristicas, Tarifa, Ocupado_desde, Ocupado_hasta, EstadoActual)
-    VALUES ('Doble', 'Cama Matrimonio ', 70, @DateNow, @FutureDate, 'Ocupado');
+    SET NOCOUNT ON;
 
-    INSERT INTO HabitacionesDobles (HabitacionID, CamasDobles)
-    VALUES (SCOPE_IDENTITY(), 2);
+    DECLARE @HabitacionID INT;
+    DECLARE @Ocupado_desde DATETIME;
+    DECLARE @Ocupado_hasta DATETIME;
 
-    SET @Counter = @Counter + 1;
-END
-COMMIT;
+    SELECT @HabitacionID = i.HabitacionID, @Ocupado_desde = i.Ocupado_desde, @Ocupado_hasta = i.Ocupado_hasta
+    FROM inserted i;
 
--- 4 Habitaciones Suite ocupadas hasta el 30 de octubre de 2023
-SET @Counter = 1;
-BEGIN TRANSACTION;
-WHILE @Counter <= 4
-BEGIN
-    INSERT INTO Habitaciones (Tipo, Caracteristicas, Tarifa, Ocupado_desde, Ocupado_hasta, EstadoActual)
-    VALUES ('Suite', 'Sala de estar y minibar', 100, @DateNow, @FutureDate, 'Ocupado');
-
-    INSERT INTO HabitacionesSuite (HabitacionID, SalaDeEstar, Minibar)
-    VALUES (SCOPE_IDENTITY(), 1, 1);
-
-    SET @Counter = @Counter + 1;
-END
-COMMIT;
-
+    IF @Ocupado_desde IS NULL OR @Ocupado_hasta IS NULL OR @Ocupado_hasta < GETDATE() OR @Ocupado_desde > GETDATE()
+    BEGIN
+        UPDATE Habitaciones
+        SET EstadoActual = 'Libre'
+        WHERE HabitacionID = @HabitacionID;
+    END
+    ELSE
+    BEGIN
+        UPDATE Habitaciones
+        SET EstadoActual = 'Ocupado'
+        WHERE HabitacionID = @HabitacionID;
+    END
+END;
