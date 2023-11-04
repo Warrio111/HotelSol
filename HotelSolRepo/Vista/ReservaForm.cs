@@ -37,8 +37,6 @@ namespace HotelSolRepo.Vista
         {
             List<HabitacionesXmlWrapper> habitacionesSeleccionadas = new List<HabitacionesXmlWrapper>();
 
-
-
             if (comboBox1.SelectedItem != null)
             {
                 habitacionesSeleccionadas.Add(new HabitacionesXmlWrapper
