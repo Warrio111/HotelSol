@@ -93,61 +93,7 @@ namespace HotelSolRepo.Modelo
         public string Turno { get; set; }
     }
 
-    [Serializable]
-    [XmlRoot("Habitaciones")]
-    public class HabitacionesXmlWrapper
-    {
-        [XmlElement("HabitacionID")]
-        public int HabitacionID { get; set; }
-
-        [XmlElement("Tipo")]
-        public string Tipo { get; set; }
-
-        [XmlElement("Caracteristicas")]
-        public string Caracteristicas { get; set; }
-
-        [XmlElement("Tarifa")]
-        public Nullable<double> Tarifa { get; set; }
-
-        [XmlElement("EstadoActual")]
-        public string EstadoActual { get; set; }
-    }
-
-    [Serializable]
-    [XmlRoot("HabitacionesDobles")]
-    public class HabitacionesDoblesXmlWrapper
-    {
-        [XmlElement("HabitacionID")]
-        public int HabitacionID { get; set; }
-
-        [XmlElement("CamasDobles")]
-        public Nullable<int> CamasDobles { get; set; }
-    }
-
-    [Serializable]
-    [XmlRoot("HabitacionesSencillas")]
-    public class HabitacionesSencillasXmlWrapper
-    {
-        [XmlElement("HabitacionID")]
-        public int HabitacionID { get; set; }
-
-        [XmlElement("CamaSencilla")]
-        public Nullable<int> CamaSencilla { get; set; }
-    }
-
-    [Serializable]
-    [XmlRoot("HabitacionesSuite")]
-    public class HabitacionesSuiteXmlWrapper
-    {
-        [XmlElement("HabitacionID")]
-        public int HabitacionID { get; set; }
-
-        [XmlElement("SalaDeEstar")]
-        public Nullable<bool> SalaDeEstar { get; set; }
-
-        [XmlElement("Minibar")]
-        public Nullable<bool> Minibar { get; set; }
-    }
+ 
 
     [Serializable]
     [XmlRoot("ProgramasFidelizacion")]
@@ -193,7 +139,7 @@ namespace HotelSolRepo.Modelo
 
         [XmlArray("Habitaciones")]
         [XmlArrayItem("Habitacion")]
-        public List<HabitacionXmlWrapper> Habitaciones { get; set; }
+        public List<HabitacionesXmlWrapper> Habitaciones { get; set; }
 
         [XmlElement("EmpleadoID")]
         public Nullable<int> EmpleadoID { get; set; }
@@ -212,11 +158,18 @@ namespace HotelSolRepo.Modelo
 
         [XmlElement("FechaCreacion", DataType = "dateTime")]
         public Nullable<DateTime> FechaCreacion { get; set; }
+    }
+
+    [XmlRoot("HabitacionesList")]
+    public class HabitacionesListXmlWrapper
+    {
+        [XmlElement("Habitaciones")]
+        public List<HabitacionesXmlWrapper> Habitaciones { get; set; }
 
     }
 
     [Serializable]
-    public class HabitacionXmlWrapper
+    public class HabitacionesXmlWrapper
     {
         [XmlElement("HabitacionID")]
         public int HabitacionID { get; set; }
@@ -224,11 +177,62 @@ namespace HotelSolRepo.Modelo
         [XmlElement("Tipo")]
         public string Tipo { get; set; }  // Modificado para incluir "Sencilla", "Doble", "Suite"
 
+        [XmlElement("Caracteristicas")]
+        public string Caracteristicas { get; set; }
+
+        [XmlElement("Tarifa")]
+        public Nullable<double> Tarifa { get; set; }
+
+        [XmlElement("EstadoActual")]
+        public string EstadoActual { get; set; }
+        [XmlElement("Ocupado_desde", DataType = "dateTime")]
+        public Nullable<DateTime> Ocupado_desde { get; set; }
+        [XmlElement("Ocupado_hasta", DataType = "dateTime")]
+        public Nullable<DateTime> Ocupado_hasta { get; set; }
+        [XmlElement("CodigoHabitacion")]
+        public string CodigoHabitacion { get; set; }
         [XmlElement("TipoPension")]
         public string TipoPension { get; set; }
 
         [XmlElement("NumeroHabitaciones")]
         public int NumeroHabitaciones { get; set; }
+    }
+
+    [Serializable]
+    [XmlRoot("HabitacionesDobles")]
+    public class HabitacionesDoblesXmlWrapper
+    {
+        [XmlElement("HabitacionID")]
+        public int HabitacionID { get; set; }
+
+        [XmlElement("CamasDobles")]
+        public Nullable<int> CamasDobles { get; set; }
+    }
+
+
+    [Serializable]
+    [XmlRoot("HabitacionesSencillas")]
+    public class HabitacionesSencillasXmlWrapper
+    {
+        [XmlElement("HabitacionID")]
+        public int HabitacionID { get; set; }
+
+        [XmlElement("CamaSencilla")]
+        public Nullable<int> CamaSencilla { get; set; }
+    }
+
+    [Serializable]
+    [XmlRoot("HabitacionesSuite")]
+    public class HabitacionesSuiteXmlWrapper
+    {
+        [XmlElement("HabitacionID")]
+        public int HabitacionID { get; set; }
+
+        [XmlElement("SalaDeEstar")]
+        public Nullable<bool> SalaDeEstar { get; set; }
+
+        [XmlElement("Minibar")]
+        public Nullable<bool> Minibar { get; set; }
     }
 
 
@@ -251,6 +255,4 @@ namespace HotelSolRepo.Modelo
         [XmlElement("Estado")]
         public string Estado { get; set; }
     }
-
-    // Puedes crear clases similares para las otras entidades que necesites
 }

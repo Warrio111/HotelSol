@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controlador\ClienteController.cs" />
+    <Compile Include="Controlador\HabitacionController.cs" />
     <Compile Include="Controlador\ReservaController.cs" />
     <Compile Include="HotelDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

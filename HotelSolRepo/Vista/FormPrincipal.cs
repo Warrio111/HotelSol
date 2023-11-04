@@ -61,7 +61,6 @@ namespace HotelSolRepo.Vista
 
         private void BtnExportarXML_Click(object sender, EventArgs e)
         {
-            
             if(null!=exportXmlWrapperType)
             {
                 ExportarForm exportarForm = new ExportarForm(exportXmlWrapperType);

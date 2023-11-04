@@ -35,12 +35,13 @@ namespace HotelSolRepo.Vista
 
         public ReservasListXmlWrapper RealizarExportDesdeReservas()
         {
-            List<HabitacionXmlWrapper> habitacionesSeleccionadas = new List<HabitacionXmlWrapper>();
+            List<HabitacionesXmlWrapper> habitacionesSeleccionadas = new List<HabitacionesXmlWrapper>();
+
 
 
             if (comboBox1.SelectedItem != null)
             {
-                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
+                habitacionesSeleccionadas.Add(new HabitacionesXmlWrapper
                 {
                     HabitacionID = ConvertToNumericType(comboBox1.SelectedItem.ToString()),
                     TipoPension = GetPensionType(checkBox1, checkBox2),
@@ -50,7 +51,7 @@ namespace HotelSolRepo.Vista
 
             if (comboBox2.SelectedItem != null)
             {
-                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
+                habitacionesSeleccionadas.Add(new HabitacionesXmlWrapper
                 {
                     HabitacionID = ConvertToNumericType(comboBox2.SelectedItem.ToString()),
                     TipoPension = GetPensionType(checkBox3, checkBox4),
@@ -60,7 +61,7 @@ namespace HotelSolRepo.Vista
 
             if (comboBox3.SelectedItem != null)
             {
-                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
+                habitacionesSeleccionadas.Add(new HabitacionesXmlWrapper
                 {
                     HabitacionID = ConvertToNumericType(comboBox3.SelectedItem.ToString()),
                     TipoPension = GetPensionType(checkBox5, checkBox6),
@@ -136,12 +137,13 @@ namespace HotelSolRepo.Vista
             var cliente = clienteController.ObtenerClientePorNIF(formPrincipal.AuthenticatedNIF);
 
 
-            List<HabitacionXmlWrapper> habitacionesSeleccionadas = new List<HabitacionXmlWrapper>();
+            List<HabitacionesXmlWrapper> habitacionesSeleccionadas = new List<HabitacionesXmlWrapper>();
+
 
 
             if (comboBox1.SelectedItem != null)
             {
-                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
+                habitacionesSeleccionadas.Add(new HabitacionesXmlWrapper
                 {
                     HabitacionID = ConvertToNumericType(comboBox1.SelectedItem.ToString()),
                     TipoPension = GetPensionType(checkBox1, checkBox2),
@@ -151,7 +153,7 @@ namespace HotelSolRepo.Vista
 
             if (comboBox2.SelectedItem != null)
             {
-                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
+                habitacionesSeleccionadas.Add(new HabitacionesXmlWrapper
                 {
                     HabitacionID = ConvertToNumericType(comboBox2.SelectedItem.ToString()),
                     TipoPension = GetPensionType(checkBox3, checkBox4),
@@ -161,7 +163,8 @@ namespace HotelSolRepo.Vista
 
             if (comboBox3.SelectedItem != null)
             {
-                habitacionesSeleccionadas.Add(new HabitacionXmlWrapper
+                habitacionesSeleccionadas.Add(new HabitacionesXmlWrapper
+
                 {
                     HabitacionID = ConvertToNumericType(comboBox3.SelectedItem.ToString()),
                     TipoPension = GetPensionType(checkBox5, checkBox6),

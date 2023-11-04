@@ -65,25 +65,6 @@ namespace HotelSolRepo.Controlador
                 return true;
             }
         }
-
-        // Obtiene una lista de todos los clientes
-        public List<Clientes> ObtenerClientes()
-        {
-            using (HotelDBEntities db = new HotelDBEntities())
-            {
-                return db.Clientes.ToList();
-            }
-        }
-
-        // Obtiene un cliente específico por NIF
-        public Clientes ObtenerClientePorNIF(string nif)
-        {
-            using (HotelDBEntities db = new HotelDBEntities())
-            {
-                return db.Clientes.FirstOrDefault(c => c.NIF == nif);
-            }
-        }
-
         // Actualiza la información de un cliente existente
         public bool ActualizarCliente(Clientes clienteActualizado)
         {
@@ -118,6 +99,42 @@ namespace HotelSolRepo.Controlador
                 return false;
             }
         }
+
+        // Obtiene un cliente específico por NIF
+        public Clientes ObtenerClientePorNIF(string nif)
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                return db.Clientes.FirstOrDefault(c => c.NIF == nif);
+            }
+        }
+        // Obtiene una lista de todos los clientes
+        public List<Clientes> ObtenerClientes()
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                return db.Clientes.ToList();
+            }
+        }
+
+        // Obtiene Estancias de un cliente específico por NIF
+        public List<Reservas> GetHistorialEstanciasCliente(string clienteId)
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                return db.Reservas.Where(r => r.Clientes.NIF == clienteId).ToList();
+            }
+        }
+        public List<Clientes> GetClientesConReservas()
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                return db.Clientes.Where(c => c.Reservas.Any()).ToList();
+            }
+        }
+
+
+
     }
 }
 

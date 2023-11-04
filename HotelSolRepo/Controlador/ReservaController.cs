@@ -63,9 +63,6 @@ namespace HotelSolRepo.Controlador
             }
         }
 
-
-
-
         // Crear reserva desde datos XML
         public bool HacerReservaDesdeXml(string xmlReserva, int empleadoID)
         {
@@ -142,7 +139,6 @@ namespace HotelSolRepo.Controlador
             }
         }
 
-
         public void ConfirmarReserva(int empleadoID)
         {
             if (File.Exists(rutaArchivoXml))
@@ -159,7 +155,6 @@ namespace HotelSolRepo.Controlador
             }
         }
 
-
         // Actualizar reserva existente
         public void ActualizarReserva(Reservas reservaActualizada)
         {
@@ -172,10 +167,82 @@ namespace HotelSolRepo.Controlador
                     reservaExistente.FechaFin = reservaActualizada.FechaFin;
                     reservaExistente.Estado = reservaActualizada.Estado;
 
+
                     db.SaveChanges();
                 }
             }
         }
+
+        public void ModificarReserva(int reservaId, DateTime nuevaFechaLlegada, DateTime nuevaFechaSalida)
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                Reservas reserva = db.Reservas.Find(reservaId);
+                if (reserva != null)
+                {
+                    reserva.FechaInicio = nuevaFechaLlegada;
+                    reserva.FechaFin = nuevaFechaSalida;
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void CancelarReserva(int reservaId)
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                Reservas reserva = db.Reservas.Find(reservaId);
+                if (reserva != null)
+                {
+                    db.Reservas.Remove(reserva);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void RegistrarLlegadaCliente(int reservaId)
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                Reservas reserva = db.Reservas.Find(reservaId);
+                if (reserva != null)
+                {
+                    reserva.FechaInicio = DateTime.Now;
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void RegistrarSalidaCliente(int reservaId)
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                Reservas reserva = db.Reservas.Find(reservaId);
+                if (reserva != null)
+                {
+                    reserva.FechaFin = DateTime.Now;
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public List<Reservas> GetReservas()
+        {
+               using (HotelDBEntities db = new HotelDBEntities())
+            {
+                return db.Reservas.ToList();
+            }
+        }
+
+        // Obtener una reserva específica por ID
+        public Reservas ObtenerReservaPorID(int reservaID)
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                return db.Reservas.FirstOrDefault(r => r.ReservaID == reservaID);
+            }
+        }
+
     }
 }
 
