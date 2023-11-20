@@ -50,8 +50,7 @@ namespace HotelSolRepo.Vista
         private void ConectarControladoresEventos()
         {
             btnNuevaReserva.Click += BtnNuevaReserva_Click;
-            btnExportarXML.Click += BtnExportarXML_Click;
-            btnImportarXML.Click += BtnImportarXML_Click;
+      
         }
 
         private void BtnNuevaReserva_Click(object sender, EventArgs e)
