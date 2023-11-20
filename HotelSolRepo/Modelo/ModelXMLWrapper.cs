@@ -3,39 +3,56 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 namespace HotelSolRepo.Modelo
 {
+    [XmlRoot("FacturasList")]
+    public class FacturasListXmlWrapper
+    {
+        [XmlElement("Facturas")]
+        public List<FacturasXmlWrapper> Facturas { get; set; }
+    }
     [Serializable]
-    [XmlRoot("Facturas")]
     public class FacturasXmlWrapper
-{
-    [XmlElement("FacturaID")]
-    public int FacturaID { get; set; }
+    {
+        [XmlElement("FacturaID")]
+        public int FacturaID { get; set; }
 
-    [XmlElement("NIF")]
-    public string NIF { get; set; }
+        [XmlElement("NIF")]
+        public string NIF { get; set; }
 
-    [XmlElement("EmpleadoID")]
-    public Nullable<int> EmpleadoID { get; set; }
+        [XmlElement("EmpleadoID")]
+        public Nullable<int> EmpleadoID { get; set; }
 
-    [XmlElement("Detalles")]
-    public string Detalles { get; set; }
+        [XmlElement("Detalles")]
+        public string Detalles { get; set; }
 
-    [XmlElement("Cargos")]
-    public Nullable<double> Cargos { get; set; }
+        [XmlElement("Cargos")]
+        public Nullable<double> Cargos { get; set; }
 
-    [XmlElement("Impuestos")]
-    public Nullable<double> Impuestos { get; set; }
+        [XmlElement("Impuestos")]
+        public Nullable<double> Impuestos { get; set; }
 
-    [XmlElement("Fecha", DataType = "dateTime")]
-    public Nullable<DateTime> Fecha { get; set; }
+        [XmlElement("Fecha", DataType = "dateTime")]
+        public Nullable<DateTime> Fecha { get; set; }
 
-    [XmlElement("FechaCreacion", DataType = "dateTime")]
-    public Nullable<DateTime> FechaCreacion { get; set; }
+        [XmlElement("FechaCreacion", DataType = "dateTime")]
+        public Nullable<DateTime> FechaCreacion { get; set; }
 
-    [XmlElement("TipoFactura")]
-    public string TipoFactura { get; set; }
-}
+        [XmlElement("TipoFactura")]
+        public string TipoFactura { get; set; }
+        [XmlArray("Clientes")]
+        [XmlArrayItem("Cliente")]
+        public List<ClientesXmlWrapper> Clientes { get; set; }
+        [XmlArray("Empleados")]
+        [XmlArrayItem("Empleado")]
+        public List<EmpleadosXmlWrapper> Empleados { get; set; }
+    }
+
+    [XmlRoot("ClientesList")]
+    public class ClientesListXmlWrapper
+    {
+        [XmlElement("Clientes")]
+        public List<ClientesXmlWrapper> Clientes { get; set; }
+    }
     [Serializable]
-    [XmlRoot("Clientes")]
     public class ClientesXmlWrapper
     {
         [XmlElement("NIF")]
@@ -54,9 +71,24 @@ namespace HotelSolRepo.Modelo
 
         [XmlElement("ProgramaFidelizacionID")]
         public Nullable<int> ProgramaFidelizacionID { get; set; }
+        [XmlArray("ProgramasFidelizacion")]
+        [XmlArrayItem("ProgramaFidelizacion")]
+        public List<ProgramasFidelizacionXmlWrapper> ProgramasFidelizacion { get; set; }
+        [XmlArray("Reservas")]
+        [XmlArrayItem("Reserva")]
+        public List<ReservasXmlWrapper> Reservas { get; set; }
+        [XmlArray("Facturas")]
+        [XmlArrayItem("Factura")]
+        public List<FacturasXmlWrapper> Facturas { get; set; }
+    }
+
+    [XmlRoot("EmpleadosList")]
+    public class EmpleadosListXmlWrapper
+    {
+        [XmlElement("Empleados")]
+        public List<EmpleadosXmlWrapper> Empleados { get; set; }
     }
     [Serializable]
-    [XmlRoot("Empleados")]
     public class EmpleadosXmlWrapper
     {
         [XmlElement("EmpleadoID")]
@@ -65,38 +97,29 @@ namespace HotelSolRepo.Modelo
         [XmlElement("Nombre")]
         public string Nombre { get; set; }
 
-        [XmlElement("Apellidos")]
-        public string Apellidos { get; set; }
+        [XmlElement("Rol")]
+        public string Rol { get; set; }
 
-        [XmlElement("CorreoElectronico")]
-        public string CorreoElectronico { get; set; }
-
-        [XmlElement("Telefono")]
-        public string Telefono { get; set; }
-
-        [XmlElement("FechaNacimiento", DataType = "dateTime")]
-        public Nullable<DateTime> FechaNacimiento { get; set; }
-
-        [XmlElement("FechaContratacion", DataType = "dateTime")]
-        public Nullable<DateTime> FechaContratacion { get; set; }
-
-        [XmlElement("Puesto")]
-        public string Puesto { get; set; }
-
-        [XmlElement("Salario")]
-        public Nullable<double> Salario { get; set; }
-
-        [XmlElement("HorasSemanales")]
-        public Nullable<int> HorasSemanales { get; set; }
-
-        [XmlElement("Turno")]
-        public string Turno { get; set; }
+        [XmlElement("Horario")]
+        public string Horario { get; set; }
+        [XmlArray("Reservas")]
+        [XmlArrayItem("Reserva")]
+        public List<ReservasXmlWrapper> Reservas { get; set; }
+        [XmlArray("Facturas")]
+        [XmlArrayItem("Factura")]
+        public List<FacturasXmlWrapper> Facturas { get; set; }
+        [XmlArray("TareasEmpleados")]
+        [XmlArrayItem("TareasEmpleados")]
+        public List<TareasEmpleadosXmlWrapper> TareasEmpleados { get; set; }
     }
 
- 
-
+    [XmlRoot("ProgramasFidelizacionList")]
+    public class ProgramasFidelizacionListXmlWrapper
+    {
+        [XmlElement("ProgramasFidelizacion")]
+        public List<ProgramasFidelizacionXmlWrapper> ProgramasFidelizacion { get; set; }
+    }
     [Serializable]
-    [XmlRoot("ProgramasFidelizacion")]
     public class ProgramasFidelizacionXmlWrapper
     {
         [XmlElement("ProgramaFidelizacionID")]
@@ -110,6 +133,9 @@ namespace HotelSolRepo.Modelo
 
         [XmlElement("Beneficios")]
         public string Beneficios { get; set; }
+        [XmlArray("Clientes")]
+        [XmlArrayItem("Cliente")]
+        public List<ClientesXmlWrapper> Clientes { get; set; }
     }
 
     [XmlRoot("ReservasList")]
@@ -131,15 +157,8 @@ namespace HotelSolRepo.Modelo
         [XmlElement("NIF")]
         public string NIF { get; set; }
 
-        [XmlElement("ClienteNombre")]  // Nuevo campo
-        public string ClienteNombre { get; set; }
-
-        [XmlElement("ClienteApellido")]  // Nuevo campo
-        public string ClienteApellido { get; set; }
-
-        [XmlArray("Habitaciones")]
-        [XmlArrayItem("Habitacion")]
-        public List<HabitacionesXmlWrapper> Habitaciones { get; set; }
+        [XmlElement("HabitacionID")]
+        public Nullable<int> HabitacionID { get; set; }
 
         [XmlElement("EmpleadoID")]
         public Nullable<int> EmpleadoID { get; set; }
@@ -153,11 +172,27 @@ namespace HotelSolRepo.Modelo
         [XmlElement("OpcionesPension")]
         public string OpcionesPension { get; set; }
 
-        [XmlElement("Estado")]
-        public string Estado { get; set; }
+        [XmlElement("EstadoReserva")]
+        public string EstadoReserva { get; set; }
 
         [XmlElement("FechaCreacion", DataType = "dateTime")]
         public Nullable<DateTime> FechaCreacion { get; set; }
+
+        [XmlElement("CheckInConfirmado", DataType = "dateTime")]
+        public Nullable<DateTime> CheckInConfirmado { get; set; }
+
+        [XmlElement("CheckOutConfirmado", DataType = "dateTime")]
+        public Nullable<DateTime> CheckOutConfirmado { get; set; }
+
+        [XmlArray("Habitaciones")]
+        [XmlArrayItem("Habitacion")]
+        public List<HabitacionesXmlWrapper> Habitaciones { get; set; }
+        [XmlArray("Clientes")]
+        [XmlArrayItem("Cliente")]
+        public List<ClientesXmlWrapper> Clientes { get; set; }
+        [XmlArray("Empleados")]
+        [XmlArrayItem("Empleado")]
+        public List<EmpleadosXmlWrapper> Empleados { get; set; }
     }
 
     [XmlRoot("HabitacionesList")]
@@ -185,17 +220,30 @@ namespace HotelSolRepo.Modelo
 
         [XmlElement("EstadoActual")]
         public string EstadoActual { get; set; }
+
         [XmlElement("Ocupado_desde", DataType = "dateTime")]
         public Nullable<DateTime> Ocupado_desde { get; set; }
         [XmlElement("Ocupado_hasta", DataType = "dateTime")]
         public Nullable<DateTime> Ocupado_hasta { get; set; }
         [XmlElement("CodigoHabitacion")]
         public string CodigoHabitacion { get; set; }
-        [XmlElement("TipoPension")]
-        public string TipoPension { get; set; }
 
         [XmlElement("NumeroHabitaciones")]
-        public int NumeroHabitaciones { get; set; }
+        public Nullable<int> NumeroHabitaciones { get; set; }
+
+        [XmlArray("Reservas")]
+        [XmlArrayItem("Reserva")]
+        public List<ReservasXmlWrapper> Reservas { get; set; }
+        [XmlArray("HabitacionesSencillas")]
+        [XmlArrayItem("HabitacionSencilla")]
+        public List<HabitacionesSencillasXmlWrapper> HabitacionesSencillas { get; set; }
+        [XmlArray("HabitacionesDobles")]
+        [XmlArrayItem("HabitacionDoble")]
+        public List<HabitacionesDoblesXmlWrapper> HabitacionesDobles { get; set; }
+
+        [XmlArray("HabitacionesSuite")]
+        [XmlArrayItem("HabitacionSuite")]
+        public List<HabitacionesSuiteXmlWrapper> HabitacionesSuite { get; set; }
     }
 
     [Serializable]
@@ -207,8 +255,10 @@ namespace HotelSolRepo.Modelo
 
         [XmlElement("CamasDobles")]
         public Nullable<int> CamasDobles { get; set; }
+        [XmlArray("Habitaciones")]
+        [XmlArrayItem("Habitacion")]
+        public List<HabitacionesXmlWrapper> Habitaciones { get; set; }
     }
-
 
     [Serializable]
     [XmlRoot("HabitacionesSencillas")]
@@ -219,6 +269,9 @@ namespace HotelSolRepo.Modelo
 
         [XmlElement("CamaSencilla")]
         public Nullable<int> CamaSencilla { get; set; }
+        [XmlArray("Habitaciones")]
+        [XmlArrayItem("Habitacion")]
+        public List<HabitacionesXmlWrapper> Habitaciones { get; set; }
     }
 
     [Serializable]
@@ -233,11 +286,19 @@ namespace HotelSolRepo.Modelo
 
         [XmlElement("Minibar")]
         public Nullable<bool> Minibar { get; set; }
+        [XmlArray("Habitaciones")]
+        [XmlArrayItem("Habitacion")]
+        public List<HabitacionesXmlWrapper> Habitaciones { get; set; }
     }
 
+    [XmlRoot("TareasEmpleadosList")]
+    public class TareasEmpleadosListXmlWrapper
+    {
+        [XmlElement("TareasEmpleados")]
+        public List<TareasEmpleadosXmlWrapper> TareasEmpleados { get; set; }
+    }
 
     [Serializable]
-    [XmlRoot("TareasEmpleados")]
     public class TareasEmpleadosXmlWrapper
     {
         [XmlElement("TareaID")]
@@ -251,8 +312,8 @@ namespace HotelSolRepo.Modelo
 
         [XmlElement("Fecha", DataType = "dateTime")]
         public Nullable<DateTime> Fecha { get; set; }
-
-        [XmlElement("Estado")]
-        public string Estado { get; set; }
+        [XmlArray("Empleados")]
+        [XmlArrayItem("Empleado")]
+        public List<EmpleadosXmlWrapper> Empleados { get; set; }
     }
 }

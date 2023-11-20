@@ -79,7 +79,7 @@ namespace HotelSolRepo.Controlador
                             NIF = nuevaReserva.NIF,
                             FechaInicio = nuevaReserva.FechaInicio,
                             FechaFin = nuevaReserva.FechaFin,
-                            Estado = nuevaReserva.Estado,
+                            Estado = nuevaReserva.EstadoReserva,
                             FechaCreacion = nuevaReserva.FechaCreacion,  // Utilizar la fecha de creación deserializada
                             EmpleadoID = empleadoID  // Utilizar el ID del empleado proporcionado
                         };
@@ -93,7 +93,7 @@ namespace HotelSolRepo.Controlador
                             {
                                 ReservaID = reserva.ReservaID,
                                 HabitacionID = habitacion.HabitacionID,
-                                TipoPension = habitacion.TipoPension
+                                TipoPension = habitacion.Tipo
                             };
 
                             db.ReservaHabitaciones.Add(reservaHabitacion);
@@ -120,9 +120,7 @@ namespace HotelSolRepo.Controlador
         {
             reservaTemporal.EmpleadoID = empleadoID;
             reservaTemporal.FechaCreacion = DateTime.Now;
-            string clienteNombre = reservaTemporal.ClienteNombre;
-            
-            
+
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(ReservasXmlWrapper));
