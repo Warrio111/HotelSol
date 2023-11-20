@@ -20,7 +20,7 @@ namespace HotelSolRepo.Vista
         public event Action<Form> CallerPrincipal;
         public string AuthenticatedNIF { get; set; } // Propiedad para almacenar el NIF del usuario autenticado
         public int AuthenticatedEmployeeID { get; set; } // Propiedad para almacenar el ID del empleado autenticado
-        public ReservasListXmlWrapper reservasXML = new ReservasListXmlWrapper();
+        public ReservaHabitacionesListXmlWrapper reservaHabitacionesXML = new ReservaHabitacionesListXmlWrapper();
         public FormPrincipal()
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace HotelSolRepo.Vista
             {
                 exportXmlWrapperType = xmlWrapperType;
             };
-            reservasXML.Reservas = new List<ReservasXmlWrapper>();
+            reservaHabitacionesXML.ReservaHabitaciones = new List<ReservaHabitacionesXmlWrapper>();
             ShowEmployeeLogin(); // Solicitar autenticación del empleado al iniciar el programa
         }
 

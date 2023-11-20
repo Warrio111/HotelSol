@@ -19,7 +19,7 @@ namespace HotelSolRepo.Vista
             comboBox1.Items.Add("FacturasListXmlWrapper");
             comboBox1.Items.Add("EmpleadosListXmlWrapper");
             comboBox1.Items.Add("ReservasListXmlWrapper");
-            comboBox1.Items.Add("ReservasHabitacionesListXmlWrapper");
+            comboBox1.Items.Add("ReservaHabitacionesListXmlWrapper");
             comboBox1.Items.Add("HabitacionesListXmlWrapper");
             comboBox1.Items.Add("HabitacionesSencillasXmlWrapper");
             comboBox1.Items.Add("HabitacionesDoblesXmlWrapper");
@@ -76,6 +76,12 @@ namespace HotelSolRepo.Vista
                             ReservasListXmlWrapper reservasList = (ReservasListXmlWrapper)data[0];
                             data = reservasList.Reservas;
                         }
+                        // Si los datos son de tipo ReservaHabitacionesListXmlWrapper, extrae la lista de ReservasHabitaciones
+                        else if (xmlWrapperType == typeof(ReservaHabitacionesListXmlWrapper))
+                        {
+                            ReservaHabitacionesListXmlWrapper reservasHabitacionesList = (ReservaHabitacionesListXmlWrapper)data[0];
+                            data = reservasHabitacionesList.ReservaHabitaciones;
+                        }
                         // Si los datos son de tipo ClientesListXmlWrapper, extrae la lista de Clientes
                         else if (xmlWrapperType == typeof(ClientesListXmlWrapper))
                         {
@@ -100,8 +106,8 @@ namespace HotelSolRepo.Vista
                             HabitacionesListXmlWrapper habitacionesList = (HabitacionesListXmlWrapper)data[0];
                             data = habitacionesList.Habitaciones;
                         }
-                        else if (xmlWrapperType == typeof(HabitacionesSencillasXmlWrapper)) 
-                        { 
+                        else if (xmlWrapperType == typeof(HabitacionesSencillasXmlWrapper))
+                        {
                             HabitacionesSencillasXmlWrapper habitacionesSencillasList = (HabitacionesSencillasXmlWrapper)data[0];
                         }
                         // Si los datos son de tipo HabitacionesDoblesXmlWrapper, extrae la lista de HabitacionesDobles

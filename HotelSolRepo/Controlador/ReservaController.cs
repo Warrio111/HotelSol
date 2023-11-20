@@ -1,4 +1,5 @@
 ﻿using HotelSolRepo.Modelo;
+using HotelSolRepo.Vista;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +11,8 @@ namespace HotelSolRepo.Controlador
 {
     public class ReservaController
     {
-        private string rutaArchivoXml = @"E:\backup\Academico\UOC\FP\Tercer Semestre\Técnicas de persistencia de datos con .NET\HotelSolRepo\HotelSolRepo\XMLs\reservas.xml";
+        //private string rutaArchivoXml = @"E:\backup\Academico\UOC\FP\Tercer Semestre\Técnicas de persistencia de datos con .NET\HotelSolRepo\HotelSolRepo\XMLs\reservas.xml";
+        private string rutaArchivoXml = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "XMLs", "reservas.xml");
         private Reservas reserva;
 
 
@@ -147,7 +149,6 @@ namespace HotelSolRepo.Controlador
                 Console.WriteLine("Error al generar la reserva temporal en XML: " + ex.Message);
             }
         }
-
 
         public void ConfirmarReserva(int empleadoID)
         {
