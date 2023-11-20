@@ -38,6 +38,7 @@ namespace HotelSolRepo.Modelo
         public virtual DbSet<ReservaHabitaciones> ReservaHabitaciones { get; set; }
         public virtual DbSet<Reservas> Reservas { get; set; }
         public virtual DbSet<TareasEmpleados> TareasEmpleados { get; set; }
+        public virtual DbSet<Direcciones> Direcciones { get; set; }
     
         public virtual int sp_RealizarCheckIn(Nullable<int> reservaID)
         {
