@@ -218,7 +218,7 @@ namespace HotelSolRepo.Controlador
                 Reservas reserva = db.Reservas.Find(reservaId);
                 if (reserva != null)
                 {
-                    reserva.FechaInicio = DateTime.Now;
+                    reserva.CheckInConfirmado = DateTime.Now;
                     db.SaveChanges();
                 }
             }
@@ -231,7 +231,7 @@ namespace HotelSolRepo.Controlador
                 Reservas reserva = db.Reservas.Find(reservaId);
                 if (reserva != null)
                 {
-                    reserva.FechaFin = DateTime.Now;
+                    reserva.CheckOutConfirmado = DateTime.Now;
                     db.SaveChanges();
                 }
             }
