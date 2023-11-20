@@ -20,9 +20,7 @@ namespace HotelSolRepo.Vista
             InitializeComponent();
             this.Load += new EventHandler(this.ReservaForm_Load);
             btnConfirmar.Click += new EventHandler(this.RealizarReserva_Click);
-            btnCheckAvaliable.Click += new EventHandler(this.ComprobarDisponibilidad_Click);
-            btnLoginMenu.Click += new EventHandler(this.LoginForm_Click);
-            btnRegisterMenu.Click += new EventHandler(this.RegisterForm_Click);
+          
             exportXmlWrapperType = typeof(ReservasListXmlWrapper);
             this.Owner = formularioPadre;
             if (this.Owner is FormPrincipal formPrincipal)

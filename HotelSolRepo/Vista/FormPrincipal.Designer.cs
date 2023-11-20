@@ -37,9 +37,10 @@
             // 
             // btnNuevaReserva
             // 
+            this.btnNuevaReserva.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnNuevaReserva.Location = new System.Drawing.Point(12, 84);
             this.btnNuevaReserva.Name = "btnNuevaReserva";
-            this.btnNuevaReserva.Size = new System.Drawing.Size(173, 51);
+            this.btnNuevaReserva.Size = new System.Drawing.Size(98, 51);
             this.btnNuevaReserva.TabIndex = 0;
             this.btnNuevaReserva.Text = "Gestion de Reservas";
             this.btnNuevaReserva.UseVisualStyleBackColor = true;
@@ -47,21 +48,22 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.BackgroundImage = global::HotelSolRepo.Properties.Resources.logo;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(191, 0);
+            this.panel1.Location = new System.Drawing.Point(131, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(946, 648);
+            this.panel1.Size = new System.Drawing.Size(1072, 660);
             this.panel1.TabIndex = 4;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 422);
+            this.button2.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            this.button2.Location = new System.Drawing.Point(12, 155);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(173, 52);
+            this.button2.Size = new System.Drawing.Size(98, 52);
             this.button2.TabIndex = 7;
             this.button2.Text = "Gestion de Clientes";
             this.button2.UseVisualStyleBackColor = true;
@@ -69,19 +71,21 @@
             // 
             // button3
             // 
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button3.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Location = new System.Drawing.Point(12, 12);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(173, 52);
+            this.button3.Size = new System.Drawing.Size(98, 52);
             this.button3.TabIndex = 8;
             this.button3.Text = "Consultar Disponibilidad";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 491);
+            this.button4.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            this.button4.Location = new System.Drawing.Point(12, 228);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(173, 52);
+            this.button4.Size = new System.Drawing.Size(98, 52);
             this.button4.TabIndex = 9;
             this.button4.Text = "Gestion de Empleados";
             this.button4.UseVisualStyleBackColor = true;
@@ -90,9 +94,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.BackgroundImage = global::HotelSolRepo.Properties.Resources.logo;
-            this.ClientSize = new System.Drawing.Size(1137, 648);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackgroundImage = global::HotelSolRepo.Properties.Resources.fondo;
+            this.ClientSize = new System.Drawing.Size(1203, 660);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
