@@ -28,6 +28,8 @@
         <AssociationConnector Association="HotelDBModel.FK__Habitacio__Habit__46E78A0C" ManuallyRouted="false" />
         <AssociationConnector Association="HotelDBModel.FK__ReservaHa__Habit__5629CD9C" ManuallyRouted="false" />
         <AssociationConnector Association="HotelDBModel.FK__ReservaHa__Reser__5535A963" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HotelDBModel.Direcciones" Width="1.5" PointX="0.75" PointY="8.125" />
+        <AssociationConnector Association="HotelDBModel.FK__Clientes__Direcc__3B75D760" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
