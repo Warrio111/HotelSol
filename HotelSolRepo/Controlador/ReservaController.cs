@@ -120,9 +120,7 @@ namespace HotelSolRepo.Controlador
         {
             reservaTemporal.EmpleadoID = empleadoID;
             reservaTemporal.FechaCreacion = DateTime.Now;
-            string clienteNombre = reservaTemporal.ClienteNombre;
-            
-            
+
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(ReservasXmlWrapper));
@@ -199,7 +197,7 @@ namespace HotelSolRepo.Controlador
                 }
             }
         }
-
+        // Este metodo tiene que convertirse en Check-IN
         public void RegistrarLlegadaCliente(int reservaId)
         {
             using (HotelDBEntities db = new HotelDBEntities())
@@ -212,7 +210,7 @@ namespace HotelSolRepo.Controlador
                 }
             }
         }
-
+        // Este metodo tiene que convertirse en Check-OUT
         public void RegistrarSalidaCliente(int reservaId)
         {
             using (HotelDBEntities db = new HotelDBEntities())

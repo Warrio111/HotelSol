@@ -42,7 +42,7 @@ namespace HotelSolRepo.Vista
                 habitacionesSeleccionadas.Add(new HabitacionesXmlWrapper
                 {
                     HabitacionID = ConvertToNumericType(comboBox1.SelectedItem.ToString()),
-                    TipoPension = GetPensionType(checkBox1, checkBox2),
+                    Tipo = GetPensionType(checkBox1, checkBox2),
                     NumeroHabitaciones = (int)numericUpDown1.Value
                 });
             }
@@ -52,7 +52,7 @@ namespace HotelSolRepo.Vista
                 habitacionesSeleccionadas.Add(new HabitacionesXmlWrapper
                 {
                     HabitacionID = ConvertToNumericType(comboBox2.SelectedItem.ToString()),
-                    TipoPension = GetPensionType(checkBox3, checkBox4),
+                    Tipo = GetPensionType(checkBox3, checkBox4),
                     NumeroHabitaciones = (int)numericUpDown2.Value
                 });
             }
@@ -62,7 +62,7 @@ namespace HotelSolRepo.Vista
                 habitacionesSeleccionadas.Add(new HabitacionesXmlWrapper
                 {
                     HabitacionID = ConvertToNumericType(comboBox3.SelectedItem.ToString()),
-                    TipoPension = GetPensionType(checkBox5, checkBox6),
+                    Tipo = GetPensionType(checkBox5, checkBox6),
                     NumeroHabitaciones = (int)numericUpDown3.Value
                 });
             }
@@ -77,7 +77,7 @@ namespace HotelSolRepo.Vista
                     FechaInicio = dateTimePicker1.Value,
                     FechaFin = dateTimePicker2.Value,
                     NIF = ((FormPrincipal)this.ParentForm).AuthenticatedNIF, // Este valor debe venir del usuario autenticado
-                    Estado = "Pendiente",
+                    EstadoReserva = "Pendiente",
                     FechaCreacion = DateTime.Now,
                     Habitaciones = habitacionesSeleccionadas
                 };
@@ -134,7 +134,6 @@ namespace HotelSolRepo.Vista
             ClienteController clienteController = new ClienteController();
             var cliente = clienteController.ObtenerClientePorNIF(formPrincipal.AuthenticatedNIF);
 
-
             List<HabitacionesXmlWrapper> habitacionesSeleccionadas = new List<HabitacionesXmlWrapper>();
 
 
@@ -144,7 +143,7 @@ namespace HotelSolRepo.Vista
                 habitacionesSeleccionadas.Add(new HabitacionesXmlWrapper
                 {
                     HabitacionID = ConvertToNumericType(comboBox1.SelectedItem.ToString()),
-                    TipoPension = GetPensionType(checkBox1, checkBox2),
+                    Tipo = GetPensionType(checkBox1, checkBox2),
                     NumeroHabitaciones = (int)numericUpDown1.Value
                 });
             }
@@ -154,7 +153,7 @@ namespace HotelSolRepo.Vista
                 habitacionesSeleccionadas.Add(new HabitacionesXmlWrapper
                 {
                     HabitacionID = ConvertToNumericType(comboBox2.SelectedItem.ToString()),
-                    TipoPension = GetPensionType(checkBox3, checkBox4),
+                    Tipo = GetPensionType(checkBox3, checkBox4),
                     NumeroHabitaciones = (int)numericUpDown2.Value
                 });
             }
@@ -165,7 +164,7 @@ namespace HotelSolRepo.Vista
 
                 {
                     HabitacionID = ConvertToNumericType(comboBox3.SelectedItem.ToString()),
-                    TipoPension = GetPensionType(checkBox5, checkBox6),
+                    Tipo = GetPensionType(checkBox5, checkBox6),
                     NumeroHabitaciones = (int)numericUpDown3.Value
                 });
             }
@@ -175,13 +174,15 @@ namespace HotelSolRepo.Vista
                 FechaInicio = dateTimePicker1.Value,
                 FechaFin = dateTimePicker2.Value,
                 NIF = formPrincipal.AuthenticatedNIF,
-                Estado = "Pendiente",
+                EstadoReserva = "Pendiente",
                 FechaCreacion = DateTime.Now,
-                ClienteNombre = cliente.Nombre,  
+                 
 
 
                 Habitaciones = habitacionesSeleccionadas
             };
+            
+
             Type XmlWrapperType = typeof(ReservasXmlWrapper);
             ((FormPrincipal)this.ParentForm).OnXmlWrapperTypeChanged(XmlWrapperType);
 

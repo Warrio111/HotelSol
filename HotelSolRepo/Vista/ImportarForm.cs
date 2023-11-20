@@ -16,15 +16,15 @@ namespace HotelSolRepo.Vista
             InitializeComponent();
             comboBox1.Items.Add("");
             comboBox1.Items.Add("ReservasListXmlWrapper");
-            comboBox1.Items.Add("ClientesXmlWrapper");
-            comboBox1.Items.Add("FacturasXmlWrapper");
-            comboBox1.Items.Add("EmpleadosXmlWrapper");
+            comboBox1.Items.Add("ClientesListXmlWrapper");
+            comboBox1.Items.Add("FacturasListXmlWrapper");
+            comboBox1.Items.Add("EmpleadosListXmlWrapper");
+            comboBox1.Items.Add("HabitacionesListXmlWrapper");
             comboBox1.Items.Add("HabitacionesSencillasXmlWrapper");
             comboBox1.Items.Add("HabitacionesDoblesXmlWrapper");
             comboBox1.Items.Add("HabitacionesSuiteXmlWrapper");
-            comboBox1.Items.Add("HabitacionesXmlWrapper");
-            comboBox1.Items.Add("ProgramasFidelizacionXmlWrapper");
-            comboBox1.Items.Add("TareasEmpleadosXmlWrapper");
+            comboBox1.Items.Add("ProgramasFidelizacionListXmlWrapper");
+            comboBox1.Items.Add("TareasEmpleadosListXmlWrapper");
         }
 
         public void SubscribeToXmlWrapperTypeChange(FormPrincipal activeForm)
@@ -74,6 +74,56 @@ namespace HotelSolRepo.Vista
                         {
                             ReservasListXmlWrapper reservasList = (ReservasListXmlWrapper)data[0];
                             data = reservasList.Reservas;
+                        }
+                        // Si los datos son de tipo ClientesListXmlWrapper, extrae la lista de Clientes
+                        else if (xmlWrapperType == typeof(ClientesListXmlWrapper))
+                        {
+                            ClientesListXmlWrapper clientesList = (ClientesListXmlWrapper)data[0];
+                            data = clientesList.Clientes;
+                        }
+                        // Si los datos son de tipo FacturasListXmlWrapper, extrae la lista de Facturas
+                        else if (xmlWrapperType == typeof(FacturasListXmlWrapper))
+                        {
+                            FacturasListXmlWrapper facturasList = (FacturasListXmlWrapper)data[0];
+                            data = facturasList.Facturas;
+                        }
+                        // Si los datos son de tipo EmpleadosListXmlWrapper, extrae la lista de Empleados
+                        else if (xmlWrapperType == typeof(EmpleadosListXmlWrapper))
+                        {
+                            EmpleadosListXmlWrapper empleadosList = (EmpleadosListXmlWrapper)data[0];
+                            data = empleadosList.Empleados;
+                        }
+                        // Si los datos son de tipo HabitacionesListXmlWrapper, extrae la lista de Habitaciones
+                        else if (xmlWrapperType == typeof(HabitacionesListXmlWrapper))
+                        {
+                            HabitacionesListXmlWrapper habitacionesList = (HabitacionesListXmlWrapper)data[0];
+                            data = habitacionesList.Habitaciones;
+                        }
+                        else if (xmlWrapperType == typeof(HabitacionesSencillasXmlWrapper)) 
+                        { 
+                            HabitacionesSencillasXmlWrapper habitacionesSencillasList = (HabitacionesSencillasXmlWrapper)data[0];
+                        }
+                        // Si los datos son de tipo HabitacionesDoblesXmlWrapper, extrae la lista de HabitacionesDobles
+                        else if (xmlWrapperType == typeof(HabitacionesDoblesXmlWrapper))
+                        {
+                            HabitacionesDoblesXmlWrapper habitacionesDoblesList = (HabitacionesDoblesXmlWrapper)data[0];
+                        }
+                        // Si los datos son de tipo HabitacionesSuiteXmlWrapper, extrae la lista de HabitacionesSuite
+                        else if (xmlWrapperType == typeof(HabitacionesSuiteXmlWrapper))
+                        {
+                            HabitacionesSuiteXmlWrapper habitacionesSuiteList = (HabitacionesSuiteXmlWrapper)data[0];
+                        }
+                        // Si los datos son de tipo ProgramasFidelizacionListXmlWrapper, extrae la lista de ProgramasFidelizacion
+                        else if (xmlWrapperType == typeof(ProgramasFidelizacionListXmlWrapper))
+                        {
+                            ProgramasFidelizacionListXmlWrapper programasFidelizacionList = (ProgramasFidelizacionListXmlWrapper)data[0];
+                            data = programasFidelizacionList.ProgramasFidelizacion;
+                        }
+                        // Si los datos son de tipo TareasEmpleadosListXmlWrapper, extrae la lista de TareasEmpleados
+                        else if (xmlWrapperType == typeof(TareasEmpleadosListXmlWrapper))
+                        {
+                            TareasEmpleadosListXmlWrapper tareasEmpleadosList = (TareasEmpleadosListXmlWrapper)data[0];
+                            data = tareasEmpleadosList.TareasEmpleados;
                         }
 
                         // Crea el DataGridView
