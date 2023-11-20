@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnConfirmar = new System.Windows.Forms.Button();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.btnConfirmar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,15 +42,6 @@
             this.panel1.Size = new System.Drawing.Size(650, 467);
             this.panel1.TabIndex = 0;
             // 
-            // btnConfirmar
-            // 
-            this.btnConfirmar.Location = new System.Drawing.Point(668, 431);
-            this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(147, 48);
-            this.btnConfirmar.TabIndex = 1;
-            this.btnConfirmar.Text = "CONFIRMAR RESERVA";
-            this.btnConfirmar.UseVisualStyleBackColor = true;
-            // 
             // webBrowser1
             // 
             this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -60,11 +51,20 @@
             this.webBrowser1.Size = new System.Drawing.Size(650, 467);
             this.webBrowser1.TabIndex = 0;
             // 
+            // btnConfirmar
+            // 
+            this.btnConfirmar.Location = new System.Drawing.Point(668, 431);
+            this.btnConfirmar.Name = "btnConfirmar";
+            this.btnConfirmar.Size = new System.Drawing.Size(147, 48);
+            this.btnConfirmar.TabIndex = 1;
+            this.btnConfirmar.Text = "CONFIRMAR RESERVA";
+            this.btnConfirmar.UseVisualStyleBackColor = true;
+            // 
             // ServiciosExtraForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(909, 544);
+            this.ClientSize = new System.Drawing.Size(921, 486);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.panel1);
             this.Name = "ServiciosExtraForm";

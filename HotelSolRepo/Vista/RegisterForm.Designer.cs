@@ -48,7 +48,6 @@
             this.textBoxName.Size = new System.Drawing.Size(241, 20);
             this.textBoxName.TabIndex = 0;
             this.textBoxName.Text = "NOMBRE";
-            
             // 
             // contextMenuStrip1
             // 
@@ -124,7 +123,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackgroundImage = global::HotelSolRepo.Properties.Resources.fondo;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(921, 486);
             this.Controls.Add(this.textBoxPsswdCheck);
             this.Controls.Add(this.textBoxPsswd);
             this.Controls.Add(this.btnRegisterValidation);

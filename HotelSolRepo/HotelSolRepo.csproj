@@ -225,6 +225,7 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <None Include="Resources\logo.jpeg" />
+    <None Include="Resources\fondo.jpeg" />
     <Content Include="Vista\ReservaTemplate.xslt">
       <SubType>Designer</SubType>
     </Content>

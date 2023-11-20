@@ -15,10 +15,11 @@ namespace HotelSolRepo.Vista
         {
             InitializeComponent();
             comboBox1.Items.Add("");
-            comboBox1.Items.Add("ReservasListXmlWrapper");
             comboBox1.Items.Add("ClientesListXmlWrapper");
             comboBox1.Items.Add("FacturasListXmlWrapper");
             comboBox1.Items.Add("EmpleadosListXmlWrapper");
+            comboBox1.Items.Add("ReservasListXmlWrapper");
+            comboBox1.Items.Add("ReservasHabitacionesListXmlWrapper");
             comboBox1.Items.Add("HabitacionesListXmlWrapper");
             comboBox1.Items.Add("HabitacionesSencillasXmlWrapper");
             comboBox1.Items.Add("HabitacionesDoblesXmlWrapper");

@@ -68,41 +68,45 @@ namespace HotelSolRepo.Controlador
         {
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(ReservasXmlWrapper));
+                XmlSerializer serializer = new XmlSerializer(typeof(ReservaHabitacionesXmlWrapper));
                 using (StringReader reader = new StringReader(xmlReserva))
                 {
-                    ReservasXmlWrapper nuevaReserva = (ReservasXmlWrapper)serializer.Deserialize(reader);
+                    ReservaHabitacionesXmlWrapper nuevaReserva = (ReservaHabitacionesXmlWrapper)serializer.Deserialize(reader);
+
                     using (HotelDBEntities db = new HotelDBEntities())
                     {
-                        Reservas reserva = new Reservas
+                        foreach (var reservaXml in nuevaReserva.Reservas)
                         {
-                            NIF = nuevaReserva.NIF,
-                            FechaInicio = nuevaReserva.FechaInicio,
-                            FechaFin = nuevaReserva.FechaFin,
-                            EstadoReserva = nuevaReserva.EstadoReserva,
-                            FechaCreacion = nuevaReserva.FechaCreacion,  // Utilizar la fecha de creación deserializada
-                            EmpleadoID = empleadoID  // Utilizar el ID del empleado proporcionado
-                        };
-
-                        db.Reservas.Add(reserva);
-                        db.SaveChanges();
-
-                        foreach (var habitacion in nuevaReserva.Habitaciones)
-                        {
-                            ReservaHabitaciones reservaHabitacion = new ReservaHabitaciones
+                            Reservas reserva = new Reservas
                             {
-                                ReservaID = reserva.ReservaID,
-                                HabitacionID = habitacion.HabitacionID,
-                                TipoPension = habitacion.Tipo
+                                NIF = reservaXml.NIF,  // Utilizar la propiedad NIF de cada reservaXml
+                                FechaInicio = reservaXml.FechaInicio,
+                                FechaFin = reservaXml.FechaFin,
+                                EstadoReserva = reservaXml.EstadoReserva,
+                                FechaCreacion = reservaXml.FechaCreacion,  // Utilizar la fecha de creación deserializada de cada reservaXml
+                                EmpleadoID = empleadoID  // Utilizar el ID del empleado proporcionado
                             };
 
-                            db.ReservaHabitaciones.Add(reservaHabitacion);
+                            db.Reservas.Add(reserva);
+                            db.SaveChanges();
+
+                            foreach (var habitacion in nuevaReserva.Habitaciones)
+                            {
+                                ReservaHabitaciones reservaHabitacion = new ReservaHabitaciones
+                                {
+                                    ReservaID = reserva.ReservaID,
+                                    HabitacionID = habitacion.HabitacionID,
+                                    TipoPension = habitacion.Tipo
+                                };
+
+                                db.ReservaHabitaciones.Add(reservaHabitacion);
+                            }
+
+                            db.SaveChanges();
+
+                            reserva.EstadoReserva = "Confirmada";
+                            db.SaveChanges();
                         }
-
-                        db.SaveChanges();
-
-                        reserva.EstadoReserva = "Confirmada";
-                        db.SaveChanges();
                     }
 
                     return true;
@@ -115,20 +119,27 @@ namespace HotelSolRepo.Controlador
             }
         }
 
-        // Generar archivo XML para reserva temporal
-        public void GenerarReservaTemporalXml(ReservasXmlWrapper reservaTemporal, int empleadoID)
-        {
-            reservaTemporal.EmpleadoID = empleadoID;
-            reservaTemporal.FechaCreacion = DateTime.Now;
 
+        // Generar archivo XML para reserva temporal
+        public void GenerarReservaTemporalXml(List<ReservaHabitacionesXmlWrapper> reservasTemporales, int empleadoID)
+        {
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(ReservasXmlWrapper));
-                using (StringWriter writer = new StringWriter())
+                foreach (var reservaTemporal in reservasTemporales)
                 {
-                    serializer.Serialize(writer, reservaTemporal);
-                    string xmlReservaTemporal = writer.ToString();
-                    File.WriteAllText(rutaArchivoXml, xmlReservaTemporal);
+                    foreach (var reserva in reservaTemporal.Reservas)
+                    {
+                        reserva.EmpleadoID = empleadoID;
+                        reserva.FechaCreacion = DateTime.Now;
+                    }
+
+                    XmlSerializer serializer = new XmlSerializer(typeof(ReservaHabitacionesXmlWrapper));
+                    using (StringWriter writer = new StringWriter())
+                    {
+                        serializer.Serialize(writer, reservaTemporal);
+                        string xmlReservaTemporal = writer.ToString();
+                        File.WriteAllText(rutaArchivoXml, xmlReservaTemporal);
+                    }
                 }
             }
             catch (Exception ex)
@@ -136,6 +147,7 @@ namespace HotelSolRepo.Controlador
                 Console.WriteLine("Error al generar la reserva temporal en XML: " + ex.Message);
             }
         }
+
 
         public void ConfirmarReserva(int empleadoID)
         {

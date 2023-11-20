@@ -184,15 +184,45 @@ namespace HotelSolRepo.Modelo
         [XmlElement("CheckOutConfirmado", DataType = "dateTime")]
         public Nullable<DateTime> CheckOutConfirmado { get; set; }
 
-        [XmlArray("Habitaciones")]
-        [XmlArrayItem("Habitacion")]
-        public List<HabitacionesXmlWrapper> Habitaciones { get; set; }
+        [XmlArray("Facturas")]
+        [XmlArrayItem("Factura")]
+        public List<FacturasXmlWrapper> Facturas { get; set; }
+
         [XmlArray("Clientes")]
         [XmlArrayItem("Cliente")]
         public List<ClientesXmlWrapper> Clientes { get; set; }
         [XmlArray("Empleados")]
         [XmlArrayItem("Empleado")]
         public List<EmpleadosXmlWrapper> Empleados { get; set; }
+    }
+
+    [XmlRoot("ReservaHabitacionesList")]
+    public class ReservaHabitacionesListXmlWrapper
+    {
+        [XmlElement("ReservaHabitaciones")]
+        public List<ReservaHabitacionesXmlWrapper> ReservaHabitaciones { get; set; }
+    }
+
+    [Serializable]
+    public class ReservaHabitacionesXmlWrapper
+    {
+        [XmlElement("ReservaHabitacionID")]
+        public int ReservaHabitacionID { get; set; }
+
+        [XmlElement("ReservaID")]
+        public Nullable<int> ReservaID { get; set; }
+
+        [XmlElement("HabitacionID")]
+        public Nullable<int> HabitacionID { get; set; }
+
+        [XmlElement("TipoPension")]
+        public string TipoPension { get; set; }
+        [XmlArray("Habitaciones")]
+        [XmlArrayItem("Habitacion")]
+        public List<HabitacionesXmlWrapper> Habitaciones { get; set; }
+        [XmlArray("Reservas")]
+        [XmlArrayItem("Reserva")]
+        public List<ReservasXmlWrapper> Reservas { get; set; }
     }
 
     [XmlRoot("HabitacionesList")]

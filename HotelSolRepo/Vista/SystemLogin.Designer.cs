@@ -37,19 +37,19 @@
             // 
             this.textBoxNameEmployee.Location = new System.Drawing.Point(231, 101);
             this.textBoxNameEmployee.Name = "textBoxNameEmployee";
-            this.textBoxNameEmployee.Size = new System.Drawing.Size(298, 20);
+            this.textBoxNameEmployee.Size = new System.Drawing.Size(244, 20);
             this.textBoxNameEmployee.TabIndex = 0;
             // 
             // textBoxIdEmployee
             // 
-            this.textBoxIdEmployee.Location = new System.Drawing.Point(255, 152);
+            this.textBoxIdEmployee.Location = new System.Drawing.Point(231, 151);
             this.textBoxIdEmployee.Name = "textBoxIdEmployee";
             this.textBoxIdEmployee.Size = new System.Drawing.Size(244, 20);
             this.textBoxIdEmployee.TabIndex = 1;
             // 
             // btnLoginEmployee
             // 
-            this.btnLoginEmployee.Location = new System.Drawing.Point(311, 210);
+            this.btnLoginEmployee.Location = new System.Drawing.Point(231, 216);
             this.btnLoginEmployee.Name = "btnLoginEmployee";
             this.btnLoginEmployee.Size = new System.Drawing.Size(137, 23);
             this.btnLoginEmployee.TabIndex = 2;
@@ -60,7 +60,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackgroundImage = global::HotelSolRepo.Properties.Resources.fondo;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(921, 486);
             this.Controls.Add(this.btnLoginEmployee);
             this.Controls.Add(this.textBoxIdEmployee);
             this.Controls.Add(this.textBoxNameEmployee);
