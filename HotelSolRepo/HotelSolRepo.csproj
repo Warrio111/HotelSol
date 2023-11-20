@@ -61,22 +61,22 @@
     <Compile Include="Controlador\ClienteController.cs" />
     <Compile Include="Controlador\HabitacionController.cs" />
     <Compile Include="Controlador\ReservaController.cs" />
-    <Compile Include="Modelo\Cliente.cs">
+    <Compile Include="Modelo\Clientes.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\Empleado.cs">
+    <Compile Include="Modelo\Empleados.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\Factura.cs">
+    <Compile Include="Modelo\Facturas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\Habitacione.cs">
+    <Compile Include="Modelo\Habitaciones.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\HabitacionesDoble.cs">
+    <Compile Include="Modelo\HabitacionesDobles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\HabitacionesSencilla.cs">
+    <Compile Include="Modelo\HabitacionesSencillas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo\HabitacionesSuite.cs">
@@ -101,13 +101,13 @@
     <Compile Include="Modelo\ProgramasFidelizacion.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\Reserva.cs">
+    <Compile Include="Modelo\ReservaHabitaciones.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\ReservaHabitacione.cs">
+    <Compile Include="Modelo\Reservas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\TareasEmpleado.cs">
+    <Compile Include="Modelo\TareasEmpleados.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Vista\ServiciosExtraForm.cs">
