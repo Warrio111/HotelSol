@@ -151,11 +151,11 @@
     <Compile Include="Vista\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vista\ReservaForm.cs">
+    <Compile Include="Vista\CrearReservaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vista\ReservaForm.Designer.cs">
-      <DependentUpon>ReservaForm.cs</DependentUpon>
+    <Compile Include="Vista\CrearReservaForm.Designer.cs">
+      <DependentUpon>CrearReservaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Vista\SystemLogin.cs">
       <SubType>Form</SubType>
@@ -188,8 +188,8 @@
     <EmbeddedResource Include="Vista\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vista\ReservaForm.resx">
-      <DependentUpon>ReservaForm.cs</DependentUpon>
+    <EmbeddedResource Include="Vista\CrearReservaForm.resx">
+      <DependentUpon>CrearReservaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\ServiciosExtraForm.resx">
       <DependentUpon>ServiciosExtraForm.cs</DependentUpon>
@@ -222,7 +222,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Modelo\Model1.edmx.sql" />
     <Content Include="Modelo\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

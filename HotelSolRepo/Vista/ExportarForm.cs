@@ -56,9 +56,9 @@ namespace HotelSolRepo.Vista
                     else if (result == DialogResult.Yes)
                     {
                         // El usuario desea Sobrescribir el archivo existente
-                        if (dataForm is ReservaForm)
+                        if (dataForm is CrearReservaForm)
                         {
-                            ReservaForm reservaForm = (ReservaForm)dataForm;
+                            CrearReservaForm reservaForm = (CrearReservaForm)dataForm;
 
                             ReservaHabitacionesListXmlWrapper reservaHabitacionesList = new ReservaHabitacionesListXmlWrapper();
                             reservaHabitacionesList.ReservaHabitaciones = new List<ReservaHabitacionesXmlWrapper>();
@@ -80,9 +80,9 @@ namespace HotelSolRepo.Vista
                         // Conecpto de LIFO (Last In First Out) para añadir datos al archivo existente
                         // Aplicamos LIFO a las reservasList 
                         // El usuario desea añadir datos al archivo donde corresponda
-                        if (dataForm is ReservaForm)
+                        if (dataForm is CrearReservaForm)
                         {
-                            ReservaForm reservaForm = (ReservaForm)dataForm;
+                            CrearReservaForm reservaForm = (CrearReservaForm)dataForm;
 
                             ReservaHabitacionesListXmlWrapper reservaHabitacionesList = new ReservaHabitacionesListXmlWrapper();
                             reservaHabitacionesList.ReservaHabitaciones = new List<ReservaHabitacionesXmlWrapper>();
@@ -112,9 +112,9 @@ namespace HotelSolRepo.Vista
                 else
                 {
                     // El archivo no existe, simplemente guarda los datos
-                    if (dataForm is ReservaForm)
+                    if (dataForm is CrearReservaForm)
                     {
-                        ReservaForm reservaForm = (ReservaForm)dataForm;
+                        CrearReservaForm reservaForm = (CrearReservaForm)dataForm;
                         // Aquí creamos una instancia del tipo exportXmlWrapperType
                         serializeXMLWrapperType = Activator.CreateInstance(exportXmlWrapperType);
                         foreach (PropertyInfo propertyInfo in exportXmlWrapperType.GetProperties())

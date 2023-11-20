@@ -33,16 +33,18 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnNuevaReserva
             // 
             this.btnNuevaReserva.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            this.btnNuevaReserva.Location = new System.Drawing.Point(12, 84);
+            this.btnNuevaReserva.Location = new System.Drawing.Point(12, 237);
             this.btnNuevaReserva.Name = "btnNuevaReserva";
             this.btnNuevaReserva.Size = new System.Drawing.Size(98, 51);
             this.btnNuevaReserva.TabIndex = 0;
-            this.btnNuevaReserva.Text = "Gestion de Reservas";
+            this.btnNuevaReserva.Text = "Crear Reserva";
             this.btnNuevaReserva.UseVisualStyleBackColor = true;
             this.btnNuevaReserva.Click += new System.EventHandler(this.btnNuevaReserva_Click_1);
             // 
@@ -61,7 +63,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            this.button2.Location = new System.Drawing.Point(12, 155);
+            this.button2.Location = new System.Drawing.Point(12, 426);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(98, 52);
             this.button2.TabIndex = 7;
@@ -83,12 +85,32 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            this.button4.Location = new System.Drawing.Point(12, 228);
+            this.button4.Location = new System.Drawing.Point(12, 581);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(98, 52);
             this.button4.TabIndex = 9;
             this.button4.Text = "Gestion de Empleados";
             this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            this.button1.Location = new System.Drawing.Point(12, 311);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(98, 52);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Anular Reserva";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            this.button5.Location = new System.Drawing.Point(12, 85);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(98, 52);
+            this.button5.TabIndex = 12;
+            this.button5.Text = "Consultar Reservas";
+            this.button5.UseVisualStyleBackColor = true;
             // 
             // FormPrincipal
             // 
@@ -97,6 +119,8 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = global::HotelSolRepo.Properties.Resources.fondo;
             this.ClientSize = new System.Drawing.Size(1203, 660);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -116,5 +140,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button5;
     }
 }

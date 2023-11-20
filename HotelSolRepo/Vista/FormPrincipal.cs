@@ -58,7 +58,7 @@ namespace HotelSolRepo.Vista
 
         private void BtnNuevaReserva_Click(object sender, EventArgs e)
         {
-            MostrarFormulario(new ReservaForm(ref exportXmlWrapperType,this));
+            MostrarFormulario(new CrearReservaForm(ref exportXmlWrapperType,this));
         }
 
         private void BtnExportarXML_Click(object sender, EventArgs e)

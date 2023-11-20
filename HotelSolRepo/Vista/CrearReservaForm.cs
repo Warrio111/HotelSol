@@ -7,14 +7,14 @@ using System.Collections.Generic;
 
 namespace HotelSolRepo.Vista
 {
-    public partial class ReservaForm : Form
+    public partial class CrearReservaForm : Form
     {
         private ReservaController reservaController = new ReservaController();
         private HotelDBEntities db = new HotelDBEntities();
         private List<object> datos;
 
 
-        public ReservaForm(ref Type exportXmlWrapperType, Form formularioPadre)
+        public CrearReservaForm(ref Type exportXmlWrapperType, Form formularioPadre)
 
         {
             InitializeComponent();
@@ -382,6 +382,16 @@ namespace HotelSolRepo.Vista
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }
