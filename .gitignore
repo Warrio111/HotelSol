@@ -361,3 +361,23 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/HotelSolRepo/Modelo/Clientes.cs
+/HotelSolRepo/Modelo/Empleados.cs
+/HotelSolRepo/Modelo/Facturas.cs
+/HotelSolRepo/Modelo/Habitaciones.cs
+/HotelSolRepo/Modelo/HabitacionesDobles.cs
+/HotelSolRepo/Modelo/HabitacionesSencillas.cs
+/HotelSolRepo/Modelo/HabitacionesSuite.cs
+/HotelSolRepo/Modelo/Model1.Context.cs
+/HotelSolRepo/Modelo/Model1.Context.tt
+/HotelSolRepo/Modelo/Model1.cs
+/HotelSolRepo/Modelo/Model1.Designer.cs
+/HotelSolRepo/Modelo/Model1.edmx
+/HotelSolRepo/Modelo/Model1.edmx.diagram
+/HotelSolRepo/Modelo/Model1.tt
+/HotelSolRepo/Modelo/ProgramasFidelizacion.cs
+/HotelSolRepo/Modelo/ReservaHabitaciones.cs
+/HotelSolRepo/Modelo/Reservas.cs
+/HotelSolRepo/Modelo/sp_helpdiagramdefinition_Result.cs
+/HotelSolRepo/Modelo/sp_helpdiagrams_Result.cs
+/HotelSolRepo/Modelo/TareasEmpleados.cs

@@ -61,15 +61,9 @@
     <Compile Include="Controlador\ClienteController.cs" />
     <Compile Include="Controlador\HabitacionController.cs" />
     <Compile Include="Controlador\ReservaController.cs" />
-    <Compile Include="HotelDBDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HotelDBDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Modelo\Clientes.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\ModelXMLWrapper.cs" />
     <Compile Include="Modelo\Empleados.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -103,6 +97,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\ModelXMLWrapper.cs" />
     <Compile Include="Modelo\ProgramasFidelizacion.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -112,20 +107,14 @@
     <Compile Include="Modelo\Reservas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\TareasEmpleados.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Vista\ServiciosExtraForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vista\ServiciosExtraForm.Designer.cs">
       <DependentUpon>ServiciosExtraForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modelo\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Modelo\sp_helpdiagrams_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Modelo\TareasEmpleados.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -179,6 +168,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Vista\ExportarForm.resx">
       <DependentUpon>ExportarForm.cs</DependentUpon>
@@ -208,17 +198,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="HotelDBDataSet.xsc">
-      <DependentUpon>HotelDBDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="HotelDBDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>HotelDBDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="HotelDBDataSet.xss">
-      <DependentUpon>HotelDBDataSet.xsd</DependentUpon>
-    </None>
+    <None Include="App.Config" />
     <None Include="Modelo\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
@@ -234,19 +214,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Modelo\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Modelo\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\logo.jpeg" />
     <Content Include="Vista\ReservaTemplate.xslt">
       <SubType>Designer</SubType>
     </Content>

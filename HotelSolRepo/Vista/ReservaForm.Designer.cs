@@ -54,14 +54,14 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(88, 236);
+            this.dateTimePicker1.Location = new System.Drawing.Point(163, 163);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(464, 20);
             this.dateTimePicker1.TabIndex = 0;
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(88, 262);
+            this.dateTimePicker2.Location = new System.Drawing.Point(163, 198);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(464, 20);
             this.dateTimePicker2.TabIndex = 1;
@@ -69,7 +69,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(88, 288);
+            this.comboBox1.Location = new System.Drawing.Point(163, 224);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(166, 21);
             this.comboBox1.TabIndex = 2;
@@ -93,18 +93,18 @@
             // 
             // btnLoginMenu
             // 
-            this.btnLoginMenu.Location = new System.Drawing.Point(88, 159);
+            this.btnLoginMenu.Location = new System.Drawing.Point(619, 74);
             this.btnLoginMenu.Name = "btnLoginMenu";
-            this.btnLoginMenu.Size = new System.Drawing.Size(464, 49);
+            this.btnLoginMenu.Size = new System.Drawing.Size(162, 47);
             this.btnLoginMenu.TabIndex = 4;
             this.btnLoginMenu.Text = "Validar Cliente";
             this.btnLoginMenu.UseVisualStyleBackColor = true;
             // 
             // btnRegisterMenu
             // 
-            this.btnRegisterMenu.Location = new System.Drawing.Point(88, 81);
+            this.btnRegisterMenu.Location = new System.Drawing.Point(619, 12);
             this.btnRegisterMenu.Name = "btnRegisterMenu";
-            this.btnRegisterMenu.Size = new System.Drawing.Size(464, 51);
+            this.btnRegisterMenu.Size = new System.Drawing.Size(162, 46);
             this.btnRegisterMenu.TabIndex = 5;
             this.btnRegisterMenu.Text = "Registrar Cliente";
             this.btnRegisterMenu.UseVisualStyleBackColor = true;
@@ -136,7 +136,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(260, 288);
+            this.numericUpDown1.Location = new System.Drawing.Point(335, 225);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(38, 20);
             this.numericUpDown1.TabIndex = 9;
@@ -219,6 +219,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackgroundImage = global::HotelSolRepo.Properties.Resources.logo;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(805, 520);
             this.Controls.Add(this.checkBox6);
             this.Controls.Add(this.checkBox5);

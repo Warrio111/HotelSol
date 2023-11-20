@@ -18,7 +18,9 @@ namespace HotelSolRepo.Modelo
         public Nullable<int> ReservaID { get; set; }
         public Nullable<int> HabitacionID { get; set; }
         public string TipoPension { get; set; }
-        public Nullable<int> NumeroHabitaciones { get; set; }
+        public Nullable<System.DateTime> FechaInicio { get; set; }
+        public Nullable<System.DateTime> FechaFin { get; set; }
+        public Nullable<double> Precio { get; set; }
     
         public virtual Habitaciones Habitaciones { get; set; }
         public virtual Reservas Reservas { get; set; }

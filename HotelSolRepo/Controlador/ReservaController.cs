@@ -79,7 +79,7 @@ namespace HotelSolRepo.Controlador
                             NIF = nuevaReserva.NIF,
                             FechaInicio = nuevaReserva.FechaInicio,
                             FechaFin = nuevaReserva.FechaFin,
-                            Estado = nuevaReserva.EstadoReserva,
+                            EstadoReserva = nuevaReserva.EstadoReserva,
                             FechaCreacion = nuevaReserva.FechaCreacion,  // Utilizar la fecha de creación deserializada
                             EmpleadoID = empleadoID  // Utilizar el ID del empleado proporcionado
                         };
@@ -101,7 +101,7 @@ namespace HotelSolRepo.Controlador
 
                         db.SaveChanges();
 
-                        reserva.Estado = "Confirmada";
+                        reserva.EstadoReserva = "Confirmada";
                         db.SaveChanges();
                     }
 
@@ -163,7 +163,7 @@ namespace HotelSolRepo.Controlador
                 {
                     reservaExistente.FechaInicio = reservaActualizada.FechaInicio;
                     reservaExistente.FechaFin = reservaActualizada.FechaFin;
-                    reservaExistente.Estado = reservaActualizada.Estado;
+                    reservaExistente.EstadoReserva = reservaActualizada.EstadoReserva;
 
 
                     db.SaveChanges();
@@ -197,7 +197,7 @@ namespace HotelSolRepo.Controlador
                 }
             }
         }
-
+        // Este metodo tiene que convertirse en Check-IN
         public void RegistrarLlegadaCliente(int reservaId)
         {
             using (HotelDBEntities db = new HotelDBEntities())
@@ -210,7 +210,7 @@ namespace HotelSolRepo.Controlador
                 }
             }
         }
-
+        // Este metodo tiene que convertirse en Check-OUT
         public void RegistrarSalidaCliente(int reservaId)
         {
             using (HotelDBEntities db = new HotelDBEntities())

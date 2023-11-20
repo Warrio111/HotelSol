@@ -17,7 +17,6 @@ namespace HotelSolRepo.Modelo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Habitaciones()
         {
-            this.Reservas = new HashSet<Reservas>();
             this.ReservaHabitaciones = new HashSet<ReservaHabitaciones>();
         }
     
@@ -33,8 +32,6 @@ namespace HotelSolRepo.Modelo
         public virtual HabitacionesDobles HabitacionesDobles { get; set; }
         public virtual HabitacionesSencillas HabitacionesSencillas { get; set; }
         public virtual HabitacionesSuite HabitacionesSuite { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reservas> Reservas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReservaHabitaciones> ReservaHabitaciones { get; set; }
     }

@@ -29,59 +29,76 @@
         private void InitializeComponent()
         {
             this.btnNuevaReserva = new System.Windows.Forms.Button();
-            this.btnExportarXML = new System.Windows.Forms.Button();
-            this.btnImportarXML = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnNuevaReserva
             // 
-            this.btnNuevaReserva.Location = new System.Drawing.Point(16, 15);
-            this.btnNuevaReserva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNuevaReserva.Location = new System.Drawing.Point(12, 84);
             this.btnNuevaReserva.Name = "btnNuevaReserva";
-            this.btnNuevaReserva.Size = new System.Drawing.Size(231, 63);
+            this.btnNuevaReserva.Size = new System.Drawing.Size(173, 51);
             this.btnNuevaReserva.TabIndex = 0;
-            this.btnNuevaReserva.Text = "NuevaReserva";
+            this.btnNuevaReserva.Text = "Gestion de Reservas";
             this.btnNuevaReserva.UseVisualStyleBackColor = true;
-            // 
-            // btnExportarXML
-            // 
-            this.btnExportarXML.Location = new System.Drawing.Point(12, 466);
-            this.btnExportarXML.Name = "btnExportarXML";
-            this.btnExportarXML.Size = new System.Drawing.Size(231, 63);
-            this.btnExportarXML.TabIndex = 1;
-            this.btnExportarXML.Text = "ExportarXML";
-            this.btnExportarXML.UseVisualStyleBackColor = true;
-            // 
-            // btnImportarXML
-            // 
-            this.btnImportarXML.Location = new System.Drawing.Point(12, 536);
-            this.btnImportarXML.Name = "btnImportarXML";
-            this.btnImportarXML.Size = new System.Drawing.Size(231, 63);
-            this.btnImportarXML.TabIndex = 2;
-            this.btnImportarXML.Text = "ImportarXML";
-            this.btnImportarXML.UseVisualStyleBackColor = true;
+            this.btnNuevaReserva.Click += new System.EventHandler(this.btnNuevaReserva_Click_1);
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.BackgroundImage = global::HotelSolRepo.Properties.Resources.logo;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(255, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Location = new System.Drawing.Point(191, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1261, 798);
+            this.panel1.Size = new System.Drawing.Size(946, 648);
             this.panel1.TabIndex = 4;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(12, 422);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(173, 52);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "Gestion de Clientes";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(12, 12);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(173, 52);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "Consultar Disponibilidad";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(12, 491);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(173, 52);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "Gestion de Empleados";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // FormPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1516, 798);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.BackgroundImage = global::HotelSolRepo.Properties.Resources.logo;
+            this.ClientSize = new System.Drawing.Size(1137, 648);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnImportarXML);
-            this.Controls.Add(this.btnExportarXML);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.btnNuevaReserva);
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormPrincipal";
             this.Text = "FormPrincipal";
             this.ResumeLayout(false);
@@ -91,8 +108,9 @@
         #endregion
 
         private System.Windows.Forms.Button btnNuevaReserva;
-        private System.Windows.Forms.Button btnExportarXML;
-        private System.Windows.Forms.Button btnImportarXML;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }

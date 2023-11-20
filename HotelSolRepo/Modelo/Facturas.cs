@@ -14,6 +14,12 @@ namespace HotelSolRepo.Modelo
     
     public partial class Facturas
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Facturas()
+        {
+            this.Reservas = new HashSet<Reservas>();
+        }
+    
         public int FacturaID { get; set; }
         public string NIF { get; set; }
         public Nullable<int> EmpleadoID { get; set; }
@@ -26,5 +32,7 @@ namespace HotelSolRepo.Modelo
     
         public virtual Clientes Clientes { get; set; }
         public virtual Empleados Empleados { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reservas> Reservas { get; set; }
     }
 }

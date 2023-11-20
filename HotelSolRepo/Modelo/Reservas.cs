@@ -22,18 +22,19 @@ namespace HotelSolRepo.Modelo
     
         public int ReservaID { get; set; }
         public string NIF { get; set; }
-        public Nullable<int> HabitacionID { get; set; }
         public Nullable<int> EmpleadoID { get; set; }
         public Nullable<System.DateTime> FechaInicio { get; set; }
         public Nullable<System.DateTime> FechaFin { get; set; }
-        public string OpcionesPension { get; set; }
-        public string Estado { get; set; }
+        public string EstadoReserva { get; set; }
+        public Nullable<System.DateTime> CheckInConfirmado { get; set; }
+        public Nullable<System.DateTime> CheckOutConfirmado { get; set; }
+        public Nullable<int> FacturaID { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string TipoReserva { get; set; }
     
         public virtual Clientes Clientes { get; set; }
         public virtual Empleados Empleados { get; set; }
-        public virtual Habitaciones Habitaciones { get; set; }
+        public virtual Facturas Facturas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReservaHabitaciones> ReservaHabitaciones { get; set; }
     }
