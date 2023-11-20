@@ -196,6 +196,35 @@ namespace HotelSolRepo.Modelo
         public List<EmpleadosXmlWrapper> Empleados { get; set; }
     }
 
+    [XmlRoot("ReservaHabitacionesList")]
+    public class ReservaHabitacionesListXmlWrapper
+    {
+        [XmlElement("ReservaHabitaciones")]
+        public List<ReservaHabitacionesXmlWrapper> ReservaHabitaciones { get; set; }
+    }
+
+    [Serializable]
+    public class ReservaHabitacionesXmlWrapper
+    {
+        [XmlElement("ReservaHabitacionID")]
+        public int ReservaHabitacionID { get; set; }
+
+        [XmlElement("ReservaID")]
+        public Nullable<int> ReservaID { get; set; }
+
+        [XmlElement("HabitacionID")]
+        public Nullable<int> HabitacionID { get; set; }
+
+        [XmlElement("TipoPension")]
+        public string TipoPension { get; set; }
+        [XmlArray("Habitaciones")]
+        [XmlArrayItem("Habitacion")]
+        public List<HabitacionesXmlWrapper> Habitaciones { get; set; }
+        [XmlArray("Reservas")]
+        [XmlArrayItem("Reserva")]
+        public List<ReservasXmlWrapper> Reservas { get; set; }
+    }
+
     [XmlRoot("HabitacionesList")]
     public class HabitacionesListXmlWrapper
     {
