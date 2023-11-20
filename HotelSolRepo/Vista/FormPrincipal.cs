@@ -15,9 +15,9 @@ namespace HotelSolRepo.Vista
     {
         public bool IsAuthenticated { get; set; } // Propiedad para saber si el usuario está autenticado
         private Type exportXmlWrapperType; // Almacena el tipo de XMLWrapper para exportación
-        private Form callerForm; // Almacena el formulario que llama a FormPrincipal
+        private Form exportCallerForm; // Almacena el formulario que llama a FormPrincipal
         public event Action<Type> XmlWrapperTypeChanged; // Evento personalizado
-        public event Action<Form> CallerPrincipal;
+        public event Action<Form> CallerPrincipal; // Evento personalizado
         public string AuthenticatedNIF { get; set; } // Propiedad para almacenar el NIF del usuario autenticado
         public int AuthenticatedEmployeeID { get; set; } // Propiedad para almacenar el ID del empleado autenticado
         public ReservaHabitacionesListXmlWrapper reservaHabitacionesXML = new ReservaHabitacionesListXmlWrapper();
@@ -33,6 +33,10 @@ namespace HotelSolRepo.Vista
             {
                 exportXmlWrapperType = xmlWrapperType;
             };
+            CallerPrincipal += (callerForm) =>
+            {
+                exportCallerForm = callerForm;
+            };
             reservaHabitacionesXML.ReservaHabitaciones = new List<ReservaHabitacionesXmlWrapper>();
             ShowEmployeeLogin(); // Solicitar autenticación del empleado al iniciar el programa
         }
@@ -45,7 +49,6 @@ namespace HotelSolRepo.Vista
         public void OnPrincipalFormCalled(Form callerForm)
         {
             CallerPrincipal?.Invoke(callerForm);
-            this.callerForm = callerForm;
         }
         private void ConectarControladoresEventos()
         {
@@ -66,7 +69,7 @@ namespace HotelSolRepo.Vista
                 
                 if (exportarForm != null)
                 {
-                    exportarForm.ExportarDatosToXml(this.callerForm);
+                    exportarForm.ExportarDatosToXml(this.exportCallerForm);
                 }
                 //MostrarFormulario(exportarForm);
                 return;
