@@ -11,47 +11,21 @@ namespace HotelSolRepo.Vista
     {
         private ReservaController reservaController = new ReservaController();
         private HotelDBEntities db = new HotelDBEntities();
-        private List<object> datos;
-
+        private string AuthenticatedClientNIF { get; set; }
 
         public CrearReservaForm(ref Type exportXmlWrapperType, Form formularioPadre)
-
         {
             InitializeComponent();
             this.Load += new EventHandler(this.ReservaForm_Load);
-            btnConfirmar.Click += new EventHandler(this.RealizarReserva_Click);
-          
+            btnConfirmar.Click += new EventHandler(this.ValidarYCrearReserva);
+            btnBuscaCliente.Click += new EventHandler(this.BuscarCliente_Click);
+
             exportXmlWrapperType = typeof(ReservasListXmlWrapper);
             this.Owner = formularioPadre;
             if (this.Owner is FormPrincipal formPrincipal)
             {
                 ((FormPrincipal)this.Owner).OnPrincipalFormCalled(this);
             }
-
-
-        }
-        private void LoginForm_Click(object sender, EventArgs e)
-        {
-            FormPrincipal formPrincipal = (FormPrincipal)this.ParentForm;
-            if (formPrincipal.IsAuthenticated)
-            {
-                MessageBox.Show("Cliente Validado.");
-                return;
-            }
-
-            formPrincipal.MostrarFormulario(new LoginForm());
-        }
-
-        private void RegisterForm_Click(object sender, EventArgs e)
-        {
-            FormPrincipal formPrincipal = (FormPrincipal)this.ParentForm;
-            if (formPrincipal.IsAuthenticated)
-            {
-                MessageBox.Show("Cliente Validado.");
-                return;
-            }
-
-            formPrincipal.MostrarFormulario(new RegisterForm());
         }
 
         private void ReservaForm_Load(object sender, EventArgs e)
@@ -65,307 +39,119 @@ namespace HotelSolRepo.Vista
             }
         }
 
-        private void RealizarReserva_Click(object sender, EventArgs e)
+        private void ValidarYCrearReserva(object sender, EventArgs e)
         {
-            FormPrincipal formPrincipal = (FormPrincipal)this.ParentForm;
-            if (!formPrincipal.IsAuthenticated)
+            if (string.IsNullOrEmpty(AuthenticatedClientNIF))
             {
-                MessageBox.Show("Por favor, valide un Cliente para realizar una reserva.");
+                MessageBox.Show("Cliente no autenticado. Por favor, valide un cliente.");
+                btnConfirmar.Enabled = false;
                 return;
             }
 
-            // Obtener detalles del cliente
-            ClienteController clienteController = new ClienteController();
-            var cliente = clienteController.ObtenerClientePorNIF(formPrincipal.AuthenticatedNIF);
-
-            List<HabitacionesXmlWrapper> habitacionesSeleccionadas = new List<HabitacionesXmlWrapper>();
-            List<ReservaHabitacionesXmlWrapper> reservaHabitaciones = new List<ReservaHabitacionesXmlWrapper>();
-
-            if (comboBox1.SelectedItem != null)
+            if (!ComprobarDisponibilidad())
             {
-                // Crear instancia de HabitacionesXmlWrapper y agregarla a la lista de habitaciones seleccionadas
-                HabitacionesXmlWrapper habitacion1 = new HabitacionesXmlWrapper
-                {
-                    HabitacionID = ConvertToNumericType(comboBox1.SelectedItem.ToString()),
-                    Tipo = GetPensionType(checkBox1, checkBox2),
-                    NumeroHabitaciones = (int)numericUpDown1.Value
-                };
-                habitacionesSeleccionadas.Add(habitacion1);
-
-                // Crear instancia de ReservasXmlWrapper y agregarla a la lista de reservas en ReservaHabitacionesXmlWrapper
-                ReservasXmlWrapper reserva1 = new ReservasXmlWrapper
-                {
-                    FechaInicio = dateTimePicker1.Value,
-                    FechaFin = dateTimePicker2.Value,
-                    NIF = formPrincipal.AuthenticatedNIF,
-                    EstadoReserva = "Pendiente",
-                    FechaCreacion = DateTime.Now
-                };
-
-                // Crear instancia de ReservaHabitacionesXmlWrapper y agregarla a la lista principal
-                reservaHabitaciones.Add(new ReservaHabitacionesXmlWrapper
-                {
-                    TipoPension = GetPensionType(checkBox1, checkBox2),
-                    Habitaciones = new List<HabitacionesXmlWrapper> { habitacion1 },
-                    Reservas = new List<ReservasXmlWrapper> { reserva1 }
-                });
+                MessageBox.Show("No hay disponibilidad para las habitaciones seleccionadas.");
+                btnConfirmar.Enabled = false;
+                return;
             }
 
-            if (comboBox2.SelectedItem != null)
-            {
-
-                // Crear instancia de HabitacionesXmlWrapper y agregarla a la lista de habitaciones seleccionadas
-                HabitacionesXmlWrapper habitacion2 = new HabitacionesXmlWrapper
-                {
-                    HabitacionID = ConvertToNumericType(comboBox2.SelectedItem.ToString()),
-                    Tipo = GetPensionType(checkBox3, checkBox4),
-                    NumeroHabitaciones = (int)numericUpDown2.Value
-                };
-                habitacionesSeleccionadas.Add(habitacion2);
-                // Crear instancia de ReservasXmlWrapper y agregarla a la lista de reservas en ReservaHabitacionesXmlWrapper
-                ReservasXmlWrapper reserva2 = new ReservasXmlWrapper
-                {
-                    FechaInicio = dateTimePicker1.Value,
-                    FechaFin = dateTimePicker2.Value,
-                    NIF = formPrincipal.AuthenticatedNIF,
-                    EstadoReserva = "Pendiente",
-                    FechaCreacion = DateTime.Now
-                };
-                // Crear instancia de ReservaHabitacionesXmlWrapper y agregarla a la lista principal
-                reservaHabitaciones.Add(new ReservaHabitacionesXmlWrapper
-                {
-                    TipoPension = GetPensionType(checkBox3, checkBox4),
-                    Habitaciones = new List<HabitacionesXmlWrapper> { habitacion2 },
-                    Reservas = new List<ReservasXmlWrapper> { reserva2 }
-                });
-
-            }
-
-            if (comboBox3.SelectedItem != null)
-            {
-                // Crear instancia de HabitacionesXmlWrapper y agregarla a la lista de habitaciones seleccionadas
-                HabitacionesXmlWrapper habitacion3 = new HabitacionesXmlWrapper
-                {
-                    HabitacionID = ConvertToNumericType(comboBox3.SelectedItem.ToString()),
-                    Tipo = GetPensionType(checkBox5, checkBox6),
-                    NumeroHabitaciones = (int)numericUpDown3.Value
-                };
-                habitacionesSeleccionadas.Add(habitacion3);
-                // Crear instancia de ReservasXmlWrapper y agregarla a la lista de reservas en ReservaHabitacionesXmlWrapper
-                ReservasXmlWrapper reserva3 = new ReservasXmlWrapper
-                {
-                    FechaInicio = dateTimePicker1.Value,
-                    FechaFin = dateTimePicker2.Value,
-                    NIF = formPrincipal.AuthenticatedNIF,
-                    EstadoReserva = "Pendiente",
-                    FechaCreacion = DateTime.Now
-                };
-                // Crear instancia de ReservaHabitacionesXmlWrapper y agregarla a la lista principal
-                reservaHabitaciones.Add(new ReservaHabitacionesXmlWrapper
-                {
-                    TipoPension = GetPensionType(checkBox5, checkBox6),
-                    Habitaciones = new List<HabitacionesXmlWrapper> { habitacion3 },
-                    Reservas = new List<ReservasXmlWrapper> { reserva3 }
-                });
-            }
-
-
-            Type XmlWrapperType = typeof(ReservaHabitacionesXmlWrapper);
-            ((FormPrincipal)this.ParentForm).OnXmlWrapperTypeChanged(XmlWrapperType);
-
-            int empleadoID = formPrincipal.AuthenticatedEmployeeID;
-
-            reservaController.GenerarReservaTemporalXml(reservaHabitaciones, empleadoID);
-
-
-            formPrincipal.MostrarFormulario(new ServiciosExtraForm());
-        }
-        public ReservaHabitacionesListXmlWrapper RealizarExportDesdeReservas()
-        {
-            FormPrincipal formPrincipal = (FormPrincipal)this.ParentForm;
-            if (!formPrincipal.IsAuthenticated)
-            {
-                MessageBox.Show("Por favor, valide un Cliente para realizar una reserva.");
-                return null;
-            }
-            List<HabitacionesXmlWrapper> habitacionesSeleccionadas = new List<HabitacionesXmlWrapper>();
-            List<ReservaHabitacionesXmlWrapper> reservaHabitaciones = new List<ReservaHabitacionesXmlWrapper>();
-
-            if (comboBox1.SelectedItem != null)
-            {
-                // Crear instancia de HabitacionesXmlWrapper y agregarla a la lista de habitaciones seleccionadas
-                HabitacionesXmlWrapper habitacion1 = new HabitacionesXmlWrapper
-                {
-                    HabitacionID = ConvertToNumericType(comboBox1.SelectedItem.ToString()),
-                    Tipo = GetPensionType(checkBox1, checkBox2),
-                    NumeroHabitaciones = (int)numericUpDown1.Value
-                };
-                habitacionesSeleccionadas.Add(habitacion1);
-
-                // Crear instancia de ReservasXmlWrapper y agregarla a la lista de reservas en ReservaHabitacionesXmlWrapper
-                ReservasXmlWrapper reserva1 = new ReservasXmlWrapper
-                {
-                    FechaInicio = dateTimePicker1.Value,
-                    FechaFin = dateTimePicker2.Value,
-                    NIF = formPrincipal.AuthenticatedNIF,
-                    EstadoReserva = "Pendiente",
-                    FechaCreacion = DateTime.Now
-                };
-
-                // Crear instancia de ReservaHabitacionesXmlWrapper y agregarla a la lista principal
-                reservaHabitaciones.Add(new ReservaHabitacionesXmlWrapper
-                {
-                    TipoPension = GetPensionType(checkBox1, checkBox2),
-                    Habitaciones = new List<HabitacionesXmlWrapper> { habitacion1 },
-                    Reservas = new List<ReservasXmlWrapper> { reserva1 }
-                });
-            }
-
-            if (comboBox2.SelectedItem != null)
-            {
-
-                // Crear instancia de HabitacionesXmlWrapper y agregarla a la lista de habitaciones seleccionadas
-                HabitacionesXmlWrapper habitacion2 = new HabitacionesXmlWrapper
-                {
-                    HabitacionID = ConvertToNumericType(comboBox2.SelectedItem.ToString()),
-                    Tipo = GetPensionType(checkBox3, checkBox4),
-                    NumeroHabitaciones = (int)numericUpDown2.Value
-                };
-                habitacionesSeleccionadas.Add(habitacion2);
-                // Crear instancia de ReservasXmlWrapper y agregarla a la lista de reservas en ReservaHabitacionesXmlWrapper
-                ReservasXmlWrapper reserva2 = new ReservasXmlWrapper
-                {
-                    FechaInicio = dateTimePicker1.Value,
-                    FechaFin = dateTimePicker2.Value,
-                    NIF = formPrincipal.AuthenticatedNIF,
-                    EstadoReserva = "Pendiente",
-                    FechaCreacion = DateTime.Now
-                };
-                // Crear instancia de ReservaHabitacionesXmlWrapper y agregarla a la lista principal
-                reservaHabitaciones.Add(new ReservaHabitacionesXmlWrapper
-                {
-                    TipoPension = GetPensionType(checkBox3, checkBox4),
-                    Habitaciones = new List<HabitacionesXmlWrapper> { habitacion2 },
-                    Reservas = new List<ReservasXmlWrapper> { reserva2 }
-                });
-
-            }
-
-            if (comboBox3.SelectedItem != null)
-            {
-                // Crear instancia de HabitacionesXmlWrapper y agregarla a la lista de habitaciones seleccionadas
-                HabitacionesXmlWrapper habitacion3 = new HabitacionesXmlWrapper
-                {
-                    HabitacionID = ConvertToNumericType(comboBox3.SelectedItem.ToString()),
-                    Tipo = GetPensionType(checkBox5, checkBox6),
-                    NumeroHabitaciones = (int)numericUpDown3.Value
-                };
-                habitacionesSeleccionadas.Add(habitacion3);
-                // Crear instancia de ReservasXmlWrapper y agregarla a la lista de reservas en ReservaHabitacionesXmlWrapper
-                ReservasXmlWrapper reserva3 = new ReservasXmlWrapper
-                {
-                    FechaInicio = dateTimePicker1.Value,
-                    FechaFin = dateTimePicker2.Value,
-                    NIF = formPrincipal.AuthenticatedNIF,
-                    EstadoReserva = "Pendiente",
-                    FechaCreacion = DateTime.Now
-                };
-                // Crear instancia de ReservaHabitacionesXmlWrapper y agregarla a la lista principal
-                reservaHabitaciones.Add(new ReservaHabitacionesXmlWrapper
-                {
-                    TipoPension = GetPensionType(checkBox5, checkBox6),
-                    Habitaciones = new List<HabitacionesXmlWrapper> { habitacion3 },
-                    Reservas = new List<ReservasXmlWrapper> { reserva3 }
-                });
-            }
-
-            // Verificar si dateTimePicker1 y dateTimePicker2 no son nulos antes de acceder a sus propiedades
-            if (dateTimePicker1 != null && dateTimePicker2 != null)
-            {
-
-                ReservasXmlWrapper reservasXmlWrapper = new ReservasXmlWrapper
-                {
-                    ReservaID = 1,
-                    FechaInicio = dateTimePicker1.Value,
-                    FechaFin = dateTimePicker2.Value,
-                    NIF = ((FormPrincipal)this.ParentForm).AuthenticatedNIF, // Este valor debe venir del usuario autenticado
-                    EstadoReserva = "Pendiente",
-                    FechaCreacion = DateTime.Now,
-                    //Habitaciones = habitacionesSeleccionadas
-                };
-                ((FormPrincipal)this.Owner).reservaHabitacionesXML.ReservaHabitaciones.Add(new ReservaHabitacionesXmlWrapper
-                {
-                    TipoPension = GetPensionType(checkBox1, checkBox2),
-                    Habitaciones = new List<HabitacionesXmlWrapper> { habitacionesSeleccionadas[0] },
-                    Reservas = new List<ReservasXmlWrapper> { reservasXmlWrapper }
-                });
-            }
-
-            return ((FormPrincipal)this.Owner).reservaHabitacionesXML;
+            GenerarReservaTemporal();
         }
 
-        private void ComprobarDisponibilidad_Click(object sender, EventArgs e)
+        private bool ComprobarDisponibilidad()
         {
-            // Obtener las fechas seleccionadas
+            // Lógica para comprobar la disponibilidad
             DateTime fechaInicio = dateTimePicker1.Value;
             DateTime fechaFin = dateTimePicker2.Value;
+            List<int> habitacionesSeleccionadas = ObtenerHabitacionesSeleccionadas();
+            List<int> cantidades = ObtenerCantidadesSeleccionadas();
 
-            // Inicializar las listas
-            List<string> tiposHabitacionesSeleccionadas = new List<string>();
-            List<int> cantidades = new List<int>();
+            return reservaController.ComprobarDisponibilidad(fechaInicio, fechaFin, habitacionesSeleccionadas, cantidades);
+        }
 
-            // Verificar cada ComboBox y agregar el tipo de habitación y cantidad si se ha seleccionado algo
+        private List<int> ObtenerHabitacionesSeleccionadas()
+        {
+            List<int> habitacionesSeleccionadas = new List<int>();
             if (comboBox1.SelectedItem != null)
             {
-                tiposHabitacionesSeleccionadas.Add(comboBox1.SelectedItem.ToString());
-                cantidades.Add((int)numericUpDown1.Value);
+                habitacionesSeleccionadas.Add(ConvertToNumericType(comboBox1.SelectedItem.ToString()));
             }
-
             if (comboBox2.SelectedItem != null)
             {
-                tiposHabitacionesSeleccionadas.Add(comboBox2.SelectedItem.ToString());
-                cantidades.Add((int)numericUpDown2.Value);
+                habitacionesSeleccionadas.Add(ConvertToNumericType(comboBox2.SelectedItem.ToString()));
             }
-
             if (comboBox3.SelectedItem != null)
             {
-                tiposHabitacionesSeleccionadas.Add(comboBox3.SelectedItem.ToString());
+                habitacionesSeleccionadas.Add(ConvertToNumericType(comboBox3.SelectedItem.ToString()));
+            }
+            return habitacionesSeleccionadas;
+        }
+
+        private List<int> ObtenerCantidadesSeleccionadas()
+        {
+            List<int> cantidades = new List<int>();
+            if (comboBox1.SelectedItem != null)
+            {
+                cantidades.Add((int)numericUpDown1.Value);
+            }
+            if (comboBox2.SelectedItem != null)
+            {
+                cantidades.Add((int)numericUpDown2.Value);
+            }
+            if (comboBox3.SelectedItem != null)
+            {
                 cantidades.Add((int)numericUpDown3.Value);
             }
+            return cantidades;
+        }
 
-            // Convertir tipos a IDs de habitación (este paso puede variar según su implementación)
-            List<int> habitacionesSeleccionadas = tiposHabitacionesSeleccionadas.Select(tipo => ConvertToNumericType(tipo)).ToList();
+        private void GenerarReservaTemporal()
+        {
+            // Lógica para generar la reserva temporal
+            MessageBox.Show("Reserva temporal creada con éxito.");
+        }
 
-            // Llamar al método para comprobar la disponibilidad
-            bool estaDisponible = reservaController.ComprobarDisponibilidad(fechaInicio, fechaFin, habitacionesSeleccionadas, cantidades);
+        private void BuscarCliente_Click(object sender, EventArgs e)
+        {
+            string nif = DNI.Text;
+            ClienteController clienteController = new ClienteController();
+            var cliente = clienteController.ObtenerClientePorNIF(nif);
 
-            // Mostrar el resultado
-            if (estaDisponible)
+            if (cliente != null)
             {
-                MessageBox.Show("Las habitaciones seleccionadas están disponibles.");
+                AuthenticatedClientNIF = cliente.NIF;
+                ActualizarCamposCliente(cliente);
+                MessageBox.Show("Cliente autenticado con éxito.");
+                btnConfirmar.Enabled = true;
             }
             else
             {
-                MessageBox.Show("Alguna de las habitaciones seleccionadas no está disponible.");
+                MessageBox.Show("Cliente no encontrado. Por favor, verifique el NIF/DNI.");
+                AuthenticatedClientNIF = null;
+                btnConfirmar.Enabled = false;
             }
+        }
 
+        private void ActualizarCamposCliente(Clientes cliente)
+        {
+            TextBoxNombre.Text = cliente.Nombre;
+            textBoxApellido1.Text = cliente.Apellido1;
+            textBoxApellido2.Text = cliente.Apellido2;
+            textBoxTelefono.Text = cliente.Telefono;
+            textBoxEmail.Text = cliente.CorreoElectronico;
         }
 
         private int ConvertToNumericType(string tipoHabitacion)
         {
+            // Convertir tipo de habitación a su respectivo ID numérico
             switch (tipoHabitacion)
             {
-                case "Sencilla":
-                    return 1;
-                case "Doble":
-                    return 2;
-                case "Suite":
-                    return 3;
-                default:
-                    return 0;
+                case "Sencilla": return 1;
+                case "Doble": return 2;
+                case "Suite": return 3;
+                default: return 0;
             }
         }
-
         private string GetPensionType(CheckBox mediaPension, CheckBox pensionCompleta)
         {
             if (mediaPension.Checked)
@@ -395,6 +181,8 @@ namespace HotelSolRepo.Vista
         {
 
         }
+
+
     }
 }
 
