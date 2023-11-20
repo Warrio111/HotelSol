@@ -79,7 +79,7 @@ namespace HotelSolRepo.Controlador
                             NIF = nuevaReserva.NIF,
                             FechaInicio = nuevaReserva.FechaInicio,
                             FechaFin = nuevaReserva.FechaFin,
-                            Estado = nuevaReserva.Estado,
+                            EstadoReserva = nuevaReserva.Estado,
                             FechaCreacion = nuevaReserva.FechaCreacion,  // Utilizar la fecha de creación deserializada
                             EmpleadoID = empleadoID  // Utilizar el ID del empleado proporcionado
                         };
@@ -101,7 +101,7 @@ namespace HotelSolRepo.Controlador
 
                         db.SaveChanges();
 
-                        reserva.Estado = "Confirmada";
+                        reserva.EstadoReserva = "Confirmada";
                         db.SaveChanges();
                     }
 
@@ -165,7 +165,7 @@ namespace HotelSolRepo.Controlador
                 {
                     reservaExistente.FechaInicio = reservaActualizada.FechaInicio;
                     reservaExistente.FechaFin = reservaActualizada.FechaFin;
-                    reservaExistente.Estado = reservaActualizada.Estado;
+                    reservaExistente.EstadoReserva = reservaActualizada.EstadoReserva;
 
 
                     db.SaveChanges();
