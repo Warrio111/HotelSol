@@ -61,11 +61,6 @@
     <Compile Include="Controlador\ClienteController.cs" />
     <Compile Include="Controlador\HabitacionController.cs" />
     <Compile Include="Controlador\ReservaController.cs" />
-    <Compile Include="HotelDBDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HotelDBDataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Modelo\Cliente.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -198,17 +193,6 @@
     <EmbeddedResource Include="Vista\SystemLogin.resx">
       <DependentUpon>SystemLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="HotelDBDataSet1.xsc">
-      <DependentUpon>HotelDBDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="HotelDBDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>HotelDBDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="HotelDBDataSet1.xss">
-      <DependentUpon>HotelDBDataSet1.xsd</DependentUpon>
-    </None>
     <EntityDeploy Include="Modelo\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
