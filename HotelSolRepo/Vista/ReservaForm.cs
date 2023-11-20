@@ -307,6 +307,16 @@ namespace HotelSolRepo.Vista
             else
                 return "Sin Pension";
         }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

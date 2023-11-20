@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -44,6 +45,12 @@
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.DNI = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnBuscaCliente = new System.Windows.Forms.Button();
+            this.Nombre = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -51,14 +58,14 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(71, 80);
+            this.dateTimePicker1.Location = new System.Drawing.Point(71, 232);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(227, 20);
             this.dateTimePicker1.TabIndex = 0;
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(304, 80);
+            this.dateTimePicker2.Location = new System.Drawing.Point(304, 232);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(227, 20);
             this.dateTimePicker2.TabIndex = 1;
@@ -66,7 +73,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(71, 117);
+            this.comboBox1.Location = new System.Drawing.Point(71, 280);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(166, 21);
             this.comboBox1.TabIndex = 2;
@@ -81,7 +88,7 @@
             // 
             // btnConfirmar
             // 
-            this.btnConfirmar.Location = new System.Drawing.Point(71, 215);
+            this.btnConfirmar.Location = new System.Drawing.Point(380, 417);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(151, 35);
             this.btnConfirmar.TabIndex = 6;
@@ -91,7 +98,7 @@
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(71, 144);
+            this.comboBox2.Location = new System.Drawing.Point(71, 307);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(166, 21);
             this.comboBox2.TabIndex = 7;
@@ -99,28 +106,28 @@
             // comboBox3
             // 
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(71, 171);
+            this.comboBox3.Location = new System.Drawing.Point(71, 334);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(166, 21);
             this.comboBox3.TabIndex = 8;
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(260, 118);
+            this.numericUpDown1.Location = new System.Drawing.Point(243, 280);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(38, 20);
             this.numericUpDown1.TabIndex = 9;
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(260, 144);
+            this.numericUpDown2.Location = new System.Drawing.Point(243, 308);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(38, 20);
             this.numericUpDown2.TabIndex = 10;
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(260, 172);
+            this.numericUpDown3.Location = new System.Drawing.Point(243, 335);
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(38, 20);
             this.numericUpDown3.TabIndex = 11;
@@ -129,7 +136,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox1.Location = new System.Drawing.Point(314, 119);
+            this.checkBox1.Location = new System.Drawing.Point(304, 338);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(96, 17);
             this.checkBox1.TabIndex = 12;
@@ -140,7 +147,7 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox2.Location = new System.Drawing.Point(420, 118);
+            this.checkBox2.Location = new System.Drawing.Point(420, 284);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(111, 17);
             this.checkBox2.TabIndex = 13;
@@ -151,7 +158,7 @@
             // 
             this.checkBox3.AutoSize = true;
             this.checkBox3.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox3.Location = new System.Drawing.Point(314, 147);
+            this.checkBox3.Location = new System.Drawing.Point(304, 311);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(96, 17);
             this.checkBox3.TabIndex = 14;
@@ -162,7 +169,7 @@
             // 
             this.checkBox4.AutoSize = true;
             this.checkBox4.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox4.Location = new System.Drawing.Point(420, 148);
+            this.checkBox4.Location = new System.Drawing.Point(420, 338);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(111, 17);
             this.checkBox4.TabIndex = 15;
@@ -173,7 +180,7 @@
             // 
             this.checkBox5.AutoSize = true;
             this.checkBox5.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox5.Location = new System.Drawing.Point(314, 175);
+            this.checkBox5.Location = new System.Drawing.Point(304, 284);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(96, 17);
             this.checkBox5.TabIndex = 16;
@@ -184,12 +191,60 @@
             // 
             this.checkBox6.AutoSize = true;
             this.checkBox6.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox6.Location = new System.Drawing.Point(420, 175);
+            this.checkBox6.Location = new System.Drawing.Point(420, 311);
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(111, 17);
             this.checkBox6.TabIndex = 17;
             this.checkBox6.Text = "Pension Completa";
             this.checkBox6.UseVisualStyleBackColor = false;
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
+            // 
+            // DNI
+            // 
+            this.DNI.Location = new System.Drawing.Point(71, 111);
+            this.DNI.Name = "DNI";
+            this.DNI.Size = new System.Drawing.Size(166, 20);
+            this.DNI.TabIndex = 18;
+            this.DNI.Text = "NIF/DNI CLIENTE";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(64, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(189, 37);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "RESERVAS";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // btnBuscaCliente
+            // 
+            this.btnBuscaCliente.Location = new System.Drawing.Point(456, 108);
+            this.btnBuscaCliente.Name = "btnBuscaCliente";
+            this.btnBuscaCliente.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscaCliente.TabIndex = 22;
+            this.btnBuscaCliente.Text = "Buscar";
+            this.btnBuscaCliente.UseVisualStyleBackColor = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.Location = new System.Drawing.Point(71, 146);
+            this.Nombre.Name = "Nombre";
+            this.Nombre.Size = new System.Drawing.Size(166, 20);
+            this.Nombre.TabIndex = 23;
+            this.Nombre.Text = "NOMBRE";
             // 
             // ReservaForm
             // 
@@ -199,6 +254,10 @@
             this.BackgroundImage = global::HotelSolRepo.Properties.Resources.fondo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(937, 525);
+            this.Controls.Add(this.Nombre);
+            this.Controls.Add(this.btnBuscaCliente);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.DNI);
             this.Controls.Add(this.checkBox6);
             this.Controls.Add(this.checkBox5);
             this.Controls.Add(this.checkBox4);
@@ -243,5 +302,11 @@
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.TextBox DNI;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnBuscaCliente;
+        private System.Windows.Forms.TextBox Nombre;
     }
 }
