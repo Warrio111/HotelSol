@@ -184,9 +184,10 @@ namespace HotelSolRepo.Modelo
         [XmlElement("CheckOutConfirmado", DataType = "dateTime")]
         public Nullable<DateTime> CheckOutConfirmado { get; set; }
 
-        [XmlArray("Habitaciones")]
-        [XmlArrayItem("Habitacion")]
-        public List<HabitacionesXmlWrapper> Habitaciones { get; set; }
+        [XmlArray("Facturas")]
+        [XmlArrayItem("Factura")]
+        public List<FacturasXmlWrapper> Facturas { get; set; }
+
         [XmlArray("Clientes")]
         [XmlArrayItem("Cliente")]
         public List<ClientesXmlWrapper> Clientes { get; set; }
