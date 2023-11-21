@@ -59,27 +59,10 @@ namespace HotelSolRepo.Vista
 
         private void BtnNuevaReserva_Click(object sender, EventArgs e)
         {
-            MostrarFormulario(new ReservaForm(ref exportXmlWrapperType,this));
+            MostrarFormulario(new CrearReservaForm(ref exportXmlWrapperType,this));
         }
 
-        private void BtnExportarXML_Click(object sender, EventArgs e)
-        {
-            if(null!=exportXmlWrapperType)
-            {
-                ExportarForm exportarForm = new ExportarForm(exportXmlWrapperType);
-                
-                if (exportarForm != null)
-                {
-                    exportarForm.ExportarDatosToXml(this.exportCallerForm);
-                }
-                //MostrarFormulario(exportarForm);
-                return;
-            }
-            else
-            {
-                MessageBox.Show("Por favor, seleccione un tipo de archivo.");
-            }
-        }
+       
 
         private void BtnImportarXML_Click(object sender, EventArgs e)
         {

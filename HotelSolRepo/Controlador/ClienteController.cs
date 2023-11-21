@@ -71,11 +71,8 @@ namespace HotelSolRepo.Controlador
                     Contraseña = hashedPassword,
                     DireccionID = nuevaDireccion.DireccionID  // Asignar la nueva dirección al cliente
                 };
-
-                db.Clientes.Add(nuevoCliente);
-                db.SaveChanges();
-
-                return true;
+                return AgregarCliente(nuevoCliente);
+                
             }
         }
 

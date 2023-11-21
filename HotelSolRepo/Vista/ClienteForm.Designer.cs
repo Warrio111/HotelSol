@@ -28,10 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Login = new System.Windows.Forms.Button();
-            this.NIF = new System.Windows.Forms.TextBox();
-            this.Pass = new System.Windows.Forms.TextBox();
-            this.Register = new System.Windows.Forms.Button();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxSurname1 = new System.Windows.Forms.TextBox();
             this.textBoxSurname2 = new System.Windows.Forms.TextBox();
@@ -50,52 +46,15 @@
             this.textBoxProvincia = new System.Windows.Forms.TextBox();
             this.textBoxPais = new System.Windows.Forms.TextBox();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.buttonObtenerClientePorNif = new System.Windows.Forms.Button();
+            this.buttonObtenerHistorialEstanciaCliente = new System.Windows.Forms.Button();
+            this.buttonObtenerClientes = new System.Windows.Forms.Button();
+            this.buttonObtenerClientesConReservas = new System.Windows.Forms.Button();
+            this.buttonRegistrarCliente = new System.Windows.Forms.Button();
+            this.buttonActualizarCliente = new System.Windows.Forms.Button();
+            this.buttonEliminarCliente = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // Login
-            // 
-            this.Login.AccessibleName = "LoginButton";
-            this.Login.Location = new System.Drawing.Point(465, 277);
-            this.Login.Name = "Login";
-            this.Login.Size = new System.Drawing.Size(243, 31);
-            this.Login.TabIndex = 0;
-            this.Login.Text = "Login";
-            this.Login.UseVisualStyleBackColor = true;
-            this.Login.Click += new System.EventHandler(this.loginButton_Click);
-            // 
-            // NIF
-            // 
-            this.NIF.AccessibleName = "NIFText";
-            this.NIF.Location = new System.Drawing.Point(465, 186);
-            this.NIF.Name = "NIF";
-            this.NIF.Size = new System.Drawing.Size(243, 22);
-            this.NIF.TabIndex = 1;
-            this.NIF.Text = "NIF";
-            this.NIF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // Pass
-            // 
-            this.Pass.AccessibleName = "PasswordText";
-            this.Pass.Location = new System.Drawing.Point(465, 237);
-            this.Pass.MaxLength = 255;
-            this.Pass.Name = "Pass";
-            this.Pass.PasswordChar = '*';
-            this.Pass.Size = new System.Drawing.Size(243, 22);
-            this.Pass.TabIndex = 2;
-            this.Pass.Text = "Password";
-            this.Pass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Pass.UseSystemPasswordChar = true;
-            // 
-            // Register
-            // 
-            this.Register.AccessibleName = "RegisterButton";
-            this.Register.Location = new System.Drawing.Point(465, 325);
-            this.Register.Name = "Register";
-            this.Register.Size = new System.Drawing.Size(243, 31);
-            this.Register.TabIndex = 3;
-            this.Register.Text = "Register";
-            this.Register.UseVisualStyleBackColor = true;
-            this.Register.Click += new System.EventHandler(this.registerButton_Click);
             // 
             // textBoxName
             // 
@@ -208,7 +167,7 @@
             this.Registrar.UseVisualStyleBackColor = true;
             this.Registrar.Visible = false;
             this.Registrar.Click += new System.EventHandler(this.registrarButton_Click);
-            // 
+            //
             // BuscadorCliente
             // 
             this.BuscadorCliente.AccessibleName = "buscadorClientetext";
@@ -289,6 +248,7 @@
             this.textBoxPais.Text = "Pais";
             this.textBoxPais.Visible = false;
             // 
+            // 
             // webBrowser1
             // 
             this.webBrowser1.Location = new System.Drawing.Point(73, 96);
@@ -297,6 +257,76 @@
             this.webBrowser1.Size = new System.Drawing.Size(951, 556);
             this.webBrowser1.TabIndex = 22;
             this.webBrowser1.Visible = false;
+            // 
+            // buttonObtenerClientePorNif
+            // 
+            this.buttonObtenerClientePorNif.Location = new System.Drawing.Point(1131, 309);
+            this.buttonObtenerClientePorNif.Name = "buttonObtenerClientePorNif";
+            this.buttonObtenerClientePorNif.Size = new System.Drawing.Size(233, 49);
+            this.buttonObtenerClientePorNif.TabIndex = 23;
+            this.buttonObtenerClientePorNif.Text = "ObtenerClientePorNif";
+            this.buttonObtenerClientePorNif.UseVisualStyleBackColor = true;
+            this.buttonObtenerClientePorNif.Click += new System.EventHandler(this.ObtenerClientePorNif_);
+            // 
+            // buttonObtenerHistorialEstanciaCliente
+            // 
+            this.buttonObtenerHistorialEstanciaCliente.Location = new System.Drawing.Point(1131, 419);
+            this.buttonObtenerHistorialEstanciaCliente.Name = "buttonObtenerHistorialEstanciaCliente";
+            this.buttonObtenerHistorialEstanciaCliente.Size = new System.Drawing.Size(233, 49);
+            this.buttonObtenerHistorialEstanciaCliente.TabIndex = 24;
+            this.buttonObtenerHistorialEstanciaCliente.Text = "ObtenerHistorialEstanciaCliente";
+            this.buttonObtenerHistorialEstanciaCliente.UseVisualStyleBackColor = true;
+            this.buttonObtenerHistorialEstanciaCliente.Click += new System.EventHandler(this.ObtenerHistorialEstanciaCliente_Click);
+            // 
+            // buttonObtenerClientes
+            // 
+            this.buttonObtenerClientes.Location = new System.Drawing.Point(1131, 364);
+            this.buttonObtenerClientes.Name = "buttonObtenerClientes";
+            this.buttonObtenerClientes.Size = new System.Drawing.Size(233, 49);
+            this.buttonObtenerClientes.TabIndex = 24;
+            this.buttonObtenerClientes.Text = "ObtenerClientes";
+            this.buttonObtenerClientes.UseVisualStyleBackColor = true;
+            this.buttonObtenerClientes.Click += new System.EventHandler(this.ObtenerClientes_Click);
+            // 
+            // buttonObtenerClientesConReservas
+            // 
+            this.buttonObtenerClientesConReservas.Location = new System.Drawing.Point(1131, 474);
+            this.buttonObtenerClientesConReservas.Name = "buttonObtenerClientesConReservas";
+            this.buttonObtenerClientesConReservas.Size = new System.Drawing.Size(233, 49);
+            this.buttonObtenerClientesConReservas.TabIndex = 25;
+            this.buttonObtenerClientesConReservas.Text = "ObtenerClientesConReservas";
+            this.buttonObtenerClientesConReservas.UseVisualStyleBackColor = true;
+            this.buttonObtenerClientesConReservas.Click += new System.EventHandler(this.ObtenerClientesConReservas_Click);
+            // 
+            // buttonRegistrarCliente
+            // 
+            this.buttonRegistrarCliente.Location = new System.Drawing.Point(1131, 529);
+            this.buttonRegistrarCliente.Name = "buttonRegistrarCliente";
+            this.buttonRegistrarCliente.Size = new System.Drawing.Size(233, 49);
+            this.buttonRegistrarCliente.TabIndex = 26;
+            this.buttonRegistrarCliente.Text = "RegistrarCliente";
+            this.buttonRegistrarCliente.UseVisualStyleBackColor = true;
+            this.buttonRegistrarCliente.Click += new System.EventHandler(this.RegistrarCliente_Click);
+            // 
+            // buttonActualizarCliente
+            // 
+            this.buttonActualizarCliente.Location = new System.Drawing.Point(1131, 584);
+            this.buttonActualizarCliente.Name = "buttonActualizarCliente";
+            this.buttonActualizarCliente.Size = new System.Drawing.Size(233, 49);
+            this.buttonActualizarCliente.TabIndex = 27;
+            this.buttonActualizarCliente.Text = "ActualizarCliente";
+            this.buttonActualizarCliente.UseVisualStyleBackColor = true;
+            this.buttonActualizarCliente.Click += new System.EventHandler(this.ActualizarCliente_Click);
+            // 
+            // buttonEliminarCliente
+            // 
+            this.buttonEliminarCliente.Location = new System.Drawing.Point(1131, 639);
+            this.buttonEliminarCliente.Name = "buttonEliminarCliente";
+            this.buttonEliminarCliente.Size = new System.Drawing.Size(233, 49);
+            this.buttonEliminarCliente.TabIndex = 28;
+            this.buttonEliminarCliente.Text = "EliminarCliente";
+            this.buttonEliminarCliente.UseVisualStyleBackColor = true;
+            this.buttonEliminarCliente.Click += new System.EventHandler(this.EliminarCliente_Click);
             // 
             // ClienteForm
             // 
@@ -312,6 +342,13 @@
             this.Controls.Add(this.textBoxPuerta);
             this.Controls.Add(this.textBoxCalleNumero);
             this.Controls.Add(this.textBoxCalle);
+            this.Controls.Add(this.buttonEliminarCliente);
+            this.Controls.Add(this.buttonActualizarCliente);
+            this.Controls.Add(this.buttonRegistrarCliente);
+            this.Controls.Add(this.buttonObtenerClientesConReservas);
+            this.Controls.Add(this.buttonObtenerClientes);
+            this.Controls.Add(this.buttonObtenerHistorialEstanciaCliente);
+            this.Controls.Add(this.buttonObtenerClientePorNif);
             this.Controls.Add(this.BuscadorCliente);
             this.Controls.Add(this.Registrar);
             this.Controls.Add(this.textBoxPsswdCheck);
@@ -322,10 +359,6 @@
             this.Controls.Add(this.textBoxSurname2);
             this.Controls.Add(this.textBoxSurname1);
             this.Controls.Add(this.textBoxName);
-            this.Controls.Add(this.Register);
-            this.Controls.Add(this.Pass);
-            this.Controls.Add(this.NIF);
-            this.Controls.Add(this.Login);
             this.Controls.Add(this.webBrowser1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ClienteForm";
@@ -337,11 +370,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button Login;
-        private System.Windows.Forms.TextBox NIF;
-        private System.Windows.Forms.TextBox Pass;
-        private System.Windows.Forms.Button Register;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.TextBox textBoxSurname1;
         private System.Windows.Forms.TextBox textBoxSurname2;
@@ -360,5 +388,12 @@
         private System.Windows.Forms.TextBox textBoxProvincia;
         private System.Windows.Forms.TextBox textBoxPais;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.Button buttonObtenerClientePorNif;
+        private System.Windows.Forms.Button buttonObtenerHistorialEstanciaCliente;
+        private System.Windows.Forms.Button buttonObtenerClientes;
+        private System.Windows.Forms.Button buttonObtenerClientesConReservas;
+        private System.Windows.Forms.Button buttonRegistrarCliente;
+        private System.Windows.Forms.Button buttonActualizarCliente;
+        private System.Windows.Forms.Button buttonEliminarCliente;
     }
 }

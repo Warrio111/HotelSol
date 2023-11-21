@@ -30,7 +30,7 @@ namespace HotelSolRepo.Vista
 
                 MessageBox.Show("Cliente validado.");
                 Type exportXmlWrapperType = typeof(LoginForm);
-                parentForm.MostrarFormulario(new ReservaForm(ref exportXmlWrapperType,parentForm)); // Redirigir al formulario de reserva
+                parentForm.MostrarFormulario(new CrearReservaForm(ref exportXmlWrapperType,parentForm)); // Redirigir al formulario de reserva
                 this.Close(); // Cerrar el formulario de inicio de sesión
             }
             else
