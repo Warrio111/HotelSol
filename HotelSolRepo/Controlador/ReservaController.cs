@@ -65,62 +65,61 @@ namespace HotelSolRepo.Controlador
             }
         }
 
-        // Crear reserva desde datos XML
-        public bool HacerReservaDesdeXml(string xmlReserva, int empleadoID)
+       public bool HacerReservaDesdeXml(string xmlReserva, int empleadoID)
+{
+    try
+    {
+        // Deserializar XML a la clase ReservaHabitacionesXmlListWrapper
+        XmlSerializer serializer = new XmlSerializer(typeof(ReservaHabitacionesXmlListWrapper));
+        ReservaHabitacionesXmlListWrapper reservasHabitacionesListWrapper;
+        using (StringReader reader = new StringReader(xmlReserva))
         {
-            try
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(ReservaHabitacionesXmlWrapper));
-                using (StringReader reader = new StringReader(xmlReserva))
-                {
-                    ReservaHabitacionesXmlWrapper nuevaReserva = (ReservaHabitacionesXmlWrapper)serializer.Deserialize(reader);
-
-                    using (HotelDBEntities db = new HotelDBEntities())
-                    {
-                        foreach (var reservaXml in nuevaReserva.Reservas)
-                        {
-                            Reservas reserva = new Reservas
-                            {
-                                NIF = reservaXml.NIF,  // Utilizar la propiedad NIF de cada reservaXml
-                                FechaInicio = reservaXml.FechaInicio,
-                                FechaFin = reservaXml.FechaFin,
-                                EstadoReserva = reservaXml.EstadoReserva,
-                                FechaCreacion = reservaXml.FechaCreacion,  // Utilizar la fecha de creación deserializada de cada reservaXml
-                                EmpleadoID = empleadoID  // Utilizar el ID del empleado proporcionado
-                            };
-
-                            db.Reservas.Add(reserva);
-                            db.SaveChanges();
-
-                            foreach (var habitacion in nuevaReserva.Habitaciones)
-                            {
-                                ReservaHabitaciones reservaHabitacion = new ReservaHabitaciones
-                                {
-                                    ReservaID = reserva.ReservaID,
-                                    HabitacionID = habitacion.HabitacionID,
-                                    TipoPension = habitacion.Tipo
-                                };
-
-                                db.ReservaHabitaciones.Add(reservaHabitacion);
-                            }
-
-                            db.SaveChanges();
-
-                            reserva.EstadoReserva = "Confirmada";
-                            db.SaveChanges();
-                        }
-                    }
-
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al deserializar la reserva desde XML: " + ex.Message);
-                return false;
-            }
+            reservasHabitacionesListWrapper = (ReservaHabitacionesXmlListWrapper)serializer.Deserialize(reader);
         }
 
+        using (HotelDBEntities db = new HotelDBEntities())
+        {
+            // Procesar cada asociación de reserva con habitación
+            foreach (var reservaHabitacionXml in reservasHabitacionesListWrapper.ReservaHabitaciones)
+            {
+                // Aquí, busca o crea la reserva y la habitación correspondiente en la base de datos
+                // Nota: Es posible que necesites ajustar esta lógica según tu modelo y reglas de negocio
+                Reservas reserva = db.Reservas.Find(reservaHabitacionXml.ReservaID);
+                Habitaciones habitacion = db.Habitaciones.Find(reservaHabitacionXml.HabitacionID);
+
+                if (reserva != null && habitacion != null)
+                {
+                    ReservaHabitaciones nuevaReservaHabitacion = new ReservaHabitaciones
+                    {
+                        ReservaID = reserva.ReservaID,
+                        HabitacionID = habitacion.HabitacionID,
+                        TipoPension = reservaHabitacionXml.TipoPension,
+                        FechaInicio = reservaHabitacionXml.FechaInicio,
+                        FechaFin = reservaHabitacionXml.FechaFin,
+                        Precio = reservaHabitacionXml.Precio
+                    };
+
+                    db.ReservaHabitaciones.Add(nuevaReservaHabitacion);
+                }
+
+                // Confirmar la reserva y guardar los cambios
+                if (reserva != null)
+                {
+                    reserva.EstadoReserva = "Confirmada";
+                }
+            }
+
+            db.SaveChanges(); // Guardar todos los cambios al final
+        }
+
+        return true;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Error al deserializar la reserva desde XML: " + ex.Message);
+        return false;
+    }
+}
 
         // Generar archivo XML para reserva temporal
         public void GenerarReservaTemporalXml(List<ReservaHabitacionesXmlWrapper> reservasTemporales, int empleadoID)
