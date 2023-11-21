@@ -39,12 +39,12 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBoxMediaPensionCombo3 = new System.Windows.Forms.CheckBox();
+            this.checkBoxPensionCompletaCombo1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxMediaPensionCombo2 = new System.Windows.Forms.CheckBox();
+            this.checkBoxPensionCompletaCombo3 = new System.Windows.Forms.CheckBox();
+            this.checkBoxMediaPensionCombo1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxPensionCompletaCombo2 = new System.Windows.Forms.CheckBox();
             this.DNI = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -149,78 +149,77 @@
             this.numericUpDown3.Size = new System.Drawing.Size(38, 20);
             this.numericUpDown3.TabIndex = 11;
             // 
-            // checkBox1
+            // checkBoxMediaPensionCombo3
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(408, 464);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(109, 17);
-            this.checkBox1.TabIndex = 12;
-            this.checkBox1.Text = "Media Pension";
-            this.checkBox1.UseVisualStyleBackColor = false;
+            this.checkBoxMediaPensionCombo3.AutoSize = true;
+            this.checkBoxMediaPensionCombo3.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxMediaPensionCombo3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxMediaPensionCombo3.Location = new System.Drawing.Point(408, 464);
+            this.checkBoxMediaPensionCombo3.Name = "checkBoxMediaPensionCombo3";
+            this.checkBoxMediaPensionCombo3.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxMediaPensionCombo3.TabIndex = 12;
+            this.checkBoxMediaPensionCombo3.Text = "Media Pension";
+            this.checkBoxMediaPensionCombo3.UseVisualStyleBackColor = false;
             // 
-            // checkBox2
+            // checkBoxPensionCompletaCombo1
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox2.Location = new System.Drawing.Point(534, 410);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(127, 17);
-            this.checkBox2.TabIndex = 13;
-            this.checkBox2.Text = "Pension Completa";
-            this.checkBox2.UseVisualStyleBackColor = false;
+            this.checkBoxPensionCompletaCombo1.AutoSize = true;
+            this.checkBoxPensionCompletaCombo1.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxPensionCompletaCombo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxPensionCompletaCombo1.Location = new System.Drawing.Point(534, 410);
+            this.checkBoxPensionCompletaCombo1.Name = "checkBoxPensionCompletaCombo1";
+            this.checkBoxPensionCompletaCombo1.Size = new System.Drawing.Size(127, 17);
+            this.checkBoxPensionCompletaCombo1.TabIndex = 13;
+            this.checkBoxPensionCompletaCombo1.Text = "Pension Completa";
+            this.checkBoxPensionCompletaCombo1.UseVisualStyleBackColor = false;
             // 
-            // checkBox3
+            // checkBoxMediaPensionCombo2
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox3.Location = new System.Drawing.Point(408, 436);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(109, 17);
-            this.checkBox3.TabIndex = 14;
-            this.checkBox3.Text = "Media Pension";
-            this.checkBox3.UseVisualStyleBackColor = false;
+            this.checkBoxMediaPensionCombo2.AutoSize = true;
+            this.checkBoxMediaPensionCombo2.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxMediaPensionCombo2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxMediaPensionCombo2.Location = new System.Drawing.Point(408, 436);
+            this.checkBoxMediaPensionCombo2.Name = "checkBoxMediaPensionCombo2";
+            this.checkBoxMediaPensionCombo2.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxMediaPensionCombo2.TabIndex = 14;
+            this.checkBoxMediaPensionCombo2.Text = "Media Pension";
+            this.checkBoxMediaPensionCombo2.UseVisualStyleBackColor = false;
             // 
-            // checkBox4
+            // checkBoxPensionCompletaCombo3
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox4.Location = new System.Drawing.Point(534, 463);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(127, 17);
-            this.checkBox4.TabIndex = 15;
-            this.checkBox4.Text = "Pension Completa";
-            this.checkBox4.UseVisualStyleBackColor = false;
+            this.checkBoxPensionCompletaCombo3.AutoSize = true;
+            this.checkBoxPensionCompletaCombo3.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxPensionCompletaCombo3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxPensionCompletaCombo3.Location = new System.Drawing.Point(534, 463);
+            this.checkBoxPensionCompletaCombo3.Name = "checkBoxPensionCompletaCombo3";
+            this.checkBoxPensionCompletaCombo3.Size = new System.Drawing.Size(127, 17);
+            this.checkBoxPensionCompletaCombo3.TabIndex = 15;
+            this.checkBoxPensionCompletaCombo3.Text = "Pension Completa";
+            this.checkBoxPensionCompletaCombo3.UseVisualStyleBackColor = false;
             // 
-            // checkBox5
+            // checkBoxMediaPensionCombo1
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox5.Location = new System.Drawing.Point(408, 410);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(109, 17);
-            this.checkBox5.TabIndex = 16;
-            this.checkBox5.Text = "Media Pension";
-            this.checkBox5.UseVisualStyleBackColor = false;
+            this.checkBoxMediaPensionCombo1.AutoSize = true;
+            this.checkBoxMediaPensionCombo1.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxMediaPensionCombo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxMediaPensionCombo1.Location = new System.Drawing.Point(408, 410);
+            this.checkBoxMediaPensionCombo1.Name = "checkBoxMediaPensionCombo1";
+            this.checkBoxMediaPensionCombo1.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxMediaPensionCombo1.TabIndex = 16;
+            this.checkBoxMediaPensionCombo1.Text = "Media Pension";
+            this.checkBoxMediaPensionCombo1.UseVisualStyleBackColor = false;
             // 
-            // checkBox6
+            // checkBoxPensionCompletaCombo2
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox6.Location = new System.Drawing.Point(534, 436);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(127, 17);
-            this.checkBox6.TabIndex = 17;
-            this.checkBox6.Text = "Pension Completa";
-            this.checkBox6.UseVisualStyleBackColor = false;
-            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
+            this.checkBoxPensionCompletaCombo2.AutoSize = true;
+            this.checkBoxPensionCompletaCombo2.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxPensionCompletaCombo2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxPensionCompletaCombo2.Location = new System.Drawing.Point(534, 436);
+            this.checkBoxPensionCompletaCombo2.Name = "checkBoxPensionCompletaCombo2";
+            this.checkBoxPensionCompletaCombo2.Size = new System.Drawing.Size(127, 17);
+            this.checkBoxPensionCompletaCombo2.TabIndex = 17;
+            this.checkBoxPensionCompletaCombo2.Text = "Pension Completa";
+            this.checkBoxPensionCompletaCombo2.UseVisualStyleBackColor = false;
             // 
             // DNI
             // 
@@ -250,7 +249,6 @@
             this.label1.Size = new System.Drawing.Size(287, 37);
             this.label1.TabIndex = 21;
             this.label1.Text = "CREAR RESERVA";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnBuscaCliente
             // 
@@ -276,10 +274,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(68, 339);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 16);
+            this.label2.Size = new System.Drawing.Size(75, 16);
             this.label2.TabIndex = 24;
             this.label2.Text = "LLEGADA";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -288,10 +285,9 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(390, 339);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 16);
+            this.label3.Size = new System.Drawing.Size(60, 16);
             this.label3.TabIndex = 25;
             this.label3.Text = "SALIDA";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -300,7 +296,7 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(68, 391);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(130, 16);
+            this.label4.Size = new System.Drawing.Size(118, 16);
             this.label4.TabIndex = 26;
             this.label4.Text = "HABITACIONES";
             // 
@@ -418,12 +414,12 @@
             this.Controls.Add(this.btnBuscaCliente);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DNI);
-            this.Controls.Add(this.checkBox6);
-            this.Controls.Add(this.checkBox5);
-            this.Controls.Add(this.checkBox4);
-            this.Controls.Add(this.checkBox3);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.checkBoxPensionCompletaCombo2);
+            this.Controls.Add(this.checkBoxMediaPensionCombo1);
+            this.Controls.Add(this.checkBoxPensionCompletaCombo3);
+            this.Controls.Add(this.checkBoxMediaPensionCombo2);
+            this.Controls.Add(this.checkBoxPensionCompletaCombo1);
+            this.Controls.Add(this.checkBoxMediaPensionCombo3);
             this.Controls.Add(this.numericUpDown3);
             this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.numericUpDown1);
@@ -456,12 +452,12 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox checkBoxMediaPensionCombo3;
+        private System.Windows.Forms.CheckBox checkBoxPensionCompletaCombo1;
+        private System.Windows.Forms.CheckBox checkBoxMediaPensionCombo2;
+        private System.Windows.Forms.CheckBox checkBoxPensionCompletaCombo3;
+        private System.Windows.Forms.CheckBox checkBoxMediaPensionCombo1;
+        private System.Windows.Forms.CheckBox checkBoxPensionCompletaCombo2;
         private System.Windows.Forms.TextBox DNI;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
