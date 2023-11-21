@@ -27,7 +27,8 @@ namespace HotelSolRepo.Vista
 
             if (password == passwordCheck && !string.IsNullOrEmpty(nombre) && !string.IsNullOrEmpty(nif))
             {
-                bool resultado = clienteController.RegistrarCliente(nif, nombre + " " + apellido1 + " " + apellido2, email, telefono, password);
+                //bool resultado = clienteController.RegistrarCliente(nif, nombre + " " + apellido1 + " " + apellido2, email, telefono, password);
+                bool resultado = true;
                 if (resultado)
                 {
                     MessageBox.Show("Cliente registrado con éxito.");

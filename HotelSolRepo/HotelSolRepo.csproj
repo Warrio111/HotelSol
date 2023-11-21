@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -59,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controlador\ClienteController.cs" />
+    <Compile Include="Controlador\DireccionController.cs" />
     <Compile Include="Controlador\HabitacionController.cs" />
     <Compile Include="Controlador\ReservaController.cs" />
     <Compile Include="Modelo\Clientes.cs">
@@ -112,6 +114,12 @@
     </Compile>
     <Compile Include="Modelo\TareasEmpleados.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\ClienteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\ClienteForm.Designer.cs">
+      <DependentUpon>ClienteForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Vista\ServiciosExtraForm.cs">
       <SubType>Form</SubType>
@@ -173,6 +181,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Vista\ClienteForm.resx">
+      <DependentUpon>ClienteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vista\ExportarForm.resx">
       <DependentUpon>ExportarForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -230,6 +241,7 @@
     </Content>
     <None Include="Resources\logo.jpeg" />
     <None Include="Resources\fondo.jpeg" />
+    <Content Include="Vista\ClientForm.xslt" />
     <Content Include="Vista\ReservaTemplate.xslt">
       <SubType>Designer</SubType>
     </Content>

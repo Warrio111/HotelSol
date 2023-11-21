@@ -53,6 +53,7 @@ namespace HotelSolRepo.Vista
         private void ConectarControladoresEventos()
         {
             btnNuevaReserva.Click += BtnNuevaReserva_Click;
+            btnGestionClientes.Click += BtnGestionClientes_Click;
       
         }
 
@@ -131,11 +132,6 @@ namespace HotelSolRepo.Vista
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnNuevaReserva_Click_1(object sender, EventArgs e)
         {
 
@@ -144,6 +140,11 @@ namespace HotelSolRepo.Vista
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void BtnGestionClientes_Click(object sender, EventArgs e)
+        {
+            MostrarFormulario(new ClienteForm(ref exportXmlWrapperType, this));
         }
     }
 }

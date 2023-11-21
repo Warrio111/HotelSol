@@ -60,6 +60,10 @@ namespace HotelSolRepo.Modelo
 
         [XmlElement("Nombre")]
         public string Nombre { get; set; }
+        [XmlElement("PrimerApellido")]
+        public string PrimerApellido { get; set; }
+        [XmlElement("SegundoApellido")]
+        public string SegundoApellido { get; set; }
 
         [XmlElement("CorreoElectronico")]
         public string CorreoElectronico { get; set; }
@@ -80,6 +84,37 @@ namespace HotelSolRepo.Modelo
         [XmlArray("Facturas")]
         [XmlArrayItem("Factura")]
         public List<FacturasXmlWrapper> Facturas { get; set; }
+        [XmlArray("Direcciones")]
+        [XmlArrayItem("Direccion")]
+        public List<DireccionesXmlWrapper> Direcciones { get; set; }
+    }
+
+    [XmlRoot("DireccionesList")]
+    public class DireccionesListXmlWrapper
+    {
+        [XmlElement("Direcciones")]
+        public List<DireccionesXmlWrapper> Direcciones { get; set; }
+    }
+
+    [Serializable]
+    public class DireccionesXmlWrapper
+    {
+        [XmlElement("DireccionID")]
+        public int DireccionID { get; set; }
+        [XmlElement("Calle")]
+        public string Calle { get; set; }
+        [XmlElement("Numero")]
+        public string Numero { get; set; }
+        [XmlElement("Puerta")]
+        public string Puerta { get; set; }
+        [XmlElement("Piso")]
+        public string Piso { get; set; }
+        [XmlElement("CodigoPostal")]
+        public string CodigoPostal { get; set; }
+        [XmlElement("Provincia")]
+        public string Provincia { get; set; }
+        [XmlElement("Pais")]
+        public string Pais { get; set; }
     }
 
     [XmlRoot("EmpleadosList")]
