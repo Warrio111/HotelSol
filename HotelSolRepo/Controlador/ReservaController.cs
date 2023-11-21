@@ -70,11 +70,11 @@ namespace HotelSolRepo.Controlador
     try
     {
         // Deserializar XML a la clase ReservaHabitacionesXmlListWrapper
-        XmlSerializer serializer = new XmlSerializer(typeof(ReservaHabitacionesXmlListWrapper));
-        ReservaHabitacionesXmlListWrapper reservasHabitacionesListWrapper;
+        XmlSerializer serializer = new XmlSerializer(typeof(ReservaHabitacionesListXmlWrapper));
+        ReservaHabitacionesListXmlWrapper reservasHabitacionesListWrapper;
         using (StringReader reader = new StringReader(xmlReserva))
         {
-            reservasHabitacionesListWrapper = (ReservaHabitacionesXmlListWrapper)serializer.Deserialize(reader);
+            reservasHabitacionesListWrapper = (ReservaHabitacionesListXmlWrapper)serializer.Deserialize(reader);
         }
 
         using (HotelDBEntities db = new HotelDBEntities())
@@ -120,7 +120,7 @@ namespace HotelSolRepo.Controlador
         return false;
     }
 }
-
+        /*
         // Generar archivo XML para reserva temporal
         public void GenerarReservaTemporalXml(List<ReservaHabitacionesXmlWrapper> reservasTemporales, int empleadoID)
         {
@@ -148,7 +148,7 @@ namespace HotelSolRepo.Controlador
                 Console.WriteLine("Error al generar la reserva temporal en XML: " + ex.Message);
             }
         }
-
+        */
         public void ConfirmarReserva(int empleadoID)
         {
             if (File.Exists(rutaArchivoXml))

@@ -274,73 +274,73 @@ namespace HotelSolRepo.Modelo
         [XmlElement("Precio")]
         public Nullable<double> Precio { get; set; }
     }
-    public class DireccionesXmlListWrapper
+    public class DireccionesListXmlWrapper
     {
         [XmlElement("Direccion")]
         public List<DireccionesXmlWrapper> Direcciones { get; set; }
     }
 
-    public class ClientesXmlListWrapper
+    public class ClientesListXmlWrapper         
     {
         [XmlElement("Cliente")]
         public List<ClientesXmlWrapper> Clientes { get; set; }
     }
 
-    public class EmpleadosXmlListWrapper
+    public class EmpleadosListXmlWrapper
     {
         [XmlElement("Empleado")]
         public List<EmpleadosXmlWrapper> Empleados { get; set; }
     }
 
-    public class HabitacionesXmlListWrapper
+    public class HabitacionesListXmlWrapper
     {
         [XmlElement("Habitacion")]
         public List<HabitacionesXmlWrapper> Habitaciones { get; set; }
     }
 
-    public class HabitacionesDoblesXmlListWrapper
+    public class HabitacionesDoblesListXmlWrapper
     {
         [XmlElement("HabitacionDoble")]
         public List<HabitacionesDoblesXmlWrapper> HabitacionesDobles { get; set; }
     }
 
-    public class HabitacionesSencillasXmlListWrapper
+    public class HabitacionesSencillasListXmlWrapper
     {
         [XmlElement("HabitacionSencilla")]
         public List<HabitacionesSencillasXmlWrapper> HabitacionesSencillas { get; set; }
     }
 
-    public class HabitacionesSuiteXmlListWrapper
+    public class HabitacionesSuiteListXmlWrapper
     {
         [XmlElement("HabitacionSuite")]
         public List<HabitacionesSuiteXmlWrapper> HabitacionesSuite { get; set; }
     }
 
-    public class FacturasXmlListWrapper
+    public class FacturasListXmlWrapper
     {
         [XmlElement("Factura")]
         public List<FacturasXmlWrapper> Facturas { get; set; }
     }
 
-    public class ReservasXmlListWrapper
+    public class ReservasListXmlWrapper
     {
         [XmlElement("Reserva")]
         public List<ReservasXmlWrapper> Reservas { get; set; }
     }
 
-    public class ProgramasFidelizacionXmlListWrapper
+    public class ProgramasFidelizacionListXmlWrapper
     {
         [XmlElement("ProgramaFidelizacion")]
         public List<ProgramasFidelizacionXmlWrapper> ProgramasFidelizacion { get; set; }
     }
 
-    public class TareasEmpleadosXmlListWrapper
+    public class TareasEmpleadosListXmlWrapper
     {
         [XmlElement("TareaEmpleado")]
         public List<TareasEmpleadosXmlWrapper> TareasEmpleados { get; set; }
     }
 
-    public class ReservaHabitacionesXmlListWrapper
+    public class ReservaHabitacionesListXmlWrapper
     {
         [XmlElement("ReservaHabitacion")]
         public List<ReservaHabitacionesXmlWrapper> ReservaHabitaciones { get; set; }
