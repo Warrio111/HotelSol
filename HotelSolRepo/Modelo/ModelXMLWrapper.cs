@@ -359,5 +359,14 @@ namespace HotelSolRepo.Modelo
         [XmlElement("ReservaHabitacion")]
         public List<ReservaHabitacionesXmlWrapper> ReservaHabitaciones { get; set; }
     }
+    [Serializable]
+    public class ReservaCompletaXmlWrapper
+    {
+        public ClientesXmlWrapper Cliente { get; set; }
+        public DireccionesXmlWrapper Direccion { get; set; }
+        public List<ReservaHabitacionesXmlWrapper> ReservaHabitaciones { get; set; }
+        public ReservasXmlWrapper Reserva { get; set; }
+    }
+
 
 }

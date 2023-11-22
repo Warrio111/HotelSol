@@ -12,7 +12,7 @@ namespace HotelSolRepo.Controlador
     public class ReservaController
     {
         //private string rutaArchivoXml = @"E:\backup\Academico\UOC\FP\Tercer Semestre\Técnicas de persistencia de datos con .NET\HotelSolRepo\HotelSolRepo\XMLs\reservas.xml";
-        private string rutaArchivoXml = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "XMLs", "reservas.xml");
+        private string rutaArchivoXml = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Vista", "reserva_temporal.xml");
         private Reservas reserva;
 
 
