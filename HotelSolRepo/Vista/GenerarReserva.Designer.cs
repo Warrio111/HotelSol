@@ -34,7 +34,7 @@
             // 
             // btnConfirmar
             // 
-            this.btnConfirmar.Location = new System.Drawing.Point(937, 589);
+            this.btnConfirmar.Location = new System.Drawing.Point(864, 250);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(147, 48);
             this.btnConfirmar.TabIndex = 1;
@@ -43,10 +43,10 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.Location = new System.Drawing.Point(24, 12);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(845, 648);
+            this.webBrowser1.Size = new System.Drawing.Size(756, 508);
             this.webBrowser1.TabIndex = 2;
             // 
             // GenerarReserva
@@ -55,7 +55,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::HotelSolRepo.Properties.Resources.fondo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1140, 677);
+            this.ClientSize = new System.Drawing.Size(1066, 585);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.btnConfirmar);
             this.Name = "GenerarReserva";
