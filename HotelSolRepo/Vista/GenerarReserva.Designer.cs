@@ -46,19 +46,19 @@
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(890, 647);
+            this.webBrowser1.Size = new System.Drawing.Size(845, 648);
             this.webBrowser1.TabIndex = 2;
             // 
-            // ServiciosExtraForm
+            // GenerarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::HotelSolRepo.Properties.Resources.fondo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1162, 659);
+            this.ClientSize = new System.Drawing.Size(1140, 677);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.btnConfirmar);
-            this.Name = "ServiciosExtraForm";
+            this.Name = "GenerarReserva";
             this.Text = "ConfirmarReservaForm";
             this.ResumeLayout(false);
 

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using System.IO;
 using System.Xml.Serialization;
+using System.Diagnostics;
 
 namespace HotelSolRepo.Vista
 {
@@ -265,19 +266,24 @@ namespace HotelSolRepo.Vista
                 }
             };
 
-            // Serializar a XML y guardar en archivo
-            XmlSerializer serializer = new XmlSerializer(typeof(ReservaCompletaXmlWrapper));
-            StringWriter writer = new StringWriter();
-            serializer.Serialize(writer, reservaCompleta);
-            string xmlReserva = writer.ToString();
-             
+             // Serializar a XML y guardar en archivo
+             XmlSerializer serializer = new XmlSerializer(typeof(ReservaCompletaXmlWrapper));
+             StringWriter writer = new StringWriter();
+             serializer.Serialize(writer, reservaCompleta);
+             string xmlReserva = writer.ToString();
+
+            // Para propósitos de depuración: Imprimir el XML en la consola (o en donde prefieras)
+            Debug.WriteLine(xmlReserva);
+
+
             string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Vista", "reserva_temporal.xml");
-            File.Create(rutaArchivo).Close();
-            File.WriteAllText(rutaArchivo, xmlReserva);
+             File.Create(rutaArchivo).Close();
+             File.WriteAllText(rutaArchivo, xmlReserva);
 
-            MessageBox.Show("Reserva completa creada y guardada en " + rutaArchivo);
+             MessageBox.Show("Reserva completa creada y guardada en " + rutaArchivo);
+
         }
-
+            
 
         private int ConvertToNumericType(string tipoHabitacion)
         {

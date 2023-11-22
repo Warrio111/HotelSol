@@ -83,7 +83,6 @@
     <Compile Include="Controlador\HabitacionController.cs" />
     <Compile Include="Controlador\ProgramaFidelizacionController.cs" />
     <Compile Include="Controlador\ReservaController.cs" />
-    <Compile Include="Controlador\XmlController.cs" />
     <Compile Include="Modelo\Clientes.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

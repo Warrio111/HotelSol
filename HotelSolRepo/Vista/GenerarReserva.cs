@@ -9,8 +9,8 @@ namespace HotelSolRepo.Modelo
 {
     public partial class GenerarReserva : Form
     {
-        private string rutaArchivoXml = @"tu/ruta/a/reserva_temporal.xml"; // Ruta al archivo XML de reserva
-        private string rutaXslt = @"tu/ruta/a/ReservaTemplate.xslt"; // Ruta al archivo XSLT
+        private string rutaArchivoXml = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Vista", "reserva_temporal.xml");
+        private string rutaXslt = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Vista", "ReservaTemplate.xslt");
 
         public GenerarReserva()
         {
