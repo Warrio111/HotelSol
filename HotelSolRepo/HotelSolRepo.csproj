@@ -142,9 +142,9 @@
     <Compile Include="Vista\ClienteForm.Designer.cs">
       <DependentUpon>ClienteForm.cs</DependentUpon>
     </Compile>
-	  <Compile Include="Vista\GenerarReserva.cs">
-		  <SubType>Form</SubType>
-	  </Compile>
+    <Compile Include="Vista\GenerarReserva.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Vista\GenerarReserva.Designer.cs">
       <DependentUpon>GenerarReserva.cs</DependentUpon>
     </Compile>
@@ -161,18 +161,6 @@
     </Compile>
     <Compile Include="Vista\ImportarForm.Designer.cs">
       <DependentUpon>ImportarForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vista\LoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vista\LoginForm.Designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vista\RegisterForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vista\RegisterForm.Designer.cs">
-      <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Vista\CrearReservaForm.cs">
       <SubType>Form</SubType>
@@ -204,12 +192,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\ImportarForm.resx">
       <DependentUpon>ImportarForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Vista\LoginForm.resx">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Vista\RegisterForm.resx">
-      <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\CrearReservaForm.resx">
       <DependentUpon>CrearReservaForm.cs</DependentUpon>
@@ -262,8 +244,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <None Include="Resources\logo.jpeg" />
-    <None Include="Resources\fondo.jpeg" />
     <Content Include="Vista\ClientForm.xslt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
