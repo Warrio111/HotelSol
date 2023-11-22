@@ -98,7 +98,11 @@ namespace HotelSolRepo.Controlador
                     clienteExistente.Nombre = clienteActualizado.Nombre;
                     clienteExistente.CorreoElectronico = clienteActualizado.CorreoElectronico;
                     clienteExistente.Telefono = clienteActualizado.Telefono;
-                    // Actualizar otros campos aquí, pendiente de implementar...
+                    clienteExistente.DireccionID = clienteActualizado.DireccionID;
+                    clienteExistente.Contraseña = HashPassword(clienteActualizado.Contraseña);
+                    clienteExistente.PrimerApellido = clienteActualizado.PrimerApellido;
+                    clienteExistente.SegundoApellido = clienteActualizado.SegundoApellido;
+                    clienteExistente.NIF = clienteActualizado.NIF;
                     db.SaveChanges();
                     return true;
                 }

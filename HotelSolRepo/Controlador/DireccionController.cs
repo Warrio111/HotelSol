@@ -35,18 +35,33 @@ namespace HotelSolRepo.Controlador
         }
         public bool ModificarDireccion(int direccionID, string calle, string numero, string puerta, string piso, string codigoPostal, string provincia, string pais)
         {
+            
+
             using (HotelDBEntities db = new HotelDBEntities())
             {
-                var direccion = db.Direcciones.FirstOrDefault(d => d.DireccionID == direccionID);
-                if (direccion != null)
+                Direcciones direcciones = new Direcciones
                 {
-                    direccion.Calle = calle;
-                    direccion.Numero = numero;
-                    direccion.Puerta = puerta;
-                    direccion.Piso = piso;
-                    direccion.CodigoPostal = codigoPostal;
-                    direccion.Provincia = provincia;
-                    direccion.Pais = pais;
+                    DireccionID = direccionID,
+                    Calle = calle,
+                    Numero = numero,
+                    Puerta = puerta,
+                    Piso = piso,
+                    CodigoPostal = codigoPostal,
+                    Provincia = provincia,
+                    Pais = pais
+                };
+                if (direcciones != null)
+                {
+                    var direccionExistente = db.Direcciones.FirstOrDefault(d => d.DireccionID == direccionID);
+                    direccionExistente.DireccionID = direcciones.DireccionID;
+                    direccionExistente.Calle = direcciones.Calle;
+                    direccionExistente.Numero = direcciones.Numero;
+                    direccionExistente.Puerta = direcciones.Puerta;
+                    direccionExistente.Piso = direcciones.Piso;
+                    direccionExistente.CodigoPostal = direcciones.CodigoPostal;
+                    direccionExistente.Provincia = direcciones.Provincia;
+                    direccionExistente.Pais = direcciones.Pais;
+
                     db.SaveChanges();
                     return true;
                 }

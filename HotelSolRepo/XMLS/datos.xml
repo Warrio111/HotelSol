@@ -1,49 +1,29 @@
 <?xml version="1.0"?>
-<ClientesListXmlWrapper xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Clientes>
-    <NIF>123456789</NIF>
-    <Nombre>Pablo</Nombre>
-    <PrimerApellido>Rodriguez</PrimerApellido>
-    <SegundoApellido>UOC</SegundoApellido>
-    <DireccionID>0</DireccionID>
-    <CorreoElectronico>pablo@gmail.com</CorreoElectronico>
-    <Telefono>123456789</Telefono>
-    <ProgramaFidelizacionID xsi:nil="true" />
-    <Contraseña>03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4</Contraseña>
-    <Direcciones>
-      <Direccion>
-        <DireccionID>2</DireccionID>
-        <Calle>Jaume</Calle>
-        <Numero>206</Numero>
-        <Puerta>1</Puerta>
-        <Piso>1</Piso>
-        <CodigoPostal>08820</CodigoPostal>
-        <Provincia>Barcelona</Provincia>
-        <Pais>Espana</Pais>
-      </Direccion>
-    </Direcciones>
-  </Clientes>
-  <Clientes>
+<ReservasListXmlWrapper xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Reserva>
+    <ReservaID>3</ReservaID>
     <NIF>47196639H</NIF>
-    <Nombre>Robert</Nombre>
-    <PrimerApellido>Benavides</PrimerApellido>
-    <SegundoApellido>Gomez</SegundoApellido>
-    <DireccionID>0</DireccionID>
-    <CorreoElectronico>robert@gmail.com</CorreoElectronico>
-    <Telefono>123456789</Telefono>
-    <ProgramaFidelizacionID xsi:nil="true" />
-    <Contraseña>03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4</Contraseña>
-    <Direcciones>
-      <Direccion>
-        <DireccionID>1</DireccionID>
-        <Calle>Igualada</Calle>
-        <Numero>15</Numero>
-        <Puerta>1</Puerta>
-        <Piso>1</Piso>
-        <CodigoPostal>08820</CodigoPostal>
-        <Provincia>Barcelona</Provincia>
-        <Pais>Spain</Pais>
-      </Direccion>
-    </Direcciones>
-  </Clientes>
-</ClientesListXmlWrapper>
+    <EmpleadoID>1</EmpleadoID>
+    <FechaInicio>2023-01-22</FechaInicio>
+    <FechaFin>2023-01-25</FechaFin>
+    <EstadoReserva>Confirmada</EstadoReserva>
+    <CheckInConfirmado>2023-01-22T00:00:00</CheckInConfirmado>
+    <CheckOutConfirmado>2023-01-25T00:00:00</CheckOutConfirmado>
+    <FacturaID>1</FacturaID>
+    <FechaCreacion>2023-01-01T12:00:00</FechaCreacion>
+    <TipoReserva>Simple</TipoReserva>
+  </Reserva>
+  <Reserva>
+    <ReservaID>5</ReservaID>
+    <NIF>47196639H</NIF>
+    <EmpleadoID>1</EmpleadoID>
+    <FechaInicio>2023-01-23</FechaInicio>
+    <FechaFin>2023-01-26</FechaFin>
+    <EstadoReserva>Confirmada</EstadoReserva>
+    <CheckInConfirmado>2023-01-23T00:00:00</CheckInConfirmado>
+    <CheckOutConfirmado>2023-01-26T00:00:00</CheckOutConfirmado>
+    <FacturaID>1</FacturaID>
+    <FechaCreacion>2023-01-01T12:00:00</FechaCreacion>
+    <TipoReserva>Simple</TipoReserva>
+  </Reserva>
+</ReservasListXmlWrapper>

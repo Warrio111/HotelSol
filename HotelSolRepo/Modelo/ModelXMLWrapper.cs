@@ -63,6 +63,16 @@ namespace HotelSolRepo.Modelo
         [XmlElement("Contraseña")]
         public string Contraseña { get; set; }
 
+        [XmlArray("ProgramasFidelizacion")]
+        [XmlArrayItem("ProgramaFidelizacion")]
+        public List<ProgramasFidelizacionXmlWrapper> ProgramasFidelizacion { get; set; }
+        [XmlArray("Reservas")]
+        [XmlArrayItem("Reserva")]
+        public List<ReservasXmlWrapper> Reservas { get; set; }
+        [XmlArray("Facturas")]
+        [XmlArrayItem("Factura")]
+        public List<FacturasXmlWrapper> Facturas { get; set; }
+
         [XmlArray("Direcciones")]
         [XmlArrayItem("Direccion")]
         public List<DireccionesXmlWrapper> Direcciones { get; set; }

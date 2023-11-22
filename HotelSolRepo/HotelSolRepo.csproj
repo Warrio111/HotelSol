@@ -79,7 +79,9 @@
   <ItemGroup>
     <Compile Include="Controlador\ClienteController.cs" />
     <Compile Include="Controlador\DireccionController.cs" />
+    <Compile Include="Controlador\FacturaController.cs" />
     <Compile Include="Controlador\HabitacionController.cs" />
+    <Compile Include="Controlador\ProgramaFidelizacionController.cs" />
     <Compile Include="Controlador\ReservaController.cs" />
     <Compile Include="Controlador\XmlController.cs" />
     <Compile Include="Modelo\Clientes.cs">
@@ -238,7 +240,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Vista\ClientListReservaForm.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Vista\ClientListForm.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vista\ClientReservaForm.xslt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="XMLS\datos.xml" />
@@ -258,6 +266,7 @@
     <None Include="Resources\fondo.jpeg" />
     <Content Include="Vista\ClientForm.xslt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Vista\ReservaTemplate.xslt">
       <SubType>Designer</SubType>
