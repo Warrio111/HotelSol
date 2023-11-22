@@ -1,4 +1,6 @@
-﻿using HotelSolRepo.Controlador;
+﻿// NO SE AJUSTA AL MVC PERO NO ME DA TIEMPO A REFACTORIZAR. 
+
+using HotelSolRepo.Controlador;
 using HotelSolRepo.Modelo;
 using System;
 using System.Windows.Forms;
@@ -14,15 +16,18 @@ namespace HotelSolRepo.Vista
     {
         private readonly ReservaController reservaController = new ReservaController();
         private readonly ClienteController clienteController = new ClienteController();
-        private readonly HabitacionController habitacionController = new HabitacionController();
+        //private readonly HabitacionController habitacionController = new HabitacionController();
         private readonly HotelDBEntities db = new HotelDBEntities();
         private string AuthenticatedClientNIF { get; set; }
         private int AuthenticatedEmployeeID { get; set; }
+
+   
 
         public CrearReservaForm(ref Type exportXmlWrapperType, Form formularioPadre)
         {
             InitializeComponent();
             SuscribirEventos();
+           
             exportXmlWrapperType = typeof(ReservasListXmlWrapper);
             this.Owner = formularioPadre;
             EstablecerInteraccionConFormPrincipal();
@@ -85,7 +90,23 @@ namespace HotelSolRepo.Vista
             // Llamada al método CrearReservaTemporal
             CrearReservaTemporal();
 
+            // Abrir el formulario GenerarReserva
+            AbrirGenerarReserva();
         }
+
+        private void AbrirGenerarReserva()
+        {
+            if (this.Owner is FormPrincipal principalForm)
+            {
+                GenerarReserva generarReservaForm = new GenerarReserva();
+                principalForm.MostrarFormulario(generarReservaForm);
+            }
+            else
+            {
+                MessageBox.Show("Error: No se pudo abrir el formulario GenerarReserva.");
+            }
+        }
+
 
         private bool EsClienteNoAutenticado()
         {

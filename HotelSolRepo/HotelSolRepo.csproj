@@ -114,11 +114,11 @@
     <Compile Include="Modelo\TareasEmpleados.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Vista\ServiciosExtraForm.cs">
+    <Compile Include="Vista\GenerarReserva.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vista\ServiciosExtraForm.Designer.cs">
-      <DependentUpon>ServiciosExtraForm.cs</DependentUpon>
+    <Compile Include="Vista\GenerarReserva.Designer.cs">
+      <DependentUpon>GenerarReserva.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,8 +183,8 @@
     <EmbeddedResource Include="Vista\CrearReservaForm.resx">
       <DependentUpon>CrearReservaForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vista\ServiciosExtraForm.resx">
-      <DependentUpon>ServiciosExtraForm.cs</DependentUpon>
+    <EmbeddedResource Include="Vista\GenerarReserva.resx">
+      <DependentUpon>GenerarReserva.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\SystemLogin.resx">
       <DependentUpon>SystemLogin.cs</DependentUpon>
