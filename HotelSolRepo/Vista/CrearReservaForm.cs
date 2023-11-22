@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace HotelSolRepo.Vista
 {
@@ -17,7 +19,6 @@ namespace HotelSolRepo.Vista
         private string AuthenticatedClientNIF { get; set; }
         private int AuthenticatedEmployeeID { get; set; }
 
-        // Constructor que recibe el tipo de exportación XML y el formulario principal
         public CrearReservaForm(ref Type exportXmlWrapperType, Form formularioPadre)
         {
             InitializeComponent();
@@ -26,23 +27,19 @@ namespace HotelSolRepo.Vista
             this.Owner = formularioPadre;
             EstablecerInteraccionConFormPrincipal();
 
-            // Establecer el ID del empleado autenticado desde el formulario principal
             if (Owner is FormPrincipal principal)
             {
                 AuthenticatedEmployeeID = principal.AuthenticatedEmployeeID;
             }
         }
 
-        // Método para suscribir eventos a los controles
         private void SuscribirEventos()
         {
             this.Load += new EventHandler(ReservaForm_Load);
             btnConfirmar.Click += new EventHandler(ValidarYCrearReserva);
             btnBuscaCliente.Click += new EventHandler(BuscarCliente_Click);
-            // Aquí puedes añadir otros suscriptores a eventos según sea necesario
         }
 
-        // Método para establecer la interacción con FormPrincipal
         private void EstablecerInteraccionConFormPrincipal()
         {
             if (this.Owner is FormPrincipal formPrincipal)
@@ -51,13 +48,11 @@ namespace HotelSolRepo.Vista
             }
         }
 
-        // Evento Load del formulario
         private void ReservaForm_Load(object sender, EventArgs e)
         {
             CargarTiposDeHabitacion();
         }
 
-        // Método para cargar tipos de habitaciones en los ComboBox
         private void CargarTiposDeHabitacion()
         {
             var tiposHabitaciones = db.Habitaciones.Select(h => h.Tipo).Distinct().ToList();
@@ -69,7 +64,6 @@ namespace HotelSolRepo.Vista
             }
         }
 
-        // Método para validar y crear la reserva
         private void ValidarYCrearReserva(object sender, EventArgs e)
         {
             if (EsClienteNoAutenticado())
@@ -84,23 +78,25 @@ namespace HotelSolRepo.Vista
                 return;
             }
 
+            string pensionHabitacion1 = GetPensionType(checkBoxMediaPensionCombo1, checkBoxPensionCompletaCombo1);
+            string pensionHabitacion2 = GetPensionType(checkBoxMediaPensionCombo2, checkBoxPensionCompletaCombo2);
+            string pensionHabitacion3 = GetPensionType(checkBoxMediaPensionCombo3, checkBoxPensionCompletaCombo3);
+
+            // Llamada al método CrearReservaTemporal
+            CrearReservaTemporal();
+
         }
 
-        // Método para verificar si un cliente está autenticado
         private bool EsClienteNoAutenticado()
         {
-            bool noAutenticado = string.IsNullOrEmpty(AuthenticatedClientNIF);
-            btnConfirmar.Enabled = !noAutenticado;
-            return noAutenticado;
+            return string.IsNullOrEmpty(AuthenticatedClientNIF);
         }
 
-        // Método para mostrar mensajes al usuario
         private void MostrarMensaje(string mensaje)
         {
             MessageBox.Show(mensaje);
         }
 
-        // Método para comprobar la disponibilidad de las habitaciones
         private bool ComprobarDisponibilidad()
         {
             DateTime fechaInicio = dateTimePicker1.Value;
@@ -111,49 +107,27 @@ namespace HotelSolRepo.Vista
             return reservaController.ComprobarDisponibilidad(fechaInicio, fechaFin, habitacionesSeleccionadas, cantidades);
         }
 
-        // Método para obtener las habitaciones seleccionadas
         private List<int> ObtenerHabitacionesSeleccionadas()
         {
-            List<int> habitacionesSeleccionadas = new List<int>();
-            if (comboBox1.SelectedItem != null)
+            return new List<int>
             {
-                habitacionesSeleccionadas.Add(ConvertToNumericType(comboBox1.SelectedItem.ToString()));
-            }
-            if (comboBox2.SelectedItem != null)
-            {
-                habitacionesSeleccionadas.Add(ConvertToNumericType(comboBox2.SelectedItem.ToString()));
-            }
-            if (comboBox3.SelectedItem != null)
-            {
-                habitacionesSeleccionadas.Add(ConvertToNumericType(comboBox3.SelectedItem.ToString()));
-            }
-            return habitacionesSeleccionadas;
+                comboBox1.SelectedItem != null ? ConvertToNumericType(comboBox1.SelectedItem.ToString()) : 0,
+                comboBox2.SelectedItem != null ? ConvertToNumericType(comboBox2.SelectedItem.ToString()) : 0,
+                comboBox3.SelectedItem != null ? ConvertToNumericType(comboBox3.SelectedItem.ToString()) : 0
+            }.Where(h => h != 0).ToList();
         }
 
-        // Método para obtener las cantidades seleccionadas
         private List<int> ObtenerCantidadesSeleccionadas()
         {
-            List<int> cantidades = new List<int>();
-            if (comboBox1.SelectedItem != null)
+            return new List<int>
             {
-                cantidades.Add((int)numericUpDown1.Value);
-            }
-            if (comboBox2.SelectedItem != null)
-            {
-                cantidades.Add((int)numericUpDown2.Value);
-            }
-            if (comboBox3.SelectedItem != null)
-            {
-                cantidades.Add((int)numericUpDown3.Value);
-            }
-            return cantidades;
+                comboBox1.SelectedItem != null ? (int)numericUpDown1.Value : 0,
+                comboBox2.SelectedItem != null ? (int)numericUpDown2.Value : 0,
+                comboBox3.SelectedItem != null ? (int)numericUpDown3.Value : 0
+            }.Where(c => c != 0).ToList();
         }
+     
 
-      
-        // Aqui, método para realizar la exportación de las reservas a un archivo XML usando XmlController
-       
-
-        // Evento Click para buscar un cliente por NIF
         private void BuscarCliente_Click(object sender, EventArgs e)
         {
             string nif = DNI.Text;
@@ -171,7 +145,6 @@ namespace HotelSolRepo.Vista
             }
         }
 
-        // Método para autenticar y actualizar los datos del cliente en la interfaz
         private void AutenticarYActualizarCliente(Clientes cliente)
         {
             AuthenticatedClientNIF = cliente.NIF;
@@ -207,7 +180,83 @@ namespace HotelSolRepo.Vista
             }
         }
 
-        // Método para convertir el tipo de habitación a un tipo numérico
+        private void CrearReservaTemporal()
+        {
+            // Crear el objeto Cliente con los datos del formulario
+            ClientesXmlWrapper clienteXml = new ClientesXmlWrapper
+            {
+                NIF = AuthenticatedClientNIF,
+                Nombre = TextBoxNombre.Text,
+                PrimerApellido = textBoxApellido1.Text,
+                SegundoApellido = textBoxApellido2.Text,
+                CorreoElectronico = textBoxEmail.Text,
+                Telefono = textBoxTelefono.Text
+                // Añadir más detalles del cliente si es necesario
+            };
+
+            // Crear el objeto Dirección con los datos del formulario
+            DireccionesXmlWrapper direccionXml = new DireccionesXmlWrapper
+            {
+                Calle = textBoxCalle.Text,
+                Numero = textBoxNumeroDireccion.Text,
+                Puerta = textBoxPuertaDireccion.Text,
+                Piso = textBoxPisoDireccion.Text,
+                CodigoPostal = textBoxCodigoPostalDireccion.Text,
+                Provincia = textBoxProvinciaDireccion.Text,
+                Pais = textBoxPaisDireccion.Text
+            };
+
+            // Crear objetos de habitaciones asociadas a la reserva
+            List<ReservaHabitacionesXmlWrapper> habitacionesReservadas = new List<ReservaHabitacionesXmlWrapper>();
+            var tiposPensiones = new List<string>
+    {
+        GetPensionType(checkBoxMediaPensionCombo1, checkBoxPensionCompletaCombo1),
+        GetPensionType(checkBoxMediaPensionCombo2, checkBoxPensionCompletaCombo2),
+        GetPensionType(checkBoxMediaPensionCombo3, checkBoxPensionCompletaCombo3)
+    };
+
+            var habitacionesSeleccionadas = ObtenerHabitacionesSeleccionadas();
+            for (int i = 0; i < habitacionesSeleccionadas.Count; i++)
+            {
+                habitacionesReservadas.Add(new ReservaHabitacionesXmlWrapper
+                {
+                    HabitacionID = habitacionesSeleccionadas[i],
+                    TipoPension = tiposPensiones[i],
+                    FechaInicio = dateTimePicker1.Value,
+                    FechaFin = dateTimePicker2.Value
+                    // Añadir más campos si es necesario
+                });
+            }
+
+            // Crear el objeto contenedor con todos los objetos relacionados
+            ReservaCompletaXmlWrapper reservaCompleta = new ReservaCompletaXmlWrapper
+            {
+                Cliente = clienteXml,
+                Direccion = direccionXml,
+                ReservaHabitaciones = habitacionesReservadas,
+                Reserva = new ReservasXmlWrapper
+                {
+                    EmpleadoID = AuthenticatedEmployeeID,
+                    FechaInicio = dateTimePicker1.Value,
+                    FechaFin = dateTimePicker2.Value,
+                    EstadoReserva = "Temporal",
+                    NIF = clienteXml.NIF
+                }
+            };
+
+            // Serializar a XML y guardar en archivo
+            XmlSerializer serializer = new XmlSerializer(typeof(ReservaCompletaXmlWrapper));
+            StringWriter writer = new StringWriter();
+            serializer.Serialize(writer, reservaCompleta);
+            string xmlReserva = writer.ToString();
+
+            string rutaArchivo = "ruta/a/tu/archivo/reserva_temporal.xml";
+            File.WriteAllText(rutaArchivo, xmlReserva);
+
+            MessageBox.Show("Reserva completa creada y guardada en " + rutaArchivo);
+        }
+
+
         private int ConvertToNumericType(string tipoHabitacion)
         {
             switch (tipoHabitacion)
@@ -219,15 +268,13 @@ namespace HotelSolRepo.Vista
             }
         }
 
-        // Método para obtener el tipo de pensión en base a los CheckBox seleccionados
         private string GetPensionType(CheckBox mediaPension, CheckBox pensionCompleta)
         {
             if (mediaPension.Checked)
                 return "Media Pension";
-            else if (pensionCompleta.Checked)
+            if (pensionCompleta.Checked)
                 return "Pension Completa";
-            else
-                return "Sin Pension";
+            return "Sin Pension";
         }
     }
 }
