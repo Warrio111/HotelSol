@@ -155,12 +155,6 @@
     <Compile Include="Vista\FormPrincipal.Designer.cs">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vista\ImportarForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vista\ImportarForm.Designer.cs">
-      <DependentUpon>ImportarForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Vista\CrearReservaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,9 +182,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\FormPrincipal.resx">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Vista\ImportarForm.resx">
-      <DependentUpon>ImportarForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\CrearReservaForm.resx">
       <DependentUpon>CrearReservaForm.cs</DependentUpon>
@@ -221,6 +212,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Vista\ClientFacturaForm.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Vista\ClientListReservaForm.xslt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

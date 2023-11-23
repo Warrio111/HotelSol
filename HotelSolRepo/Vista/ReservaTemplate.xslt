@@ -94,7 +94,7 @@
 						<th>Fecha Fin</th>
 					
 					</tr>
-					<xsl:for-each select="ReservaCompletaXmlWrapper/ReservaHabitaciones/ReservaHabitacion">
+					<xsl:for-each select="ReservaCompletaXmlWrapper/ReservaHabitaciones/ReservaHabitacionesXmlWrapper">
 						<tr>
 							<td>
 								<xsl:value-of select="HabitacionID"/>

@@ -57,6 +57,8 @@
             this.textBoxNifClienteActualizar = new System.Windows.Forms.TextBox();
             this.textBoxNifClienteHistorial = new System.Windows.Forms.TextBox();
             this.textBoxEliminarCliente = new System.Windows.Forms.TextBox();
+            this.buttonObtenerFacturaCliente = new System.Windows.Forms.Button();
+            this.textBoxObtenerFacturaCliente = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBoxName
@@ -264,7 +266,7 @@
             // 
             // buttonObtenerClientePorNif
             // 
-            this.buttonObtenerClientePorNif.Location = new System.Drawing.Point(848, 251);
+            this.buttonObtenerClientePorNif.Location = new System.Drawing.Point(891, 248);
             this.buttonObtenerClientePorNif.Margin = new System.Windows.Forms.Padding(2);
             this.buttonObtenerClientePorNif.Name = "buttonObtenerClientePorNif";
             this.buttonObtenerClientePorNif.Size = new System.Drawing.Size(175, 40);
@@ -275,7 +277,7 @@
             // 
             // buttonObtenerHistorialEstanciaCliente
             // 
-            this.buttonObtenerHistorialEstanciaCliente.Location = new System.Drawing.Point(848, 340);
+            this.buttonObtenerHistorialEstanciaCliente.Location = new System.Drawing.Point(891, 337);
             this.buttonObtenerHistorialEstanciaCliente.Margin = new System.Windows.Forms.Padding(2);
             this.buttonObtenerHistorialEstanciaCliente.Name = "buttonObtenerHistorialEstanciaCliente";
             this.buttonObtenerHistorialEstanciaCliente.Size = new System.Drawing.Size(175, 40);
@@ -286,7 +288,7 @@
             // 
             // buttonObtenerClientes
             // 
-            this.buttonObtenerClientes.Location = new System.Drawing.Point(848, 296);
+            this.buttonObtenerClientes.Location = new System.Drawing.Point(891, 293);
             this.buttonObtenerClientes.Margin = new System.Windows.Forms.Padding(2);
             this.buttonObtenerClientes.Name = "buttonObtenerClientes";
             this.buttonObtenerClientes.Size = new System.Drawing.Size(175, 40);
@@ -297,7 +299,7 @@
             // 
             // buttonObtenerClientesConReservas
             // 
-            this.buttonObtenerClientesConReservas.Location = new System.Drawing.Point(848, 385);
+            this.buttonObtenerClientesConReservas.Location = new System.Drawing.Point(891, 382);
             this.buttonObtenerClientesConReservas.Margin = new System.Windows.Forms.Padding(2);
             this.buttonObtenerClientesConReservas.Name = "buttonObtenerClientesConReservas";
             this.buttonObtenerClientesConReservas.Size = new System.Drawing.Size(175, 40);
@@ -308,7 +310,7 @@
             // 
             // buttonRegistrarCliente
             // 
-            this.buttonRegistrarCliente.Location = new System.Drawing.Point(848, 430);
+            this.buttonRegistrarCliente.Location = new System.Drawing.Point(891, 477);
             this.buttonRegistrarCliente.Margin = new System.Windows.Forms.Padding(2);
             this.buttonRegistrarCliente.Name = "buttonRegistrarCliente";
             this.buttonRegistrarCliente.Size = new System.Drawing.Size(175, 40);
@@ -319,7 +321,7 @@
             // 
             // buttonActualizarCliente
             // 
-            this.buttonActualizarCliente.Location = new System.Drawing.Point(848, 474);
+            this.buttonActualizarCliente.Location = new System.Drawing.Point(891, 521);
             this.buttonActualizarCliente.Margin = new System.Windows.Forms.Padding(2);
             this.buttonActualizarCliente.Name = "buttonActualizarCliente";
             this.buttonActualizarCliente.Size = new System.Drawing.Size(175, 40);
@@ -330,7 +332,7 @@
             // 
             // buttonEliminarCliente
             // 
-            this.buttonEliminarCliente.Location = new System.Drawing.Point(848, 519);
+            this.buttonEliminarCliente.Location = new System.Drawing.Point(891, 566);
             this.buttonEliminarCliente.Margin = new System.Windows.Forms.Padding(2);
             this.buttonEliminarCliente.Name = "buttonEliminarCliente";
             this.buttonEliminarCliente.Size = new System.Drawing.Size(175, 40);
@@ -391,13 +393,39 @@
             this.textBoxEliminarCliente.Visible = false;
             this.textBoxEliminarCliente.DoubleClick += new System.EventHandler(this.textBoxEliminarCliente_Click);
             // 
+            // buttonObtenerFacturaCliente
+            // 
+            this.buttonObtenerFacturaCliente.Location = new System.Drawing.Point(891, 431);
+            this.buttonObtenerFacturaCliente.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonObtenerFacturaCliente.Name = "buttonObtenerFacturaCliente";
+            this.buttonObtenerFacturaCliente.Size = new System.Drawing.Size(175, 40);
+            this.buttonObtenerFacturaCliente.TabIndex = 33;
+            this.buttonObtenerFacturaCliente.Text = "ObtenerFacturaCliente";
+            this.buttonObtenerFacturaCliente.UseVisualStyleBackColor = true;
+            this.buttonObtenerFacturaCliente.Click += new System.EventHandler(this.ObtenerFacturaCliente_Click);
+            // 
+            // textBoxObtenerFacturaCliente
+            // 
+            this.textBoxObtenerFacturaCliente.AccessibleName = "";
+            this.textBoxObtenerFacturaCliente.Location = new System.Drawing.Point(55, 46);
+            this.textBoxObtenerFacturaCliente.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxObtenerFacturaCliente.MaxLength = 9;
+            this.textBoxObtenerFacturaCliente.Name = "textBoxObtenerFacturaCliente";
+            this.textBoxObtenerFacturaCliente.Size = new System.Drawing.Size(240, 20);
+            this.textBoxObtenerFacturaCliente.TabIndex = 34;
+            this.textBoxObtenerFacturaCliente.Text = "ID de la Reserva";
+            this.textBoxObtenerFacturaCliente.Visible = false;
+            this.textBoxObtenerFacturaCliente.DoubleClick += new System.EventHandler(this.ObtenerFacturaCliente_DoubleClick);
+            // 
             // ClienteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::HotelSolRepo.Properties.Resources.fondo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1082, 624);
+            this.ClientSize = new System.Drawing.Size(1167, 650);
+            this.Controls.Add(this.textBoxObtenerFacturaCliente);
+            this.Controls.Add(this.buttonObtenerFacturaCliente);
             this.Controls.Add(this.textBoxEliminarCliente);
             this.Controls.Add(this.textBoxNifClienteHistorial);
             this.Controls.Add(this.textBoxNifClienteActualizar);
@@ -467,5 +495,7 @@
         private System.Windows.Forms.TextBox textBoxNifClienteActualizar;
         private System.Windows.Forms.TextBox textBoxNifClienteHistorial;
         private System.Windows.Forms.TextBox textBoxEliminarCliente;
+        private System.Windows.Forms.Button buttonObtenerFacturaCliente;
+        private System.Windows.Forms.TextBox textBoxObtenerFacturaCliente;
     }
 }

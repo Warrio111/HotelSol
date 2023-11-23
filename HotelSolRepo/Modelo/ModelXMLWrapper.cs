@@ -188,6 +188,15 @@ namespace HotelSolRepo.Modelo
 
         [XmlElement("TipoFactura")]
         public string TipoFactura { get; set; }
+        [XmlArray("Reservas")]
+        [XmlArrayItem("Reserva")]
+        public List<ReservasXmlWrapper> Reservas { get; set; }
+        [XmlArray("Clientes")]
+        [XmlArrayItem("Cliente")]
+        public List<ClientesXmlWrapper> Clientes { get; set; }
+        [XmlArray("Habitaciones")]
+        [XmlArrayItem("Habitacion")]
+        public List<HabitacionesXmlWrapper> Habitaciones { get; set; }
     }
 
     // Representa la entidad Reservas en formato XML.
