@@ -40,6 +40,7 @@
             this.btnConfirmar.TabIndex = 1;
             this.btnConfirmar.Text = "CONFIRMAR RESERVA";
             this.btnConfirmar.UseVisualStyleBackColor = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // webBrowser1
             // 

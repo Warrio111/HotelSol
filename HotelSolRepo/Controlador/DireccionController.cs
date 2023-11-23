@@ -112,5 +112,24 @@ namespace HotelSolRepo.Controlador
                                             d.Pais.Contains(pais)).ToList();
             }
         }
+        // Metodo para obtener la direccionID de una direccion
+        public int ObtenerDireccionID(string calle, string numero, string puerta, string piso, string codigoPostal, string provincia, string pais)
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                var direccion = db.Direcciones.FirstOrDefault(d => d.Calle == calle &&
+                                                           d.Numero == numero &&
+                                                                                                      d.Puerta == puerta &&
+                                                                                                                                                 d.Piso == piso &&
+                                                                                                                                                                                            d.CodigoPostal == codigoPostal &&
+                                                                                                                                                                                                                                       d.Provincia == provincia &&
+                                                                                                                                                                                                                                                                                  d.Pais == pais);
+                if (direccion != null)
+                {
+                    return direccion.DireccionID;
+                }
+                return 0;
+            }
+        }
     }
 }

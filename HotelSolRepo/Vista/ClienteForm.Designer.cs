@@ -59,6 +59,9 @@
             this.textBoxEliminarCliente = new System.Windows.Forms.TextBox();
             this.buttonObtenerFacturaCliente = new System.Windows.Forms.Button();
             this.textBoxObtenerFacturaCliente = new System.Windows.Forms.TextBox();
+            this.buttonCheckINorOut = new System.Windows.Forms.Button();
+            this.textBoxCheckIN = new System.Windows.Forms.TextBox();
+            this.textBoxCheckOut = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBoxName
@@ -266,7 +269,7 @@
             // 
             // buttonObtenerClientePorNif
             // 
-            this.buttonObtenerClientePorNif.Location = new System.Drawing.Point(891, 248);
+            this.buttonObtenerClientePorNif.Location = new System.Drawing.Point(891, 237);
             this.buttonObtenerClientePorNif.Margin = new System.Windows.Forms.Padding(2);
             this.buttonObtenerClientePorNif.Name = "buttonObtenerClientePorNif";
             this.buttonObtenerClientePorNif.Size = new System.Drawing.Size(175, 40);
@@ -277,7 +280,7 @@
             // 
             // buttonObtenerHistorialEstanciaCliente
             // 
-            this.buttonObtenerHistorialEstanciaCliente.Location = new System.Drawing.Point(891, 337);
+            this.buttonObtenerHistorialEstanciaCliente.Location = new System.Drawing.Point(891, 325);
             this.buttonObtenerHistorialEstanciaCliente.Margin = new System.Windows.Forms.Padding(2);
             this.buttonObtenerHistorialEstanciaCliente.Name = "buttonObtenerHistorialEstanciaCliente";
             this.buttonObtenerHistorialEstanciaCliente.Size = new System.Drawing.Size(175, 40);
@@ -288,7 +291,7 @@
             // 
             // buttonObtenerClientes
             // 
-            this.buttonObtenerClientes.Location = new System.Drawing.Point(891, 293);
+            this.buttonObtenerClientes.Location = new System.Drawing.Point(891, 281);
             this.buttonObtenerClientes.Margin = new System.Windows.Forms.Padding(2);
             this.buttonObtenerClientes.Name = "buttonObtenerClientes";
             this.buttonObtenerClientes.Size = new System.Drawing.Size(175, 40);
@@ -299,7 +302,7 @@
             // 
             // buttonObtenerClientesConReservas
             // 
-            this.buttonObtenerClientesConReservas.Location = new System.Drawing.Point(891, 382);
+            this.buttonObtenerClientesConReservas.Location = new System.Drawing.Point(891, 370);
             this.buttonObtenerClientesConReservas.Margin = new System.Windows.Forms.Padding(2);
             this.buttonObtenerClientesConReservas.Name = "buttonObtenerClientesConReservas";
             this.buttonObtenerClientesConReservas.Size = new System.Drawing.Size(175, 40);
@@ -310,7 +313,7 @@
             // 
             // buttonRegistrarCliente
             // 
-            this.buttonRegistrarCliente.Location = new System.Drawing.Point(891, 477);
+            this.buttonRegistrarCliente.Location = new System.Drawing.Point(891, 502);
             this.buttonRegistrarCliente.Margin = new System.Windows.Forms.Padding(2);
             this.buttonRegistrarCliente.Name = "buttonRegistrarCliente";
             this.buttonRegistrarCliente.Size = new System.Drawing.Size(175, 40);
@@ -321,7 +324,7 @@
             // 
             // buttonActualizarCliente
             // 
-            this.buttonActualizarCliente.Location = new System.Drawing.Point(891, 521);
+            this.buttonActualizarCliente.Location = new System.Drawing.Point(891, 546);
             this.buttonActualizarCliente.Margin = new System.Windows.Forms.Padding(2);
             this.buttonActualizarCliente.Name = "buttonActualizarCliente";
             this.buttonActualizarCliente.Size = new System.Drawing.Size(175, 40);
@@ -332,7 +335,7 @@
             // 
             // buttonEliminarCliente
             // 
-            this.buttonEliminarCliente.Location = new System.Drawing.Point(891, 566);
+            this.buttonEliminarCliente.Location = new System.Drawing.Point(891, 591);
             this.buttonEliminarCliente.Margin = new System.Windows.Forms.Padding(2);
             this.buttonEliminarCliente.Name = "buttonEliminarCliente";
             this.buttonEliminarCliente.Size = new System.Drawing.Size(175, 40);
@@ -395,7 +398,7 @@
             // 
             // buttonObtenerFacturaCliente
             // 
-            this.buttonObtenerFacturaCliente.Location = new System.Drawing.Point(891, 431);
+            this.buttonObtenerFacturaCliente.Location = new System.Drawing.Point(891, 414);
             this.buttonObtenerFacturaCliente.Margin = new System.Windows.Forms.Padding(2);
             this.buttonObtenerFacturaCliente.Name = "buttonObtenerFacturaCliente";
             this.buttonObtenerFacturaCliente.Size = new System.Drawing.Size(175, 40);
@@ -417,13 +420,53 @@
             this.textBoxObtenerFacturaCliente.Visible = false;
             this.textBoxObtenerFacturaCliente.DoubleClick += new System.EventHandler(this.ObtenerFacturaCliente_DoubleClick);
             // 
+            // buttonCheckINorOut
+            // 
+            this.buttonCheckINorOut.Location = new System.Drawing.Point(891, 458);
+            this.buttonCheckINorOut.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCheckINorOut.Name = "buttonCheckINorOut";
+            this.buttonCheckINorOut.Size = new System.Drawing.Size(175, 40);
+            this.buttonCheckINorOut.TabIndex = 35;
+            this.buttonCheckINorOut.Text = "HacerCheck IN/OUT";
+            this.buttonCheckINorOut.UseVisualStyleBackColor = true;
+            this.buttonCheckINorOut.Click += new System.EventHandler(this.buttonCheckINorOut_Click);
+            // 
+            // textBoxCheckIN
+            // 
+            this.textBoxCheckIN.AccessibleName = "";
+            this.textBoxCheckIN.Location = new System.Drawing.Point(133, 46);
+            this.textBoxCheckIN.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCheckIN.MaxLength = 9;
+            this.textBoxCheckIN.Name = "textBoxCheckIN";
+            this.textBoxCheckIN.Size = new System.Drawing.Size(240, 20);
+            this.textBoxCheckIN.TabIndex = 36;
+            this.textBoxCheckIN.Text = "ID de la Reserva CheckIn";
+            this.textBoxCheckIN.Visible = false;
+            this.textBoxCheckIN.DoubleClick += new System.EventHandler(this.textBoxCheckIN_DoubleClick);
+            // 
+            // textBoxCheckOut
+            // 
+            this.textBoxCheckOut.AccessibleName = "";
+            this.textBoxCheckOut.Location = new System.Drawing.Point(408, 46);
+            this.textBoxCheckOut.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCheckOut.MaxLength = 9;
+            this.textBoxCheckOut.Name = "textBoxCheckOut";
+            this.textBoxCheckOut.Size = new System.Drawing.Size(240, 20);
+            this.textBoxCheckOut.TabIndex = 37;
+            this.textBoxCheckOut.Text = "ID de la Reserva CheckOut";
+            this.textBoxCheckOut.Visible = false;
+            this.textBoxCheckOut.DoubleClick += new System.EventHandler(this.textBoxCheckOut_DoubleClick);
+            // 
             // ClienteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::HotelSolRepo.Properties.Resources.fondo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1167, 650);
+            this.ClientSize = new System.Drawing.Size(933, 520);
+            this.Controls.Add(this.textBoxCheckOut);
+            this.Controls.Add(this.textBoxCheckIN);
+            this.Controls.Add(this.buttonCheckINorOut);
             this.Controls.Add(this.textBoxObtenerFacturaCliente);
             this.Controls.Add(this.buttonObtenerFacturaCliente);
             this.Controls.Add(this.textBoxEliminarCliente);
@@ -497,5 +540,8 @@
         private System.Windows.Forms.TextBox textBoxEliminarCliente;
         private System.Windows.Forms.Button buttonObtenerFacturaCliente;
         private System.Windows.Forms.TextBox textBoxObtenerFacturaCliente;
+        private System.Windows.Forms.Button buttonCheckINorOut;
+        private System.Windows.Forms.TextBox textBoxCheckIN;
+        private System.Windows.Forms.TextBox textBoxCheckOut;
     }
 }

@@ -375,6 +375,7 @@ namespace HotelSolRepo.Modelo
         public DireccionesXmlWrapper Direccion { get; set; }
         public List<ReservaHabitacionesXmlWrapper> ReservaHabitaciones { get; set; }
         public ReservasXmlWrapper Reserva { get; set; }
+        public FacturasXmlWrapper Factura { get; set; }
     }
 
 

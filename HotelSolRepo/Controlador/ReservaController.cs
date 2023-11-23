@@ -64,7 +64,29 @@ namespace HotelSolRepo.Controlador
                 return true;
             }
         }
-
+       public bool RegistrarReserva(string nif,int empleadoID, DateTime fechaInicio, DateTime fechaFin, string estadoReserva, DateTime ?CheckInConfirmado, DateTime ?CheckOutConfirmado, int facturaID, DateTime FechaCreacion, string TipoReserva)
+       {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                Reservas reserva = new Reservas
+                {
+                     NIF = nif,
+                     EmpleadoID = empleadoID,
+                     FechaInicio = fechaInicio,
+                     FechaFin = fechaFin,
+                     EstadoReserva = estadoReserva,
+                     CheckInConfirmado = CheckInConfirmado,
+                     CheckOutConfirmado = CheckOutConfirmado,
+                     FacturaID = facturaID,
+                     FechaCreacion = FechaCreacion,
+                     TipoReserva = TipoReserva
+                };
+                db.Reservas.Add(reserva);
+                db.SaveChanges();
+                return true;
+              }
+           
+       }
        public bool HacerReservaDesdeXml(string xmlReserva, int empleadoID)
 {
     try
@@ -173,9 +195,16 @@ namespace HotelSolRepo.Controlador
                 var reservaExistente = db.Reservas.FirstOrDefault(r => r.ReservaID == reservaActualizada.ReservaID);
                 if (reservaExistente != null)
                 {
+                    reservaExistente.EmpleadoID = reservaActualizada.EmpleadoID;
                     reservaExistente.FechaInicio = reservaActualizada.FechaInicio;
                     reservaExistente.FechaFin = reservaActualizada.FechaFin;
                     reservaExistente.EstadoReserva = reservaActualizada.EstadoReserva;
+                    reservaExistente.CheckInConfirmado = reservaActualizada.CheckInConfirmado;
+                    reservaExistente.CheckOutConfirmado = reservaActualizada.CheckOutConfirmado;
+                    reservaExistente.FacturaID = reservaActualizada.FacturaID;
+                    reservaExistente.FechaCreacion = reservaActualizada.FechaCreacion;
+                    reservaExistente.TipoReserva = reservaActualizada.TipoReserva;
+
 
 
                     db.SaveChanges();
@@ -244,12 +273,20 @@ namespace HotelSolRepo.Controlador
             }
         }
 
-        // Obtener una reserva específica por ID
+        // Obtener la ultima reserva específica por ID
         public Reservas ObtenerReservaPorID(int reservaID)
         {
             using (HotelDBEntities db = new HotelDBEntities())
             {
-                return db.Reservas.FirstOrDefault(r => r.ReservaID == reservaID);
+                return db.Reservas.Where(r => r.ReservaID == reservaID).FirstOrDefault();
+            }
+        }
+
+        public Reservas ObtenerUltimaReserva()
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                return db.Reservas.OrderByDescending(r => r.ReservaID).FirstOrDefault();
             }
         }
 

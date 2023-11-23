@@ -12,7 +12,6 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.Xsl;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace HotelSolRepo.Vista
 {
@@ -112,6 +111,8 @@ namespace HotelSolRepo.Vista
             Registrar.Visible = false;
             webBrowser1.Visible = false;
             textBoxObtenerFacturaCliente.Visible = false;
+            textBoxCheckIN.Visible = false;
+            textBoxCheckOut.Visible = false;
             buttonObtenerClientePorNif.Visible = true;
             buttonObtenerClientes.Visible = true;
             buttonObtenerHistorialEstanciaCliente.Visible = true;
@@ -980,6 +981,65 @@ namespace HotelSolRepo.Vista
                     }
                 }
             }   
+        }
+
+        private void buttonCheckINorOut_Click(object sender, EventArgs e)
+        {
+            ClientForm_Load(null, null);
+            textBoxCheckIN.Visible = true;
+            textBoxCheckOut.Visible = true;
+        }
+
+        private void textBoxCheckOut_DoubleClick(object sender, EventArgs e)
+        {
+            string reservaID = textBoxCheckOut.Text;
+            Reservas reservas = null;
+            Habitaciones habitaciones = null;
+            try
+            {
+                reservas = reservaController.ObtenerReservaPorID(int.Parse(reservaID));
+                reservas.CheckOutConfirmado = DateTime.Now;
+                reservas.EstadoReserva = "Completada";
+                reservaController.ActualizarReserva(reservas);
+            }
+            catch
+            {
+                MessageBox.Show("No se ha encontrado la reserva.");
+            }
+            // Obtener desde ReservaHabitaciones la habitacionID mediante el uso de la ReservaID
+
+            try
+            {
+                habitaciones = habitacionController.ObtenerHabitacionPorReservaID(int.Parse(textBoxCheckIN.Text));
+                habitaciones.EstadoActual = "Disponible";
+                habitaciones.Ocupado_desde = null;
+                habitaciones.Ocupado_hasta = null;
+                habitacionController.EditarHabitacion(habitaciones);
+                MessageBox.Show("Se Realizo Correctamente el CheckOUT");
+            }
+            catch
+            {
+                MessageBox.Show("No se ha encontrado la habitación.");
+            }
+
+        }
+
+        private void textBoxCheckIN_DoubleClick(object sender, EventArgs e)
+        {
+            string reservaID = textBoxCheckIN.Text;
+            Reservas reservas = null;
+            try
+            {
+                reservas = reservaController.ObtenerReservaPorID(int.Parse(reservaID));
+                reservas.CheckInConfirmado = DateTime.Now;
+                reservaController.ActualizarReserva(reservas);
+                MessageBox.Show("Se Realizo Correctamente el CheckIN");
+            }
+            catch
+            {
+                MessageBox.Show("No se ha encontrado la reserva.");
+            }
+            
         }
     }
 }

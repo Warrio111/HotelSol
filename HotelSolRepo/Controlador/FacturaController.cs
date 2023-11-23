@@ -155,5 +155,48 @@ namespace HotelSolRepo.Controlador
             }
         }
 
+        // Metodo para obtener la ultima factura
+        public int ObtenerUltimaFactura()
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                var ultimaFactura = db.Facturas.OrderByDescending(f => f.FacturaID).FirstOrDefault();
+                return ultimaFactura.FacturaID;
+            }
+        }
+        public double ObtenerPrecioTemporada(DateTime fechaInicio, DateTime fechaFin, string TipoDePension, int cantidad)
+        {
+            int precio = 0;
+            switch (fechaInicio.Month)
+            {
+                case 1:
+                case 2:
+                case 3:
+                case 11:
+                case 12:
+                    precio = 100;
+                    break;
+
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                    precio = 300;
+                    break;
+
+                default:
+                    precio = 200;
+                    break;
+            }
+
+            if (TipoDePension == "Pension Completa")
+            {
+                precio += 50;
+            }
+
+            int dias = (fechaFin - fechaInicio).Days != 0 ? (fechaFin - fechaInicio).Days : 1;
+            return (precio * cantidad) * dias;
+        }
     }
 }

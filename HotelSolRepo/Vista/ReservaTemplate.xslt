@@ -113,7 +113,110 @@
 						</tr>
 					</xsl:for-each>
 				</table>
+				<!-- Tabla para detalles de la factura -->
+				<h2>Detalles de la Factura</h2>
+				<table>
+					<tr>
+						<th>ID de Factura</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Factura/FacturaID"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Detalles</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Factura/Detalles"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Cargos</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Factura/Cargos"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Impuestos</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Factura/Impuestos"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Fecha</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Factura/Fecha"/>
+						</td>
+					</tr>
+				</table>
 
+				<h2>Reserva</h2>
+				<table>
+					<tr>
+						<th>Reserva ID</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Reserva/ReservaID"/>
+						</td>
+					</tr>
+					<tr>
+						<th>NIF Cliente</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Reserva/NIF"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Empleado ID</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Reserva/EmpleadoID"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Fecha Inicio</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Reserva/FechaInicio"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Fecha Fin</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Reserva/FechaFin"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Estado Reserva</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Reserva/EstadoReserva"/>
+						</td>
+					</tr>
+					<tr>
+						<th>CheckIn Confirmado</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Reserva/CheckInConfirmado"/>
+						</td>
+					</tr>
+					<tr>
+						<th>CheckOut Confirmado</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Reserva/CheckOutConfirmado"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Factura ID</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Reserva/FacturaID"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Fecha Creación</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Reserva/FechaCreacion"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Tipo Reserva</th>
+						<td>
+							<xsl:value-of select="ReservaCompletaXmlWrapper/Reserva/TipoReserva"/>
+						</td>
+					</tr>
+				</table>
 				
 			</body>
 		</html>

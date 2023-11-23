@@ -17,6 +17,9 @@ namespace HotelSolRepo.Vista
     {
         private readonly ReservaController reservaController = new ReservaController();
         private readonly ClienteController clienteController = new ClienteController();
+        private readonly FacturaController facturaController = new FacturaController();
+        private readonly HabitacionController habitacionController = new HabitacionController();
+        private readonly DireccionController direccionController = new DireccionController();
         //private readonly HabitacionController habitacionController = new HabitacionController();
         private readonly HotelDBEntities db = new HotelDBEntities();
         private string AuthenticatedClientNIF { get; set; }
@@ -123,13 +126,13 @@ namespace HotelSolRepo.Vista
         {
             DateTime fechaInicio = dateTimePicker1.Value;
             DateTime fechaFin = dateTimePicker2.Value;
-            List<int> habitacionesSeleccionadas = ObtenerHabitacionesSeleccionadas();
+            List<int> habitacionesSeleccionadas = ObtenerTipoHabitacionesSeleccionadas();
             List<int> cantidades = ObtenerCantidadesSeleccionadas();
 
             return reservaController.ComprobarDisponibilidad(fechaInicio, fechaFin, habitacionesSeleccionadas, cantidades);
         }
 
-        private List<int> ObtenerHabitacionesSeleccionadas()
+        private List<int> ObtenerTipoHabitacionesSeleccionadas()
         {
             return new List<int>
             {
@@ -201,24 +204,39 @@ namespace HotelSolRepo.Vista
                 }
             }
         }
-
         private void CrearReservaTemporal()
         {
+            habitacionController.ResetearHabitacionesTemporales();
+            var habitacionesSeleccionadas =  new List<string>
+            {
+                comboBox1.SelectedItem != null ? (comboBox1.SelectedItem.ToString()) : null,
+                comboBox2.SelectedItem != null ? (comboBox2.SelectedItem.ToString()) : null,
+                comboBox3.SelectedItem != null ? (comboBox3.SelectedItem.ToString()) : null
+            }.Where(h => h != null).ToList();
+
+            List<int> cantidadesHabitaciones =  new List<int>
+            {
+                comboBox1.SelectedItem != null ? (int)numericUpDown1.Value : 0,
+                comboBox2.SelectedItem != null ? (int)numericUpDown2.Value : 0,
+                comboBox3.SelectedItem != null ? (int)numericUpDown3.Value : 0
+            }.Where(c => c != 0).ToList();
+
             // Crear el objeto Cliente con los datos del formulario
             ClientesXmlWrapper clienteXml = new ClientesXmlWrapper
             {
+                DireccionID = direccionController.ObtenerDireccionID(textBoxCalle.Text, textBoxNumeroDireccion.Text, textBoxPuertaDireccion.Text, textBoxPisoDireccion.Text, textBoxCodigoPostalDireccion.Text, textBoxProvinciaDireccion.Text, textBoxPaisDireccion.Text),
                 NIF = AuthenticatedClientNIF,
                 Nombre = TextBoxNombre.Text,
                 PrimerApellido = textBoxApellido1.Text,
                 SegundoApellido = textBoxApellido2.Text,
                 CorreoElectronico = textBoxEmail.Text,
                 Telefono = textBoxTelefono.Text
-                // Añadir más detalles del cliente si es necesario
             };
 
             // Crear el objeto Dirección con los datos del formulario
             DireccionesXmlWrapper direccionXml = new DireccionesXmlWrapper
             {
+                DireccionID = direccionController.ObtenerDireccionID(textBoxCalle.Text, textBoxNumeroDireccion.Text, textBoxPuertaDireccion.Text, textBoxPisoDireccion.Text, textBoxCodigoPostalDireccion.Text, textBoxProvinciaDireccion.Text, textBoxPaisDireccion.Text),
                 Calle = textBoxCalle.Text,
                 Numero = textBoxNumeroDireccion.Text,
                 Puerta = textBoxPuertaDireccion.Text,
@@ -228,27 +246,61 @@ namespace HotelSolRepo.Vista
                 Pais = textBoxPaisDireccion.Text
             };
 
+            // Obter la ultima Id de Habitacion y sumarle 1 para crear la nueva habitacion
+            var ultimaHabitacion = habitacionController.ObtenerUltimaHabitacion();
+            var ultimaReserva = reservaController.ObtenerUltimaReserva();
+            ultimaReserva.ReservaID = ultimaReserva.ReservaID != null ? ultimaReserva.ReservaID + 1 : 1;
+            int ultimaReservaHabitacionID = 0;
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                var ultimaReservaHabitacion = db.ReservaHabitaciones.OrderByDescending(h => h.HabitacionID).FirstOrDefault();
+                ultimaReservaHabitacionID = ultimaReservaHabitacion != null ? ultimaReservaHabitacion.ReservaHabitacionID + 1 : 1;
+            }
+
             // Crear objetos de habitaciones asociadas a la reserva
             List<ReservaHabitacionesXmlWrapper> habitacionesReservadas = new List<ReservaHabitacionesXmlWrapper>();
             var tiposPensiones = new List<string>
-    {
-        GetPensionType(checkBoxMediaPensionCombo1, checkBoxPensionCompletaCombo1),
-        GetPensionType(checkBoxMediaPensionCombo2, checkBoxPensionCompletaCombo2),
-        GetPensionType(checkBoxMediaPensionCombo3, checkBoxPensionCompletaCombo3)
-    };
+            {
+                GetPensionType(checkBoxMediaPensionCombo1, checkBoxPensionCompletaCombo1),
+                GetPensionType(checkBoxMediaPensionCombo2, checkBoxPensionCompletaCombo2),
+                GetPensionType(checkBoxMediaPensionCombo3, checkBoxPensionCompletaCombo3)
+            };
 
-            var habitacionesSeleccionadas = ObtenerHabitacionesSeleccionadas();
             for (int i = 0; i < habitacionesSeleccionadas.Count; i++)
             {
+                ultimaReserva.ReservaID = ultimaReserva.ReservaID;
+                ultimaReservaHabitacionID++;
+                var habtacionID2 = habitacionController.ObtenerPrimeraHabitacionDisponible(habitacionesSeleccionadas[i]).HabitacionID;
                 habitacionesReservadas.Add(new ReservaHabitacionesXmlWrapper
                 {
-                    HabitacionID = habitacionesSeleccionadas[i],
+                    ReservaHabitacionID = ultimaReservaHabitacionID,
+                    ReservaID = ultimaReserva.ReservaID,
+                    HabitacionID = habtacionID2,
                     TipoPension = tiposPensiones[i],
                     FechaInicio = dateTimePicker1.Value,
-                    FechaFin = dateTimePicker2.Value
-                    // Añadir más campos si es necesario
+                    FechaFin = dateTimePicker2.Value,
+                    Precio = facturaController.ObtenerPrecioTemporada(dateTimePicker1.Value,dateTimePicker2.Value, tiposPensiones[i], cantidadesHabitaciones[i])
                 });
+                habitacionController.CambiarEstadoHabitacion(habitacionController.ObtenerPrimeraHabitacionDisponible(habitacionesSeleccionadas[i]).HabitacionID, "Temporal");
             }
+            // metodo que obtiene el precio total sumando los precios de las habitacionesReservadas
+            float cargos = 0;
+            foreach(var habitacion in habitacionesReservadas)
+            {
+                cargos += (float)habitacion.Precio;
+            }
+            FacturasXmlWrapper facturasReserva= new FacturasXmlWrapper
+            {
+                FacturaID = facturaController.ObtenerUltimaFactura() + 1,
+                NIF = AuthenticatedClientNIF,
+                EmpleadoID = AuthenticatedEmployeeID,
+                Detalles = "Estancia",
+                Cargos = cargos,
+                Impuestos = 0,
+                Fecha = DateTime.Now,
+                FechaCreacion = DateTime.Now,
+                TipoFactura = "Estancia",
+            };
 
             // Crear el objeto contenedor con todos los objetos relacionados
             ReservaCompletaXmlWrapper reservaCompleta = new ReservaCompletaXmlWrapper
@@ -256,19 +308,36 @@ namespace HotelSolRepo.Vista
                 Cliente = clienteXml,
                 Direccion = direccionXml,
                 ReservaHabitaciones = habitacionesReservadas,
+                Factura = facturasReserva,
                 Reserva = new ReservasXmlWrapper
                 {
+                    ReservaID = ultimaReserva.ReservaID,
                     EmpleadoID = AuthenticatedEmployeeID,
                     FechaInicio = dateTimePicker1.Value,
                     FechaFin = dateTimePicker2.Value,
                     EstadoReserva = "Temporal",
-                    NIF = clienteXml.NIF
+                    NIF = clienteXml.NIF,
+                    FacturaID = facturaController.ObtenerUltimaFactura()+1,
+                    FechaCreacion = DateTime.Now,
+                    TipoReserva = "Estancia"
                 }
             };
+            int numeroHabitaciones = 0;
+            double precio = 0;
+            foreach (var reservaHabitacion in reservaCompleta.ReservaHabitaciones)
+            {
+                if (reservaHabitacion.HabitacionID != null)
+                { numeroHabitaciones++; }
+                if (reservaHabitacion.Precio != null)
+                { precio += (double)reservaHabitacion.Precio; }
+            }
+            double precioTotal = precio;
+            reservaCompleta.Factura.Cargos = (float?)precioTotal;
 
-             // Serializar a XML y guardar en archivo
-             XmlSerializer serializer = new XmlSerializer(typeof(ReservaCompletaXmlWrapper));
-             StringWriter writer = new StringWriter();
+            // Serializar a XML y guardar en archivo
+            XmlSerializer serializer = new XmlSerializer(typeof(ReservaCompletaXmlWrapper));
+           
+            StringWriter writer = new StringWriter();
              serializer.Serialize(writer, reservaCompleta);
              string xmlReserva = writer.ToString();
 
@@ -277,10 +346,13 @@ namespace HotelSolRepo.Vista
 
 
             string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Vista", "reserva_temporal.xml");
-             File.Create(rutaArchivo).Close();
-             File.WriteAllText(rutaArchivo, xmlReserva);
+            File.Create(rutaArchivo).Close();
+            using (FileStream stream = new FileStream(rutaArchivo, FileMode.Create))
+            {
+                serializer.Serialize(stream, reservaCompleta);
+            }
 
-             MessageBox.Show("Reserva completa creada y guardada en " + rutaArchivo);
+            MessageBox.Show("Reserva completa creada y guardada en " + rutaArchivo);
 
         }
             
