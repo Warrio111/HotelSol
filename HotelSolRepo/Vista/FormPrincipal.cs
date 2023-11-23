@@ -62,20 +62,6 @@ namespace HotelSolRepo.Vista
             MostrarFormulario(new CrearReservaForm(ref exportXmlWrapperType,this));
         }
 
-       
-
-        private void BtnImportarXML_Click(object sender, EventArgs e)
-        {
-
-            ImportarForm importarForm = new ImportarForm();
-            FormPrincipal activeForm = ActiveForm as FormPrincipal;
-            if (activeForm != null)
-            {
-                importarForm.SubscribeToXmlWrapperTypeChange(activeForm);
-            }
-            MostrarFormulario(importarForm);
-        }
-
         public void MostrarFormulario(Form formulario)
         {
             // Configuracion de las propiedades del formulario para que pueda incrustarse en el panel

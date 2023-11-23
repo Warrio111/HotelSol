@@ -1,29 +1,52 @@
 <?xml version="1.0"?>
-<ReservasListXmlWrapper xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Reserva>
-    <ReservaID>3</ReservaID>
-    <NIF>47196639H</NIF>
-    <EmpleadoID>1</EmpleadoID>
-    <FechaInicio>2023-01-22</FechaInicio>
-    <FechaFin>2023-01-25</FechaFin>
-    <EstadoReserva>Confirmada</EstadoReserva>
-    <CheckInConfirmado>2023-01-22T00:00:00</CheckInConfirmado>
-    <CheckOutConfirmado>2023-01-25T00:00:00</CheckOutConfirmado>
-    <FacturaID>1</FacturaID>
-    <FechaCreacion>2023-01-01T12:00:00</FechaCreacion>
-    <TipoReserva>Simple</TipoReserva>
-  </Reserva>
-  <Reserva>
-    <ReservaID>5</ReservaID>
-    <NIF>47196639H</NIF>
-    <EmpleadoID>1</EmpleadoID>
-    <FechaInicio>2023-01-23</FechaInicio>
-    <FechaFin>2023-01-26</FechaFin>
-    <EstadoReserva>Confirmada</EstadoReserva>
-    <CheckInConfirmado>2023-01-23T00:00:00</CheckInConfirmado>
-    <CheckOutConfirmado>2023-01-26T00:00:00</CheckOutConfirmado>
-    <FacturaID>1</FacturaID>
-    <FechaCreacion>2023-01-01T12:00:00</FechaCreacion>
-    <TipoReserva>Simple</TipoReserva>
-  </Reserva>
-</ReservasListXmlWrapper>
+<FacturasXmlWrapper xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FacturaID>3</FacturaID>
+  <NIF>12345678A</NIF>
+  <EmpleadoID>4</EmpleadoID>
+  <Detalles>Estancia de 5 días</Detalles>
+  <Cargos>500</Cargos>
+  <Impuestos>50</Impuestos>
+  <Fecha>2023-10-29</Fecha>
+  <FechaCreacion>2023-11-24T10:27:04.733</FechaCreacion>
+  <TipoFactura>Estancia</TipoFactura>
+  <Reservas>
+    <Reserva>
+      <ReservaID>6</ReservaID>
+      <NIF>12345678A</NIF>
+      <EmpleadoID>4</EmpleadoID>
+      <FechaInicio>2023-10-04</FechaInicio>
+      <FechaFin>2023-10-29</FechaFin>
+      <EstadoReserva>Completada</EstadoReserva>
+      <CheckInConfirmado>2023-10-04T00:00:00</CheckInConfirmado>
+      <CheckOutConfirmado>2023-10-29T00:00:00</CheckOutConfirmado>
+      <FacturaID>3</FacturaID>
+      <FechaCreacion>2023-11-24T10:25:59.833</FechaCreacion>
+      <TipoReserva>Estándar</TipoReserva>
+    </Reserva>
+  </Reservas>
+  <Clientes>
+    <Cliente>
+      <NIF>12345678A</NIF>
+      <Nombre>Juan</Nombre>
+      <PrimerApellido>García</PrimerApellido>
+      <SegundoApellido>Pérez</SegundoApellido>
+      <DireccionID>0</DireccionID>
+      <CorreoElectronico>juan.garcia@example.com</CorreoElectronico>
+      <Telefono>600000001</Telefono>
+      <ProgramaFidelizacionID xsi:nil="true" />
+      <Contraseña>contraseña1</Contraseña>
+      <Direcciones>
+        <Direccion>
+          <DireccionID>5</DireccionID>
+          <Calle>Calle Falsa</Calle>
+          <Numero>123</Numero>
+          <Puerta>1A</Puerta>
+          <Piso>2</Piso>
+          <CodigoPostal>28080</CodigoPostal>
+          <Provincia>Madrid</Provincia>
+          <Pais>España</Pais>
+        </Direccion>
+      </Direcciones>
+    </Cliente>
+  </Clientes>
+</FacturasXmlWrapper>

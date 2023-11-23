@@ -111,6 +111,7 @@ namespace HotelSolRepo.Vista
             textBoxEliminarCliente.Visible = false;
             Registrar.Visible = false;
             webBrowser1.Visible = false;
+            textBoxObtenerFacturaCliente.Visible = false;
             buttonObtenerClientePorNif.Visible = true;
             buttonObtenerClientes.Visible = true;
             buttonObtenerHistorialEstanciaCliente.Visible = true;
@@ -118,6 +119,7 @@ namespace HotelSolRepo.Vista
             buttonRegistrarCliente.Visible = true;
             buttonActualizarCliente.Visible = true;
             buttonEliminarCliente.Visible = true;
+            
         }
 
         private void registrarButton_Click(object sender, EventArgs e)
@@ -828,6 +830,156 @@ namespace HotelSolRepo.Vista
             {
                 MessageBox.Show("Error en la eliminación del cliente.");
             }
+        }
+        // Navegacion Lateral
+        private void ObtenerFacturaCliente_Click(object sender, EventArgs e)
+        {
+            ClientForm_Load(null,null);
+            textBoxObtenerFacturaCliente.Visible = true;
+            webBrowser1.Visible = true;
+            xsltFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Vista", "ClientFacturaForm.xslt");
+
+        }
+
+        private void ObtenerFacturaCliente_DoubleClick(object sender, EventArgs e)
+        {
+            string reservaID = textBoxObtenerFacturaCliente.Text;
+            if (string.IsNullOrEmpty(reservaID))
+            {
+                MessageBox.Show("Introduzca el código de la reserva.");
+                return;
+            }
+            Reservas reservas = reservaController.ObtenerReservaPorID(int.Parse(reservaID));
+            Facturas facturas = facturaController.ObtenerFactura((int)(reservas.FacturaID));
+            Clientes clientes = clienteController.ObtenerClientePorNIF(facturas.NIF);
+            Direcciones direcciones = direccionController.ObtenerDireccion((int)clientes.DireccionID);
+            
+            if (facturas != null && clientes != null && direcciones != null && reservas != null)
+            {
+                FacturasXmlWrapper facturasXmlWrapper = new FacturasXmlWrapper();
+                facturasXmlWrapper.FacturaID = facturas.FacturaID;
+                facturasXmlWrapper.NIF = facturas.NIF;
+                facturasXmlWrapper.EmpleadoID = facturas.EmpleadoID;
+                facturasXmlWrapper.Detalles = facturas.Detalles;
+                facturasXmlWrapper.Cargos = (float?)facturas.Cargos;
+                facturasXmlWrapper.Impuestos = (float?)facturas.Impuestos;
+                facturasXmlWrapper.Fecha = facturas.Fecha;
+                facturasXmlWrapper.FechaCreacion = facturas.FechaCreacion;
+                facturasXmlWrapper.TipoFactura = facturas.TipoFactura;
+
+                // Obtener y mapear los clientes
+                ClientesXmlWrapper clientesXmlWrapper = new ClientesXmlWrapper();
+                clientesXmlWrapper.NIF = clientes.NIF;
+                clientesXmlWrapper.Nombre = clientes.Nombre;
+                clientesXmlWrapper.PrimerApellido = clientes.PrimerApellido;
+                clientesXmlWrapper.SegundoApellido = clientes.SegundoApellido;
+                clientesXmlWrapper.Contraseña = clientes.Contraseña;
+                clientesXmlWrapper.CorreoElectronico = clientes.CorreoElectronico;
+                clientesXmlWrapper.Telefono = clientes.Telefono;
+
+                // Obtener y mapear las direcciones
+                DireccionesXmlWrapper direccionesXmlWrapper = new DireccionesXmlWrapper();
+                direccionesXmlWrapper.DireccionID = direcciones.DireccionID;
+                direccionesXmlWrapper.Calle = direcciones.Calle;
+                direccionesXmlWrapper.Numero = direcciones.Numero;
+                direccionesXmlWrapper.Puerta = direcciones.Puerta;
+                direccionesXmlWrapper.Piso = direcciones.Piso;
+                direccionesXmlWrapper.CodigoPostal = direcciones.CodigoPostal;
+                direccionesXmlWrapper.Provincia = direcciones.Provincia;
+                direccionesXmlWrapper.Pais = direcciones.Pais;
+
+                // Obtener y mapear las reservas
+                ReservasXmlWrapper reservasXmlWrapper = new ReservasXmlWrapper();
+                reservasXmlWrapper.ReservaID = reservas.ReservaID;
+                reservasXmlWrapper.FechaInicio = reservas.FechaInicio;
+                reservasXmlWrapper.FechaFin = reservas.FechaFin;
+                reservasXmlWrapper.EstadoReserva = reservas.EstadoReserva;
+                reservasXmlWrapper.CheckInConfirmado = reservas.CheckInConfirmado;
+                reservasXmlWrapper.CheckOutConfirmado = reservas.CheckOutConfirmado;
+                reservasXmlWrapper.FechaCreacion = reservas.FechaCreacion;
+                reservasXmlWrapper.TipoReserva = reservas.TipoReserva;
+                reservasXmlWrapper.NIF = reservas.NIF;
+                reservasXmlWrapper.EmpleadoID = reservas.EmpleadoID;
+                reservasXmlWrapper.FacturaID = reservas.FacturaID;
+
+                clientesXmlWrapper.Direcciones = new List<DireccionesXmlWrapper>() { direccionesXmlWrapper };
+                facturasXmlWrapper.Clientes = new List<ClientesXmlWrapper>() { clientesXmlWrapper };
+                facturasXmlWrapper.Reservas = new List<ReservasXmlWrapper>() { reservasXmlWrapper };
+
+                XmlSerializer serializer = new XmlSerializer(facturasXmlWrapper.GetType());
+                SaveFileDialog saveFileDialog = new SaveFileDialog
+                {
+                    Filter = "XML files (*.xml)|*.xml",
+                    Title = "Guardar archivo XML",
+                    FileName = "datos.xml" // Este es nombre por defecto
+                };
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    rutaArchivoXml = saveFileDialog.FileName;
+                    if (File.Exists(rutaArchivoXml))
+                    {
+                        // El archivo existe, pregunta al usuario si desea sobrescribir o añadir datos
+                        var result = MessageBox.Show("El archivo ya existe. ¿Desea sobrescribirlo?", "Confirmar acción", MessageBoxButtons.YesNoCancel);
+
+                        if (result == DialogResult.Cancel)
+                        {
+                            // El usuario canceló la operación
+                            return;
+                        }
+                        else if (result == DialogResult.Yes)
+                        {
+                            using (FileStream stream = new FileStream(rutaArchivoXml, FileMode.Create))
+                            {
+                                serializer.Serialize(stream, facturasXmlWrapper);
+                            }
+
+                            MessageBox.Show("Exportación exitosa.");
+                            UpdateWebBrowserContent();
+
+                            return;
+                        }
+                        else if (result == DialogResult.No)
+                        {
+                            // Conecpto de LIFO (Last In First Out) para añadir datos al archivo existente
+                            // Aplicamos LIFO a las reservasList 
+                            // El usuario desea añadir datos al archivo donde corresponda
+
+                            FacturasListXmlWrapper facturasList = new FacturasListXmlWrapper();
+                            facturasList.Facturas = new List<FacturasXmlWrapper>();
+
+                            using (FileStream existingFileStream = new FileStream(rutaArchivoXml, FileMode.Open))
+                            {
+                                if (existingFileStream.Length != 0)
+                                    // Deserializa los datos existentes desde el archivo
+                                    facturasList = (FacturasListXmlWrapper)serializer.Deserialize(existingFileStream);
+                            }
+
+                            using (FileStream stream = new FileStream(rutaArchivoXml, FileMode.Create))
+                            {
+                                serializer.Serialize(stream, facturasList);
+                            }
+                            MessageBox.Show("Exportación exitosa.");
+                            UpdateWebBrowserContent();
+                            return;
+                        }
+                    }
+                    try
+                    {
+                        using (FileStream stream = new FileStream(rutaArchivoXml, FileMode.Create))
+                        {
+                            // Serializa los datos y escribe el archivo XML
+                            serializer.Serialize(stream, facturasXmlWrapper.GetType());
+                        }
+                        MessageBox.Show("Exportación exitosa.");
+                        UpdateWebBrowserContent();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al exportar los datos: " + ex.Message);
+                    }
+                }
+            }   
         }
     }
 }
