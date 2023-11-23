@@ -15,12 +15,12 @@ namespace HotelSolRepo.Vista
     {
         public bool IsAuthenticated { get; set; } // Propiedad para saber si el usuario está autenticado
         private Type exportXmlWrapperType; // Almacena el tipo de XMLWrapper para exportación
-        private Form callerForm; // Almacena el formulario que llama a FormPrincipal
+        private Form exportCallerForm; // Almacena el formulario que llama a FormPrincipal
         public event Action<Type> XmlWrapperTypeChanged; // Evento personalizado
-        public event Action<Form> CallerPrincipal;
+        public event Action<Form> CallerPrincipal; // Evento personalizado
         public string AuthenticatedNIF { get; set; } // Propiedad para almacenar el NIF del usuario autenticado
         public int AuthenticatedEmployeeID { get; set; } // Propiedad para almacenar el ID del empleado autenticado
-        public ReservasListXmlWrapper reservasXML = new ReservasListXmlWrapper();
+        public ReservaHabitacionesListXmlWrapper reservaHabitacionesXML = new ReservaHabitacionesListXmlWrapper();
         public FormPrincipal()
         {
             InitializeComponent();
@@ -33,7 +33,11 @@ namespace HotelSolRepo.Vista
             {
                 exportXmlWrapperType = xmlWrapperType;
             };
-            reservasXML.Reservas = new List<ReservasXmlWrapper>();
+            CallerPrincipal += (callerForm) =>
+            {
+                exportCallerForm = callerForm;
+            };
+            reservaHabitacionesXML.ReservaHabitaciones = new List<ReservaHabitacionesXmlWrapper>();
             ShowEmployeeLogin(); // Solicitar autenticación del empleado al iniciar el programa
         }
 
@@ -45,48 +49,17 @@ namespace HotelSolRepo.Vista
         public void OnPrincipalFormCalled(Form callerForm)
         {
             CallerPrincipal?.Invoke(callerForm);
-            this.callerForm = callerForm;
         }
         private void ConectarControladoresEventos()
         {
             btnNuevaReserva.Click += BtnNuevaReserva_Click;
+            btnGestionClientes.Click += BtnGestionClientes_Click;
       
         }
 
         private void BtnNuevaReserva_Click(object sender, EventArgs e)
         {
-            MostrarFormulario(new ReservaForm(ref exportXmlWrapperType,this));
-        }
-
-        private void BtnExportarXML_Click(object sender, EventArgs e)
-        {
-            if(null!=exportXmlWrapperType)
-            {
-                ExportarForm exportarForm = new ExportarForm(exportXmlWrapperType);
-                
-                if (exportarForm != null)
-                {
-                    exportarForm.ExportarDatosToXml(this.callerForm);
-                }
-                //MostrarFormulario(exportarForm);
-                return;
-            }
-            else
-            {
-                MessageBox.Show("Por favor, seleccione un tipo de archivo.");
-            }
-        }
-
-        private void BtnImportarXML_Click(object sender, EventArgs e)
-        {
-
-            ImportarForm importarForm = new ImportarForm();
-            FormPrincipal activeForm = ActiveForm as FormPrincipal;
-            if (activeForm != null)
-            {
-                importarForm.SubscribeToXmlWrapperTypeChange(activeForm);
-            }
-            MostrarFormulario(importarForm);
+            MostrarFormulario(new CrearReservaForm(ref exportXmlWrapperType,this));
         }
 
         public void MostrarFormulario(Form formulario)
@@ -128,11 +101,6 @@ namespace HotelSolRepo.Vista
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnNuevaReserva_Click_1(object sender, EventArgs e)
         {
 
@@ -141,6 +109,11 @@ namespace HotelSolRepo.Vista
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void BtnGestionClientes_Click(object sender, EventArgs e)
+        {
+            MostrarFormulario(new ClienteForm(ref exportXmlWrapperType, this));
         }
     }
 }

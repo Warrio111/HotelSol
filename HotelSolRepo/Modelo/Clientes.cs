@@ -23,11 +23,15 @@ namespace HotelSolRepo.Modelo
     
         public string NIF { get; set; }
         public string Nombre { get; set; }
+        public string PrimerApellido { get; set; }
+        public string SegundoApellido { get; set; }
+        public Nullable<int> DireccionID { get; set; }
         public string CorreoElectronico { get; set; }
         public string Telefono { get; set; }
         public Nullable<int> ProgramaFidelizacionID { get; set; }
         public string Contraseña { get; set; }
     
+        public virtual Direcciones Direcciones { get; set; }
         public virtual ProgramasFidelizacion ProgramasFidelizacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Facturas> Facturas { get; set; }

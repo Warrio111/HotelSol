@@ -36,24 +36,46 @@ namespace HotelSolRepo.Controlador
         }
 
         // Método para registrar un nuevo cliente
-        public bool RegistrarCliente(string nif, string nombre, string correoElectronico, string telefono, string password)
+        public bool RegistrarCliente(string nif, string nombre, string primerapellido, string segundoapellido, string correoElectronico, string telefono, string password, string calle, string numero, string puerta, string piso, string codigoPostal, string provincia, string pais)
         {
             using (HotelDBEntities db = new HotelDBEntities())
             {
+                // Obtener la última DireccionID de la tabla Direcciones
+                var ultimaDireccion = db.Direcciones.OrderByDescending(d => d.DireccionID).FirstOrDefault();
+
+                var nuevaDireccion = new Direcciones
+                {
+                    DireccionID = ultimaDireccion != null ? ultimaDireccion.DireccionID + 1 : 1,
+                    Calle = calle,
+                    Numero = numero,
+                    Puerta = puerta,
+                    Piso = piso,
+                    CodigoPostal = codigoPostal,
+                    Provincia = provincia,
+                    Pais = pais
+                };
+
+                db.Direcciones.Add(nuevaDireccion);
+                db.SaveChanges();
+
                 string hashedPassword = HashPassword(password);
+
                 var nuevoCliente = new Clientes
                 {
                     NIF = nif,
                     Nombre = nombre,
+                    PrimerApellido = primerapellido,
+                    SegundoApellido = segundoapellido,
                     CorreoElectronico = correoElectronico,
                     Telefono = telefono,
-                    Contraseña = hashedPassword
+                    Contraseña = hashedPassword,
+                    DireccionID = nuevaDireccion.DireccionID  // Asignar la nueva dirección al cliente
                 };
-                db.Clientes.Add(nuevoCliente);
-                db.SaveChanges();
-                return true;
+                return AgregarCliente(nuevoCliente);
+                
             }
         }
+
 
         // Agrega un nuevo cliente al sistema
         public bool AgregarCliente(Clientes nuevoCliente)
@@ -76,7 +98,11 @@ namespace HotelSolRepo.Controlador
                     clienteExistente.Nombre = clienteActualizado.Nombre;
                     clienteExistente.CorreoElectronico = clienteActualizado.CorreoElectronico;
                     clienteExistente.Telefono = clienteActualizado.Telefono;
-                    // Actualizar otros campos aquí, pendiente de implementar...
+                    clienteExistente.DireccionID = clienteActualizado.DireccionID;
+                    clienteExistente.Contraseña = HashPassword(clienteActualizado.Contraseña);
+                    clienteExistente.PrimerApellido = clienteActualizado.PrimerApellido;
+                    clienteExistente.SegundoApellido = clienteActualizado.SegundoApellido;
+                    clienteExistente.NIF = clienteActualizado.NIF;
                     db.SaveChanges();
                     return true;
                 }

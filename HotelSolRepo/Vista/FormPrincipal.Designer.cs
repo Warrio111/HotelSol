@@ -30,19 +30,17 @@
         {
             this.btnNuevaReserva = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnGestionClientes = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnNuevaReserva
             // 
             this.btnNuevaReserva.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            this.btnNuevaReserva.Location = new System.Drawing.Point(12, 84);
+            this.btnNuevaReserva.Location = new System.Drawing.Point(1, 230);
             this.btnNuevaReserva.Name = "btnNuevaReserva";
-            this.btnNuevaReserva.Size = new System.Drawing.Size(98, 51);
+            this.btnNuevaReserva.Size = new System.Drawing.Size(124, 80);
             this.btnNuevaReserva.TabIndex = 0;
-            this.btnNuevaReserva.Text = "Gestion de Reservas";
+            this.btnNuevaReserva.Text = "Gestion Reservas";
             this.btnNuevaReserva.UseVisualStyleBackColor = true;
             this.btnNuevaReserva.Click += new System.EventHandler(this.btnNuevaReserva_Click_1);
             // 
@@ -58,37 +56,16 @@
             this.panel1.TabIndex = 4;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // button2
+            // btnGestionClientes
             // 
-            this.button2.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            this.button2.Location = new System.Drawing.Point(12, 155);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 52);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Gestion de Clientes";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button3.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(12, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(98, 52);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Consultar Disponibilidad";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            this.button4.Location = new System.Drawing.Point(12, 228);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(98, 52);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Gestion de Empleados";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnGestionClientes.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnGestionClientes.Location = new System.Drawing.Point(1, 123);
+            this.btnGestionClientes.Name = "btnGestionClientes";
+            this.btnGestionClientes.Size = new System.Drawing.Size(124, 81);
+            this.btnGestionClientes.TabIndex = 7;
+            this.btnGestionClientes.Text = "Gestion de Clientes";
+            this.btnGestionClientes.UseVisualStyleBackColor = true;
+            this.btnGestionClientes.Click += new System.EventHandler(this.BtnGestionClientes_Click);
             // 
             // FormPrincipal
             // 
@@ -98,9 +75,7 @@
             this.BackgroundImage = global::HotelSolRepo.Properties.Resources.fondo;
             this.ClientSize = new System.Drawing.Size(1203, 660);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnGestionClientes);
             this.Controls.Add(this.btnNuevaReserva);
             this.IsMdiContainer = true;
             this.Name = "FormPrincipal";
@@ -113,8 +88,6 @@
 
         private System.Windows.Forms.Button btnNuevaReserva;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnGestionClientes;
     }
 }

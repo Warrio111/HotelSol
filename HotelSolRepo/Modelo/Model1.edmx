@@ -4,334 +4,361 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="HotelDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Clientes">
-          <Key>
-            <PropertyRef Name="NIF" />
-          </Key>
-          <Property Name="NIF" Type="nvarchar" MaxLength="15" Nullable="false" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="255" />
-          <Property Name="CorreoElectronico" Type="nvarchar" MaxLength="255" />
-          <Property Name="Telefono" Type="nvarchar" MaxLength="15" />
-          <Property Name="ProgramaFidelizacionID" Type="int" />
-          <Property Name="Contraseña" Type="nvarchar" MaxLength="255" />
-        </EntityType>
-        <EntityType Name="Empleados">
-          <Key>
-            <PropertyRef Name="EmpleadoID" />
-          </Key>
-          <Property Name="EmpleadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="255" />
-          <Property Name="Rol" Type="nvarchar" MaxLength="50" />
-          <Property Name="Horario" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="Facturas">
-          <Key>
-            <PropertyRef Name="FacturaID" />
-          </Key>
-          <Property Name="FacturaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NIF" Type="nvarchar" MaxLength="15" />
-          <Property Name="EmpleadoID" Type="int" />
-          <Property Name="Detalles" Type="nvarchar(max)" />
-          <Property Name="Cargos" Type="float" />
-          <Property Name="Impuestos" Type="float" />
-          <Property Name="Fecha" Type="date" />
-          <Property Name="FechaCreacion" Type="datetime" />
-          <Property Name="TipoFactura" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Habitaciones">
-          <Key>
-            <PropertyRef Name="HabitacionID" />
-          </Key>
-          <Property Name="HabitacionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Tipo" Type="nvarchar" MaxLength="50" />
-          <Property Name="Caracteristicas" Type="nvarchar(max)" />
-          <Property Name="Tarifa" Type="float" />
-          <Property Name="EstadoActual" Type="nvarchar" MaxLength="50" />
-          <Property Name="Ocupado_desde" Type="datetime" />
-          <Property Name="Ocupado_hasta" Type="datetime" />
-          <Property Name="CodigoHabitacion" Type="nvarchar" MaxLength="11" StoreGeneratedPattern="Computed" />
-        </EntityType>
-        <EntityType Name="HabitacionesDobles">
-          <Key>
-            <PropertyRef Name="HabitacionID" />
-          </Key>
-          <Property Name="HabitacionID" Type="int" Nullable="false" />
-          <Property Name="CamasDobles" Type="int" />
-        </EntityType>
-        <EntityType Name="HabitacionesSencillas">
-          <Key>
-            <PropertyRef Name="HabitacionID" />
-          </Key>
-          <Property Name="HabitacionID" Type="int" Nullable="false" />
-          <Property Name="CamaSencilla" Type="int" />
-        </EntityType>
-        <EntityType Name="HabitacionesSuite">
-          <Key>
-            <PropertyRef Name="HabitacionID" />
-          </Key>
-          <Property Name="HabitacionID" Type="int" Nullable="false" />
-          <Property Name="SalaDeEstar" Type="bit" />
-          <Property Name="Minibar" Type="bit" />
-        </EntityType>
-        <EntityType Name="ProgramasFidelizacion">
-          <Key>
-            <PropertyRef Name="ProgramaFidelizacionID" />
-          </Key>
-          <Property Name="ProgramaFidelizacionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="255" />
-          <Property Name="Puntos" Type="int" />
-          <Property Name="Beneficios" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="ReservaHabitaciones">
-          <Key>
-            <PropertyRef Name="ReservaHabitacionID" />
-          </Key>
-          <Property Name="ReservaHabitacionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ReservaID" Type="int" />
-          <Property Name="HabitacionID" Type="int" />
-          <Property Name="TipoPension" Type="nvarchar" MaxLength="50" />
-          <Property Name="FechaInicio" Type="date" />
-          <Property Name="FechaFin" Type="date" />
-          <Property Name="Precio" Type="float" />
-        </EntityType>
-        <EntityType Name="Reservas">
-          <Key>
-            <PropertyRef Name="ReservaID" />
-          </Key>
-          <Property Name="ReservaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NIF" Type="nvarchar" MaxLength="15" />
-          <Property Name="EmpleadoID" Type="int" />
-          <Property Name="FechaInicio" Type="date" />
-          <Property Name="FechaFin" Type="date" />
-          <Property Name="EstadoReserva" Type="nvarchar" MaxLength="50" />
-          <Property Name="CheckInConfirmado" Type="datetime" />
-          <Property Name="CheckOutConfirmado" Type="datetime" />
-          <Property Name="FacturaID" Type="int" />
-          <Property Name="FechaCreacion" Type="datetime" />
-          <Property Name="TipoReserva" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="TareasEmpleados">
-          <Key>
-            <PropertyRef Name="TareaID" />
-          </Key>
-          <Property Name="TareaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmpleadoID" Type="int" />
-          <Property Name="Descripcion" Type="nvarchar(max)" />
-          <Property Name="Fecha" Type="date" />
-        </EntityType>
-        <Association Name="FK__Clientes__Progra__398D8EEE">
-          <End Role="ProgramasFidelizacion" Type="Self.ProgramasFidelizacion" Multiplicity="0..1" />
-          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProgramasFidelizacion">
-              <PropertyRef Name="ProgramaFidelizacionID" />
-            </Principal>
-            <Dependent Role="Clientes">
-              <PropertyRef Name="ProgramaFidelizacionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Facturas__Emplea__4BAC3F29">
-          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleados">
-              <PropertyRef Name="EmpleadoID" />
-            </Principal>
-            <Dependent Role="Facturas">
-              <PropertyRef Name="EmpleadoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Facturas__NIF__4AB81AF0">
-          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clientes">
-              <PropertyRef Name="NIF" />
-            </Principal>
-            <Dependent Role="Facturas">
-              <PropertyRef Name="NIF" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Habitacio__Habit__412EB0B6">
-          <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="1" />
-          <End Role="HabitacionesDobles" Type="Self.HabitacionesDobles" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Habitaciones">
-              <PropertyRef Name="HabitacionID" />
-            </Principal>
-            <Dependent Role="HabitacionesDobles">
-              <PropertyRef Name="HabitacionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Habitacio__Habit__440B1D61">
-          <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="1" />
-          <End Role="HabitacionesSencillas" Type="Self.HabitacionesSencillas" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Habitaciones">
-              <PropertyRef Name="HabitacionID" />
-            </Principal>
-            <Dependent Role="HabitacionesSencillas">
-              <PropertyRef Name="HabitacionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Habitacio__Habit__46E78A0C">
-          <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="1" />
-          <End Role="HabitacionesSuite" Type="Self.HabitacionesSuite" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Habitaciones">
-              <PropertyRef Name="HabitacionID" />
-            </Principal>
-            <Dependent Role="HabitacionesSuite">
-              <PropertyRef Name="HabitacionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ReservaHa__Habit__5629CD9C">
-          <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="0..1" />
-          <End Role="ReservaHabitaciones" Type="Self.ReservaHabitaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Habitaciones">
-              <PropertyRef Name="HabitacionID" />
-            </Principal>
-            <Dependent Role="ReservaHabitaciones">
-              <PropertyRef Name="HabitacionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ReservaHa__Reser__5535A963">
-          <End Role="Reservas" Type="Self.Reservas" Multiplicity="0..1" />
-          <End Role="ReservaHabitaciones" Type="Self.ReservaHabitaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Reservas">
-              <PropertyRef Name="ReservaID" />
-            </Principal>
-            <Dependent Role="ReservaHabitaciones">
-              <PropertyRef Name="ReservaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Reservas__Emplea__5165187F">
-          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
-          <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleados">
-              <PropertyRef Name="EmpleadoID" />
-            </Principal>
-            <Dependent Role="Reservas">
-              <PropertyRef Name="EmpleadoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Reservas__Factur__52593CB8">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
-          <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facturas">
-              <PropertyRef Name="FacturaID" />
-            </Principal>
-            <Dependent Role="Reservas">
-              <PropertyRef Name="FacturaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Reservas__NIF__5070F446">
-          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
-          <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clientes">
-              <PropertyRef Name="NIF" />
-            </Principal>
-            <Dependent Role="Reservas">
-              <PropertyRef Name="NIF" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TareasEmp__Emple__59063A47">
-          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
-          <End Role="TareasEmpleados" Type="Self.TareasEmpleados" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleados">
-              <PropertyRef Name="EmpleadoID" />
-            </Principal>
-            <Dependent Role="TareasEmpleados">
-              <PropertyRef Name="EmpleadoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Function Name="sp_RealizarCheckIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ReservaID" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_RealizarCheckOut" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ReservaID" Type="int" Mode="In" />
-        </Function>
-        <EntityContainer Name="HotelDBModelStoreContainer">
-          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Habitaciones" EntityType="Self.Habitaciones" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="HabitacionesDobles" EntityType="Self.HabitacionesDobles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="HabitacionesSencillas" EntityType="Self.HabitacionesSencillas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="HabitacionesSuite" EntityType="Self.HabitacionesSuite" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProgramasFidelizacion" EntityType="Self.ProgramasFidelizacion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ReservaHabitaciones" EntityType="Self.ReservaHabitaciones" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Reservas" EntityType="Self.Reservas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TareasEmpleados" EntityType="Self.TareasEmpleados" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Clientes__Progra__398D8EEE" Association="Self.FK__Clientes__Progra__398D8EEE">
-            <End Role="ProgramasFidelizacion" EntitySet="ProgramasFidelizacion" />
-            <End Role="Clientes" EntitySet="Clientes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Facturas__Emplea__4BAC3F29" Association="Self.FK__Facturas__Emplea__4BAC3F29">
-            <End Role="Empleados" EntitySet="Empleados" />
-            <End Role="Facturas" EntitySet="Facturas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Facturas__NIF__4AB81AF0" Association="Self.FK__Facturas__NIF__4AB81AF0">
-            <End Role="Clientes" EntitySet="Clientes" />
-            <End Role="Facturas" EntitySet="Facturas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Habitacio__Habit__412EB0B6" Association="Self.FK__Habitacio__Habit__412EB0B6">
-            <End Role="Habitaciones" EntitySet="Habitaciones" />
-            <End Role="HabitacionesDobles" EntitySet="HabitacionesDobles" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Habitacio__Habit__440B1D61" Association="Self.FK__Habitacio__Habit__440B1D61">
-            <End Role="Habitaciones" EntitySet="Habitaciones" />
-            <End Role="HabitacionesSencillas" EntitySet="HabitacionesSencillas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Habitacio__Habit__46E78A0C" Association="Self.FK__Habitacio__Habit__46E78A0C">
-            <End Role="Habitaciones" EntitySet="Habitaciones" />
-            <End Role="HabitacionesSuite" EntitySet="HabitacionesSuite" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ReservaHa__Habit__5629CD9C" Association="Self.FK__ReservaHa__Habit__5629CD9C">
-            <End Role="Habitaciones" EntitySet="Habitaciones" />
-            <End Role="ReservaHabitaciones" EntitySet="ReservaHabitaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ReservaHa__Reser__5535A963" Association="Self.FK__ReservaHa__Reser__5535A963">
-            <End Role="Reservas" EntitySet="Reservas" />
-            <End Role="ReservaHabitaciones" EntitySet="ReservaHabitaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Reservas__Emplea__5165187F" Association="Self.FK__Reservas__Emplea__5165187F">
-            <End Role="Empleados" EntitySet="Empleados" />
-            <End Role="Reservas" EntitySet="Reservas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Reservas__Factur__52593CB8" Association="Self.FK__Reservas__Factur__52593CB8">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="Reservas" EntitySet="Reservas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Reservas__NIF__5070F446" Association="Self.FK__Reservas__NIF__5070F446">
-            <End Role="Clientes" EntitySet="Clientes" />
-            <End Role="Reservas" EntitySet="Reservas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TareasEmp__Emple__59063A47" Association="Self.FK__TareasEmp__Emple__59063A47">
-            <End Role="Empleados" EntitySet="Empleados" />
-            <End Role="TareasEmpleados" EntitySet="TareasEmpleados" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="HotelDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="HotelDBModelStoreContainer">
+    <EntitySet Name="Clientes" EntityType="HotelDBModel.Store.Clientes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Empleados" EntityType="HotelDBModel.Store.Empleados" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Facturas" EntityType="HotelDBModel.Store.Facturas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Habitaciones" EntityType="HotelDBModel.Store.Habitaciones" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HabitacionesDobles" EntityType="HotelDBModel.Store.HabitacionesDobles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HabitacionesSencillas" EntityType="HotelDBModel.Store.HabitacionesSencillas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HabitacionesSuite" EntityType="HotelDBModel.Store.HabitacionesSuite" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProgramasFidelizacion" EntityType="HotelDBModel.Store.ProgramasFidelizacion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ReservaHabitaciones" EntityType="HotelDBModel.Store.ReservaHabitaciones" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reservas" EntityType="HotelDBModel.Store.Reservas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TareasEmpleados" EntityType="HotelDBModel.Store.TareasEmpleados" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Direcciones" EntityType="HotelDBModel.Store.Direcciones" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__Clientes__Progra__398D8EEE" Association="HotelDBModel.Store.FK__Clientes__Progra__398D8EEE">
+      <End Role="ProgramasFidelizacion" EntitySet="ProgramasFidelizacion" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Facturas__NIF__4AB81AF0" Association="HotelDBModel.Store.FK__Facturas__NIF__4AB81AF0">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservas__NIF__5070F446" Association="HotelDBModel.Store.FK__Reservas__NIF__5070F446">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Reservas" EntitySet="Reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Facturas__Emplea__4BAC3F29" Association="HotelDBModel.Store.FK__Facturas__Emplea__4BAC3F29">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservas__Emplea__5165187F" Association="HotelDBModel.Store.FK__Reservas__Emplea__5165187F">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Reservas" EntitySet="Reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TareasEmp__Emple__59063A47" Association="HotelDBModel.Store.FK__TareasEmp__Emple__59063A47">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="TareasEmpleados" EntitySet="TareasEmpleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservas__Factur__52593CB8" Association="HotelDBModel.Store.FK__Reservas__Factur__52593CB8">
+      <End Role="Facturas" EntitySet="Facturas" />
+      <End Role="Reservas" EntitySet="Reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Habitacio__Habit__412EB0B6" Association="HotelDBModel.Store.FK__Habitacio__Habit__412EB0B6">
+      <End Role="Habitaciones" EntitySet="Habitaciones" />
+      <End Role="HabitacionesDobles" EntitySet="HabitacionesDobles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Habitacio__Habit__440B1D61" Association="HotelDBModel.Store.FK__Habitacio__Habit__440B1D61">
+      <End Role="Habitaciones" EntitySet="Habitaciones" />
+      <End Role="HabitacionesSencillas" EntitySet="HabitacionesSencillas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Habitacio__Habit__46E78A0C" Association="HotelDBModel.Store.FK__Habitacio__Habit__46E78A0C">
+      <End Role="Habitaciones" EntitySet="Habitaciones" />
+      <End Role="HabitacionesSuite" EntitySet="HabitacionesSuite" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ReservaHa__Habit__5629CD9C" Association="HotelDBModel.Store.FK__ReservaHa__Habit__5629CD9C">
+      <End Role="Habitaciones" EntitySet="Habitaciones" />
+      <End Role="ReservaHabitaciones" EntitySet="ReservaHabitaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ReservaHa__Reser__5535A963" Association="HotelDBModel.Store.FK__ReservaHa__Reser__5535A963">
+      <End Role="Reservas" EntitySet="Reservas" />
+      <End Role="ReservaHabitaciones" EntitySet="ReservaHabitaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Clientes__Direcc__3B75D760" Association="HotelDBModel.Store.FK__Clientes__Direcc__3B75D760">
+      <End Role="Direcciones" EntitySet="Direcciones" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="NIF" />
+    </Key>
+    <Property Name="NIF" Type="nvarchar" Nullable="false" MaxLength="15" />
+    <Property Name="Nombre" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="CorreoElectronico" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="Telefono" Type="nvarchar" Nullable="true" MaxLength="15" />
+    <Property Name="ProgramaFidelizacionID" Type="int" Nullable="true" />
+    <Property Name="Contraseña" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="PrimerApellido" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="SegundoApellido" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="DireccionID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Empleados">
+    <Key>
+      <PropertyRef Name="EmpleadoID" />
+    </Key>
+    <Property Name="EmpleadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="Rol" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Horario" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Facturas">
+    <Key>
+      <PropertyRef Name="FacturaID" />
+    </Key>
+    <Property Name="FacturaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NIF" Type="nvarchar" Nullable="true" MaxLength="15" />
+    <Property Name="EmpleadoID" Type="int" Nullable="true" />
+    <Property Name="Detalles" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Cargos" Type="float" Nullable="true" />
+    <Property Name="Impuestos" Type="float" Nullable="true" />
+    <Property Name="Fecha" Type="datetime" Nullable="true" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="true" />
+    <Property Name="TipoFactura" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Habitaciones">
+    <Key>
+      <PropertyRef Name="HabitacionID" />
+    </Key>
+    <Property Name="HabitacionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Caracteristicas" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Tarifa" Type="float" Nullable="true" />
+    <Property Name="EstadoActual" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Ocupado_desde" Type="datetime" Nullable="true" />
+    <Property Name="Ocupado_hasta" Type="datetime" Nullable="true" />
+    <Property Name="CodigoHabitacion" Type="nvarchar" StoreGeneratedPattern="Computed" Nullable="true" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="HabitacionesDobles">
+    <Key>
+      <PropertyRef Name="HabitacionID" />
+    </Key>
+    <Property Name="HabitacionID" Type="int" Nullable="false" />
+    <Property Name="CamasDobles" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="HabitacionesSencillas">
+    <Key>
+      <PropertyRef Name="HabitacionID" />
+    </Key>
+    <Property Name="HabitacionID" Type="int" Nullable="false" />
+    <Property Name="CamaSencilla" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="HabitacionesSuite">
+    <Key>
+      <PropertyRef Name="HabitacionID" />
+    </Key>
+    <Property Name="HabitacionID" Type="int" Nullable="false" />
+    <Property Name="SalaDeEstar" Type="bit" Nullable="true" />
+    <Property Name="Minibar" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ProgramasFidelizacion">
+    <Key>
+      <PropertyRef Name="ProgramaFidelizacionID" />
+    </Key>
+    <Property Name="ProgramaFidelizacionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="Puntos" Type="int" Nullable="true" />
+    <Property Name="Beneficios" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ReservaHabitaciones">
+    <Key>
+      <PropertyRef Name="ReservaHabitacionID" />
+    </Key>
+    <Property Name="ReservaHabitacionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReservaID" Type="int" Nullable="true" />
+    <Property Name="HabitacionID" Type="int" Nullable="true" />
+    <Property Name="TipoPension" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="FechaInicio" Type="datetime" Nullable="true" />
+    <Property Name="FechaFin" Type="datetime" Nullable="true" />
+    <Property Name="Precio" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Reservas">
+    <Key>
+      <PropertyRef Name="ReservaID" />
+    </Key>
+    <Property Name="ReservaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NIF" Type="nvarchar" Nullable="true" MaxLength="15" />
+    <Property Name="EmpleadoID" Type="int" Nullable="true" />
+    <Property Name="FechaInicio" Type="datetime" Nullable="true" />
+    <Property Name="FechaFin" Type="datetime" Nullable="true" />
+    <Property Name="EstadoReserva" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="CheckInConfirmado" Type="datetime" Nullable="true" />
+    <Property Name="CheckOutConfirmado" Type="datetime" Nullable="true" />
+    <Property Name="FacturaID" Type="int" Nullable="true" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="true" />
+    <Property Name="TipoReserva" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TareasEmpleados">
+    <Key>
+      <PropertyRef Name="TareaID" />
+    </Key>
+    <Property Name="TareaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpleadoID" Type="int" Nullable="true" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Fecha" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Direcciones">
+    <Key>
+      <PropertyRef Name="DireccionID" />
+    </Key>
+    <Property Name="DireccionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Calle" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="Numero" Type="nvarchar" Nullable="true" MaxLength="10" />
+    <Property Name="Puerta" Type="nvarchar" Nullable="true" MaxLength="10" />
+    <Property Name="Piso" Type="nvarchar" Nullable="true" MaxLength="10" />
+    <Property Name="CodigoPostal" Type="nvarchar" Nullable="true" MaxLength="10" />
+    <Property Name="Provincia" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="Pais" Type="nvarchar" Nullable="true" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__Clientes__Progra__398D8EEE">
+    <End Role="ProgramasFidelizacion" Type="HotelDBModel.Store.ProgramasFidelizacion" Multiplicity="0..1" />
+    <End Role="Clientes" Type="HotelDBModel.Store.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProgramasFidelizacion">
+        <PropertyRef Name="ProgramaFidelizacionID" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="ProgramaFidelizacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Facturas__NIF__4AB81AF0">
+    <End Role="Clientes" Type="HotelDBModel.Store.Clientes" Multiplicity="0..1" />
+    <End Role="Facturas" Type="HotelDBModel.Store.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="NIF" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="NIF" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservas__NIF__5070F446">
+    <End Role="Clientes" Type="HotelDBModel.Store.Clientes" Multiplicity="0..1" />
+    <End Role="Reservas" Type="HotelDBModel.Store.Reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="NIF" />
+      </Principal>
+      <Dependent Role="Reservas">
+        <PropertyRef Name="NIF" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Facturas__Emplea__4BAC3F29">
+    <End Role="Empleados" Type="HotelDBModel.Store.Empleados" Multiplicity="0..1" />
+    <End Role="Facturas" Type="HotelDBModel.Store.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="EmpleadoID" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="EmpleadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservas__Emplea__5165187F">
+    <End Role="Empleados" Type="HotelDBModel.Store.Empleados" Multiplicity="0..1" />
+    <End Role="Reservas" Type="HotelDBModel.Store.Reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="EmpleadoID" />
+      </Principal>
+      <Dependent Role="Reservas">
+        <PropertyRef Name="EmpleadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TareasEmp__Emple__59063A47">
+    <End Role="Empleados" Type="HotelDBModel.Store.Empleados" Multiplicity="0..1" />
+    <End Role="TareasEmpleados" Type="HotelDBModel.Store.TareasEmpleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="EmpleadoID" />
+      </Principal>
+      <Dependent Role="TareasEmpleados">
+        <PropertyRef Name="EmpleadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservas__Factur__52593CB8">
+    <End Role="Facturas" Type="HotelDBModel.Store.Facturas" Multiplicity="0..1" />
+    <End Role="Reservas" Type="HotelDBModel.Store.Reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facturas">
+        <PropertyRef Name="FacturaID" />
+      </Principal>
+      <Dependent Role="Reservas">
+        <PropertyRef Name="FacturaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Habitacio__Habit__412EB0B6">
+    <End Role="Habitaciones" Type="HotelDBModel.Store.Habitaciones" Multiplicity="1" />
+    <End Role="HabitacionesDobles" Type="HotelDBModel.Store.HabitacionesDobles" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Habitaciones">
+        <PropertyRef Name="HabitacionID" />
+      </Principal>
+      <Dependent Role="HabitacionesDobles">
+        <PropertyRef Name="HabitacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Habitacio__Habit__440B1D61">
+    <End Role="Habitaciones" Type="HotelDBModel.Store.Habitaciones" Multiplicity="1" />
+    <End Role="HabitacionesSencillas" Type="HotelDBModel.Store.HabitacionesSencillas" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Habitaciones">
+        <PropertyRef Name="HabitacionID" />
+      </Principal>
+      <Dependent Role="HabitacionesSencillas">
+        <PropertyRef Name="HabitacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Habitacio__Habit__46E78A0C">
+    <End Role="Habitaciones" Type="HotelDBModel.Store.Habitaciones" Multiplicity="1" />
+    <End Role="HabitacionesSuite" Type="HotelDBModel.Store.HabitacionesSuite" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Habitaciones">
+        <PropertyRef Name="HabitacionID" />
+      </Principal>
+      <Dependent Role="HabitacionesSuite">
+        <PropertyRef Name="HabitacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ReservaHa__Habit__5629CD9C">
+    <End Role="Habitaciones" Type="HotelDBModel.Store.Habitaciones" Multiplicity="0..1" />
+    <End Role="ReservaHabitaciones" Type="HotelDBModel.Store.ReservaHabitaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Habitaciones">
+        <PropertyRef Name="HabitacionID" />
+      </Principal>
+      <Dependent Role="ReservaHabitaciones">
+        <PropertyRef Name="HabitacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ReservaHa__Reser__5535A963">
+    <End Role="Reservas" Type="HotelDBModel.Store.Reservas" Multiplicity="0..1" />
+    <End Role="ReservaHabitaciones" Type="HotelDBModel.Store.ReservaHabitaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservas">
+        <PropertyRef Name="ReservaID" />
+      </Principal>
+      <Dependent Role="ReservaHabitaciones">
+        <PropertyRef Name="ReservaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Clientes__Direcc__3B75D760">
+    <End Role="Direcciones" Type="HotelDBModel.Store.Direcciones" Multiplicity="0..1" />
+    <End Role="Clientes" Type="HotelDBModel.Store.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Direcciones">
+        <PropertyRef Name="DireccionID" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="DireccionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HotelDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -341,13 +368,31 @@
           </Key>
           <Property Name="NIF" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PrimerApellido" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SegundoApellido" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DireccionID" Type="Int32" />
           <Property Name="CorreoElectronico" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="ProgramaFidelizacionID" Type="Int32" />
           <Property Name="Contraseña" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProgramasFidelizacion" Relationship="Self.FK__Clientes__Progra__398D8EEE" FromRole="Clientes" ToRole="ProgramasFidelizacion" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK__Facturas__NIF__4AB81AF0" FromRole="Clientes" ToRole="Facturas" />
-          <NavigationProperty Name="Reservas" Relationship="Self.FK__Reservas__NIF__5070F446" FromRole="Clientes" ToRole="Reservas" />
+          <NavigationProperty Name="Direcciones" Relationship="Self.FK__Clientes__Direcc__3B75D760" FromRole="Clientes" ToRole="Direcciones" />
+          <NavigationProperty Name="ProgramasFidelizacion" Relationship="Self.FK__Clientes__Progra__3C69FB99" FromRole="Clientes" ToRole="ProgramasFidelizacion" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK__Facturas__NIF__4D94879B" FromRole="Clientes" ToRole="Facturas" />
+          <NavigationProperty Name="Reservas" Relationship="Self.FK__Reservas__NIF__534D60F1" FromRole="Clientes" ToRole="Reservas" />
+        </EntityType>
+        <EntityType Name="Direcciones">
+          <Key>
+            <PropertyRef Name="DireccionID" />
+          </Key>
+          <Property Name="DireccionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Calle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Numero" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Puerta" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Piso" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Provincia" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Pais" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Clientes__Direcc__3B75D760" FromRole="Direcciones" ToRole="Clientes" />
         </EntityType>
         <EntityType Name="Empleados">
           <Key>
@@ -357,9 +402,9 @@
           <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Horario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK__Facturas__Emplea__4BAC3F29" FromRole="Empleados" ToRole="Facturas" />
-          <NavigationProperty Name="Reservas" Relationship="Self.FK__Reservas__Emplea__5165187F" FromRole="Empleados" ToRole="Reservas" />
-          <NavigationProperty Name="TareasEmpleados" Relationship="Self.FK__TareasEmp__Emple__59063A47" FromRole="Empleados" ToRole="TareasEmpleados" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK__Facturas__Emplea__4E88ABD4" FromRole="Empleados" ToRole="Facturas" />
+          <NavigationProperty Name="Reservas" Relationship="Self.FK__Reservas__Emplea__5441852A" FromRole="Empleados" ToRole="Reservas" />
+          <NavigationProperty Name="TareasEmpleados" Relationship="Self.FK__TareasEmp__Emple__5BE2A6F2" FromRole="Empleados" ToRole="TareasEmpleados" />
         </EntityType>
         <EntityType Name="Facturas">
           <Key>
@@ -374,9 +419,9 @@
           <Property Name="Fecha" Type="DateTime" Precision="0" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="TipoFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK__Facturas__NIF__4AB81AF0" FromRole="Facturas" ToRole="Clientes" />
-          <NavigationProperty Name="Empleados" Relationship="Self.FK__Facturas__Emplea__4BAC3F29" FromRole="Facturas" ToRole="Empleados" />
-          <NavigationProperty Name="Reservas" Relationship="Self.FK__Reservas__Factur__52593CB8" FromRole="Facturas" ToRole="Reservas" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Facturas__NIF__4D94879B" FromRole="Facturas" ToRole="Clientes" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Facturas__Emplea__4E88ABD4" FromRole="Facturas" ToRole="Empleados" />
+          <NavigationProperty Name="Reservas" Relationship="Self.FK__Reservas__Factur__5535A963" FromRole="Facturas" ToRole="Reservas" />
         </EntityType>
         <EntityType Name="Habitaciones">
           <Key>
@@ -390,10 +435,10 @@
           <Property Name="Ocupado_desde" Type="DateTime" Precision="3" />
           <Property Name="Ocupado_hasta" Type="DateTime" Precision="3" />
           <Property Name="CodigoHabitacion" Type="String" MaxLength="11" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="HabitacionesDobles" Relationship="Self.FK__Habitacio__Habit__412EB0B6" FromRole="Habitaciones" ToRole="HabitacionesDobles" />
-          <NavigationProperty Name="HabitacionesSencillas" Relationship="Self.FK__Habitacio__Habit__440B1D61" FromRole="Habitaciones" ToRole="HabitacionesSencillas" />
-          <NavigationProperty Name="HabitacionesSuite" Relationship="Self.FK__Habitacio__Habit__46E78A0C" FromRole="Habitaciones" ToRole="HabitacionesSuite" />
-          <NavigationProperty Name="ReservaHabitaciones" Relationship="Self.FK__ReservaHa__Habit__5629CD9C" FromRole="Habitaciones" ToRole="ReservaHabitaciones" />
+          <NavigationProperty Name="HabitacionesDobles" Relationship="Self.FK__Habitacio__Habit__440B1D61" FromRole="Habitaciones" ToRole="HabitacionesDobles" />
+          <NavigationProperty Name="HabitacionesSencillas" Relationship="Self.FK__Habitacio__Habit__46E78A0C" FromRole="Habitaciones" ToRole="HabitacionesSencillas" />
+          <NavigationProperty Name="HabitacionesSuite" Relationship="Self.FK__Habitacio__Habit__49C3F6B7" FromRole="Habitaciones" ToRole="HabitacionesSuite" />
+          <NavigationProperty Name="ReservaHabitaciones" Relationship="Self.FK__ReservaHa__Habit__59063A47" FromRole="Habitaciones" ToRole="ReservaHabitaciones" />
         </EntityType>
         <EntityType Name="HabitacionesDobles">
           <Key>
@@ -401,7 +446,7 @@
           </Key>
           <Property Name="HabitacionID" Type="Int32" Nullable="false" />
           <Property Name="CamasDobles" Type="Int32" />
-          <NavigationProperty Name="Habitaciones" Relationship="Self.FK__Habitacio__Habit__412EB0B6" FromRole="HabitacionesDobles" ToRole="Habitaciones" />
+          <NavigationProperty Name="Habitaciones" Relationship="Self.FK__Habitacio__Habit__440B1D61" FromRole="HabitacionesDobles" ToRole="Habitaciones" />
         </EntityType>
         <EntityType Name="HabitacionesSencillas">
           <Key>
@@ -409,7 +454,7 @@
           </Key>
           <Property Name="HabitacionID" Type="Int32" Nullable="false" />
           <Property Name="CamaSencilla" Type="Int32" />
-          <NavigationProperty Name="Habitaciones" Relationship="Self.FK__Habitacio__Habit__440B1D61" FromRole="HabitacionesSencillas" ToRole="Habitaciones" />
+          <NavigationProperty Name="Habitaciones" Relationship="Self.FK__Habitacio__Habit__46E78A0C" FromRole="HabitacionesSencillas" ToRole="Habitaciones" />
         </EntityType>
         <EntityType Name="HabitacionesSuite">
           <Key>
@@ -418,7 +463,7 @@
           <Property Name="HabitacionID" Type="Int32" Nullable="false" />
           <Property Name="SalaDeEstar" Type="Boolean" />
           <Property Name="Minibar" Type="Boolean" />
-          <NavigationProperty Name="Habitaciones" Relationship="Self.FK__Habitacio__Habit__46E78A0C" FromRole="HabitacionesSuite" ToRole="Habitaciones" />
+          <NavigationProperty Name="Habitaciones" Relationship="Self.FK__Habitacio__Habit__49C3F6B7" FromRole="HabitacionesSuite" ToRole="Habitaciones" />
         </EntityType>
         <EntityType Name="ProgramasFidelizacion">
           <Key>
@@ -428,7 +473,7 @@
           <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Puntos" Type="Int32" />
           <Property Name="Beneficios" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK__Clientes__Progra__398D8EEE" FromRole="ProgramasFidelizacion" ToRole="Clientes" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Clientes__Progra__3C69FB99" FromRole="ProgramasFidelizacion" ToRole="Clientes" />
         </EntityType>
         <EntityType Name="ReservaHabitaciones">
           <Key>
@@ -441,8 +486,8 @@
           <Property Name="FechaInicio" Type="DateTime" Precision="0" />
           <Property Name="FechaFin" Type="DateTime" Precision="0" />
           <Property Name="Precio" Type="Double" />
-          <NavigationProperty Name="Habitaciones" Relationship="Self.FK__ReservaHa__Habit__5629CD9C" FromRole="ReservaHabitaciones" ToRole="Habitaciones" />
-          <NavigationProperty Name="Reservas" Relationship="Self.FK__ReservaHa__Reser__5535A963" FromRole="ReservaHabitaciones" ToRole="Reservas" />
+          <NavigationProperty Name="Habitaciones" Relationship="Self.FK__ReservaHa__Habit__59063A47" FromRole="ReservaHabitaciones" ToRole="Habitaciones" />
+          <NavigationProperty Name="Reservas" Relationship="Self.FK__ReservaHa__Reser__5812160E" FromRole="ReservaHabitaciones" ToRole="Reservas" />
         </EntityType>
         <EntityType Name="Reservas">
           <Key>
@@ -459,10 +504,10 @@
           <Property Name="FacturaID" Type="Int32" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="TipoReserva" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK__Reservas__NIF__5070F446" FromRole="Reservas" ToRole="Clientes" />
-          <NavigationProperty Name="Empleados" Relationship="Self.FK__Reservas__Emplea__5165187F" FromRole="Reservas" ToRole="Empleados" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK__Reservas__Factur__52593CB8" FromRole="Reservas" ToRole="Facturas" />
-          <NavigationProperty Name="ReservaHabitaciones" Relationship="Self.FK__ReservaHa__Reser__5535A963" FromRole="Reservas" ToRole="ReservaHabitaciones" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Reservas__NIF__534D60F1" FromRole="Reservas" ToRole="Clientes" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Reservas__Emplea__5441852A" FromRole="Reservas" ToRole="Empleados" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK__Reservas__Factur__5535A963" FromRole="Reservas" ToRole="Facturas" />
+          <NavigationProperty Name="ReservaHabitaciones" Relationship="Self.FK__ReservaHa__Reser__5812160E" FromRole="Reservas" ToRole="ReservaHabitaciones" />
         </EntityType>
         <EntityType Name="TareasEmpleados">
           <Key>
@@ -472,9 +517,21 @@
           <Property Name="EmpleadoID" Type="Int32" />
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Empleados" Relationship="Self.FK__TareasEmp__Emple__59063A47" FromRole="TareasEmpleados" ToRole="Empleados" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__TareasEmp__Emple__5BE2A6F2" FromRole="TareasEmpleados" ToRole="Empleados" />
         </EntityType>
-        <Association Name="FK__Clientes__Progra__398D8EEE">
+        <Association Name="FK__Clientes__Direcc__3B75D760">
+          <End Role="Direcciones" Type="Self.Direcciones" Multiplicity="0..1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direcciones">
+              <PropertyRef Name="DireccionID" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="DireccionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Clientes__Progra__3C69FB99">
           <End Role="ProgramasFidelizacion" Type="Self.ProgramasFidelizacion" Multiplicity="0..1" />
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -486,7 +543,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Facturas__NIF__4AB81AF0">
+        <Association Name="FK__Facturas__NIF__4D94879B">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -498,7 +555,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservas__NIF__5070F446">
+        <Association Name="FK__Reservas__NIF__534D60F1">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
           <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -510,7 +567,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Facturas__Emplea__4BAC3F29">
+        <Association Name="FK__Facturas__Emplea__4E88ABD4">
           <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -522,7 +579,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservas__Emplea__5165187F">
+        <Association Name="FK__Reservas__Emplea__5441852A">
           <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
           <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -534,7 +591,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TareasEmp__Emple__59063A47">
+        <Association Name="FK__TareasEmp__Emple__5BE2A6F2">
           <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
           <End Role="TareasEmpleados" Type="Self.TareasEmpleados" Multiplicity="*" />
           <ReferentialConstraint>
@@ -546,7 +603,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservas__Factur__52593CB8">
+        <Association Name="FK__Reservas__Factur__5535A963">
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
           <End Role="Reservas" Type="Self.Reservas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -558,7 +615,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Habitacio__Habit__412EB0B6">
+        <Association Name="FK__Habitacio__Habit__440B1D61">
           <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="1" />
           <End Role="HabitacionesDobles" Type="Self.HabitacionesDobles" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -570,7 +627,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Habitacio__Habit__440B1D61">
+        <Association Name="FK__Habitacio__Habit__46E78A0C">
           <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="1" />
           <End Role="HabitacionesSencillas" Type="Self.HabitacionesSencillas" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -582,7 +639,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Habitacio__Habit__46E78A0C">
+        <Association Name="FK__Habitacio__Habit__49C3F6B7">
           <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="1" />
           <End Role="HabitacionesSuite" Type="Self.HabitacionesSuite" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -594,7 +651,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ReservaHa__Habit__5629CD9C">
+        <Association Name="FK__ReservaHa__Habit__59063A47">
           <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="0..1" />
           <End Role="ReservaHabitaciones" Type="Self.ReservaHabitaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -606,7 +663,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ReservaHa__Reser__5535A963">
+        <Association Name="FK__ReservaHa__Reser__5812160E">
           <End Role="Reservas" Type="Self.Reservas" Multiplicity="0..1" />
           <End Role="ReservaHabitaciones" Type="Self.ReservaHabitaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -620,6 +677,7 @@
         </Association>
         <EntityContainer Name="HotelDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Direcciones" EntityType="Self.Direcciones" />
           <EntitySet Name="Empleados" EntityType="Self.Empleados" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" />
           <EntitySet Name="Habitaciones" EntityType="Self.Habitaciones" />
@@ -630,198 +688,216 @@
           <EntitySet Name="ReservaHabitaciones" EntityType="Self.ReservaHabitaciones" />
           <EntitySet Name="Reservas" EntityType="Self.Reservas" />
           <EntitySet Name="TareasEmpleados" EntityType="Self.TareasEmpleados" />
-          <AssociationSet Name="FK__Clientes__Progra__398D8EEE" Association="Self.FK__Clientes__Progra__398D8EEE">
+          <AssociationSet Name="FK__Clientes__Direcc__3B75D760" Association="Self.FK__Clientes__Direcc__3B75D760">
+            <End Role="Direcciones" EntitySet="Direcciones" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Clientes__Progra__3C69FB99" Association="Self.FK__Clientes__Progra__3C69FB99">
             <End Role="ProgramasFidelizacion" EntitySet="ProgramasFidelizacion" />
             <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Facturas__NIF__4AB81AF0" Association="Self.FK__Facturas__NIF__4AB81AF0">
+          <AssociationSet Name="FK__Facturas__NIF__4D94879B" Association="Self.FK__Facturas__NIF__4D94879B">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservas__NIF__5070F446" Association="Self.FK__Reservas__NIF__5070F446">
+          <AssociationSet Name="FK__Reservas__NIF__534D60F1" Association="Self.FK__Reservas__NIF__534D60F1">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Reservas" EntitySet="Reservas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Facturas__Emplea__4BAC3F29" Association="Self.FK__Facturas__Emplea__4BAC3F29">
+          <AssociationSet Name="FK__Facturas__Emplea__4E88ABD4" Association="Self.FK__Facturas__Emplea__4E88ABD4">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservas__Emplea__5165187F" Association="Self.FK__Reservas__Emplea__5165187F">
+          <AssociationSet Name="FK__Reservas__Emplea__5441852A" Association="Self.FK__Reservas__Emplea__5441852A">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="Reservas" EntitySet="Reservas" />
           </AssociationSet>
-          <AssociationSet Name="FK__TareasEmp__Emple__59063A47" Association="Self.FK__TareasEmp__Emple__59063A47">
+          <AssociationSet Name="FK__TareasEmp__Emple__5BE2A6F2" Association="Self.FK__TareasEmp__Emple__5BE2A6F2">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="TareasEmpleados" EntitySet="TareasEmpleados" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservas__Factur__52593CB8" Association="Self.FK__Reservas__Factur__52593CB8">
+          <AssociationSet Name="FK__Reservas__Factur__5535A963" Association="Self.FK__Reservas__Factur__5535A963">
             <End Role="Facturas" EntitySet="Facturas" />
             <End Role="Reservas" EntitySet="Reservas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Habitacio__Habit__412EB0B6" Association="Self.FK__Habitacio__Habit__412EB0B6">
+          <AssociationSet Name="FK__Habitacio__Habit__440B1D61" Association="Self.FK__Habitacio__Habit__440B1D61">
             <End Role="Habitaciones" EntitySet="Habitaciones" />
             <End Role="HabitacionesDobles" EntitySet="HabitacionesDobles" />
           </AssociationSet>
-          <AssociationSet Name="FK__Habitacio__Habit__440B1D61" Association="Self.FK__Habitacio__Habit__440B1D61">
+          <AssociationSet Name="FK__Habitacio__Habit__46E78A0C" Association="Self.FK__Habitacio__Habit__46E78A0C">
             <End Role="Habitaciones" EntitySet="Habitaciones" />
             <End Role="HabitacionesSencillas" EntitySet="HabitacionesSencillas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Habitacio__Habit__46E78A0C" Association="Self.FK__Habitacio__Habit__46E78A0C">
+          <AssociationSet Name="FK__Habitacio__Habit__49C3F6B7" Association="Self.FK__Habitacio__Habit__49C3F6B7">
             <End Role="Habitaciones" EntitySet="Habitaciones" />
             <End Role="HabitacionesSuite" EntitySet="HabitacionesSuite" />
           </AssociationSet>
-          <AssociationSet Name="FK__ReservaHa__Habit__5629CD9C" Association="Self.FK__ReservaHa__Habit__5629CD9C">
+          <AssociationSet Name="FK__ReservaHa__Habit__59063A47" Association="Self.FK__ReservaHa__Habit__59063A47">
             <End Role="Habitaciones" EntitySet="Habitaciones" />
             <End Role="ReservaHabitaciones" EntitySet="ReservaHabitaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK__ReservaHa__Reser__5535A963" Association="Self.FK__ReservaHa__Reser__5535A963">
+          <AssociationSet Name="FK__ReservaHa__Reser__5812160E" Association="Self.FK__ReservaHa__Reser__5812160E">
             <End Role="Reservas" EntitySet="Reservas" />
             <End Role="ReservaHabitaciones" EntitySet="ReservaHabitaciones" />
           </AssociationSet>
           <FunctionImport Name="sp_RealizarCheckIn">
-          <Parameter Name="ReservaID" Mode="In" Type="Int32" />
+            <Parameter Name="ReservaID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_RealizarCheckOut">
-          <Parameter Name="ReservaID" Mode="In" Type="Int32" />
+            <Parameter Name="ReservaID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HotelDBModelStoreContainer" CdmEntityContainer="HotelDBEntities">
-          <EntitySetMapping Name="Clientes">
-            <EntityTypeMapping TypeName="HotelDBModel.Clientes">
-              <MappingFragment StoreEntitySet="Clientes">
-                <ScalarProperty Name="NIF" ColumnName="NIF" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="ProgramaFidelizacionID" ColumnName="ProgramaFidelizacionID" />
-                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Empleados">
-            <EntityTypeMapping TypeName="HotelDBModel.Empleados">
-              <MappingFragment StoreEntitySet="Empleados">
-                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Rol" ColumnName="Rol" />
-                <ScalarProperty Name="Horario" ColumnName="Horario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Facturas">
-            <EntityTypeMapping TypeName="HotelDBModel.Facturas">
-              <MappingFragment StoreEntitySet="Facturas">
-                <ScalarProperty Name="FacturaID" ColumnName="FacturaID" />
-                <ScalarProperty Name="NIF" ColumnName="NIF" />
-                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
-                <ScalarProperty Name="Detalles" ColumnName="Detalles" />
-                <ScalarProperty Name="Cargos" ColumnName="Cargos" />
-                <ScalarProperty Name="Impuestos" ColumnName="Impuestos" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="TipoFactura" ColumnName="TipoFactura" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Habitaciones">
-            <EntityTypeMapping TypeName="HotelDBModel.Habitaciones">
-              <MappingFragment StoreEntitySet="Habitaciones">
-                <ScalarProperty Name="HabitacionID" ColumnName="HabitacionID" />
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-                <ScalarProperty Name="Caracteristicas" ColumnName="Caracteristicas" />
-                <ScalarProperty Name="Tarifa" ColumnName="Tarifa" />
-                <ScalarProperty Name="EstadoActual" ColumnName="EstadoActual" />
-                <ScalarProperty Name="Ocupado_desde" ColumnName="Ocupado_desde" />
-                <ScalarProperty Name="Ocupado_hasta" ColumnName="Ocupado_hasta" />
-                <ScalarProperty Name="CodigoHabitacion" ColumnName="CodigoHabitacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HabitacionesDobles">
-            <EntityTypeMapping TypeName="HotelDBModel.HabitacionesDobles">
-              <MappingFragment StoreEntitySet="HabitacionesDobles">
-                <ScalarProperty Name="HabitacionID" ColumnName="HabitacionID" />
-                <ScalarProperty Name="CamasDobles" ColumnName="CamasDobles" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HabitacionesSencillas">
-            <EntityTypeMapping TypeName="HotelDBModel.HabitacionesSencillas">
-              <MappingFragment StoreEntitySet="HabitacionesSencillas">
-                <ScalarProperty Name="HabitacionID" ColumnName="HabitacionID" />
-                <ScalarProperty Name="CamaSencilla" ColumnName="CamaSencilla" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HabitacionesSuite">
-            <EntityTypeMapping TypeName="HotelDBModel.HabitacionesSuite">
-              <MappingFragment StoreEntitySet="HabitacionesSuite">
-                <ScalarProperty Name="HabitacionID" ColumnName="HabitacionID" />
-                <ScalarProperty Name="SalaDeEstar" ColumnName="SalaDeEstar" />
-                <ScalarProperty Name="Minibar" ColumnName="Minibar" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProgramasFidelizacion">
-            <EntityTypeMapping TypeName="HotelDBModel.ProgramasFidelizacion">
-              <MappingFragment StoreEntitySet="ProgramasFidelizacion">
-                <ScalarProperty Name="ProgramaFidelizacionID" ColumnName="ProgramaFidelizacionID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Puntos" ColumnName="Puntos" />
-                <ScalarProperty Name="Beneficios" ColumnName="Beneficios" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReservaHabitaciones">
-            <EntityTypeMapping TypeName="HotelDBModel.ReservaHabitaciones">
-              <MappingFragment StoreEntitySet="ReservaHabitaciones">
-                <ScalarProperty Name="ReservaHabitacionID" ColumnName="ReservaHabitacionID" />
-                <ScalarProperty Name="ReservaID" ColumnName="ReservaID" />
-                <ScalarProperty Name="HabitacionID" ColumnName="HabitacionID" />
-                <ScalarProperty Name="TipoPension" ColumnName="TipoPension" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Reservas">
-            <EntityTypeMapping TypeName="HotelDBModel.Reservas">
-              <MappingFragment StoreEntitySet="Reservas">
-                <ScalarProperty Name="ReservaID" ColumnName="ReservaID" />
-                <ScalarProperty Name="NIF" ColumnName="NIF" />
-                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-                <ScalarProperty Name="EstadoReserva" ColumnName="EstadoReserva" />
-                <ScalarProperty Name="CheckInConfirmado" ColumnName="CheckInConfirmado" />
-                <ScalarProperty Name="CheckOutConfirmado" ColumnName="CheckOutConfirmado" />
-                <ScalarProperty Name="FacturaID" ColumnName="FacturaID" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="TipoReserva" ColumnName="TipoReserva" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TareasEmpleados">
-            <EntityTypeMapping TypeName="HotelDBModel.TareasEmpleados">
-              <MappingFragment StoreEntitySet="TareasEmpleados">
-                <ScalarProperty Name="TareaID" ColumnName="TareaID" />
-                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_RealizarCheckIn" FunctionName="HotelDBModel.Store.sp_RealizarCheckIn" />
-          <FunctionImportMapping FunctionImportName="sp_RealizarCheckOut" FunctionName="HotelDBModel.Store.sp_RealizarCheckOut" />
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HotelDBModelStoreContainer" CdmEntityContainer="HotelDBEntities">
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="IsTypeOf(HotelDBModel.Clientes)">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="NIF" ColumnName="NIF" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="ProgramaFidelizacionID" ColumnName="ProgramaFidelizacionID" />
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="DireccionID" ColumnName="DireccionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleados">
+      <EntityTypeMapping TypeName="IsTypeOf(HotelDBModel.Empleados)">
+        <MappingFragment StoreEntitySet="Empleados">
+          <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Horario" ColumnName="Horario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facturas">
+      <EntityTypeMapping TypeName="IsTypeOf(HotelDBModel.Facturas)">
+        <MappingFragment StoreEntitySet="Facturas">
+          <ScalarProperty Name="FacturaID" ColumnName="FacturaID" />
+          <ScalarProperty Name="NIF" ColumnName="NIF" />
+          <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+          <ScalarProperty Name="Detalles" ColumnName="Detalles" />
+          <ScalarProperty Name="Cargos" ColumnName="Cargos" />
+          <ScalarProperty Name="Impuestos" ColumnName="Impuestos" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="TipoFactura" ColumnName="TipoFactura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Habitaciones">
+      <EntityTypeMapping TypeName="IsTypeOf(HotelDBModel.Habitaciones)">
+        <MappingFragment StoreEntitySet="Habitaciones">
+          <ScalarProperty Name="HabitacionID" ColumnName="HabitacionID" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Caracteristicas" ColumnName="Caracteristicas" />
+          <ScalarProperty Name="Tarifa" ColumnName="Tarifa" />
+          <ScalarProperty Name="EstadoActual" ColumnName="EstadoActual" />
+          <ScalarProperty Name="Ocupado_desde" ColumnName="Ocupado_desde" />
+          <ScalarProperty Name="Ocupado_hasta" ColumnName="Ocupado_hasta" />
+          <ScalarProperty Name="CodigoHabitacion" ColumnName="CodigoHabitacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HabitacionesDobles">
+      <EntityTypeMapping TypeName="IsTypeOf(HotelDBModel.HabitacionesDobles)">
+        <MappingFragment StoreEntitySet="HabitacionesDobles">
+          <ScalarProperty Name="HabitacionID" ColumnName="HabitacionID" />
+          <ScalarProperty Name="CamasDobles" ColumnName="CamasDobles" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HabitacionesSencillas">
+      <EntityTypeMapping TypeName="IsTypeOf(HotelDBModel.HabitacionesSencillas)">
+        <MappingFragment StoreEntitySet="HabitacionesSencillas">
+          <ScalarProperty Name="HabitacionID" ColumnName="HabitacionID" />
+          <ScalarProperty Name="CamaSencilla" ColumnName="CamaSencilla" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HabitacionesSuite">
+      <EntityTypeMapping TypeName="IsTypeOf(HotelDBModel.HabitacionesSuite)">
+        <MappingFragment StoreEntitySet="HabitacionesSuite">
+          <ScalarProperty Name="HabitacionID" ColumnName="HabitacionID" />
+          <ScalarProperty Name="SalaDeEstar" ColumnName="SalaDeEstar" />
+          <ScalarProperty Name="Minibar" ColumnName="Minibar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProgramasFidelizacion">
+      <EntityTypeMapping TypeName="IsTypeOf(HotelDBModel.ProgramasFidelizacion)">
+        <MappingFragment StoreEntitySet="ProgramasFidelizacion">
+          <ScalarProperty Name="ProgramaFidelizacionID" ColumnName="ProgramaFidelizacionID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Puntos" ColumnName="Puntos" />
+          <ScalarProperty Name="Beneficios" ColumnName="Beneficios" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReservaHabitaciones">
+      <EntityTypeMapping TypeName="IsTypeOf(HotelDBModel.ReservaHabitaciones)">
+        <MappingFragment StoreEntitySet="ReservaHabitaciones">
+          <ScalarProperty Name="ReservaHabitacionID" ColumnName="ReservaHabitacionID" />
+          <ScalarProperty Name="ReservaID" ColumnName="ReservaID" />
+          <ScalarProperty Name="HabitacionID" ColumnName="HabitacionID" />
+          <ScalarProperty Name="TipoPension" ColumnName="TipoPension" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservas">
+      <EntityTypeMapping TypeName="IsTypeOf(HotelDBModel.Reservas)">
+        <MappingFragment StoreEntitySet="Reservas">
+          <ScalarProperty Name="ReservaID" ColumnName="ReservaID" />
+          <ScalarProperty Name="NIF" ColumnName="NIF" />
+          <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+          <ScalarProperty Name="EstadoReserva" ColumnName="EstadoReserva" />
+          <ScalarProperty Name="CheckInConfirmado" ColumnName="CheckInConfirmado" />
+          <ScalarProperty Name="CheckOutConfirmado" ColumnName="CheckOutConfirmado" />
+          <ScalarProperty Name="FacturaID" ColumnName="FacturaID" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="TipoReserva" ColumnName="TipoReserva" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TareasEmpleados">
+      <EntityTypeMapping TypeName="IsTypeOf(HotelDBModel.TareasEmpleados)">
+        <MappingFragment StoreEntitySet="TareasEmpleados">
+          <ScalarProperty Name="TareaID" ColumnName="TareaID" />
+          <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Direcciones">
+      <EntityTypeMapping TypeName="IsTypeOf(HotelDBModel.Direcciones)">
+        <MappingFragment StoreEntitySet="Direcciones">
+          <ScalarProperty Name="DireccionID" ColumnName="DireccionID" />
+          <ScalarProperty Name="Calle" ColumnName="Calle" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="Puerta" ColumnName="Puerta" />
+          <ScalarProperty Name="Piso" ColumnName="Piso" />
+          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -835,7 +911,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>

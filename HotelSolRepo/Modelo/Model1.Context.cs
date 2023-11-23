@@ -28,6 +28,7 @@ namespace HotelSolRepo.Modelo
         }
     
         public virtual DbSet<Clientes> Clientes { get; set; }
+        public virtual DbSet<Direcciones> Direcciones { get; set; }
         public virtual DbSet<Empleados> Empleados { get; set; }
         public virtual DbSet<Facturas> Facturas { get; set; }
         public virtual DbSet<Habitaciones> Habitaciones { get; set; }
