@@ -1,0 +1,48 @@
+﻿<odoo>
+    <data>
+        <!-- Vista de lista de Facturas -->
+        <record id="view_factura_tree" model="ir.ui.view">
+            <field name="name">factura.tree</field>
+            <field name="model">tu_modulo.factura</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="FacturaID"/>
+                    <field name="NIF"/>
+                    <field name="EmpleadoID"/>
+                    <field name="Detalles"/>
+                    <field name="Cargos"/>
+                    <field name="Impuestos"/>
+                    <field name="Fecha"/>
+                    <field name="FechaCreacion"/>
+                    <field name="TipoFactura"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista de formulario de Facturas -->
+        <record id="view_factura_form" model="ir.ui.view">
+            <field name="name">factura.form</field>
+            <field name="model">tu_modulo.factura</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="FacturaID"/>
+                        <field name="NIF"/>
+                        <field name="EmpleadoID"/>
+                        <field name="Detalles"/>
+                        <field name="Cargos"/>
+                        <field name="Impuestos"/>
+                        <field name="Fecha"/>
+                        <field name="FechaCreacion"/>
+                        <field name="TipoFactura"/>
+                    </group>
+                    <notebook>
+                        <page string="Reservas" groups="base.group_user">
+                            <field name="reservas_ids" widget="many2many_tags"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

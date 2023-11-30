@@ -265,10 +265,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PythonOdoo\ModeloOdoo\ModeloOdoo.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="PythonOdoo\odoo_xmlrpc_wrapper.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PythonOdoo\tests\test_odoo_xmlrpc_wrapper.py" />
+    <Content Include="PythonOdoo\VistaOdoo\FacturaView.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Vista\ClientFacturaForm.xslt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

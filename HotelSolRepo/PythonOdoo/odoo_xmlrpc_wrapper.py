@@ -345,6 +345,6 @@ class Bot:
         }
 
         # Crear la factura en Odoo y vincularla al cliente y la reserva
-        factura_id = self.create('infraninjasFactura', factura_data)
+        factura_id = self.create('modulo.infraninjasfactura', factura_data)
         print('Factura creada con ID', factura_id)
 
