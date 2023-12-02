@@ -1,4 +1,4 @@
-﻿# models.py
+﻿# ModeloOdoo.py
 
 from odoo import models, fields, api
 
@@ -18,6 +18,8 @@ class Factura(models.Model):
 
     # Relación con Reservas
     reservas_ids = fields.One2many('modulo.infraninjasreserva', 'factura_id', string='Reservas')
+    # Relación con Cliente
+    cliente_id = fields.Many2one('modulo.infraninjascliente', string='Cliente')
 
 class Reserva(models.Model):
     _name = 'modulo.infraninjasreserva'

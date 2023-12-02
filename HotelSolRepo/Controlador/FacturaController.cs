@@ -2,13 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using IronPython.Hosting;
-using Microsoft.Scripting.Hosting;
 using System.IO;
-using static IronPython.Modules._ast;
-using System.Xml.Linq;
 
 namespace HotelSolRepo.Controlador
 {
@@ -213,7 +208,7 @@ namespace HotelSolRepo.Controlador
             // Importar el modulo de odoo
             string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PythonOdoo", "odoo_xmlrpc_wrapper.py");
             // Parámetros que deseas pasar al script
-            string[] scriptArgs = { "host=192.168.1.153:8069", "db=infraninjas", "userlogin=infraninjas@gmail.com", "password=12345aA" };
+            string[] scriptArgs = { "host=192.168.1.53:8069", "db=infraninjas", "userlogin=infraninjas@gmail.com", "password=12345aA" };
 
             // Ejecutar el script con argumentos
             engine.GetSysModule().SetVariable("argv", scriptArgs);

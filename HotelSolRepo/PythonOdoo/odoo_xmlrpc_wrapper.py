@@ -295,7 +295,7 @@ class Bot:
         }
 
         # Crear la dirección en Odoo
-        direccion_id = self.create('infraninjasDireccion', direccion_data)
+        direccion_id = self.create('modulo.infraninjasdireccion', direccion_data)
 
         # Obtener datos del cliente
         cliente_data = {
@@ -309,7 +309,7 @@ class Bot:
         }
 
         # Crear el cliente en Odoo
-        cliente_id = self.create('infraninjasCliente', cliente_data)
+        cliente_id = self.create('modulo.infraninjascliente', cliente_data)
 
         # Obtener datos de la reserva
         reserva_data = {
@@ -327,7 +327,7 @@ class Bot:
         }
 
         # Crear la reserva en Odoo y vincularla a la factura
-        reserva_id = self.create('infraninjasReserva', reserva_data)
+        reserva_id = self.create('modulo.infraninjasreserva', reserva_data)
 
         # Obtener datos de la factura
         factura_data = {
