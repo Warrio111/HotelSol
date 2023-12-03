@@ -1,0 +1,62 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>b20546b3-e890-468b-83fe-f4f6095a049b</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>Interface.pyw</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>PythonOdoo</Name>
+    <RootNamespace>PythonOdoo</RootNamespace>
+    <IsWindowsApplication>True</IsWindowsApplication>
+    <InterpreterId>Global|PythonCore|3.11</InterpreterId>
+    <TestFramework>Pytest</TestFramework>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Interface.pyw" />
+    <Compile Include="models\ModeloOdoo.py" />
+    <Compile Include="odoo_xmlrpc_wrapper.py" />
+    <Compile Include="test.py" />
+    <Compile Include="test_odoo_xmlrpc_wrapper.py" />
+    <Compile Include="XmlRead.py" />
+    <Compile Include="__init__.py" />
+    <Compile Include="__manifest__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="menu.xml" />
+    <Content Include="security\ir.model.access.csv" />
+    <Content Include="views\FacturaView.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|IronPython|3.4" />
+    <InterpreterReference Include="Global|PythonCore|3.11" />
+    <InterpreterReference Include="Global|PythonCore|3.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="models\" />
+    <Folder Include="security\" />
+    <Folder Include="views\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <Target Name="CoreCompile" />
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

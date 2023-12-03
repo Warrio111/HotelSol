@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Acción de ventana para Facturas -->
+		<record id="action_factura" model="ir.actions.act_window">
+			<field name="name">Facturas</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">modulo.infraninjasfactura</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Acción de ventana para Reservas -->
+		<record id="action_reserva" model="ir.actions.act_window">
+			<field name="name">Reservas</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">modulo.infraninjasreserva</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Acción de ventana para Clientes -->
+		<record id="action_cliente" model="ir.actions.act_window">
+			<field name="name">Clientes</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">modulo.infraninjascliente</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Acción de ventana para Direcciones -->
+		<record id="action_direccion" model="ir.actions.act_window">
+			<field name="name">Direcciones</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">modulo.infraninjasdireccion</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Menu principal para el modulo -->
+		<menuitem id="menu_infraninjas" name="Infraninjas" sequence="1"/>
+
+		<!-- Submenú para la acción de ventana de Facturas -->
+		<menuitem id="menu_infraninjas_factura" name="Facturas" parent="menu_infraninjas" sequence="1" action="action_factura"/>
+
+		<!-- Submenú para la acción de ventana de Reservas -->
+		<menuitem id="menu_infraninjas_reserva" name="Reservas" parent="menu_infraninjas" sequence="2" action="action_reserva"/>
+
+		<!-- Submenú para la acción de ventana de Clientes -->
+		<menuitem id="menu_infraninjas_cliente" name="Clientes" parent="menu_infraninjas" sequence="3" action="action_cliente"/>
+
+		<!-- Submenú para la acción de ventana de Direcciones -->
+		<menuitem id="menu_infraninjas_direccion" name="Direcciones" parent="menu_infraninjas" sequence="4" action="action_direccion"/>
+	</data>
+</odoo>

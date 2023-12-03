@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelSolRepo", "HotelSolRepo\HotelSolRepo.csproj", "{254CDD12-B0FB-49EA-8B27-B5F4521BD6A1}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonOdoo", "PythonOdoo\PythonOdoo.pyproj", "{B20546B3-E890-468B-83FE-F4F6095A049B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,9 @@ Global
 		{254CDD12-B0FB-49EA-8B27-B5F4521BD6A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{254CDD12-B0FB-49EA-8B27-B5F4521BD6A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{254CDD12-B0FB-49EA-8B27-B5F4521BD6A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B20546B3-E890-468B-83FE-F4F6095A049B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B20546B3-E890-468B-83FE-F4F6095A049B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B20546B3-E890-468B-83FE-F4F6095A049B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

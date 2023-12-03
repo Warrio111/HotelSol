@@ -1,4 +1,4 @@
-﻿import unittest
+import unittest
 from ..odoo_xmlrpc_wrapper import odoo_xmlrpc_wrapper as oxw
 
 class TestOXW(unittest.TestCase):

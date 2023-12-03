@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using IronPython.Hosting;
-using System.IO;
 
 namespace HotelSolRepo.Controlador
 {
@@ -199,24 +197,5 @@ namespace HotelSolRepo.Controlador
             return (precio * cantidad) * dias;
         }
 
-        // Metodo para llamar a script de python y generar la factura en odoo
-        public void GenerarFacturaOdoo(string facturaxmldata)
-        {
-            // Configuracion del motor IronPython
-            var engine = Python.CreateEngine();
-            var scope = engine.CreateScope();
-            // Importar el modulo de odoo
-            string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PythonOdoo", "odoo_xmlrpc_wrapper.py");
-            // Parámetros que deseas pasar al script
-            string[] scriptArgs = { "host=192.168.1.53:8069", "db=infraninjas", "userlogin=infraninjas@gmail.com", "password=12345aA" };
-
-            // Ejecutar el script con argumentos
-            engine.GetSysModule().SetVariable("argv", scriptArgs);
-            scope.Engine.ExecuteFile(rutaArchivo);
-            // Obtener la clase Odoo
-            dynamic bot = scope.GetVariable("Bot");
-            // Llamar a la función con los datos XML
-            bot.create_invoice_from_xml(facturaxmldata);
-        }
     }
 }
