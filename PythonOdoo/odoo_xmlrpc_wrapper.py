@@ -49,7 +49,7 @@ class Bot:
             raise Exception(
                 f"Wrong one ({self.HOST}, {self.DB}, {self.USERLOGIN}, PASSWORD)"
             )
-        self.__orm = xmlrpc.client.ServerProxy(f"{self.URL}/object")
+        self.__orm = xmlrpc.client.ServerProxy(f"{self.URL}/object",allow_none=True)
         self.profile = self.read("res.users", ids=self.uid, fields=["name"])[0]
         self.name = self.profile["name"]
         self.successful = True

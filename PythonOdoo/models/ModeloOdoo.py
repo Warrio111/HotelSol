@@ -122,15 +122,6 @@ class ModuloInfraninjasViews(models.Model):
             """
         })
 
-def leer_xml(path):
-    # Parsear el archivo XML
-    tree = ET.parse(path, encoding='utf-8')
-    root = tree.getroot()
-
-    # Generar el string con todo el documento
-    xml_string = ET.tostring(root, encoding='utf-8', errors='ignore').decode('utf-8')
-    return xml_string
-
 def create_invoice_from_xml(odoo,path):
         # Obtener el string del XML
         xml_data = leer_xml(path)
