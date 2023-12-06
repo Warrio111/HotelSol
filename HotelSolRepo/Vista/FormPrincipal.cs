@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,6 +116,39 @@ namespace HotelSolRepo.Vista
         private void BtnGestionClientes_Click(object sender, EventArgs e)
         {
             MostrarFormulario(new ClienteForm(ref exportXmlWrapperType, this));
+        }
+
+        private void buttonOdoo_click(object sender, EventArgs e)
+        {
+            try
+            {
+                ProcessStartInfo start = new ProcessStartInfo();
+                start.FileName = "python";
+                start.Arguments = "\"C:\\Grado Superior\\002_Tercer Semestre\\(P) Técnicas de persistencia de datos con .NET y\\Hotel\\PythonOdoo\\Interface.pyw\"";
+                start.UseShellExecute = false;
+                start.RedirectStandardOutput = true;
+                start.RedirectStandardError = true;
+                start.CreateNoWindow = true;
+
+                using (Process process = Process.Start(start))
+                {
+                    using (StreamReader reader = process.StandardOutput)
+                    {
+                        string result = reader.ReadToEnd();
+                        Console.Write(result);
+                    }
+
+                    using (StreamReader reader = process.StandardError)
+                    {
+                        string result = reader.ReadToEnd();
+                        Console.Write(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
         }
     }
 }
