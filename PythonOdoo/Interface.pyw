@@ -1,5 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 from datetime import date, datetime
+import os
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog, messagebox
@@ -32,10 +33,10 @@ class OdooApp:
         ttk.Label(self.master, text="Contrasena Odoo:").grid(row=3, column=0, padx=10, pady=10)
         ttk.Entry(self.master, textvariable=self.odoo_password, show='*').grid(row=3, column=1, padx=10, pady=10)
 
-        # Botón para seleccionar el archivo XML
-        ttk.Button(self.master, text="Seleccionar XML", command=self.select_xml_file).grid(row=4, column=0, columnspan=1, pady=10)
-        # Botón para seleccionar el archivo XML
-        ttk.Button(self.master, text="Seleccionar XML View", command=self.create_model).grid(row=4, column=1, columnspan=2, pady=10)
+        # # Botón para seleccionar el archivo XML
+        # ttk.Button(self.master, text="Seleccionar XML", command=self.select_xml_file).grid(row=4, column=0, columnspan=1, pady=10)
+        # # Botón para seleccionar el archivo XML
+        # ttk.Button(self.master, text="Seleccionar XML View", command=self.create_model).grid(row=4, column=1, columnspan=2, pady=10)
 
         # Botones de exportar e importar XML
         ttk.Button(self.master, text="Exportar XML", command=self.export_xml).grid(row=5, column=0, pady=10)
@@ -48,90 +49,6 @@ class OdooApp:
             print("Archivo XML seleccionado:", file_path)
             messagebox.showinfo("Archivo XML Seleccionado", f"Archivo XML seleccionado: {file_path}")
             return file_path
-
-    def create_model(self):
-        odoo = OdooBot(self.odoo_host.get(), self.db_name.get(), self.odoo_user.get(), self.odoo_password.get(),False,False)
-        # Definir la información del modelo
-        model_data_direccion = {
-            "name": "Direccion",
-            "model": "modulo.infraninjasdireccion",
-            "description": "Modelo para gestionar direcciones",
-            "arch": """
-                <data>
-                    <!-- Campos del modelo -->
-                    <field name="Calle" type="char" string="Calle"/>
-                    <field name="Numero" type="char" string="Numero"/>
-                    <field name="Puerta" type="char" string="Puerta"/>
-                    <field name="Piso" type="char" string="Piso"/>
-                    <field name="CodigoPostal" type="char" string="Codigo Postal"/>
-                    <field name="Provincia" type="char" string="Provincia"/>
-                    <field name="Pais" type="char" string="Pais"/>
-                </data>
-            """,
-        }
-        odoo.create('modulo.infraninjasdireccion', model_data_direccion)
-        model_data_cliente = {
-            "name": "Cliente",
-            "model": "modulo.infraninjascliente",
-            "description": "Modelo para gestionar clientes",
-            "arch": """
-                <data>
-                    <!-- Campos del modelo -->
-                    <field name="NIF" type="char" string="NIF"/>
-                    <field name="Nombre" type="char" string="Nombre"/>
-                    <field name="PrimerApellido" type="char" string="Primer Apellido"/>
-                    <field name="SegundoApellido" type="char" string="Segundo Apellido"/>
-                    <field name="CorreoElectronico" type="char" string="Correo Electronico"/>
-                    <field name="Telefono" type="char" string="Telefono"/>
-                    <field name="DireccionID" type="many2one" relation="modulo.infraninjasdireccion" string="Direccion"/>
-                </data>
-            """,
-        }
-        odoo.create('ir.model', model_data_cliente)
-        model_data_reserva = {
-            "name": "Reserva",
-            "model": "modulo.infraninjasreserva",
-            "description": "Modelo para gestionar reservas",
-            "arch": """
-                <data>
-                    <!-- Campos del modelo -->
-                    <field name="ReservaID" type="integer" string="ID de Reserva"/>
-                    <field name="NIF" type="char" string="NIF"/>
-                    <field name="EmpleadoID" type="integer" string="ID de Empleado"/>
-                    <field name="FechaInicio" type="date" string="Fecha de Inicio"/>
-                    <field name="FechaFin" type="date" string="Fecha de Fin"/>
-                    <field name="EstadoReserva" type="selection" string="Estado de Reserva" selection="[('pendiente', 'Pendiente'), ('confirmada', 'Confirmada'), ('cancelada', 'Cancelada')]"/>
-                    <field name="CheckInConfirmado" type="boolean" string="Check-In Confirmado"/>
-                    <field name="CheckOutConfirmado" type="boolean" string="Check-Out Confirmado"/>
-                    <field name="FacturaID" type="integer" string="ID de Factura"/>
-                    <field name="FechaCreacion" type="datetime" string="Fecha de Creación"/>
-                    <field name="TipoReserva" type="char" string="Tipo de Reserva"/>
-                </data>
-            """,
-        }
-        odoo.create('ir.model', model_data_reserva)
-        model_data_factura = {
-            "name": "Factura",
-            "model": "modulo.infraninjasfactura",
-            "description": "Modelo para gestionar facturas",
-            "arch": """
-                <data>
-                    <!-- Campos del modelo -->
-                    <field name="FacturaId" type="char" string="ID de Factura"/>
-                    <field name="NIF" type="char" string="NIF"/>
-                    <field name="EmpleadoID" type="integer" string="ID de Empleado"/>
-                    <field name="Detalles" type="text" string="Detalles"/>
-                    <field name="Cargos" type="float" string="Cargos"/>
-                    <field name="Impuestos" type="float" string="Impuestos"/>
-                    <field name="Fecha" type="date" string="Fecha"/>
-                    <field name="FechaCreacion" type="datetime" string="Fecha de Creación"/>
-                    <field name="TipoFactura" type="selection" string="Tipo de Factura" selection="[('simple', 'Simple'), ('estancia', 'Estancia')]"/>
-                    <field name="reservas_ids" type="many2many" relation="modulo.infraninjasreserva" string="Reservas"/>
-                    <field name="cliente_id" type="many2one" relation="modulo.infraninjascliente" string="Cliente"/>
-                </data>
-            """,
-        }
-        odoo.create('ir.model', model_data_factura)
     
     def create_invoice_from_xml(self,odoo,path):
         # Obtener el string del XML
@@ -150,7 +67,7 @@ class OdooApp:
             'x_Provincia': root.find('Clientes/Cliente/Direcciones/Direccion/Provincia').text,
             'x_Pais': root.find('Clientes/Cliente/Direcciones/Direccion/Pais').text,
         }
-        messagebox.showinfo("Exportar XML Direccion", direccion_data)
+        #messagebox.showinfo("Exportar XML Direccion", direccion_data)
         # Crear la dirección en Odoo
         direccion_id = odoo.create('x_modulo.infraninjasdireccion', direccion_data)
 
@@ -164,7 +81,7 @@ class OdooApp:
             'x_Telefono': root.find('Clientes/Cliente/Telefono').text,
             'x_DireccionID': int(root.find('Clientes/Cliente/Direcciones/Direccion/DireccionID').text),
         }
-        messagebox.showinfo("Exportar XML Cliente", cliente_data)
+        #messagebox.showinfo("Exportar XML Cliente", cliente_data)
         # Crear el cliente en Odoo
         odoo.create('x_modulo.infraninjascliente', cliente_data)
 
@@ -180,7 +97,7 @@ class OdooApp:
             ultimo_nif_insertado = cliente_info[-1]['id']
 
             # Mostrar el último NIF insertado
-            messagebox.showinfo("Último NIF Insertado", ultimo_nif_insertado)
+            #messagebox.showinfo("Último NIF Insertado", ultimo_nif_insertado)
         else:
             # Manejar el caso en el que no se encontraron registros
             messagebox.showinfo("Error", "No se encontraron registros para el NIF insertado")
@@ -200,7 +117,7 @@ class OdooApp:
             'x_FechaCreacion': root.find('Reservas/Reserva/FechaCreacion').text,
             'x_TipoReserva': root.find('Reservas/Reserva/TipoReserva').text,
         }
-        messagebox.showinfo("Exportar XML Reserva", reserva_data)
+        #messagebox.showinfo("Exportar XML Reserva", reserva_data)
         # Crear la reserva en Odoo y vincularla a la factura
         odoo.create('x_modulo.infraninjasreserva', reserva_data)
 
@@ -216,7 +133,7 @@ class OdooApp:
             ultimo_reserva_id_insertado = reserva_info[-1]['id']
 
             # Mostrar el último x_ReservaID insertado
-            messagebox.showinfo("Último x_ReservaID Insertado", str(ultimo_reserva_id_insertado))
+            #messagebox.showinfo("Último x_ReservaID Insertado", str(ultimo_reserva_id_insertado))
         else:
             # Manejar el caso en el que no se encontraron registros
             messagebox.showinfo("Error", "No se encontraron registros para el x_ReservaID insertado")
@@ -235,23 +152,204 @@ class OdooApp:
             'x_cliente_id': ultimo_nif_insertado,
             'x_reservas_ids': [(4, ultimo_reserva_id_insertado)],
         }
-        messagebox.showinfo("Exportar XML Factura", factura_data)
+        #messagebox.showinfo("Exportar XML Factura", factura_data)
         # Crear la factura en Odoo y vincularla al cliente y la reserva
         odoo.create('x_modulo.infraninjasfactura', factura_data)
         messagebox.showinfo("Factura creada correctamente")
+    def create_client_from_xml(self, odoo, path):
+        # Obtener el string del XML
+        xml_data = leer_xml(path)
+
+        # Parsear el XML
+        root = ET.fromstring(xml_data)
+
+        # Obtener la lista de clientes
+        clientes = root.findall('Clientes')
+
+        for cliente in clientes:
+            # Obtener datos del cliente
+            cliente_data = {
+                'x_NIF': cliente.find('NIF').text,
+                'x_Nombre': cliente.find('Nombre').text,
+                'x_PrimerApellido': cliente.find('PrimerApellido').text,
+                'x_SegundoApellido': cliente.find('SegundoApellido').text,
+                'x_CorreoElectronico': cliente.find('CorreoElectronico').text,
+                'x_Telefono': cliente.find('Telefono').text,
+                'x_DireccionID': int(cliente.find('DireccionID').text),
+            }
+
+            # Crear el cliente en Odoo
+            odoo.create('x_modulo.infraninjascliente', cliente_data)
+
+            # Obtener el ID del cliente recién creado
+            cliente_id = odoo.search('x_modulo.infraninjascliente', [('x_NIF', '=', cliente_data['x_NIF'])])
+
+            if cliente_id:
+                # Obtener datos de la dirección del cliente
+                direccion_data = {
+                    'x_DireccionID': int(cliente.find('Direcciones/Direccion/DireccionID').text),
+                    'x_Calle': cliente.find('Direcciones/Direccion/Calle').text,
+                    'x_Numero': cliente.find('Direcciones/Direccion/Numero').text,
+                    'x_Puerta': cliente.find('Direcciones/Direccion/Puerta').text,
+                    'x_Piso': cliente.find('Direcciones/Direccion/Piso').text,
+                    'x_CodigoPostal': cliente.find('Direcciones/Direccion/CodigoPostal').text,
+                    'x_Provincia': cliente.find('Direcciones/Direccion/Provincia').text,
+                    'x_Pais': cliente.find('Direcciones/Direccion/Pais').text,
+                }
+
+                # Crear la dirección en Odoo
+                odoo.create('x_modulo.infraninjasdireccion', direccion_data)
+
+                #messagebox.showinfo("Cliente y Dirección Creados", f"Cliente y dirección creados para NIF: {cliente_data['x_NIF']}")
+            else:
+                messagebox.showwarning("Error", f"No se pudo crear el cliente para NIF: {cliente_data['x_NIF']}")
+    def create_reservations_from_xml(self, odoo, path):
+        # Obtener el string del XML
+        xml_data = leer_xml(path)
+        # Parsear el XML
+        root = ET.fromstring(xml_data)
+        for cliente_elem in root.findall('.//Clientes'):
+            nif = cliente_elem.find('NIF').text
+            nombre = cliente_elem.find('Nombre').text
+            primer_apellido = cliente_elem.find('PrimerApellido').text
+            segundo_apellido = cliente_elem.find('SegundoApellido').text
+            direccion_id = int(cliente_elem.find('Direcciones/Direccion/DireccionID').text)
+            correo_electronico = cliente_elem.find('CorreoElectronico').text
+            telefono = cliente_elem.find('Telefono').text
+            cliente_data = {
+                'x_NIF': nif,
+                'x_Nombre': nombre,
+                'x_PrimerApellido': primer_apellido,
+                'x_SegundoApellido': segundo_apellido,
+                'x_CorreoElectronico': correo_electronico,
+                'x_Telefono': telefono,
+                'x_DireccionID': direccion_id,
+            }
+            # Crear el cliente en Odoo
+            odoo.create('x_modulo.infraninjascliente', cliente_data)
+            # Obtener el ID del cliente recién creado
+            cliente_id = odoo.search('x_modulo.infraninjascliente', [('x_NIF', '=', cliente_data['x_NIF'])])
+            ultimo_nif_insertado = ''
+            # Verificar si se encontraron resultados antes de intentar obtener el último NIF
+            if cliente_id:
+                # Obtener el registro completo del cliente usando el ID
+                cliente_info = odoo.read('x_modulo.infraninjascliente', ids=cliente_id, fields=['x_NIF'])
+                ultimo_nif_insertado = cliente_info[-1]['id']
+                # Obtener datos de la dirección del cliente
+                direccion_data = {
+                    'x_DireccionID': int(cliente_elem.find('Direcciones/Direccion/DireccionID').text),
+                    'x_Calle': cliente_elem.find('Direcciones/Direccion/Calle').text,
+                    'x_Numero': cliente_elem.find('Direcciones/Direccion/Numero').text,
+                    'x_Puerta': cliente_elem.find('Direcciones/Direccion/Puerta').text,
+                    'x_Piso': cliente_elem.find('Direcciones/Direccion/Piso').text,
+                    'x_CodigoPostal': cliente_elem.find('Direcciones/Direccion/CodigoPostal').text,
+                    'x_Provincia': cliente_elem.find('Direcciones/Direccion/Provincia').text,
+                    'x_Pais': cliente_elem.find('Direcciones/Direccion/Pais').text,
+                }
+                # Crear la dirección en Odoo
+                odoo.create('x_modulo.infraninjasdireccion', direccion_data)
+                #messagebox.showinfo("Cliente y Dirección Creados", f"Cliente y dirección creados para NIF: {cliente_data['x_NIF']}")
+            else:
+                messagebox.showwarning("Error", f"No se pudo crear el cliente para NIF: {cliente_data['x_NIF']}")
+                
+            for reserva_elem in cliente_elem.findall('.//Reservas/Reserva'):
+                reserva_id = int(reserva_elem.find('ReservaID').text)
+                nif = reserva_elem.find('NIF').text
+                empleado_id = int(reserva_elem.find('EmpleadoID').text)
+                fecha_inicio = reserva_elem.find('FechaInicio').text
+                fecha_fin = reserva_elem.find('FechaFin').text
+                estado_reserva = reserva_elem.find('EstadoReserva').text
+                checkInConfirmado = reserva_elem.find('CheckInConfirmado').text
+                checkOutConfirmado = reserva_elem.find('CheckOutConfirmado').text
+                factura_id = int(reserva_elem.find('FacturaID').text)
+                fecha_creacion = reserva_elem.find('FechaCreacion').text
+                tipo_reserva = reserva_elem.find('TipoReserva').text
+                
+                reserva_info = {
+                    'x_ReservaID': reserva_id,
+                    'x_NIF': nif,
+                    'x_EmpleadoID': empleado_id,
+                    'x_FechaInicio': fecha_inicio,
+                    'x_FechaFin': fecha_fin,
+                    'x_EstadoReserva': estado_reserva,
+                    'x_CheckInConfirmado': checkInConfirmado,
+                    'x_CheckOutConfirmado': checkOutConfirmado,
+                    'x_FacturaID': factura_id,
+                    'x_FechaCreacion': fecha_creacion,
+                    'x_TipoReserva': tipo_reserva,
+                }
+                # Crear la reserva en Odoo y vincularla a la factura
+                odoo.create('x_modulo.infraninjasreserva', reserva_info)
+                # Obtener el ID de la reserva recién creada
+                reserva_id = odoo.search('x_modulo.infraninjasreserva', [('x_ReservaID', '=', reserva_info['x_ReservaID'])])
+                ultimo_reserva_id_insertado = 0
+                # Verificar si se encontraron resultados antes de intentar obtener la última reserva
+                if reserva_id:
+                    # Obtener el registro completo de la reserva usando el ID
+                    reserva_info = odoo.read('x_modulo.infraninjasreserva', ids=reserva_id, fields=['x_ReservaID'])
+                    # Obtener el último x_ReservaID insertado
+                    ultimo_reserva_id_insertado = reserva_info[-1]['id']
+                    # Mostrar el último x_ReservaID insertado
+                    #messagebox.showinfo("Último x_ReservaID Insertado", str(ultimo_reserva_id_insertado))
+                else:
+                    # Manejar el caso en el que no se encontraron registros
+                    messagebox.showinfo("Error", "No se encontraron registros para el x_ReservaID insertado")
+                
+
+                for factura_elem in cliente_elem.findall('.//Facturas/Factura'):
+                    factura_id = int(factura_elem.find('FacturaID').text)
+                    nif = factura_elem.find('NIF').text
+                    empleado_id = int(factura_elem.find('EmpleadoID').text)
+                    detalles = factura_elem.find('Detalles').text
+                    cargos = float(factura_elem.find('Cargos').text)
+                    impuestos = float(factura_elem.find('Impuestos').text)
+                    fecha = factura_elem.find('Fecha').text
+                    fecha_creacion = factura_elem.find('FechaCreacion').text
+                    tipo_factura = factura_elem.find('TipoFactura').text
+                    factura_info = {
+                        'x_FacturaID': factura_id,
+                        'x_NIF': nif,
+                        'x_EmpleadoID': empleado_id,
+                        'x_Detalles': detalles,
+                        'x_Cargos': cargos,
+                        'x_Impuestos': impuestos,
+                        'x_Fecha': fecha,
+                        'x_FechaCreacion': fecha_creacion,
+                        'x_TipoFactura': tipo_factura,
+                        'x_cliente_id': ultimo_nif_insertado,
+                        'x_reservas_ids': [(4, ultimo_reserva_id_insertado)],
+                    }
+                    # Crear la factura en Odoo y vincularla al cliente y la reserva
+                    odoo.create('x_modulo.infraninjasfactura', factura_info)
+                    #messagebox.showinfo("Factura creada correctamente")
+
+
     def export_xml(self):
         # Implementa lógica para exportar XML
         path = self.select_xml_file()
-        xml_data=leer_xml(path)
-        odoo = OdooBot(self.odoo_host.get(), self.db_name.get(), self.odoo_user.get(), self.odoo_password.get(),False,False)
+        xml_data = leer_xml(path)
+        odoo = OdooBot(self.odoo_host.get(), self.db_name.get(), self.odoo_user.get(), self.odoo_password.get(), False, False)
+
         if odoo.successful:
             messagebox.showinfo("Conexion Exitosa", odoo.status())
         else:
             messagebox.showerror("Error de Conexion", "Error al conectar con Odoo")
-            
-        #ModuloInfraninjasViews.create_invoice_from_xml(odoo,self.select_xml_file)
-        self.create_invoice_from_xml(odoo,path)
+
+        # Obtén el nombre del documento desde la ruta del archivo
+        document_name = os.path.basename(path)
+
+        # Lógica para determinar qué función llamar según el nombre del documento
+        if document_name == "facturaCliente.xml":
+            self.create_invoice_from_xml(odoo, path)
+        elif document_name == "obtenerClientes.xml":
+            self.create_client_from_xml(odoo, path)
+        elif document_name == "obtenerClientesConReservas.xml":
+            self.create_reservations_from_xml(odoo, path)
+        else:
+            messagebox.showwarning("Advertencia", f"No se encontró una función asociada para el documento {document_name}")
+
         messagebox.showinfo("Exportar XML", xml_data)
+
 
 
     def import_xml(self):
