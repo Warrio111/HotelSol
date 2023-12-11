@@ -378,5 +378,108 @@ namespace HotelSolRepo.Modelo
         public FacturasXmlWrapper Factura { get; set; }
     }
 
+    [Serializable]
+    public class IncidenciasXmlWrapper
+    {
+        [XmlElement("IncidenciaID")]
+        public int IncidenciaID { get; set; }
 
+        [XmlElement("Descripcion")]
+        public string Descripcion { get; set; }
+
+        [XmlElement("FechaReporte", DataType = "dateTime")]
+        public DateTime FechaReporte { get; set; }
+
+        [XmlElement("HabitacionID")]
+        public Nullable<int> HabitacionID { get; set; }
+    }
+    [XmlRoot("IncidenciasList")]
+    public class IncidenciasListXmlWrapper
+    {
+        [XmlElement("Incidencia")]
+        public List<IncidenciasXmlWrapper> Incidencias { get; set; }
+    }
+    [Serializable]
+    public class ProductosXmlWrapper
+    {
+        [XmlElement("ProductoID")]
+        public int ProductoID { get; set; }
+
+        [XmlElement("Nombre")]
+        public string Nombre { get; set; }
+
+        [XmlElement("Precio")]
+        public decimal Precio { get; set; }
+
+        [XmlElement("Cantidad")]
+        public int Cantidad { get; set; }
+
+        [XmlElement("FacturaID")]
+        public Nullable<int> FacturaID { get; set; }
+
+    }
+
+    [XmlRoot("ProductosList")]
+    public class ProductosListXmlWrapper
+    {
+        [XmlElement("Producto")]
+        public List<ProductosXmlWrapper> Productos { get; set; }
+    }
+    [Serializable]
+    public class ProveedoresXmlWrapper
+    {
+        [XmlElement("NIF")]
+        public string NIF { get; set; }
+
+        [XmlElement("Empresa")]
+        public string Empresa { get; set; }
+
+        [XmlElement("Contacto")]
+        public string Contacto { get; set; }
+
+        [XmlElement("CorreoElectronico")]
+        public string CorreoElectronico { get; set; }
+
+        [XmlElement("TipoProveedor")]
+        public string TipoProveedor { get; set; }
+
+        [XmlElement("CondicionesDePago")]
+        public string CondicionesDePago { get; set; }
+
+        [XmlElement("DireccionID")]
+        public Nullable<int> DireccionID { get; set; }
+
+    }
+
+    [XmlRoot("ProveedoresList")]
+    public class ProveedoresListXmlWrapper
+    {
+        [XmlElement("Proveedor")]
+        public List<ProveedoresXmlWrapper> Proveedores { get; set; }
+    }
+    [Serializable]
+    public class ServiciosXmlWrapper
+    {
+        [XmlElement("ServicioID")]
+        public int ServicioID { get; set; }
+
+        [XmlElement("Nombre")]
+        public string Nombre { get; set; }
+
+        [XmlElement("Precio")]
+        public decimal Precio { get; set; }
+
+        [XmlElement("Cantidad")]
+        public int Cantidad { get; set; }
+
+        [XmlElement("FacturaID")]
+        public Nullable<int> FacturaID { get; set; }
+    }
+
+    [XmlRoot("ServiciosList")]
+    public class ServiciosListXmlWrapper
+    {
+        [XmlElement("Servicio")]
+        public List<ServiciosXmlWrapper> Servicios { get; set; }
+    }
 }

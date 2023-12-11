@@ -108,16 +108,14 @@ namespace HotelSolRepo.Vista
 
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void BtnGestionClientes_Click(object sender, EventArgs e)
         {
             MostrarFormulario(new ClienteForm(ref exportXmlWrapperType, this));
         }
-
+        private void buttonGestionHabitaciones_click(object sender, EventArgs e)
+        {
+            MostrarFormulario(new HabitacionForm(ref exportXmlWrapperType, this));
+        }
         private void buttonOdoo_click(object sender, EventArgs e)
         {
             try
@@ -150,5 +148,7 @@ namespace HotelSolRepo.Vista
                 Console.WriteLine("Error: " + ex.Message);
             }
         }
+
+       
     }
 }

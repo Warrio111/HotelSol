@@ -18,6 +18,7 @@ namespace HotelSolRepo.Modelo
         public Direcciones()
         {
             this.Clientes = new HashSet<Clientes>();
+            this.Proveedores = new HashSet<Proveedores>();
         }
     
         public int DireccionID { get; set; }
@@ -31,5 +32,7 @@ namespace HotelSolRepo.Modelo
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Clientes> Clientes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Proveedores> Proveedores { get; set; }
     }
 }

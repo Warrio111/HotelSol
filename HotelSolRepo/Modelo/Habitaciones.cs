@@ -18,6 +18,7 @@ namespace HotelSolRepo.Modelo
         public Habitaciones()
         {
             this.ReservaHabitaciones = new HashSet<ReservaHabitaciones>();
+            this.Incidencias = new HashSet<Incidencias>();
         }
     
         public int HabitacionID { get; set; }
@@ -34,5 +35,7 @@ namespace HotelSolRepo.Modelo
         public virtual HabitacionesSuite HabitacionesSuite { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReservaHabitaciones> ReservaHabitaciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Incidencias> Incidencias { get; set; }
     }
 }

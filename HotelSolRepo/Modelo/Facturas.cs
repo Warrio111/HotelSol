@@ -18,6 +18,8 @@ namespace HotelSolRepo.Modelo
         public Facturas()
         {
             this.Reservas = new HashSet<Reservas>();
+            this.Productos = new HashSet<Productos>();
+            this.Servicios = new HashSet<Servicios>();
         }
     
         public int FacturaID { get; set; }
@@ -34,5 +36,9 @@ namespace HotelSolRepo.Modelo
         public virtual Empleados Empleados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservas> Reservas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Productos> Productos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Servicios> Servicios { get; set; }
     }
 }
