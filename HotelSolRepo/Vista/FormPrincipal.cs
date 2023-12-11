@@ -116,6 +116,10 @@ namespace HotelSolRepo.Vista
         {
             MostrarFormulario(new HabitacionForm(ref exportXmlWrapperType, this));
         }
+        private void buttonGestionDeCompras_Click(object sender, EventArgs e)
+        {
+            MostrarFormulario(new ComprasForm(ref exportXmlWrapperType, this));
+        }
         private void buttonOdoo_click(object sender, EventArgs e)
         {
             try
@@ -149,6 +153,6 @@ namespace HotelSolRepo.Vista
             }
         }
 
-       
+        
     }
 }

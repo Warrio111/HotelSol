@@ -33,12 +33,13 @@
             this.btnGestionClientes = new System.Windows.Forms.Button();
             this.buttonOdoo = new System.Windows.Forms.Button();
             this.buttonGestionHabitaciones = new System.Windows.Forms.Button();
+            this.buttonGestionDeCompras = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnNuevaReserva
             // 
             this.btnNuevaReserva.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            this.btnNuevaReserva.Location = new System.Drawing.Point(1, 367);
+            this.btnNuevaReserva.Location = new System.Drawing.Point(1, 478);
             this.btnNuevaReserva.Margin = new System.Windows.Forms.Padding(4);
             this.btnNuevaReserva.Name = "btnNuevaReserva";
             this.btnNuevaReserva.Size = new System.Drawing.Size(165, 98);
@@ -62,7 +63,7 @@
             // btnGestionClientes
             // 
             this.btnGestionClientes.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            this.btnGestionClientes.Location = new System.Drawing.Point(1, 95);
+            this.btnGestionClientes.Location = new System.Drawing.Point(2, 55);
             this.btnGestionClientes.Margin = new System.Windows.Forms.Padding(4);
             this.btnGestionClientes.Name = "btnGestionClientes";
             this.btnGestionClientes.Size = new System.Drawing.Size(165, 100);
@@ -74,7 +75,7 @@
             // buttonOdoo
             // 
             this.buttonOdoo.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            this.buttonOdoo.Location = new System.Drawing.Point(1, 495);
+            this.buttonOdoo.Location = new System.Drawing.Point(1, 606);
             this.buttonOdoo.Margin = new System.Windows.Forms.Padding(4);
             this.buttonOdoo.Name = "buttonOdoo";
             this.buttonOdoo.Size = new System.Drawing.Size(165, 100);
@@ -86,7 +87,7 @@
             // buttonGestionHabitaciones
             // 
             this.buttonGestionHabitaciones.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            this.buttonGestionHabitaciones.Location = new System.Drawing.Point(1, 230);
+            this.buttonGestionHabitaciones.Location = new System.Drawing.Point(1, 341);
             this.buttonGestionHabitaciones.Margin = new System.Windows.Forms.Padding(4);
             this.buttonGestionHabitaciones.Name = "buttonGestionHabitaciones";
             this.buttonGestionHabitaciones.Size = new System.Drawing.Size(165, 100);
@@ -95,6 +96,18 @@
             this.buttonGestionHabitaciones.UseVisualStyleBackColor = true;
             this.buttonGestionHabitaciones.Click += new System.EventHandler(this.buttonGestionHabitaciones_click);
             // 
+            // buttonGestionDeCompras
+            // 
+            this.buttonGestionDeCompras.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            this.buttonGestionDeCompras.Location = new System.Drawing.Point(1, 200);
+            this.buttonGestionDeCompras.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonGestionDeCompras.Name = "buttonGestionDeCompras";
+            this.buttonGestionDeCompras.Size = new System.Drawing.Size(165, 100);
+            this.buttonGestionDeCompras.TabIndex = 13;
+            this.buttonGestionDeCompras.Text = "Gestion de Compras";
+            this.buttonGestionDeCompras.UseVisualStyleBackColor = true;
+            this.buttonGestionDeCompras.Click += new System.EventHandler(this.buttonGestionDeCompras_Click);
+            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -102,6 +115,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = global::HotelSolRepo.Properties.Resources.fondo;
             this.ClientSize = new System.Drawing.Size(1604, 812);
+            this.Controls.Add(this.buttonGestionDeCompras);
             this.Controls.Add(this.buttonGestionHabitaciones);
             this.Controls.Add(this.buttonOdoo);
             this.Controls.Add(this.panel1);
@@ -122,5 +136,6 @@
         private System.Windows.Forms.Button btnGestionClientes;
         private System.Windows.Forms.Button buttonOdoo;
         private System.Windows.Forms.Button buttonGestionHabitaciones;
+        private System.Windows.Forms.Button buttonGestionDeCompras;
     }
 }
