@@ -29,6 +29,7 @@ namespace HotelSolRepo.Vista
             direccionController = new DireccionController();
             reservaController = new ReservaController();
             facturaController = new FacturaController();
+            incidenciaController = new IncidenciaController();
             programaFidelizacionController = new ProgramaFidelizacionController();
             this.Load += new EventHandler(HabitacionForm_Load);
 
@@ -42,8 +43,8 @@ namespace HotelSolRepo.Vista
 
         private void HabitacionForm_Load(object sender, EventArgs e)
         {
-            labelHabitacionIDIncidencia.Visible = false;
-            labelMensajeIncidencia.Visible = false;
+            textBoxIDHabitacionIncidencia.Visible = false;
+            textBoxIncidenciaMensaje.Visible = false;
             buttonEnviarMensajeIncidencia.Visible = false;
             dataGridViewIncidencias.Visible = false;
             dataGridViewHabitaciones.Visible = false;
@@ -53,12 +54,18 @@ namespace HotelSolRepo.Vista
             this.habitacionesTableAdapter.Fill(this.hotelDBDataSet.Habitaciones);
             
         }
-
+        private void textBoxIncidenciaMensaje_TextChanged(object sender, EventArgs e)
+        {
+            // Ajusta automáticamente la altura del TextBox según el contenido
+            int lineas = textBoxIncidenciaMensaje.GetLineFromCharIndex(textBoxIncidenciaMensaje.TextLength) + 1;
+            int alturaLinea = textBoxIncidenciaMensaje.Font.Height;
+            int nuevaAltura = textBoxIncidenciaMensaje.Margin.Top + alturaLinea * (lineas + 2);  // Se suma 2 para proporcionar algún espacio adicional
+            textBoxIncidenciaMensaje.Height = nuevaAltura;
+        }
         private void buttonRegistrarIncidencia_click(object sender, EventArgs e)
         {
-            HabitacionForm_Load(sender, e);
-            labelHabitacionIDIncidencia.Visible = true;
-            labelMensajeIncidencia.Visible = true;
+            textBoxIDHabitacionIncidencia.Visible = true;
+            textBoxIncidenciaMensaje.Visible = true;
             buttonEnviarMensajeIncidencia.Visible = true;
         }
 
@@ -74,10 +81,10 @@ namespace HotelSolRepo.Vista
             dataGridViewHabitaciones.Visible = true;
         }
 
-        private void ButtonEnviarMensajeIncidencia_Click(object sender, EventArgs e)
+        private void buttonEnviarMensageIncidencia_click(object sender, EventArgs e)
         {
-            string habitacionIDText = labelHabitacionIDIncidencia.Text;
-            string mensaje = labelMensajeIncidencia.Text;
+            string habitacionIDText = textBoxIDHabitacionIncidencia.Text;
+            string mensaje = textBoxIncidenciaMensaje.Text;
 
             if (!string.IsNullOrEmpty(habitacionIDText) && !string.IsNullOrEmpty(mensaje))
             {
@@ -96,6 +103,5 @@ namespace HotelSolRepo.Vista
                 MessageBox.Show("Debe rellenar todos los campos de forma correcta");
             }
         }
-
     }
 }

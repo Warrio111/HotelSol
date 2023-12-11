@@ -55,8 +55,8 @@
             this.hotelDBDataSetBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.incidenciasTableAdapter = new HotelSolRepo.HotelDBDataSet1TableAdapters.IncidenciasTableAdapter();
             this.buttonEnviarMensajeIncidencia = new System.Windows.Forms.Button();
-            this.labelMensajeIncidencia = new System.Windows.Forms.Label();
-            this.labelHabitacionIDIncidencia = new System.Windows.Forms.Label();
+            this.textBoxIncidenciaMensaje = new System.Windows.Forms.TextBox();
+            this.textBoxIDHabitacionIncidencia = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHabitaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.habitacionesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hotelDBDataSet)).BeginInit();
@@ -70,6 +70,8 @@
             // dataGridViewHabitaciones
             // 
             this.dataGridViewHabitaciones.AutoGenerateColumns = false;
+            this.dataGridViewHabitaciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewHabitaciones.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewHabitaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewHabitaciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.habitacionIDDataGridViewTextBoxColumn,
@@ -96,7 +98,7 @@
             this.habitacionIDDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.habitacionIDDataGridViewTextBoxColumn.Name = "habitacionIDDataGridViewTextBoxColumn";
             this.habitacionIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.habitacionIDDataGridViewTextBoxColumn.Width = 125;
+            this.habitacionIDDataGridViewTextBoxColumn.Width = 114;
             // 
             // tipoDataGridViewTextBoxColumn
             // 
@@ -104,7 +106,7 @@
             this.tipoDataGridViewTextBoxColumn.HeaderText = "Tipo";
             this.tipoDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.tipoDataGridViewTextBoxColumn.Name = "tipoDataGridViewTextBoxColumn";
-            this.tipoDataGridViewTextBoxColumn.Width = 125;
+            this.tipoDataGridViewTextBoxColumn.Width = 64;
             // 
             // caracteristicasDataGridViewTextBoxColumn
             // 
@@ -120,7 +122,7 @@
             this.tarifaDataGridViewTextBoxColumn.HeaderText = "Tarifa";
             this.tarifaDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.tarifaDataGridViewTextBoxColumn.Name = "tarifaDataGridViewTextBoxColumn";
-            this.tarifaDataGridViewTextBoxColumn.Width = 125;
+            this.tarifaDataGridViewTextBoxColumn.Width = 71;
             // 
             // estadoActualDataGridViewTextBoxColumn
             // 
@@ -128,7 +130,7 @@
             this.estadoActualDataGridViewTextBoxColumn.HeaderText = "EstadoActual";
             this.estadoActualDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.estadoActualDataGridViewTextBoxColumn.Name = "estadoActualDataGridViewTextBoxColumn";
-            this.estadoActualDataGridViewTextBoxColumn.Width = 125;
+            this.estadoActualDataGridViewTextBoxColumn.Width = 116;
             // 
             // ocupadodesdeDataGridViewTextBoxColumn
             // 
@@ -136,7 +138,7 @@
             this.ocupadodesdeDataGridViewTextBoxColumn.HeaderText = "Ocupado_desde";
             this.ocupadodesdeDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.ocupadodesdeDataGridViewTextBoxColumn.Name = "ocupadodesdeDataGridViewTextBoxColumn";
-            this.ocupadodesdeDataGridViewTextBoxColumn.Width = 125;
+            this.ocupadodesdeDataGridViewTextBoxColumn.Width = 138;
             // 
             // ocupadohastaDataGridViewTextBoxColumn
             // 
@@ -144,7 +146,7 @@
             this.ocupadohastaDataGridViewTextBoxColumn.HeaderText = "Ocupado_hasta";
             this.ocupadohastaDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.ocupadohastaDataGridViewTextBoxColumn.Name = "ocupadohastaDataGridViewTextBoxColumn";
-            this.ocupadohastaDataGridViewTextBoxColumn.Width = 125;
+            this.ocupadohastaDataGridViewTextBoxColumn.Width = 132;
             // 
             // codigoHabitacionDataGridViewTextBoxColumn
             // 
@@ -152,7 +154,7 @@
             this.codigoHabitacionDataGridViewTextBoxColumn.HeaderText = "CodigoHabitacion";
             this.codigoHabitacionDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.codigoHabitacionDataGridViewTextBoxColumn.Name = "codigoHabitacionDataGridViewTextBoxColumn";
-            this.codigoHabitacionDataGridViewTextBoxColumn.Width = 125;
+            this.codigoHabitacionDataGridViewTextBoxColumn.Width = 145;
             // 
             // habitacionesBindingSource
             // 
@@ -284,25 +286,25 @@
             this.buttonEnviarMensajeIncidencia.Visible = false;
             this.buttonEnviarMensajeIncidencia.Click += new System.EventHandler(this.buttonEnviarMensageIncidencia_click);
             // 
-            // labelMensajeIncidencia
+            // textBoxIncidenciaMensaje
             // 
-            this.labelMensajeIncidencia.AutoSize = true;
-            this.labelMensajeIncidencia.Location = new System.Drawing.Point(331, 79);
-            this.labelMensajeIncidencia.Name = "labelMensajeIncidencia";
-            this.labelMensajeIncidencia.Size = new System.Drawing.Size(286, 20);
-            this.labelMensajeIncidencia.TabIndex = 6;
-            this.labelMensajeIncidencia.Text = "Introduce El mensaje de la incidencia";
-            this.labelMensajeIncidencia.Visible = false;
+            this.textBoxIncidenciaMensaje.Location = new System.Drawing.Point(411, 76);
+            this.textBoxIncidenciaMensaje.MaxLength = 255;
+            this.textBoxIncidenciaMensaje.Multiline = true;
+            this.textBoxIncidenciaMensaje.Name = "textBoxIncidenciaMensaje";
+            this.textBoxIncidenciaMensaje.Size = new System.Drawing.Size(161, 28);
+            this.textBoxIncidenciaMensaje.TabIndex = 6;
+            this.textBoxIncidenciaMensaje.Text = "Introduce la incidencia";
+            this.textBoxIncidenciaMensaje.TextChanged += new System.EventHandler(this.textBoxIncidenciaMensaje_TextChanged);  // Agrega este evento
             // 
-            // labelHabitacionIDIncidencia
+            // textBoxIDHabitacionIncidencia
             // 
-            this.labelHabitacionIDIncidencia.AutoSize = true;
-            this.labelHabitacionIDIncidencia.Location = new System.Drawing.Point(125, 79);
-            this.labelHabitacionIDIncidencia.Name = "labelHabitacionIDIncidencia";
-            this.labelHabitacionIDIncidencia.Size = new System.Drawing.Size(179, 16);
-            this.labelHabitacionIDIncidencia.TabIndex = 7;
-            this.labelHabitacionIDIncidencia.Text = "Introduce el ID de Habitacion";
-            this.labelHabitacionIDIncidencia.Visible = false;
+            this.textBoxIDHabitacionIncidencia.Location = new System.Drawing.Point(166, 76);
+            this.textBoxIDHabitacionIncidencia.Name = "textBoxIDHabitacionIncidencia";
+            this.textBoxIDHabitacionIncidencia.Size = new System.Drawing.Size(161, 22);
+            this.textBoxIDHabitacionIncidencia.TabIndex = 7;
+            this.textBoxIDHabitacionIncidencia.Text = "IDHabitacion Incidencia";
+            this.textBoxIDHabitacionIncidencia.Visible = false;
             // 
             // HabitacionForm
             // 
@@ -311,14 +313,14 @@
             this.BackgroundImage = global::HotelSolRepo.Properties.Resources.fondo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1229, 602);
-            this.Controls.Add(this.labelHabitacionIDIncidencia);
-            this.Controls.Add(this.labelMensajeIncidencia);
+            this.Controls.Add(this.textBoxIDHabitacionIncidencia);
+            this.Controls.Add(this.textBoxIncidenciaMensaje);
             this.Controls.Add(this.buttonEnviarMensajeIncidencia);
             this.Controls.Add(this.buttonVerHabitaciones);
             this.Controls.Add(this.buttonVerIncidencia);
             this.Controls.Add(this.buttonRegistrarIncidencia);
-            this.Controls.Add(this.dataGridViewIncidencias);
             this.Controls.Add(this.dataGridViewHabitaciones);
+            this.Controls.Add(this.dataGridViewIncidencias);
             this.Name = "HabitacionForm";
             this.Text = "HabitacionForm";
             this.Load += new System.EventHandler(this.HabitacionForm_Load);
@@ -363,7 +365,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaReporteDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn habitacionIDDataGridViewTextBoxColumn1;
         private System.Windows.Forms.Button buttonEnviarMensajeIncidencia;
-        private System.Windows.Forms.Label labelMensajeIncidencia;
-        private System.Windows.Forms.Label labelHabitacionIDIncidencia;
+        private System.Windows.Forms.TextBox textBoxIncidenciaMensaje;
+        private System.Windows.Forms.TextBox textBoxIDHabitacionIncidencia;
     }
 }
