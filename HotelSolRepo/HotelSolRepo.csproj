@@ -138,6 +138,7 @@
     <Compile Include="Controlador\IncidenciaController.cs" />
     <Compile Include="Controlador\ProductoController.cs" />
     <Compile Include="Controlador\ProgramaFidelizacionController.cs" />
+    <Compile Include="Controlador\ProveedorController.cs" />
     <Compile Include="Controlador\ReservaController.cs" />
     <Compile Include="Controlador\ServicioController.cs" />
     <Compile Include="HotelDBDataSet.Designer.cs">
@@ -370,6 +371,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="XMLS\datos.xml" />
+    <Content Include="XMLS\facturaCliente.xml" />
+    <Content Include="XMLS\obtenerClientes.xml" />
+    <Content Include="XMLS\obtenerClientesConReservas.xml" />
     <None Include="Resources\logo.jpeg" />
     <None Include="Resources\fondo.jpeg" />
     <Content Include="Modelo\Model1.Context.tt">

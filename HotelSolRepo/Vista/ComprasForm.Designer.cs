@@ -63,6 +63,9 @@
             this.serviciosTableAdapter = new HotelSolRepo.HotelDBDataSet2TableAdapters.ServiciosTableAdapter();
             this.proveedoresBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.proveedoresTableAdapter = new HotelSolRepo.HotelDBDataSet2TableAdapters.ProveedoresTableAdapter();
+            this.buttonContratarServicio = new System.Windows.Forms.Button();
+            this.textBoxIDServicioContratar = new System.Windows.Forms.TextBox();
+            this.textBoxIDusuarioServicio = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTodo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hotelDBDataSet2BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hotelDBDataSet2)).BeginInit();
@@ -144,7 +147,7 @@
             // 
             // buttonVerFacturas
             // 
-            this.buttonVerFacturas.Location = new System.Drawing.Point(1188, 367);
+            this.buttonVerFacturas.Location = new System.Drawing.Point(1188, 432);
             this.buttonVerFacturas.Name = "buttonVerFacturas";
             this.buttonVerFacturas.Size = new System.Drawing.Size(168, 59);
             this.buttonVerFacturas.TabIndex = 13;
@@ -346,6 +349,34 @@
             // 
             this.proveedoresTableAdapter.ClearBeforeFill = true;
             // 
+            // buttonContratarServicio
+            // 
+            this.buttonContratarServicio.Location = new System.Drawing.Point(1188, 367);
+            this.buttonContratarServicio.Name = "buttonContratarServicio";
+            this.buttonContratarServicio.Size = new System.Drawing.Size(168, 59);
+            this.buttonContratarServicio.TabIndex = 23;
+            this.buttonContratarServicio.Text = "ContratarServicio";
+            this.buttonContratarServicio.UseVisualStyleBackColor = true;
+            this.buttonContratarServicio.Click += new System.EventHandler(this.buttonContratarServicio_Click);
+            // 
+            // textBoxIDServicioContratar
+            // 
+            this.textBoxIDServicioContratar.Location = new System.Drawing.Point(27, 75);
+            this.textBoxIDServicioContratar.Name = "textBoxIDServicioContratar";
+            this.textBoxIDServicioContratar.Size = new System.Drawing.Size(100, 22);
+            this.textBoxIDServicioContratar.TabIndex = 25;
+            this.textBoxIDServicioContratar.Text = "ID a contratar";
+            this.textBoxIDServicioContratar.Visible = false;
+            // 
+            // textBoxIDusuarioServicio
+            // 
+            this.textBoxIDusuarioServicio.Location = new System.Drawing.Point(27, 45);
+            this.textBoxIDusuarioServicio.Name = "textBoxIDusuarioServicio";
+            this.textBoxIDusuarioServicio.Size = new System.Drawing.Size(100, 22);
+            this.textBoxIDusuarioServicio.TabIndex = 24;
+            this.textBoxIDusuarioServicio.Text = "IDUsuario";
+            this.textBoxIDusuarioServicio.Visible = false;
+            // 
             // ComprasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -353,6 +384,9 @@
             this.BackgroundImage = global::HotelSolRepo.Properties.Resources.fondo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1359, 777);
+            this.Controls.Add(this.textBoxIDServicioContratar);
+            this.Controls.Add(this.textBoxIDusuarioServicio);
+            this.Controls.Add(this.buttonContratarServicio);
             this.Controls.Add(this.dataGridViewTodo);
             this.Controls.Add(this.textBoxIDComprar);
             this.Controls.Add(this.textBoxIDUsuario);
@@ -430,5 +464,8 @@
         private HotelDBDataSet2TableAdapters.ServiciosTableAdapter serviciosTableAdapter;
         private System.Windows.Forms.BindingSource proveedoresBindingSource;
         private HotelDBDataSet2TableAdapters.ProveedoresTableAdapter proveedoresTableAdapter;
+        private System.Windows.Forms.Button buttonContratarServicio;
+        private System.Windows.Forms.TextBox textBoxIDServicioContratar;
+        private System.Windows.Forms.TextBox textBoxIDusuarioServicio;
     }
 }
