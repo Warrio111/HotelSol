@@ -87,5 +87,23 @@ namespace HotelSolRepo.Modelo
                 return productos;
             }
         }
+
+        // Metodo para obtener los datos de un producto en formato XML
+        public ProductosXmlWrapper ObtenerDatosXmlProducto(int idProducto)
+        {
+               using (HotelDBEntities db = new HotelDBEntities())
+            {
+                    var producto = db.Productos.Find(idProducto);
+                    var productoXml = new ProductosXmlWrapper()
+                    {
+                        ProductoID = producto.ProductoID,
+                        Nombre = producto.Nombre,
+                        Precio = producto.Precio,
+                        Cantidad = producto.Cantidad,
+                        FacturaID = producto.FacturaID
+                    };
+                    return productoXml;
+                }
+        }
     }
 }

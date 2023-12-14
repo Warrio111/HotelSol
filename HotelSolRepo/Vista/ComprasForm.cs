@@ -1,14 +1,9 @@
 ﻿using HotelSolRepo.Controlador;
 using HotelSolRepo.Modelo;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace HotelSolRepo.Vista
 {
@@ -210,6 +205,7 @@ namespace HotelSolRepo.Vista
                 string tipoProveedor = textBoxTipoProveedor.Text;
                 string condicionesPagoProveedor = textBoxCondicionesPagoProveedor.Text;
                 proveedorController.RegistrarProveedor(nifProveedor, empresaProveedor, contactoProveedor, correoProveedor, tipoProveedor, condicionesPagoProveedor, 1);
+                GenerarXmlTemporalProveedor(nifProveedor);
             }
             else if (textBoxNombreProducto.Visible)
             {
@@ -224,6 +220,7 @@ namespace HotelSolRepo.Vista
                 {
                     // Realizar operaciones con los valores convertidos
                     productoController.RegistrarProducto(nombreProducto, precioProducto, cantidadProducto);
+                    GenerarXmlTemporalProducto(nombreProducto);
                 }
 
 
@@ -244,6 +241,7 @@ namespace HotelSolRepo.Vista
 
                     // Asegúrate de ajustar esta línea si la función RegistrarServicio espera un valor de tipo decimal y un valor de tipo int
                     servicioController.RegistrarServicio(nombreServicio, precioServicio, cantidadServicio);
+                    GenerarXmlTemporalServicio(nombreServicio);
                 }
 
             }
@@ -260,7 +258,7 @@ namespace HotelSolRepo.Vista
                 facturaController.RegistrarFactura(idUsuario, AuthenticatedEmployeeID, producto.Nombre, (double)(producto.Precio), 0, DateTime.Now, DateTime.Now, "Producto");
                 int ultimaFactura = facturaController.ObtenerUltimaFactura();
                 productoController.ModificarProducto(producto.ProductoID, producto.Nombre, producto.Precio, producto.Cantidad - 1, ultimaFactura);
-
+                GenerarXmlTemporalProducto(idProducto);
 
             }
             else if(textBoxIDServicioContratar.Visible)
@@ -274,13 +272,44 @@ namespace HotelSolRepo.Vista
                 facturaController.RegistrarFactura(idUsuario, AuthenticatedEmployeeID, servicios.Nombre, (double)(servicios.Precio), 0, DateTime.Now, DateTime.Now, "Servicio");
                 int ultimaFactura = facturaController.ObtenerUltimaFactura();
                 servicioController.ModificarServicio(servicios.ServicioID, servicios.Nombre, servicios.Precio, servicios.Cantidad - 1, ultimaFactura);
+                GenerarXmlTemporalServicio(idServicio);
             }
             else
             {
                 // No hay operación para realizar
             }
         }
+        // Métodos para generar XML temporal para cada tipo de entidad
+        private void GenerarXmlTemporalProveedor(string nifProveedor)
+        {
+            ProveedoresXmlWrapper proveedorXml = proveedorController.ObtenerDatosXmlProveedor(nifProveedor);
+            GenerarXmlTemporal(proveedorXml, "proveedor_temporal.xml");
+        }
 
-       
+        private void GenerarXmlTemporalProducto(string nombreProducto)
+        {
+            ProductosXmlWrapper productoXml = productoController.ObtenerDatosXmlProducto(int.Parse(nombreProducto));
+            GenerarXmlTemporal(productoXml, "producto_temporal.xml");
+        }
+
+        private void GenerarXmlTemporalServicio(string nombreServicio)
+        {
+            ServiciosXmlWrapper servicioXml = servicioController.ObtenerDatosXmlServicio(int.Parse(nombreServicio));
+            GenerarXmlTemporal(servicioXml, "servicio_temporal.xml");
+        }
+
+        private void GenerarXmlTemporal(object data, string fileName)
+        {
+            // Lógica para serializar el objeto y guardarlo en un archivo temporal
+            // Utiliza la clase XmlSerializer para convertir el objeto a XML
+            XmlSerializer serializer = new XmlSerializer(data.GetType());
+            string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Vista", fileName);
+            using (StreamWriter writer = new StreamWriter(filepath))
+            {
+                serializer.Serialize(writer, data);
+            }
+
+            MessageBox.Show($"XML temporal creado y guardado en {filepath}");
+        }
     }
 }

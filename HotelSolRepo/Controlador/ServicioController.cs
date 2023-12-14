@@ -88,5 +88,22 @@ namespace HotelSolRepo.Controlador
             }
         }
 
+        // Metodo para obtener un servicio en formato XML
+        public ServiciosXmlWrapper ObtenerDatosXmlServicio(int nombreServicio)
+        {
+               using (HotelDBEntities db = new HotelDBEntities())
+            {
+                    var servicio = db.Servicios.Find(nombreServicio);
+                    var servicioXml = new ServiciosXmlWrapper()
+                    {
+                        ServicioID = servicio.ServicioID,
+                        Nombre = servicio.Nombre,
+                        Precio = servicio.Precio,
+                        Cantidad = servicio.Cantidad,
+                        FacturaID = servicio.FacturaID
+                    };
+                    return servicioXml;
+                }
+        }
     }
 }

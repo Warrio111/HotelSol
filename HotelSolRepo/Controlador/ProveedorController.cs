@@ -93,5 +93,35 @@ namespace HotelSolRepo.Controlador
                 return proveedores;
             }
         }
+
+        // Metodo para obtener los datos de un proveedor en formato XML
+        public ProveedoresXmlWrapper ObtenerDatosXmlProveedor(string nifProveedor)
+        {
+            using (HotelDBEntities db = new HotelDBEntities())
+            {
+                var proveedor = db.Proveedores.Find(nifProveedor);
+                var direccion = db.Direcciones.Find(proveedor.DireccionID);
+                var proveedorXml = new ProveedoresXmlWrapper()
+                {
+                    NIF = proveedor.NIF,
+                    Empresa = proveedor.Empresa,
+                    Contacto = proveedor.Contacto,
+                    CorreoElectronico = proveedor.CorreoElectronico,
+                    TipoProveedor = proveedor.TipoProveedor,
+                    CondicionesDePago = proveedor.CondicionesDePago,
+                    Direccion = new DireccionesXmlWrapper()
+                    {
+                        DireccionID = direccion.DireccionID,
+                        Calle = direccion.Calle,
+                        Numero = direccion.Numero,
+                        Puerta = direccion.Puerta,
+                        Provincia = direccion.Provincia,
+                        CodigoPostal = direccion.CodigoPostal,
+                        Pais = direccion.Pais
+                    }
+                };
+                return proveedorXml;
+            }
+        }
     }
 }

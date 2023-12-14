@@ -445,6 +445,8 @@ namespace HotelSolRepo.Modelo
 
         [XmlElement("CondicionesDePago")]
         public string CondicionesDePago { get; set; }
+        [XmlElement("Direccion")]
+        public DireccionesXmlWrapper Direccion { get; set; }
 
         [XmlElement("DireccionID")]
         public Nullable<int> DireccionID { get; set; }
