@@ -34,8 +34,8 @@ En esta primera etapa, estamos diseñando la funcionalidad y la interfaz gráfic
 Primero, clona el repositorio desde la rama principal (master) a tu máquina local.
 
 ```bash
-git clone https://github.com/mratomo/HotelSolRepo.git
-cd HotelSOLInfraNinjas
+git clone https://github.com/Warrio111/HotelSol.git
+cd HotelSol
 ```
 ### 2. Actualizar la Rama master
 Asegúrate de tener la última versión de la rama master antes de empezar a trabajar en tu desarrollo.
